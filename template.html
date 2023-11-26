@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style/template.css">
+    <script src="./assets/js/template_js.js"></script>
     <title>Document</title>
 </head>
-<body>
-    
+<body id="body" onload="init()">
+    <div class="width_monitor"></div>
+        <div id="side_bar" class="side_bar">
+            <div class="width_100 center_felx">
+                <img src="./assets/img/Join logo vector.png" class="siede_bar_logo_header" alt="join_logo">
+            </div>
+            <nav class="nav">
+                <div class="menu">
+                    <div onclick="menue_clicked('summary')" id="summary" class="btn_clicked menu_buttons">
+                        <img src="./assets/img/summary_icon.png" class="side_bar_logos_img">
+                        <div class="menu_name">Summary</div>
+                    </div>
+                    <div onclick="menue_clicked('add_task')" id="add_task" class=" menu_buttons">
+                        <img src="./assets/img/add_task_icon.png" class="side_bar_logos_img">
+                        <div class="menu_name">Add Task</div>
+                    </div>
+                    <div onclick="menue_clicked('board')" id="board" class=" menu_buttons">
+                        <img src="./assets/img/board_icon.png" class="side_bar_logos_img">
+                        <div class="menu_name">Board</div>
+                    </div>
+                    <div onclick="menue_clicked('contacts')" id="contacts" class=" menu_buttons">
+                        <img src="./assets/img/contacts_icon.png" class="side_bar_logos_img">
+                        <div class="menu_name">Contacts</div>
+                    </div>
+                </div>
+                <div class="legal">
+                    <div class="nav_legal">Privacy Policy</div>
+                    <div class="nav_legal">Legal notice</div>
+                </div>
+            </nav>
+        </div>
+        <div class="header_include_container">
+            <div id="header" class="header">
+                <p>Kanban Project Management Tool</p>
+                <div class="help_name_container">
+                    <img onclick="includeHTML('help.html')" class="help_icon_header" src="./assets/img/help.png" alt="help_icon">
+                    <div onclick="toggleMenu()" class="name">SM</div>
+                </div>
+            </div>
+            <div id="include" class="include">
+                <div w3-include-html=""></div>
+            </div>
+        </div>
+        <div id="popup_menu" class="popup_menu display_none">
+            <div onclick="includeHTML('legal_notice.html')" class="nav_legal">Legal notice</div>
+            <div onclick="includeHTML('privacy_policy.html')" class="nav_legal">Privacy Policy</div>
+            <div class="nav_legal">Log out</div>
+        </div>
 </body>
 </html>

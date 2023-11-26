@@ -1,0 +1,204 @@
+body, html{
+    height: 100%;
+    margin: 0;
+    display: flex;
+}
+
+.side_bar{
+    width: 16.11111vw;
+    height: 100%;
+    background-color: #2a3647;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.siede_bar_logo_header{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 43.116379310344827586206896551724;
+    height: auto;
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    width: 100%;
+    align-items: center;
+}
+
+.menu{
+    width: 100%;
+}
+
+.menu_buttons{
+    display: flex;
+    align-items: center;
+    width: 85%;
+    padding-left: 15%;
+}
+
+.btn_clicked{
+    background-color: #091931;
+}
+
+.side_bar_logos_img{
+    width: 9.2879256965944272445820433436533;
+    padding: 10px 30px 10px 10px;
+}
+
+.legal{
+    color: #696F77;
+    width: 85%;
+    padding-left: 15%;
+}
+
+.nav_legal{
+    padding-top: 10px;
+    
+}
+
+.header_include_container{
+    width: calc(100vw - 16.11111vw);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    height: 70px;
+}
+
+p{
+    font-size: 24px;
+}
+
+.help_name_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+.help_icon_header{
+    width: 2.6490066225165562913907284768212vw;
+    height: 2.6490066225165562913907284768212vw;
+    padding-right: 20px;
+}
+
+.name{
+    color: #29ABE2;
+    width: 3.6357615894039735099337748344371vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.6357615894039735099337748344371vw;
+    border-radius: 50%;
+    border: solid #2a3647 3px;
+    font-size: 24px;
+}
+
+.include{
+    height: 100%;
+    padding-left: 100px;
+}
+
+.popup_menu{
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    background-color: #091931;
+    color: #7B818A;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px;
+}
+
+.display_none{
+    display: none;
+}
+
+.display_block{
+    display: block;
+}
+
+@media (min-width: 1500px) {
+    .name{
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .name{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .side_bar_logos_img{
+       padding: 10px;
+    }
+    .menu_buttons{
+        width: 95%;
+        padding-left: 5%;
+    }
+}
+
+@media (max-width: 900px) {
+    .side_bar_logos_img{
+        padding: 5px;
+     }
+    .menu_name{
+        display: none;
+    }
+    .menu_buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .name{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 700px) {
+    .siede_bar_logo_header{
+        width: 70px;
+        height: auto;
+    }
+    .name{
+        font-size: 12px;
+    }
+    .legal{
+        font-size: 12px;
+    }
+    p{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .name{
+        font-size: 10px;
+    }
+    .legal{
+        font-size: 10px;
+    }
+    p{
+        font-size: 16px;
+    }
+}

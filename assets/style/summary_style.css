@@ -1,0 +1,136 @@
+.header_summary{
+    display: flex;
+    align-items: center;
+    padding-top: 136px;
+}
+
+.summary_seperator{
+    border-left: 3px solid #8FD1ED;
+    height: 61px;
+    padding-right: 80px;
+}
+
+.summary_h1{
+    font-size: 61px;
+    padding-right: 80px;
+}
+
+.header_txt{
+    font-size: 27.5px;
+}
+
+.h2{
+    font-size: 64px;
+   margin-top: 0;
+   margin-bottom: 0;
+}
+
+.summary_top_cards{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 168px;
+    width: 560px;
+}
+
+.summary_top_card{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 47.142857142857142857142857142857%;
+    border: solid lightgray 1px;
+    border-radius: 15px;
+}
+
+.summary_icons{
+    width: 69px;
+    height: 69px;
+}
+
+.summary_top_card_numbers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text_cards{
+    font-size: 20px;
+}
+
+.middlecards{
+    width: 560px;
+    height: 168px;
+    border: solid lightgray 1px;
+    border-radius: 15px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.summary_middle_card{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 266px;
+}
+
+.card_seperator{
+    border-left: 3px solid #EEEEEE;
+    height: 70%;
+    padding-right: 80px;
+}
+
+.deadline_txt{
+    font-size: 21px;
+    font-weight: 800px;
+}
+
+.text_beneath_deadline{
+    font-size: 16px;
+    padding-top: 5px;
+}
+
+.bottom_cards{
+    width: 560px;
+    height: 168px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary_bot_card_numbers{
+    border: solid lightgray 1px;
+    border-radius: 15px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.summary_content{
+    display: flex;
+}
+
+.greeting_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+}
+
+.greeting{
+    font-size: 47px;
+}
+
+.greeting_name{
+    font-size: 64px;
+    color: #29abe2;
+}
