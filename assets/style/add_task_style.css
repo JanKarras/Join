@@ -1,0 +1,142 @@
+
+
+.add_task_h1{
+    font-size: 61px;
+    padding-top: 100px;
+}
+
+.add_taks_sides{
+    width: 30.555555555555555555555555555556vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.left_side{
+    height: 376px;
+}
+
+.right_side{
+    height: 416px;
+}
+
+.display_flex{
+    display: flex;
+}
+
+.name_of_input{
+
+}
+
+.star{
+    color: #FBADB7;
+}
+
+input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 48px;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+    padding: 12px 21px 12px 21px;
+    margin-top: 10px;
+}
+
+select{
+    width: 100%;
+    margin-top: 10px;
+    height: 48px;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+}
+
+.seperator_add_task{
+    border-left: 3px solid #8FD1ED;
+    height: 424px;
+}
+
+.add_task_body{
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+}
+
+.description {
+    height: 120px;
+}
+
+.description_input{
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+    resize: none;
+}
+
+
+.prio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.prio_btns{
+    width: 136px;
+    height: 56px;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.required{
+    display: flex;
+}
+
+footer{
+    padding-top: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+}
+
+.footer_btns_container{
+    display: flex;
+}
+
+.clear{
+    width: 110px;
+    height: 56px;
+    border: solid black 1px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create{
+    width: 186px;
+    height: 56px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+}
+
+input[type="text"]::placeholder {
+    color: #999; /* Farbe des Platzhaltertexts */
+    opacity: 0.8; /* Transparenz des Platzhaltertexts */
+}
+
+textarea[type="text"]::placeholder {
+    color: #999; /* Farbe des Platzhaltertexts */
+    opacity: 0.8; /* Transparenz des Platzhaltertexts */
+}

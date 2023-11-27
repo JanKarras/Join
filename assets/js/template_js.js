@@ -16,12 +16,23 @@ async function includeHTML(file) {
         let div = document.createElement('div'); // Neues DIV-Element erstellen
         div.innerHTML = newContent; // Neuen Inhalt in das DIV-Element einfügen
         container.appendChild(div); // DIV-Element dem Container hinzufügen
+        init_include(file);
     } else {
         let div = document.createElement('div');
         div.innerHTML = 'Page not found';
         container.appendChild(div);
     }
-    init_include(file);
+}
+
+function init_include(name){
+    let functionName = name.split('.')[0] + '_init';
+
+    // Überprüfe, ob die Funktion existiert, bevor du sie aufrufst
+    if (typeof window[functionName] === 'function') {
+        window[functionName]();
+    } else {
+        console.error(`Die Funktion ${functionName} existiert nicht.`);
+    }
 }
 
 

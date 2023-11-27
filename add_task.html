@@ -3,9 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style/add_task_style.css">
+    <script src="./assets/js/add_task_js.js"></script>
     <title>Document</title>
 </head>
 <body>
-    
+    <h1 class="add_task_h1">Add Task</h1>
+    <div class="add_task_body">
+        <div class="add_taks_sides left_side">
+        <div>
+            <div class="display_flex">
+                <div class="name_of_input">Title</div>
+                <div class="star">*</div>
+            </div>
+            <input type="text" placeholder="Enter a title">
+        </div>
+        <div>
+            <div class="description">
+                <div>Description</div>
+                <textarea class="description_input" placeholder="Enter a description"></textarea>
+            </div>
+        </div>
+        <div>
+            <div>Assigend to</div>
+            <select name="" id=""></select>
+        </div>
+        </div>
+        <div class="seperator_add_task"></div>
+        <div class="add_taks_sides right_side">
+        <div>
+            <div class="display_flex">
+                <div class="name_of_input">Due date</div>
+                <div class="star">*</div>
+            </div>
+            <input type="date">
+        </div>
+        <div>
+            <div>Prio</div>
+            <div class="prio">
+                <div class="prio_btns">
+                    <div>Urgent</div>
+                    <img class="arrows_img" src="./assets/img/urgent.png" alt="">
+                </div>
+                <div class="prio_btns">
+                    <div>Medium</div>
+                    <img class="arrows_img" src="./assets/img/medium.png" alt="">
+                </div>
+                <div class="prio_btns">
+                    <div>Low</div>
+                    <img class="arrows_img" src="./assets/img/low.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="display_flex">
+                <div class="name_of_input">Category</div>
+                <div class="star">*</div>
+            </div>
+            <select></select>
+        </div>
+        <div>
+            <div>Subtasks</div>
+            <select></select>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <div class="required">
+            <div class="star">*</div>
+            <div>This field is required</div>
+        </div>
+        <div class="footer_btns_container">
+            <div class="clear">
+                <div>Clear</div>
+                <img src="./assets/img/iconoir_cancel.png">
+            </div>
+            <div class="create">
+                <div>Create Task</div>
+                <img>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

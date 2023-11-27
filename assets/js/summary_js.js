@@ -1,19 +1,23 @@
 
-function init(){
-    console.log("test")
+function summary_init(){
     load_numbers();
-    render_greeting();
+    updateTime();
 }
 
 function load_numbers(){
     
 }
 
-function render_greeting(){
-    function updateTime(){
-        let currentTime = new Date();
-        let currenthour = currentTime.getHours();
-        console.log(currenthour);
-    }
-    setInterval(updateTime, 5000);
+function updateTime(){
+    let currentTime = new Date();
+    let currenthour = currentTime.getHours();
+    console.log(currenthour);
+    if (currenthour < 12){
+        document.getElementById('greeting').innerHTML = "Good morning";
+    } else if (currenthour > 12 && currenthour < 14){
+        document.getElementById('greeting').innerHTML = "Good noon";
+    } else if (currenthour > 14 && currenthour < 18){
+        document.getElementById('greeting').innerHTML = "Good afternoon";
+    } else if (currenthour > 18)
+        document.getElementById('greeting').innerHTML = "Good evening";
 }
