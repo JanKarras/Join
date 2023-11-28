@@ -153,6 +153,7 @@ input,
 }
 input {
   width: 100%;
+  font-size: 1.1rem;
   padding: 1.1rem 1.3rem;
   padding-right: 3rem;
   border-radius: 8px;
@@ -210,7 +211,8 @@ input {
   color: #2a3647;
   border: 1px solid #2a3647;
 }
-.signin button:nth-child(2) {
+.signin button:nth-child(2),
+.signup2 button:hover {
   border: 1px solid #2a3647;
   color: #000;
   background-color: #fff;
@@ -305,8 +307,8 @@ input {
   .moveup-logo {
     width: 65px;
     height: 70px;
-    top: 28px;
-    left: 32px;
+    top: 45px;
+    left: 45px;
   }
   .signin-container {
     flex-direction: column;
@@ -327,7 +329,6 @@ input {
   .name input {
     margin-bottom: 28px;
   }
-
   .sign-in-form,
   .sign-up-form {
     padding: 28px 0px 28px 0px;
@@ -339,11 +340,9 @@ input {
     flex-direction: column;
     align-items: center;
   }
-  .signin button {
+  .signin button,
+  .register-button button {
     width: 50%;
-    text-align: center;
-    padding: 0.8rem 0;
-    font-size: 1.2rem;
   }
   .signup2 button {
     margin-left: 25px;
@@ -376,6 +375,7 @@ input {
   .name input {
     margin-bottom: 25px;
   }
+
   input {
     width: 100%;
     padding: 0.6rem 0.9rem;
@@ -386,7 +386,6 @@ input {
     font-size: 1rem;
     padding: 0.7rem 1rem;
   }
-
   .signup2 span {
     font-size: 1rem;
   }
@@ -394,8 +393,7 @@ input {
   .input input {
     padding: 0.9rem;
   }
-
-  .legality {
-    bottom: 5%;
-  }
+}
+.legality {
+  bottom: 5%;
 }

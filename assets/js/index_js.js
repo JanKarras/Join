@@ -79,7 +79,7 @@ function loginUser() {
       user.email == userEmail.value && user.password == userPassword.value
   );
   if (user) {
-    window.location.href = "summary.html?msg=You Signed Up successfuly";
+    window.location.href = "summary.html";
   }
 }
 function validateUser() {
@@ -91,4 +91,3 @@ function validateUser() {
     registerButton.classList.remove("signin");
   }
 }
-validateUser();
