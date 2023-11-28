@@ -2,7 +2,7 @@
 
 .add_task_h1{
     font-size: 61px;
-    padding-top: 100px;
+    padding-bottom: 70px;
 }
 
 .add_taks_sides{
@@ -15,17 +15,12 @@
 .left_side{
     height: 376px;
 }
-
 .right_side{
     height: 416px;
 }
 
 .display_flex{
     display: flex;
-}
-
-.name_of_input{
-
 }
 
 .star{
@@ -98,7 +93,7 @@ select{
 }
 
 footer{
-    padding-top: 180px;
+    padding-top: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,7 +131,7 @@ input[type="text"]::placeholder {
     opacity: 0.8; /* Transparenz des Platzhaltertexts */
 }
 
-textarea[type="text"]::placeholder {
+textarea::placeholder{
     color: #999; /* Farbe des Platzhaltertexts */
     opacity: 0.8; /* Transparenz des Platzhaltertexts */
 }
