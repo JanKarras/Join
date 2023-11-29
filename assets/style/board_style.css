@@ -11,16 +11,11 @@ body {
 }
 
 .content {
-        position: absolute;
-        left: 232px;
         width: calc(100% - 232px);
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        padding-left: 70px;
-        padding-right: 70px;
         box-sizing: border-box;
-        padding-top: 80px;
 }
 
 
@@ -29,13 +24,16 @@ body {
         justify-content: space-between;
         width: 100%;
         max-width: 1477px;
-        padding-top: 82px;
         padding-bottom: 99px;
 }
 
 .headline h1 {
         font-size: 61px;
         font-weight: 700;
+}
+
+h1{
+        margin-top: 0;
 }
 
 .inputAndButtonHeadline {

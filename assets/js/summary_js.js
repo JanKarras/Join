@@ -11,7 +11,6 @@ function load_numbers(){
 function updateTime(){
     let currentTime = new Date();
     let currenthour = currentTime.getHours();
-    console.log(currenthour);
     if (currenthour < 12){
         document.getElementById('greeting').innerHTML = "Good morning";
     } else if (currenthour > 12 && currenthour < 14){
