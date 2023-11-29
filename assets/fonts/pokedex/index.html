@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pokedex-style.css">
+    <link rel="stylesheet" href="fonts.css">
+    <script src="./pokedex-script.js"></script>
+    <script src="../showdetail/showdetail.js"></script>
+    <title>Pokedex</title>
+</head>
+<body id="body"  onload="init(0)">
+    <div class="display" id="pokedex">
+        <header>
+                <img class="nav-imges" src="../img/arrow.png">
+                <img class="nav-imges" src="../img/Menue.png" id="menu-button"onclick="toggleMenu()">
+        </header>
+        <h1 id="headline">Pokedex 1. Generation</h1>
+        <content id="content" class="card-container">
+        </content>
+    </div>
+    <div  id="showdetail">
+        <div class="height_40">
+            <header>
+                <img onclick="close_detail()" class="nav-imges" src="../img/arrow.png">
+                <img class="nav-imges" src="../img/heart.png">
+            </header>
+            <section class="standart_info">
+                <div class="name_types">
+                        <h2 id="name-deatil"></h2>
+                        <div class="id">
+                            <div id="id-detail"></div>
+                        </div>
+                    </div>
+                    <div class="types">
+                        <div id="type1-detail"></div>
+                        <div id="type2-detail"></div>
+                    </div>
+                    <div class="img_detail_container">
+                        <img id="img_detail" src="">
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section id="spezefic_information" class="height_60 display-none">
+            <div class="padding_left_5vw">
+            <nav class="nav">
+                <div class="lightgray" id="nav-about" onclick="move_nav('about')">About</div>
+                <div class="lightgray" id="nav-stats" onclick="move_nav('stats')">Base Stats</div>
+                <div class="lightgray" id="nav-evolution" onclick="move_nav('evolution')">Evolution</div>
+                <div class="lightgray" id="nav-moves" onclick="move_nav('moves')">Moves</div>
+            </nav>
+            <hr>
+            <div id="about" class="about">
+                <div class="about_list">
+                    <ul class="column">
+                        <li>Species</li>
+                        <li>Height</li>
+                        <li>Weigth</li>
+                        <li>Abilities</li>
+                    </ul>
+                    <ul class="column">
+                        <li id="species"></li>
+                        <li id="height"></li>
+                        <li id="weigth"></li>
+                        <li id="abilities"></li>
+                    </ul>
+                </div>
+                <h1 class="h1">Breeding</h1>
+                <div class="about_list">
+                    <ul class="column">
+                        <li>Gender</li>
+                        <li>Egg Groups</li>
+                        <li>Egg Cycle</li>
+                    </ul>
+                    <ul class="column">
+                        <li id="gender"></li>
+                        <li id="egg_groups"></li>
+                        <li id="egg_cycle"></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="stats" class="stats">
+                <div class="stats_list">
+                    <ul class="column">
+                        <li>HP</li>
+                        <li>Attack</li>
+                        <li>Defense</li>
+                        <li>Sp. Atk</li>
+                        <li>Sp. Def</li>
+                        <li>Speed</li>
+                        <li>Total</li>
+                    </ul>
+                    <ul class="column margin_left">
+                        <li id="stat0"></li>
+                        <li id="stat1"></li>
+                        <li id="stat2"></li>
+                        <li id="stat3"></li>
+                        <li id="stat4"></li>
+                        <li id="stat5"></li>
+                        <li id="stat6"></li>
+                    </ul>
+                    <ul class="column">
+                        <li class="bar">
+                            <div class="progress green" id="progress0"></div>
+                        </li>
+                        <li class="bar">
+                            <div class="progress" id="progress1"></div>
+                        </li>
+                        <li class="bar">
+                            <div class="progress green" id="progress2"></div>
+                        </li>
+                        <li class="bar">
+                            <div class="progress" id="progress3"></div>
+                        </li>
+                        <li class="bar">
+                            <div class="progress green" id="progress4"></div>
+                        </li>
+                        <li class="bar">
+                            <div class="progress" id="progress5"></div>
+                        </li>
+                        <li class="bar">
+                            <div class="progress green" id="progress6"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="evolution" class="evolution" ></div>
+            <div id="moves" class="moves">
+                <ul class="column_moves" id="moves_list"></ul>
+            </div>
+            </div>
+        </section>
+    </div>
+    <div id="menu" class="hidden">
+        <div onclick="toggleMenu()" id="close-button">
+            <div class="close-line"></div>
+            <div class="close-line"></div>
+        </div>
+        <div class="gen_selection">
+            <h3 id="menu-button0" onclick="init(0); toggleMenu();">1. Gen: Kanto</h3>
+            <h3 id="menu-button1" onclick="init(1); toggleMenu();">2. Gen: Johto</h3>
+            <h3 id="menu-button2" onclick="init(2); toggleMenu();">3. Gen: Hoenn</h3>
+            <h3 id="menu-button3" onclick="init(3); toggleMenu();">4. Gen: Sinnoh</h3>
+            <h3 id="menu-button4" onclick="init(4); toggleMenu();">5. Gen: Einall</h3>
+            <h3 id="menu-button5" onclick="init(5); toggleMenu();">6. Gen: Kalos</h3>
+            <h3 id="menu-button6" onclick="init(6); toggleMenu();">7. Gen: Alola</h3>
+            <h3 id="menu-button7" onclick="init(7); toggleMenu();">8. Gen: Galar</h3>
+            <h3 id="menu-button8" onclick="init(8); toggleMenu();">9. Gen: Paldea</h3>
+        </div>
+    </div>
+</body>
+</html>
