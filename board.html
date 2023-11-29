@@ -6,12 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/board.css">
+    <link rel="stylesheet" href="./assets/style/board_style.css">
     <title>Board</title>
-    <script defer src="../scripts/board.js"></script>
+    <script defer src="./assets/js/board_js.js"></script>
 </head>
 
-<body onload="init();">
+<body>
     <div id="sidebar">
         <div w3-include-html="./sidebar.html"></div>
     </div>
@@ -20,16 +20,16 @@
         <div class="headline">
             <span class="responsiveHeadline">
                 <h1>Board</h1>
-                <div class="plusForResponsive"><img src="../img/board-img/addplus.png">
+                <div class="plusForResponsive"><img src="./assets/img/board-img/addplus.png">
                 </div>
             </span>
             <span class="inputAndButtonHeadline">
                 <div class="inputDiv">
                     <input id="input" placeholder="Find Task">
-                    <img src="../img/board-img/lupe.png">
+                    <img src="./assets/img/board-img/lupe.png">
                 </div>
                 <div class="buttonAdd">Add task
-                    <img src="../img/board-img/addplus.png">
+                    <img src="./assets/img/board-img/addplus.png">
                 </div>
 
             </span>
@@ -38,7 +38,7 @@
         <div class="taskContent">
             <div class="taskContainer">
                 <div class="taskCategoryName">
-                    <h3> To do</h3><span class="hoverPlusEffect"></span><img src="../img/board-img/plusButtonTasks.png"></span>
+                    <h3> To do</h3><span class="hoverPlusEffect"></span><img src="./assets/img/board-img/plusButtonTasks.png"></span>
                 </div>
                 <div id="taskCategoryToDo"></div>
             </div>
@@ -46,7 +46,7 @@
             <div class="taskContainer">
                 <div class="taskCategoryName">
                     <h3> In progress</h3><span class="hoverPlusEffect" ><img
-                            src="../img/board-img/plusButtonTasks.png"></span>
+                            src="./assets/img/board-img/plusButtonTasks.png"></span>
                 </div>
                 <div id="taskCategoryInProgress"></div>
             </div>
@@ -54,14 +54,14 @@
             <div class="taskContainer">
                 <div class="taskCategoryName">
                     <h3>Await feedback</h3><span class="hoverPlusEffect"><img
-                            src="../img/board-img/plusButtonTasks.png"></span>
+                            src="./assets/img/board-img/plusButtonTasks.png"></span>
                 </div>
                 <div id="taskCategoryAwaitFeedback"></div>
             </div>
 
             <div class="taskContainer">
                 <div class="taskCategoryName">
-                    <h3>Done</h3><span class="hoverPlusEffect"><img src="../img/board-img/plusButtonTasks.png"></span>
+                    <h3>Done</h3><span class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png"></span>
                 </div>
                 <div id="taskCategoryDone"></div>
             </div>
@@ -91,7 +91,7 @@
                         <h3 class="titles">Assigned to</h3>
                         <div class="selectionAssignedTo" id="assignedToSelection">
                             <div>
-                                <p>Select contacts to assign</p><img src="../img/addtask-img/arrow_drop_down.png">
+                                <p>Select contacts to assign</p><img src="./assets/img/addtask-img/arrow_drop_down.png">
                             </div>
                         </div>
                           <div class="createdTaskAssignedMember" id="assginedMembersCreateTask"></div> 
@@ -110,13 +110,13 @@
                         <h3>Prio</h3>
                         <div class="priorities" id="priorities">
                             <span id="selecturgent" onclick="highlightPriority('urgent')">
-                                <p>Urgent</p><img src="../img/addtask-img/higPrio.png">
+                                <p>Urgent</p><img src="./assets/img/addtask-img/higPrio.png">
                             </span>
                             <span id="selectmedium" onclick="highlightPriority('medium')">
-                                <p>Medium</p><img src="../img/addtask-img/mediumPrio.png">
+                                <p>Medium</p><img src="./assets/img/addtask-img/mediumPrio.png">
                             </span>
                             <span id="selectlow" onclick="highlightPriority('low')">
-                                <p>Low</p><img src="../img/addtask-img/lowPrio.png">
+                                <p>Low</p><img src="./assets/img/addtask-img/lowPrio.png">
                             </span>
                         </div>
                         <div class="formError d-none" id="errorPriority">What is the priority of the task?</div>
@@ -125,7 +125,7 @@
                         <h3 class="titles">Category</h3>
                         <div class="category" id="categorySelection" onclick="openCategorySelection()">
                             <div>
-                                <p>Select task category</p><img src="../img/addtask-img/arrow_drop_down.png">
+                                <p>Select task category</p><img src="./assets/img/addtask-img/arrow_drop_down.png">
                             </div>
                         </div>
                         <div id="colorSelection">
@@ -149,25 +149,25 @@
                         <h3>Subtask</h3>
                         <div class="addNewSubtask">
                             <input id="subtask" placeholder="Add new subtask"><img onclick="createSubtask()"
-                                src="../img/addtask-img/plus.png" style="cursor:pointer">
+                                src="./assets/img/addtask-img/plus.png" style="cursor:pointer">
                         </div>
                         <div id="newCreatedSubtasks"></div>
                     </div>
                     <div class="clearAndCreateButtonPopUp">
                         <div>
                             <div class="clearButton">Cancel<img
-                                    src="../img/cancelIcon.png"></div>
+                                    src="./assets/img/cancelIcon.png"></div>
                         </div>
                         <div>
                             <button class="createButton" type="submit">Create Task</p><img
-                                    src="../img/createAccIcon.png"></button>
+                                    src="./assets/img/createAccIcon.png"></button>
                         </div>
                     </div>
                 </span>
             </form>
         </div>
     </div>
-     <div id="taskCreated"><img src="../img/board-img/addedToBoard.png"></div>
+     <div id="taskCreated"><img src="./assets/img/board-img/addedToBoard.png"></div>
     
 </body>
 
