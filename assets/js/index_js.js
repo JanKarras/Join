@@ -11,12 +11,14 @@ let userPassword = document.getElementById("password");
 let confirmPassword = document.getElementById("confirm-password");
 let msgBox = document.getElementById("msgBox");
 let checkBox = document.getElementById("checkbox");
+const button = document.getElementById("signin-button");
+
 
 const signInContainer = document.querySelector(".signin-container1");
 const signInForm = document.querySelector(".sign-in-form");
 const legality = document.querySelector(".legality");
-const button = document.getElementById("signin-button");
 const registerButton = document.querySelector(".register-button");
+
 
 const windowWidth = window.innerWidth;
 

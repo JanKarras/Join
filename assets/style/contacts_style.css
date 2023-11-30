@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.contacts {
+  display: flex;
+  height: calc(100vh - 65px);
+}
+
+.contact_sidebar {
+  width: 456px;
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.add_contact {
+  position: fixed;
+  width: 440px;
+  background: #fff;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_new_contact {
+  padding: 1rem 4rem;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: #2a3647;
+  color: #fff;
+  cursor: pointer;
+}
+
+.contact_list {
+  padding: 24px 80px;
+  margin-top: 3rem;
+}
+
+.contact_info .alphabet {
+  padding: 0rem 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.3rem;
+  margin: 0.4rem;
+  border-bottom: 1px solid #dbdada;
+}
+
+.contacts_initials {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact_name {
+  display: flex;
+  padding: 0.8rem 1rem;
+  align-items: center;
+  gap: 3rem;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.contact_name:hover {
+  background-color: #f7f7f7;
+}
+
+.contact_name:focus {
+  background-color: #2a3647;
+}
+
+.contact_name span,
+.contacts_edit p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: orange;
+  color: #fff;
+}
+
+.contact_name h5 {
+  font-weight: 400;
+  color: #56b7f3;
+  margin-top: 0.2rem;
+}
+
+.contact_name h4 {
+  font-weight: 400;
+}
+
+.contact_detail {
+  padding: 5rem 3rem;
+}
+
+.contacts_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.contacts_heading h2 {
+  font-size: 3.5rem;
+}
+.partition {
+  height: 3.3rem;
+  border: 2px solid #87cefa;
+}
+
+.info {
+  width: 461px;
+  height: 354px;
+}
+
+.contacts_edit {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.contacts_edit p {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+}
+.contactname h3 {
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+.contact_information h4,
+.contact_information h5 {
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.email {
+  color: #56b7f3;
+}
+
+.contact_icon span {
+  margin-right: 0.5rem;
+  font-size: 14px;
+}
+
+.contact_icon span i {
+  margin-right: 0.5rem;
+}
