@@ -1,0 +1,363 @@
+                                        /*Pokedex-Start*/
+
+body{
+    margin-left: 5vw;
+    margin-right: 5vw;
+    font-family: 'Lato', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18;
+}
+
+.overflow{
+    overflow: hidden;
+}
+
+.nav-imges
+{
+    height: 30px;
+    width: auto;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.card {
+    width: calc(47% - 10px); /* 50% Breite für 2 Karten nebeneinander */
+    margin-bottom: 10px; /* Abstand zwischen den Karten */
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+.id{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: grey;
+}
+
+h2{
+    color:  white;
+    margin-top: 4vh;
+}
+
+.type{
+    color: white;
+    margin-top: 10px;
+    font-size: 1.3em;
+}
+
+.type_img_container{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.type-container{
+    width: 50%;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+.display{
+    display: block;
+}
+
+.display-none{
+    display: none;
+}
+
+                                        /*Pokedex-End*/
+                                        /*Pokedex-Menu-Start*/
+#menu {
+    position: fixed;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s;
+    color: #000; 
+}
+
+
+.visible {
+    right: 0;
+}
+
+
+.hidden {
+    right: -300px;
+}
+
+#close-button {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5vh;
+    right: 50px;
+    cursor: pointer;
+}
+
+.close-line {
+    width: 100%;
+    height: 2px;
+    background-color: #000; 
+    position: absolute;
+}
+
+.close-line:first-child {
+    top: 50%;
+    left: 0;
+    transform: translate(0%, -50%) rotate(45deg);
+}
+
+.close-line:last-child {
+    top: 50%;
+    left: 0;
+    transform: translate(0%, -50%) rotate(-45deg);
+}
+
+.gen_selection{
+    margin-top: 5vh;
+    margin-left: 50px;
+}
+
+
+                                        /*Pokedex-Menu-Ende*/
+                                        /*Show-Detail-Start*/
+
+.height_60{
+    height: 60vh;
+}
+
+.height_40{
+    height: 40vh;
+}
+
+.img_detail_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#img_detail{
+    width: 50%;
+    height: auto;
+}
+
+.name_id_container{
+    display: flex;
+    justify-content: space-between;
+    align-items:end;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+h2{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.types{
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    color: white;
+}
+
+.padding_left_5vw
+{
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+hr{
+    border:  none;
+    border-top: 1px solid #ccc;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2vh;
+    font-weight: 700;
+}
+
+.nav div{
+    cursor: pointer;
+}
+
+.lightgray
+{
+    color:#ccc;
+}
+
+.about{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.about_list{
+    display: flex;
+}
+
+ul{
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
+.column{
+    display: inline-block;
+    vertical-align: top;
+    list-style-type: none;
+    padding: 0;
+}
+
+.column:nth-child(1){
+    width: 30%;
+}
+
+.column:nth-child(2){
+    width: 70%;
+}
+
+.column li{
+    margin-bottom: 2vh;
+}
+
+.h1{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+#gender{
+    display: flex;
+}
+
+.stats_list{
+  display: flex;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    width: 60vw
+}
+
+.progress {
+    background-color: #c41e1e;
+    height: 10px; /* Höhe der Balken */
+    margin-top: 5px;
+    margin-bottom: 4px;
+    width: 0; /* Anfangsbreite, wird durch JavaScript aktualisiert */
+    transition: width 0.5s; /* Animiere die Breite bei Änderungen */
+    border-radius: 5px;
+}
+
+.green{
+    background-color: #4CAF50;
+}
+
+.margin_left{
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#spezefic_information{
+    background-color: white;
+    width: 100vw;
+    margin-left: -5vw;
+    margin-right: -5vw;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+.evolution-chain-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+#first-evolution{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#second-evolution{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#first-evolution{
+    display: flex;
+    text-align: center;
+}
+
+#second-evolution{
+    display: flex;
+    text-align: center;
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  
+  .arrow::before {
+    content: "\2192"; /* Right arrow character */
+    margin: 0 10px;
+    font-size: 32px;
+  }
+  .arrow:empty::before {
+    display: none; /* Verstecke den Pfeil, wenn .arrow leer ist */
+  }
+
+#moves_list{
+    list-style-type: none;
+
+}
+
+.moves_list_element{
+    display: flex;
+}
+
+.column_moves{
+    display: inline-block;
+    vertical-align: top;
+    list-style-type: none;
+    padding: 0;
+}
+
+.column_moves li{
+    margin-bottom: 2vh;
+}
+
+.about, .stats, .evolution, .moves {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Übergangseigenschaften hinzugefügt */
+  }
+  
+  .about.active, .stats.active, .evolution.active, .moves.active {
+    display: block;
+    opacity: 1;
+  }
+
+                                        /*Show-Detail-End*/
