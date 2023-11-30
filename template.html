@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/style/template.css" />
+    <link rel="stylesheet" href="./assets/style/fonts.css" />
     <script src="./assets/js/template_js.js"></script>
     <script src="./assets/js/summary_js.js"></script>
     <script src="./assets/js/add_task_js.js"></script>
+    <script src="./assets/js/board_js.js"></script>
     <title>Document</title>
   </head>
   <body id="body" onload="init()">
@@ -60,8 +62,12 @@
           </div>
         </div>
         <div class="legal">
-          <div class="nav_legal">Privacy Policy</div>
-          <div class="nav_legal">Legal notice</div>
+          <a href="./privacy_policy.html" target="_blank" class="nav_legal"
+            >Privacy Policy</a
+          >
+          <a href="./legal_notice.html" target="_blank" class="nav_legal"
+            >Legal notice</a
+          >
         </div>
       </nav>
     </div>
@@ -83,12 +89,12 @@
       </div>
     </div>
     <div id="popup_menu" class="popup_menu display_none">
-      <div onclick="includeHTML('legal_notice.html')" class="nav_legal">
-        Legal notice
-      </div>
-      <div onclick="includeHTML('privacy_policy.html')" class="nav_legal">
-        Privacy Policy
-      </div>
+      <a href="./legal_notice.html" target="_blank" class="nav_legal"
+        >Legal notice</a
+      >
+      <a href="./privacy_policy.html" target="_blank" class="nav_legal"
+        >Privacy Policy</a
+      >
       <div class="nav_legal">Log out</div>
     </div>
   </body>
