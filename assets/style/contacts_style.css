@@ -9,6 +9,14 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
+a h4 {
+  color: black;
+}
+
 .contacts {
   display: flex;
   height: calc(100vh - 65px);
@@ -26,7 +34,7 @@ body {
 
 .add_contact {
   position: fixed;
-  width: 440px;
+  width: 456px;
   background: #fff;
   height: 100px;
   display: flex;
@@ -35,7 +43,8 @@ body {
 }
 
 .add_new_contact {
-  padding: 1rem 4rem;
+  padding: 1rem 0;
+  width: 300px;
   border-radius: 16px;
   display: flex;
   justify-content: center;
@@ -52,7 +61,7 @@ body {
 }
 
 .contact_info .alphabet {
-  padding: 0rem 1.5rem;
+  padding: 0rem 1.6rem;
   padding-top: 1.5rem;
   padding-bottom: 1.3rem;
   margin: 0.4rem;
@@ -66,11 +75,16 @@ body {
 
 .contact_name {
   display: flex;
+  width: 300px;
   padding: 0.8rem 1rem;
   align-items: center;
   gap: 3rem;
   border-radius: 16px;
   cursor: pointer;
+}
+
+.alphabet {
+  width: 290px;
 }
 
 .contact_name:hover {
@@ -79,6 +93,22 @@ body {
 
 .contact_name:focus {
   background-color: #2a3647;
+}
+
+.contact_name:focus h4 {
+  color: #fff;
+}
+
+.contact_name:focus span {
+  border: 2px solid #fff;
+}
+
+.name_email {
+  display: flex;
+}
+
+.name_email span {
+  margin-right: 3rem;
 }
 
 .contact_name span,
@@ -93,9 +123,13 @@ body {
   color: #fff;
 }
 
+.contacts_edit p {
+  border: 3px solid #fff;
+}
+
 .contact_name h5 {
   font-weight: 400;
-  color: #56b7f3;
+  color: #0d99ff;
   margin-top: 0.2rem;
 }
 
@@ -104,18 +138,23 @@ body {
 }
 
 .contact_detail {
-  padding: 5rem 3rem;
+  padding: 5rem 3.5rem;
+  background-color: #f6f7f8;
+  width: 60vw;
 }
 
 .contacts_heading {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 .contacts_heading h2 {
   font-size: 3.5rem;
+}
+.contacts_heading p {
+  font-size: 1.5rem;
 }
 .partition {
   height: 3.3rem;
@@ -144,15 +183,35 @@ body {
   font-weight: 300;
   margin-bottom: 0.5rem;
 }
-
+.contact_information h4 {
+  font-size: 20px;
+  font-weight: 400;
+}
 .contact_information h4,
 .contact_information h5 {
-  font-weight: 400;
   margin-bottom: 1.5rem;
 }
+.contact_information h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
 
-.email {
+.delete_edit {
+  cursor: pointer;
+}
+
+.delete_edit:hover {
   color: #56b7f3;
+}
+
+.contact_information .email {
+  color: #0d99ff;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.change_background {
+  background-color: #2a3647;
 }
 
 .contact_icon span {

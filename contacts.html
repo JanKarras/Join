@@ -9,15 +9,15 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="./assets/style/fonts.css" />
+    <script src="assets/js/contacts_js.js" defer></script>
   </head>
   <body>
-    <section class="contacts" onload="contacts_init()">
+    <div id="sidebar">
+      <div w3-include-html="./template.html"></div>
+    </div>
+    <div id="line" w3-include-html="./header.html"></div>
+    <section class="contacts">
       <div class="contact_sidebar">
         <div class="add_contact">
           <div class="add_new_contact">
@@ -26,14 +26,10 @@
           </div>
         </div>
         <div class="contact_list">
-          <!-- first contact -->
           <div class="contact_info" id="name_email"></div>
-          <!-- end of first contact -->
         </div>
       </div>
       <div class="contact_detail" id="contact_details"></div>
     </section>
-
-    <script src="assets/js/contacts_js.js"></script>
   </body>
 </html>

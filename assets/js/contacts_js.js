@@ -1,49 +1,65 @@
 let users = [
   {
+    id: 1,
     name: "Anton Mayer",
-    email: "anton@gmail.com",
+    email: "anton@outlook.com",
     telefon: "01551032454",
   },
   {
-    name: "Anita James",
-    email: "anton@gmail.com",
+    id: 2,
+    name: "Anita Gant",
+    email: "anita@aol.com.com",
     telefon: "01551032454",
   },
   {
+    id: 3,
     name: "Elena James",
-    email: "helena@gmail.com",
-    telefon: "01331032454",
+    email: "elenajames@gmail.com",
+    telefon: "016031032215",
   },
   {
+    id: 4,
     name: "Zoe Graber",
-    email: "anton@gmail.com",
-    telefon: "01551032454",
+    email: "zoegraber@web.de",
+    telefon: "015211032454",
   },
   {
+    id: 5,
     name: "Shawn Peter",
-    email: "anton@gmail.com",
-    telefon: "01551032454",
+    email: "sp@live.com",
+    telefon: "01601032491",
   },
   {
+    id: 6,
     name: "Seun Dede",
-    email: "anton@gmail.com",
-    telefon: "01551032454",
+    email: "seun@outlook.com",
+    telefon: "01781032872",
+  },
+  {
+    id: 7,
+    name: "Christina Justus",
+    email: "cjustus@gmail.com",
+    telefon: "01781031072",
+  },
+  {
+    id: 8,
+    name: "Philip Chanel",
+    email: "philipchanel@yahoo.com",
+    telefon: "01781032872",
   },
 ];
+window.onload = displayUsers;
 
 const userName = document.getElementById("name_email");
 const userInfo = document.getElementById("contact_details");
+const clickedContact = document.querySelector(".contact_name");
 
-//window.onload = displayUsers;
-
-function contacts_init() {
-  displayUsers();
-}
+let currentAlphabet = "";
 
 users.sort((a, b) => a.name.localeCompare(b.name));
 
 function displayUsers() {
-  let currentAlphabet = "";
+  userName.innerHTML = "";
   for (let i = 0; i < users.length; i++) {
     const user = users[i];
     const firstAlphabet = user.name.charAt(0).toUpperCase();
@@ -62,40 +78,19 @@ function displayUsers() {
 function displayUserDetails(i) {
   userInfo.innerHTML = "";
   const user = users[i];
-
+  if (!user) {
+    return;
+  }
   const names = user.name.split(" ");
   let nameInitials = names[0].charAt(0).toUpperCase();
   nameInitials += names[names.length - 1].charAt(0).toUpperCase();
+  userInfo.innerHTML += userDetailHTML(i, nameInitials);
+}
 
-  userInfo.innerHTML += `
-    <div class="contacts_heading">
-    <h2>Contacts</h2>
-    <div class="partition"></div>
-    <p>Better with a team</p>
-  </div>
-  <div class="info">
-    <div class="contacts_edit" id="username_info">
-      <p>${nameInitials}</p>
-      <div class="contactname">
-        <h3>${user.name}</h3>
-        <div class="contact_icon">
-          <span><i class="fa-solid fa-pencil"></i><span>Edit</span></span>
-          <span
-            ><i class="fa-regular fa-trash-can"></i
-            ><span>Delete</span></span
-          >
-        </div>
-      </div>
-    </div>
-    <div class="contact_information">
-      <h4>Contact Information</h4>
-      <h5>Email</h5>
-      <h5 class="email">${user.email}</h5>
-      <h5>Phone</h5>
-      <h5>${user.telefon}</h5>
-    </div>
-  </div>
-    `;
+function deleteUser(userId, i) {
+  users = users.filter((user) => user.id !== userId);
+  displayUsers();
+  displayUserDetails(i);
 }
 
 function userHTML(i, firstAlphabet, nameInitials) {
@@ -105,13 +100,13 @@ function userHTML(i, firstAlphabet, nameInitials) {
     <h3>${firstAlphabet}</h3>
   </div>
   <div class="contacts_initials">
-    <div class="contact_name anton" onclick="displayUserDetails(${i})">
+    <a href="#" class="contact_name anton" onclick="displayUserDetails(${i})">
       <span>${nameInitials}</span>
       <div>
         <h4>${user.name}</h4>
         <h5>${user.email}</h5>
       </div>
-    </div>
+    </a>
   </div>
       `;
 }
@@ -119,12 +114,45 @@ function userHTML(i, firstAlphabet, nameInitials) {
 function sortedUserHTML(i, nameInitials) {
   const user = users[i];
   return ` 
-    <div class="contact_name anton" onclick="displayUserDetails(${i})">
+    <a href="#" class="contact_name anton" onclick="displayUserDetails(${i})">
     <span>${nameInitials}</span>
     <div>
       <h4>${user.name}</h4>
       <h5>${user.email}</h5>
     </div>
-  </div>
+  </a>
     `;
+}
+
+function userDetailHTML(i, nameInitials) {
+  const user = users[i];
+  return `
+  <div class="contacts_heading">
+  <h2>Contacts</h2>
+  <div class="partition"></div>
+  <p>Better with a team</p>
+  </div>
+  <div class="info">
+  <div class="contacts_edit" id="username_info">
+    <p>${nameInitials}</p>
+    <div class="contactname">
+      <h3>${user.name}</h3>
+      <div class="contact_icon">
+        <span  class="delete_edit"><i class="fa-solid fa-pencil"></i><span>Edit</span></span>
+        <span class="delete_edit"  onclick="deleteUser(${user.id})"
+          ><i class="fa-regular fa-trash-can"></i
+          ><span>Delete</span></span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="contact_information">
+    <h4>Contact Information</h4>
+    <h5>Email</h5>
+    <h5 class="email">${user.email}</h5>
+    <h5>Phone</h5>
+    <h5>${user.telefon}</h5>
+  </div>
+  </div>
+  `;
 }
