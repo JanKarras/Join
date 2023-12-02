@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,61 +8,64 @@
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <title>Board</title>
     <script defer src="./assets/js/board_js.js"></script>
+    <script src="./assets/js/header_js.js"></script>
+    <script src="./assets/js/template_js.js"></script>
 </head>
 
-<body>
-    <div id="sidebar">
-        <div w3-include-html="./sidebar.html"></div>
-    </div>
-    <div id="line" w3-include-html="./header.html"></div>
-    <div class="content" id="content">
-        <div class="headline">
-            <span class="responsiveHeadline">
-                <h1>Board</h1>
-                <div class="plusForResponsive"><img src="./assets/img/board-img/addplus.png">
-                </div>
-            </span>
-            <span class="inputAndButtonHeadline">
-                <div class="inputDiv">
-                    <input id="input" placeholder="Find Task">
-                    <img src="./assets/img/board-img/lupe.png">
-                </div>
-                <div class="buttonAdd">Add task
-                    <img src="./assets/img/board-img/addplus.png">
-                </div>
+<body id="bodys" onload="board_init()">
+    <div id="template" w3-include-html="./template.html"></div>
+    <div id="board_body" class="board_body">
+        <div class="header" w3-include-html="./header.html"></div>
+        <div id="content">
+            <div class="headline">
+                <span class="responsiveHeadline">
+                    <h1>Board</h1>
+                    <div class="plusForResponsive"><img src="./assets/img/board-img/addplus.png">
+                    </div>
+                </span>
+                <span class="inputAndButtonHeadline">
+                    <div class="inputDiv">
+                        <input id="input" placeholder="Find Task">
+                        <img src="./assets/img/board-img/lupe.png">
+                    </div>
+                    <div class="buttonAdd">Add task
+                        <img src="./assets/img/board-img/addplus.png">
+                    </div>
 
-            </span>
-        </div>
-
-        <div class="taskContent">
-            <div class="taskContainer">
-                <div class="taskCategoryName">
-                    <h3> To do</h3><span class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png"></span>
-                </div>
-                <div id="taskCategoryToDo"></div>
+                </span>
             </div>
 
-            <div class="taskContainer">
-                <div class="taskCategoryName">
-                    <h3> In progress</h3><span class="hoverPlusEffect" ><img
-                            src="./assets/img/board-img/plusButtonTasks.png"></span>
+            <div class="taskContent">
+                <div class="taskContainer">
+                    <div class="taskCategoryName">
+                        <h3> To do</h3><span class="hoverPlusEffect"><img
+                                src="./assets/img/board-img/plusButtonTasks.png"></span>
+                    </div>
+                    <div id="taskCategoryToDo"></div>
                 </div>
-                <div id="taskCategoryInProgress"></div>
-            </div>
 
-            <div class="taskContainer">
-                <div class="taskCategoryName">
-                    <h3>Await feedback</h3><span class="hoverPlusEffect"><img
-                            src="./assets/img/board-img/plusButtonTasks.png"></span>
+                <div class="taskContainer">
+                    <div class="taskCategoryName">
+                        <h3> In progress</h3><span class="hoverPlusEffect"><img
+                                src="./assets/img/board-img/plusButtonTasks.png"></span>
+                    </div>
+                    <div id="taskCategoryInProgress"></div>
                 </div>
-                <div id="taskCategoryAwaitFeedback"></div>
-            </div>
 
-            <div class="taskContainer">
-                <div class="taskCategoryName">
-                    <h3>Done</h3>
+                <div class="taskContainer">
+                    <div class="taskCategoryName">
+                        <h3>Await feedback</h3><span class="hoverPlusEffect"><img
+                                src="./assets/img/board-img/plusButtonTasks.png"></span>
+                    </div>
+                    <div id="taskCategoryAwaitFeedback"></div>
                 </div>
-                <div id="taskCategoryDone"></div>
+
+                <div class="taskContainer">
+                    <div class="taskCategoryName">
+                        <h3>Done</h3>
+                    </div>
+                    <div id="taskCategoryDone"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +96,7 @@
                                 <p>Select contacts to assign</p><img src="./assets/img/addtask-img/arrow_drop_down.png">
                             </div>
                         </div>
-                          <div class="createdTaskAssignedMember" id="assginedMembersCreateTask"></div> 
+                        <div class="createdTaskAssignedMember" id="assginedMembersCreateTask"></div>
                         <div class="formError d-none" id="errorAssigned">Please, select atleast "Myself"</div>
                     </div>
                 </span>
@@ -156,8 +157,7 @@
                     </div>
                     <div class="clearAndCreateButtonPopUp">
                         <div>
-                            <div class="clearButton">Cancel<img
-                                    src="./assets/img/cancelIcon.png"></div>
+                            <div class="clearButton">Cancel<img src="./assets/img/cancelIcon.png"></div>
                         </div>
                         <div>
                             <button class="createButton" type="submit">Create Task</p><img
@@ -168,8 +168,8 @@
             </form>
         </div>
     </div>
-     <div id="taskCreated"><img src="./assets/img/board-img/addedToBoard.png"></div>
-    
+    <div id="taskCreated"><img src="./assets/img/board-img/addedToBoard.png"></div>
+
 </body>
 
 </html>

@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacts</title>
-    <link rel="stylesheet" href="assets/style/contacts_style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./assets/style/fonts.css" />
-    <script src="assets/js/contacts_js.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="overlay" id="overlay"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacts</title>
+  <link rel="stylesheet" href="assets/style/contacts_style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/style/fonts.css" />
+  <script src="./assets/js/header_js.js"></script>
+  <script src="./assets/js/template_js.js"></script>
+  <script src="assets/js/contacts_js.js" defer></script>
+</head>
+
+<body onload="contacts_init()">
+  <div id="template" w3-include-html="./template.html"></div>
+  <div id="contacts_body" class="contacts_body">
+    <div class="header" w3-include-html="./header.html"></div>
+    <div id="content">
       <section class="contacts">
         <div class="contact_sidebar">
           <div class="add_contact">
-            <div class="add_new_contact" onclick="openAddContactPopup()">
+            <div class="add_new_contact">
               <span>Add new contact</span>
               <span><i class="fa-solid fa-user-plus"></i></span>
             </div>
@@ -27,99 +30,9 @@
             <div class="contact_info" id="name_email"></div>
           </div>
         </div>
-        <div class="contact_detail">
-          <div class="contacts_heading">
-            <h2>Contacts</h2>
-            <div class="partition"></div>
-            <p>Better with a team</p>
-          </div>
-          <div id="contact_details"></div>
-        </div>
+        <div class="contact_detail" id="contact_details"></div>
       </section>
-      <div class="add-contact" id="addContactPopup">
-        <form>
-          <div class="add_contact_title">
-            <img src="assets/img/logo-white.png" alt="" class="join_logo" />
-
-            <div class="contact_title">
-              <h2>Add contact</h2>
-              <p>Tasks are better with a team!</p>
-            </div>
-          </div>
-          <div class="contact_img">
-            <img src="assets/img/Group13.png" alt="" />
-          </div>
-          <div class="add_contact_info">
-            <div class="c_name_email">
-              <div class="input">
-                <input type="text" id="addName" placeholder="Name" />
-                <i class="fa-regular fa-user log-icon"></i>
-              </div>
-
-              <div class="input">
-                <input type="text" id="addEmail" placeholder="Email" />
-                <i class="fa-regular fa-envelope log-icon"></i>
-              </div>
-
-              <div class="input">
-                <input type="" id="addPhone" placeholder="Phone" />
-                <i class="fa-solid fa-phone log-icon"></i>
-              </div>
-              <div class="delete_save">
-                <button>Cancel<i class="fa-solid fa-xmark"></i></button>
-                <button onclick="addContactPopup()">
-                  Create contact <i class="fa-solid fa-check"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-        <span onclick="closeAddContactPopup()" class="close_form"
-          ><i class="fa-solid fa-xmark"></i
-        ></span>
-      </div>
-      <div class="edit-contact" id="editContactPopup">
-        <form>
-          <div class="add_contact_title">
-            <img src="assets/img/logo-white.png" alt="" class="join_logo" />
-
-            <div class="contact_title">
-              <h2>Edit contact</h2>
-              <div class="underline"></div>
-            </div>
-          </div>
-          <div class="contacts_edit contact_img">
-            <p>AM</p>
-          </div>
-          <div class="add_contact_info">
-            <div class="c_name_email">
-              <div class="input">
-                <input type="text" id="editName" placeholder="Name" />
-                <i class="fa-regular fa-user log-icon"></i>
-              </div>
-
-              <div class="input">
-                <input type="text" id="editEmail" placeholder="Email" />
-                <i class="fa-regular fa-envelope log-icon"></i>
-              </div>
-
-              <div class="input">
-                <input type="" id="editPhone" placeholder="Phone" />
-                <i class="fa-solid fa-phone log-icon"></i>
-              </div>
-              <div class="delete_save">
-                <button>Delete</button>
-                <button onclick="saveChanges()">
-                  Save <i class="fa-solid fa-check"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-        <span onclick="closeEditContactPopup()" class="close_form"
-          ><i class="fa-solid fa-xmark"></i
-        ></span>
-      </div>
     </div>
-  </body>
+</body>
+
 </html>

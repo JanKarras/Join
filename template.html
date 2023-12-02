@@ -23,8 +23,7 @@
       </div>
       <nav class="nav">
         <div class="menu">
-          <div
-            onclick="menue_clicked('summary')"
+          <a href="summary.html"><div
             id="summary"
             class="btn_clicked menu_buttons"
           >
@@ -34,8 +33,8 @@
             />
             <div class="menu_name">Summary</div>
           </div>
-          <div
-            onclick="menue_clicked('add_task')"
+          </a>
+          <a href="add_task.html"><div
             id="add_task"
             class="menu_buttons"
           >
@@ -45,12 +44,12 @@
             />
             <div class="menu_name">Add Task</div>
           </div>
-          <div onclick="menue_clicked('board')" id="board" class="menu_buttons">
+        </a>
+          <a href="board.html"><div id="board" class="menu_buttons">
             <img src="./assets/img/board_icon.png" class="side_bar_logos_img" />
             <div class="menu_name">Board</div>
           </div>
-          <div
-            onclick="menue_clicked('contacts')"
+          <a href="contacts.html"><div
             id="contacts"
             class="menu_buttons"
           >
@@ -60,6 +59,7 @@
             />
             <div class="menu_name">Contacts</div>
           </div>
+          </a>
         </div>
         <div class="legal">
           <a href="./privacy_policy.html" target="_blank" class="nav_legal"
@@ -70,32 +70,6 @@
           >
         </div>
       </nav>
-    </div>
-    <div class="header_include_container">
-      <div id="header" class="header">
-        <p>Kanban Project Management Tool</p>
-        <div class="help_name_container">
-          <img
-            onclick="includeHTML('help.html')"
-            class="help_icon_header"
-            src="./assets/img/help.png"
-            alt="help_icon"
-          />
-          <div onclick="toggleMenu()" class="name">SM</div>
-        </div>
-      </div>
-      <div id="include" class="include">
-        <div id="content" w3-include-html=""></div>
-      </div>
-    </div>
-    <div id="popup_menu" class="popup_menu display_none">
-      <a href="./legal_notice.html" target="_blank" class="nav_legal"
-        >Legal notice</a
-      >
-      <a href="./privacy_policy.html" target="_blank" class="nav_legal"
-        >Privacy Policy</a
-      >
-      <div class="nav_legal">Log out</div>
     </div>
   </body>
 </html>

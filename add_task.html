@@ -1,89 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style/add_task_style.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <script src="./assets/js/add_task_js.js"></script>
+    <script src="./assets/js/header_js.js"></script>
+    <script src="./assets/js/template_js.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <div class="add_task_h1">Add Task</div>
-    <div class="add_task_body">
-        <div class="add_taks_sides left_side">
-        <div>
-            <div class="display_flex">
-                <div class="name_of_input">Title</div>
-                <div class="star">*</div>
-            </div>
-            <input type="text" placeholder="Enter a title">
-        </div>
-        <div>
-            <div class="description">
-                <div>Description</div>
-                <textarea class="description_input" placeholder="Enter a description"></textarea>
-            </div>
-        </div>
-        <div>
-            <div>Assigend to</div>
-            <select name="" id=""></select>
-        </div>
-        </div>
-        <div class="seperator_add_task"></div>
-        <div class="add_taks_sides right_side">
-        <div>
-            <div class="display_flex">
-                <div class="name_of_input">Due date</div>
-                <div class="star">*</div>
-            </div>
-            <input type="date" id="date_input">
-        </div>
-        <div>
-            <div>Prio</div>
-            <div class="prio">
-                <div class="prio_btns">
-                    <div>Urgent</div>
-                    <img class="arrows_img" src="./assets/img/urgent.png" alt="">
+
+<body id="bodys" onload="add_task_init()">
+    <div id="template" w3-include-html="./template.html"></div>
+    <div id="add_task_body" class="add_task_body">
+        <div class="header" w3-include-html="./header.html"></div>
+        <div id="content">
+            <div class="add_task_h1">Add Task</div>
+            <div class="add_task_content">
+                <div class="add_taks_sides left_side">
+                    <div>
+                        <div class="display_flex">
+                            <div class="name_of_input">Title</div>
+                            <div class="star">*</div>
+                        </div>
+                        <input type="text" placeholder="Enter a title">
+                    </div>
+                    <div>
+                        <div class="description">
+                            <div>Description</div>
+                            <textarea class="description_input" placeholder="Enter a description"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Assigend to</div>
+                        <select name="" id=""></select>
+                    </div>
                 </div>
-                <div class="prio_btns">
-                    <div>Medium</div>
-                    <img class="arrows_img" src="./assets/img/medium.png" alt="">
+                <div class="seperator_add_task"></div>
+                <div class="add_taks_sides right_side">
+                    <div>
+                        <div class="display_flex">
+                            <div class="name_of_input">Due date</div>
+                            <div class="star">*</div>
+                        </div>
+                        <input type="date" id="date_input">
+                    </div>
+                    <div>
+                        <div>Prio</div>
+                        <div class="prio">
+                            <div class="prio_btns">
+                                <div>Urgent</div>
+                                <img class="arrows_img" src="./assets/img/urgent.png" alt="">
+                            </div>
+                            <div class="prio_btns">
+                                <div>Medium</div>
+                                <img class="arrows_img" src="./assets/img/medium.png" alt="">
+                            </div>
+                            <div class="prio_btns">
+                                <div>Low</div>
+                                <img class="arrows_img" src="./assets/img/low.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="display_flex">
+                            <div class="name_of_input">Category</div>
+                            <div class="star">*</div>
+                        </div>
+                        <select></select>
+                    </div>
+                    <div>
+                        <div>Subtasks</div>
+                        <select></select>
+                    </div>
                 </div>
-                <div class="prio_btns">
-                    <div>Low</div>
-                    <img class="arrows_img" src="./assets/img/low.png" alt="">
+            </div>
+            <footer>
+                <div class="required">
+                    <div class="star">*</div>
+                    <div>This field is required</div>
                 </div>
-            </div>
+                <div class="footer_btns_container">
+                    <div class="clear">
+                        <div>Clear</div>
+                        <img src="./assets/img/iconoir_cancel.png">
+                    </div>
+                    <div class="create">
+                        <div>Create Task</div>
+                        <img>
+                    </div>
+                </div>
+            </footer>
         </div>
-        <div>
-            <div class="display_flex">
-                <div class="name_of_input">Category</div>
-                <div class="star">*</div>
-            </div>
-            <select></select>
-        </div>
-        <div>
-            <div>Subtasks</div>
-            <select></select>
-        </div>
-    </div>
-    </div>
-    <footer>
-        <div class="required">
-            <div class="star">*</div>
-            <div>This field is required</div>
-        </div>
-        <div class="footer_btns_container">
-            <div class="clear">
-                <div>Clear</div>
-                <img src="./assets/img/iconoir_cancel.png">
-            </div>
-            <div class="create">
-                <div>Create Task</div>
-                <img>
-            </div>
-        </div>
-    </footer>
 </body>
+
 </html>
