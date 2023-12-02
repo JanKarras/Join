@@ -101,6 +101,7 @@ function deleteUser(userTelephone, i) {
 function openAddContactPopup() {
   document.getElementById("addContactPopup").classList.add("show_add_contact");
   document.getElementById("overlay").style.display = "block";
+  document.getElementById("addContactPopup").classList.add("translate");
 }
 
 function addContactPopup() {

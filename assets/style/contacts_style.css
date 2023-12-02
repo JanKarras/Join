@@ -17,8 +17,8 @@ a h4 {
 }
 
 .container {
-  width: 100vw;
-  height: 100vh;
+  width: calc(100vw - 16.1111vw);
+  height: calc(100vh - 65px);
   position: relative;
   z-index: 10;
 }
@@ -26,7 +26,7 @@ a h4 {
 .contacts {
   display: flex;
   height: calc(100vh - 65px);
-  width: 100vw;
+  width: calc(100vw - 16.1111vw);
 }
 
 .contact_sidebar {
@@ -36,6 +36,7 @@ a h4 {
   display: flex;
   flex-direction: column;
   box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
   position: relative;
 }
 
@@ -253,16 +254,23 @@ a h4 {
   transform: translate(-50%, -50%);
   border-radius: 2rem;
   z-index: 1001;
-  transition: 0.5s;
-}
-.add-contact,
-.edit-contact {
+
+  transform: translateX(-200%);
+  transition: all 3s;
   display: none;
 }
+
+/* .add-contact,
+.edit-contact {
+  display: none;
+} */
 .show_add_contact {
   display: block;
 }
 
+.translate {
+  transform: translate(-50%, -50%);
+}
 .contact_img p {
   width: 120px;
   height: 120px;
