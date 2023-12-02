@@ -20,7 +20,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scrollbar-width: thin;
 }
 
 body {
@@ -35,8 +34,16 @@ a h4 {
   color: black;
 }
 
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
 .contacts {
   display: flex;
+  width: 100vw;
 }
 
 .contact_sidebar {
@@ -51,18 +58,19 @@ a h4 {
 
 .add_contact {
   position: fixed;
-  width: 456px;
-  background: #fff;
-  height: 100px;
+  width: 27rem;
+  height: 6.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 }
 
 .add_new_contact {
   padding: 1rem 0;
-  width: 300px;
-  border-radius: 16px;
+  width: 18.75rem;
+  margin-left: 2rem;
+  border-radius: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,12 +81,12 @@ a h4 {
 }
 
 .contact_list {
-  padding: 24px 80px;
-  margin-top: 3rem;
+  padding: 1.5rem 5rem;
+  padding-top: 6rem;
 }
 
 .contact_info .alphabet {
-  padding: 0rem 1.6rem;
+  padding: 0 1.6rem;
   padding-top: 1.5rem;
   padding-bottom: 1.3rem;
   margin: 0.4rem;
@@ -126,6 +134,17 @@ a h4 {
 
 .name_email span {
   margin-right: 3rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
 }
 
 .contact_name span,
@@ -179,8 +198,8 @@ a h4 {
 }
 
 .info {
-  width: 461px;
-  height: 354px;
+  width: 28.8rem;
+  height: 22rem;
 }
 
 .contacts_edit {
@@ -191,8 +210,8 @@ a h4 {
 }
 
 .contacts_edit p {
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
   font-size: 2rem;
 }
 .contactname h3 {
@@ -238,4 +257,194 @@ a h4 {
 
 .contact_icon span i {
   margin-right: 0.5rem;
+}
+
+/* add contact */
+.add-contact,
+.edit-contact {
+  width: 60vw;
+  height: 37.125rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2rem;
+  z-index: 1001;
+  transition: 0.5s;
+}
+.add-contact,
+.edit-contact {
+  display: none;
+}
+.show_add_contact {
+  display: block;
+}
+
+.contact_img p {
+  width: 120px;
+  height: 120px;
+  font-size: 2.3rem;
+}
+
+.underline {
+  width: 100px;
+  border: 2px solid #29abe2;
+}
+
+form {
+  display: flex;
+  gap: 2rem;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: 2rem;
+  position: relative;
+}
+
+.close_form i {
+  position: absolute;
+  font-size: 1.5rem;
+  top: 2.8rem;
+  right: 2.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.close_form:hover i {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.add_contact_title {
+  width: 40%;
+  max-width: 29.2rem;
+  height: 37.125rem;
+  padding: 2rem;
+  background-color: #2a3647;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.join_logo {
+  position: absolute;
+  top: 23%;
+  left: 2.8rem;
+  height: 6rem;
+}
+
+.contact_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+  margin-left: 0.9rem;
+}
+.contact_title h2 {
+  font-size: 3.5rem;
+  color: white;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.contact_title p {
+  color: rgb(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  letter-spacing: 1.3px;
+}
+.add_contact_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  border-radius: 2rem;
+}
+.c_name_email {
+  width: 422px;
+  margin-right: 2rem;
+}
+.input {
+  position: relative;
+}
+.log-icon {
+  position: absolute;
+  top: 30%;
+  right: 20px;
+  transform: translateY(-50%);
+  color: #a0a0a0;
+}
+input::placeholder {
+  font-size: 1rem;
+  color: #dbdada;
+}
+
+input,
+.name input {
+  margin-bottom: 25px;
+}
+input {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 0.6rem 0.9rem;
+  padding-right: 3rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+input:focus {
+  outline: 1px solid #56b7f3;
+}
+
+.delete_save button {
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.delete_save button:nth-child(1) {
+  background-color: #fff;
+  color: #2a3647;
+  border: 1px solid #2a3647;
+  margin-right: 2rem;
+}
+.delete_save button:nth-child(2) {
+  background-color: #2a3647;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.delete_save button:nth-child(2):hover {
+  color: #fff;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
+}
+
+.delete_save button:nth-child(1):hover {
+  border: 1px solid #29abe2;
+  color: #29abe2;
+  background-color: #fff;
+}
+
+button i {
+  margin-left: 0.5rem;
+}
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none;
 }

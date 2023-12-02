@@ -206,21 +206,22 @@ input {
   transition: 0.3s;
 }
 .signin:hover button:nth-child(1):hover,
-.signup button:hover {
-  background-color: #fff;
-  color: #2a3647;
-  border: 1px solid #2a3647;
-}
-.signin button:nth-child(2),
+.signup button:hover,
 .signup2 button:hover {
+  color: #fff;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
+}
+.signin button:nth-child(2) {
   border: 1px solid #2a3647;
   color: #000;
   background-color: #fff;
   transition: 0.3s;
 }
 .signin button:nth-child(2):hover {
-  background-color: #2a3647;
-  color: #fff;
+  border: 1px solid #29abe2;
+  color: #29abe2;
+  background-color: #fff;
 }
 .register-button button {
   background-color: #838588;
