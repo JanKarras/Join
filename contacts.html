@@ -96,7 +96,7 @@
                 </div>
               </div>
               <div class="contacts_edit contact_img">
-                <p>AM</p>
+                <p id="contactInitials">AM</p>
               </div>
               <div class="add_contact_info">
                 <div class="c_name_email">
@@ -115,7 +115,9 @@
                     <i class="fa-solid fa-phone log-icon"></i>
                   </div>
                   <div class="delete_save">
-                    <button>Delete</button>
+                    <button onclick="deleteUserByIndex(currentUserIndex)">
+                      Delete
+                    </button>
                     <button onclick="saveChanges()">
                       Save <i class="fa-solid fa-check"></i>
                     </button>
