@@ -35,15 +35,12 @@ a h4 {
 }
 
 .container {
-  width: 100vw;
-  height: 100vh;
   position: relative;
   z-index: 10;
 }
 
 .contacts {
   display: flex;
-  width: 100vw;
 }
 
 .contact_sidebar {
