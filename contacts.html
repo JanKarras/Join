@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacts</title>
-    <link rel="stylesheet" href="assets/style/contacts_style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./assets/style/fonts.css" />
-    <script src="assets/js/contacts_js.js" defer></script>
-  </head>
-  <body>
-    <div id="sidebar">
-      <div w3-include-html="./template.html"></div>
-    </div>
-    <div id="line" w3-include-html="./header.html"></div>
-    <section class="contacts">
-      <div class="contact_sidebar">
-        <div class="add_contact">
-          <div class="add_new_contact">
-            <span>Add new contact</span>
-            <span><i class="fa-solid fa-user-plus"></i></span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacts</title>
+  <link rel="stylesheet" href="assets/style/contacts_style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/style/fonts.css" />
+  <script src="./assets/js/header_js.js"></script>
+  <script src="./assets/js/template_js.js"></script>
+  <script src="assets/js/contacts_js.js" defer></script>
+</head>
+
+<body onload="contacts_init()">
+  <div id="template" w3-include-html="./template.html"></div>
+  <div id="contacts_body" class="contacts_body">
+    <div class="header" w3-include-html="./header.html"></div>
+    <div id="content">
+      <section class="contacts">
+        <div class="contact_sidebar">
+          <div class="add_contact">
+            <div class="add_new_contact">
+              <span>Add new contact</span>
+              <span><i class="fa-solid fa-user-plus"></i></span>
+            </div>
+          </div>
+          <div class="contact_list">
+            <div class="contact_info" id="name_email"></div>
           </div>
         </div>
-        <div class="contact_list">
-          <div class="contact_info" id="name_email"></div>
-        </div>
-      </div>
-      <div class="contact_detail" id="contact_details"></div>
-    </section>
-  </body>
+        <div class="contact_detail" id="contact_details"></div>
+      </section>
+    </div>
+</body>
+
 </html>

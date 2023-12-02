@@ -1,3 +1,21 @@
+#bodys{
+  max-width: 1440px;
+  margin: auto;
+}
+
+.header{
+  flex: 1;
+}
+
+#content{
+  flex: 1;
+}
+
+.contacts_body{
+  width: 100%;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +37,6 @@ a h4 {
 
 .contacts {
   display: flex;
-  height: calc(100vh - 65px);
 }
 
 .contact_sidebar {
@@ -140,7 +157,7 @@ a h4 {
 .contact_detail {
   padding: 5rem 3.5rem;
   background-color: #f6f7f8;
-  width: 60vw;
+  flex: 1;
 }
 
 .contacts_heading {

@@ -48,7 +48,6 @@ let users = [
     telefon: "01781032872",
   },
 ];
-window.onload = displayUsers;
 
 const userName = document.getElementById("name_email");
 const userInfo = document.getElementById("contact_details");
@@ -57,6 +56,26 @@ const clickedContact = document.querySelector(".contact_name");
 let currentAlphabet = "";
 
 users.sort((a, b) => a.name.localeCompare(b.name));
+
+async function includeHTML() {
+  let includeElements = document.querySelectorAll('[w3-include-html]'); //Alle Elemente mit w3-include-html in einem Array Speichern
+  for (let i = 0; i < includeElements.length; i++) { //Durch das ganze array durchgehen
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html"); // "includes/header.html" Speichert den dateinpfad
+      let resp = await fetch(file); //Anfrage an die file zum laden. Anwort in resp speichern
+      if (resp.ok) {
+          element.innerHTML = await resp.text(); // Der ganze string aus header.html ist dadrinne gespeichert.
+      } else {
+          element.innerHTML = 'Page not found';
+      }
+  }
+}
+
+async function contacts_init(){
+    await includeHTML();
+    menue_clicked('contacts');
+    displayUsers();
+}
 
 function displayUsers() {
   userName.innerHTML = "";
