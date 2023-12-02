@@ -45,7 +45,8 @@ window.onload = contacts_init();
 
 const userName = document.getElementById("name_email");
 const userInfo = document.getElementById("contact_details");
-const clickedContact = document.querySelector(".contact_name");
+const contactInitials = document.getElementById("contactInitials");
+
 let initials;
 let currentUserIndex;
 let currentAlphabet = "";
@@ -92,6 +93,7 @@ function displayUsers() {
 }
 
 function displayUserDetails(i) {
+  addBackgroundColor(i);
   userInfo.innerHTML = "";
   const user = users[i];
   if (!user) {
@@ -101,6 +103,19 @@ function displayUserDetails(i) {
   let nameInitials = names[0].charAt(0).toUpperCase();
   nameInitials += names[names.length - 1].charAt(0).toUpperCase();
   userInfo.innerHTML += userDetailHTML(i, nameInitials);
+}
+
+function addBackgroundColor(i) {
+  const contactNames = document.querySelectorAll(".contact_name");
+  contactNames.forEach((contact) => {
+    contact.classList.remove("selected-contact");
+  });
+  const selectedContact = document.querySelector(
+    `.contact_name[data-index="${i}"]`
+  );
+  if (selectedContact) {
+    selectedContact.classList.add("selected-contact");
+  }
 }
 
 function deleteUserByIndex(index) {
@@ -151,11 +166,13 @@ function closeAddContactPopup() {
 }
 
 function openEditContactPopup(currentUserIndex) {
+  const userColor = getUserColor(currentUserIndex);
   const user = users[currentUserIndex];
   document.getElementById("editName").value = user.name;
   document.getElementById("editEmail").value = user.email;
   document.getElementById("editPhone").value = user.telefon;
   contactInitials.innerText = initials;
+  contactInitials.style.backgroundColor = userColor;
   document.getElementById("editContactPopup").classList.add("show_add_contact");
   document.getElementById("overlay").style.display = "block";
 }
@@ -171,6 +188,7 @@ function saveChanges() {
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();
+  addBackgroundColor(currentUserIndex);
 }
 
 function closeEditContactPopup() {
@@ -180,45 +198,69 @@ function closeEditContactPopup() {
   document.getElementById("overlay").style.display = "none";
 }
 
+const colors = [
+  "#9f36e6",
+  "purple",
+  "#e614a0",
+  "#2ec5a4",
+  "orange",
+  "#dd5d13",
+  "#1e796a",
+];
+
+const userColorMap = {};
+
+function getUserColor(index) {
+  if (!userColorMap[index]) {
+    // If the user doesn't have a color assigned, assign one
+    const colorIndex = index % colors.length;
+    userColorMap[index] = colors[colorIndex];
+  }
+  return userColorMap[index];
+}
+
 function userHTML(i, firstAlphabet, nameInitials) {
   const user = users[i];
+  const userColor = getUserColor(i);
   return `
       <div class="alphabet" id="alphabet">
-      <h3>${firstAlphabet}</h3>
-    </div>
-    <div class="contacts_initials">
-      <a href="#" class="contact_name anton" onclick="displayUserDetails(${i})">
-        <span>${nameInitials}</span>
+        <h3>${firstAlphabet}</h3>
+      </div>
+      <div class="contacts_initials">
+        <a href="#" class="contact_name anton" data-index="${i}" onclick="displayUserDetails(${i})">
+          <span style="background-color: ${userColor}">${nameInitials}</span>
+          <div>
+            <h4>${user.name}</h4>
+            <h5>${user.email}</h5>
+          </div>
+        </a>
+      </div>
+    `;
+}
+
+function sortedUserHTML(i, nameInitials) {
+  const user = users[i];
+  const userColor = getUserColor(i);
+  return ` 
+      <a href="#" class="contact_name anton" data-index="${i}" onclick="displayUserDetails(${i})">
+        <span style="background-color: ${userColor}">${nameInitials}</span>
         <div>
           <h4>${user.name}</h4>
           <h5>${user.email}</h5>
         </div>
       </a>
-    </div>
-        `;
-}
-
-function sortedUserHTML(i, nameInitials) {
-  const user = users[i];
-  return ` 
-      <a href="#" class="contact_name anton" onclick="displayUserDetails(${i})">
-      <span>${nameInitials}</span>
-      <div>
-        <h4>${user.name}</h4>
-        <h5>${user.email}</h5>
-      </div>
-    </a>
-      `;
+    `;
 }
 
 function userDetailHTML(i, nameInitials) {
+  const userColor = getUserColor(i);
   currentUserIndex = i;
   initials = nameInitials;
   let user = users[currentUserIndex];
   return `
     <div class="info">
     <div class="contacts_edit" id="username_info">
-      <p>${initials}</p>
+      <p style="background-color: ${userColor}">${initials}</p>
       <div class="contactname">
         <h3>${user.name}</h3>
         <div class="contact_icon">

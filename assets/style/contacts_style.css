@@ -122,15 +122,27 @@ a h4 {
   background-color: #f7f7f7;
 }
 
-.contact_name:focus {
-  background-color: #2a3647;
+/* .contact_name:focus h4 {
+  color: #fff;
+} */
+
+.contact_name:focus span {
+  border: 2px solid #fff;
 }
 
-.contact_name:focus h4 {
+.selected-contact h4 {
   color: #fff;
 }
 
-.contact_name:focus span {
+.selected-contact {
+  background-color: #2a3647;
+}
+
+.selected-contact:hover {
+  background-color: #2a3647;
+}
+
+.selected-contact span {
   border: 2px solid #fff;
 }
 
