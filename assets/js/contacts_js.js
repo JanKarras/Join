@@ -1,59 +1,60 @@
 let users = [
   {
-    id: 1,
     name: "Anton Mayer",
     email: "anton@outlook.com",
-    telefon: "01551032454",
+    telefon: +491514567813,
   },
   {
     id: 2,
     name: "Anita Gant",
-    email: "anita@aol.com.com",
-    telefon: "01551032454",
+    email: "anita@aol.com",
+    telefon: +491510527872,
   },
   {
     id: 3,
     name: "Elena James",
     email: "elenajames@gmail.com",
-    telefon: "016031032215",
+    telefon: +497714567894,
   },
   {
     id: 4,
     name: "Zoe Graber",
     email: "zoegraber@web.de",
-    telefon: "015211032454",
+    telefon: +4915145678512,
   },
   {
     id: 5,
     name: "Shawn Peter",
     email: "sp@live.com",
-    telefon: "01601032491",
+    telefon: +491602135121,
   },
   {
     id: 6,
     name: "Seun Dede",
     email: "seun@outlook.com",
-    telefon: "01781032872",
+    telefon: +491554567890,
   },
   {
     id: 7,
     name: "Christina Justus",
     email: "cjustus@gmail.com",
-    telefon: "01781031072",
+    telefon: +491781161324,
   },
-  {
-    id: 8,
-    name: "Philip Chanel",
-    email: "philipchanel@yahoo.com",
-    telefon: "01781032872",
-  },
+  // {
+  //   id: 8,
+  //   name: "Philip Chanel",
+  //   email: "philipchanel@yahoo.com",
+  //   telefon: +491514567890,
+  // },
 ];
+
 window.onload = displayUsers;
 
 const userName = document.getElementById("name_email");
 const userInfo = document.getElementById("contact_details");
 const clickedContact = document.querySelector(".contact_name");
 
+let currentUserIndex;
 let currentAlphabet = "";
 
 users.sort((a, b) => a.name.localeCompare(b.name));
@@ -85,12 +86,81 @@ function displayUserDetails(i) {
   let nameInitials = names[0].charAt(0).toUpperCase();
   nameInitials += names[names.length - 1].charAt(0).toUpperCase();
   userInfo.innerHTML += userDetailHTML(i, nameInitials);
+  userInfo.classList.remove("translate");
+  setTimeout(() => {
+    userInfo.classList.add("translate");
+  }, 500);
 }
 
-function deleteUser(userId, i) {
-  users = users.filter((user) => user.id !== userId);
+function deleteUser(userTelephone, i) {
+  users = users.filter((user) => user.telefon !== userTelephone);
   displayUsers();
   displayUserDetails(i);
+}
+
+function openAddContactPopup() {
+  document.getElementById("addContactPopup").classList.add("show_add_contact");
+  document.getElementById("overlay").style.display = "block";
+}
+
+function addContactPopup() {
+  let newName = document.getElementById("addName").value;
+  let newEmail = document.getElementById("addEmail").value;
+  let newTelefon = +document.getElementById("addPhone").value;
+  if (!newName || !newEmail || !newTelefon) {
+    return;
+  }
+  users.push({ name: newName, email: newEmail, telefon: newTelefon });
+  users.sort((a, b) => a.name.localeCompare(b.name));
+
+  clearForm();
+  closeAddContactPopup();
+  displayUsers();
+  displayUserDetails();
+}
+
+function clearForm() {
+  document.getElementById("addName").value = "";
+  document.getElementById("addEmail").value = "";
+  document.getElementById("addPhone").value = "";
+}
+
+function closeAddContactPopup() {
+  document
+    .getElementById("addContactPopup")
+    .classList.remove("show_add_contact");
+  document.getElementById("overlay").style.display = "none";
+}
+
+function openEditContactPopup(index) {
+  currentUserIndex = index;
+  const user = users[currentUserIndex];
+  document.getElementById("editName").value = user.name;
+  document.getElementById("editEmail").value = user.email;
+  document.getElementById("editPhone").value = user.telefon;
+  document.getElementById("editContactPopup").classList.add("show_add_contact");
+  document.getElementById("overlay").style.display = "block";
+}
+
+function saveChanges() {
+  let user = users[currentUserIndex];
+  let editedName = document.getElementById("editName").value;
+  let editedEmail = document.getElementById("editEmail").value;
+  let editedPhone = document.getElementById("editPhone").value;
+  user.name = editedName;
+  user.email = editedEmail;
+  user.telefon = editedPhone;
+  users.sort((a, b) => a.name.localeCompare(b.name));
+  closeEditContactPopup();
+  displayUsers();
+  displayUserDetails(currentUserIndex);
+}
+
+function closeEditContactPopup() {
+  document
+    .getElementById("editContactPopup")
+    .classList.remove("show_add_contact");
+  document.getElementById("overlay").style.display = "none";
 }
 
 function userHTML(i, firstAlphabet, nameInitials) {
@@ -125,21 +195,17 @@ function sortedUserHTML(i, nameInitials) {
 }
 
 function userDetailHTML(i, nameInitials) {
-  const user = users[i];
+  currentUserIndex = i;
+  let user = users[currentUserIndex];
   return `
-  <div class="contacts_heading">
-  <h2>Contacts</h2>
-  <div class="partition"></div>
-  <p>Better with a team</p>
-  </div>
   <div class="info">
   <div class="contacts_edit" id="username_info">
     <p>${nameInitials}</p>
     <div class="contactname">
       <h3>${user.name}</h3>
       <div class="contact_icon">
-        <span  class="delete_edit"><i class="fa-solid fa-pencil"></i><span>Edit</span></span>
-        <span class="delete_edit"  onclick="deleteUser(${user.id})"
+        <span onclick="openEditContactPopup(${i})"  class="delete_edit"><i class="fa-solid fa-pencil"></i><span>Edit</span></span>
+        <span class="delete_edit"  onclick="deleteUser(${user.telefon})"
           ><i class="fa-regular fa-trash-can"></i
           ><span>Delete</span></span
         >
