@@ -44,7 +44,7 @@
             </div>
           </section>
           <div class="add-contact" id="addContactPopup">
-            <form>
+            <form onclick="addContactPopup(); return false">
               <div class="add_contact_title">
                 <img src="assets/img/logo-white.png" alt="" class="join_logo" />
 
@@ -76,7 +76,7 @@
                     <button onclick="closeAddContactPopup()">
                       Cancel<i class="fa-solid fa-xmark"></i>
                     </button>
-                    <button onclick="addContactPopup()">
+                    <button>
                       Create contact <i class="fa-solid fa-check"></i>
                     </button>
                   </div>
@@ -120,8 +120,8 @@
                     <button onclick="deleteUserByIndex(currentUserIndex)">
                       Delete
                     </button>
-                    <button onclick="saveChanges()">
-                      Save <i class="fa-solid fa-check"></i>
+                    <button onclick="saveChanges(); return false">
+                      Save<i class="fa-solid fa-check"></i>
                     </button>
                   </div>
                 </div>
