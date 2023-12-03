@@ -11,7 +11,7 @@
     <script src="./assets/js/board_js.js"></script>
     <title>Document</title>
   </head>
-  <body id="body" onload="init()">
+  <body id="body" onload="template_init()">
     <div class="width_monitor"></div>
     <div id="side_bar" class="side_bar">
       <div class="width_100 center_felx">
@@ -23,7 +23,7 @@
       </div>
       <nav class="nav">
         <div class="menu">
-          <a href="summary.html"><div
+          <a href="summary.html" onclick="smoothPageTransition('summary.html')"><div
             id="summary"
             class="btn_clicked menu_buttons"
           >
@@ -34,7 +34,7 @@
             <div class="menu_name">Summary</div>
           </div>
           </a>
-          <a href="add_task.html"><div
+          <a href="add_task.html" onclick="smoothPageTransition('add_task.html')"><div
             id="add_task"
             class="menu_buttons"
           >
@@ -45,11 +45,11 @@
             <div class="menu_name">Add Task</div>
           </div>
         </a>
-          <a href="board.html"><div id="board" class="menu_buttons">
+          <a href="board.html" onclick="smoothPageTransition('board.html')"><div id="board" class="menu_buttons">
             <img src="./assets/img/board_icon.png" class="side_bar_logos_img" />
             <div class="menu_name">Board</div>
           </div>
-          <a href="contacts.html"><div
+          <a href="contacts.html" onclick="smoothPageTransition('contacts.html')"><div
             id="contacts"
             class="menu_buttons"
           >

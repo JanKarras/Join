@@ -3,6 +3,12 @@
         margin: auto;
 }
 
+#body.fade-out {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        /* Die Dauer und das Timing der Animation anpassen */
+}
+
 .header {
         flex: 1;
 }
