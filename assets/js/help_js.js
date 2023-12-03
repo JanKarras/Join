@@ -1,6 +1,5 @@
 async function help_init(){
     await includeHTML();
-    document.getElementById('help_header').classList
 }
 
 async function includeHTML() {
