@@ -1,11 +1,13 @@
-body,html {
+body,
+html {
   height: 100%;
   margin: 0;
   display: flex;
 }
 
 .side_bar {
-  width: 272px;
+  width: 14.5vw;
+  max-width: 232px;
   height: 100%;
   background-color: #2a3647;
   display: flex;
@@ -31,7 +33,7 @@ nav {
   align-items: center;
 }
 
-nav a{
+nav a {
   text-decoration: none;
   color: #ffffff;
 }

@@ -51,8 +51,6 @@ let initials;
 let currentUserIndex;
 let currentAlphabet = "";
 
-users.sort((a, b) => a.name.localeCompare(b.name));
-
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]"); //Alle Elemente mit w3-include-html in einem Array Speichern
   for (let i = 0; i < includeElements.length; i++) {
@@ -227,13 +225,13 @@ function userHTML(i, firstAlphabet, nameInitials) {
         <h3>${firstAlphabet}</h3>
       </div>
       <div class="contacts_initials">
-        <a href="#" class="contact_name anton" data-index="${i}" onclick="displayUserDetails(${i})">
+        <div href="#" class="contact_name anton" data-index="${i}" onclick="displayUserDetails(${i})">
           <span style="background-color: ${userColor}">${nameInitials}</span>
           <div>
             <h4>${user.name}</h4>
             <h5>${user.email}</h5>
           </div>
-        </a>
+        </div>
       </div>
     `;
 }
@@ -242,13 +240,13 @@ function sortedUserHTML(i, nameInitials) {
   const user = users[i];
   const userColor = getUserColor(i);
   return ` 
-      <a href="#" class="contact_name anton" data-index="${i}" onclick="displayUserDetails(${i})">
+      <div class="contact_name anton" data-index="${i}" onclick="displayUserDetails(${i})">
         <span style="background-color: ${userColor}">${nameInitials}</span>
         <div>
           <h4>${user.name}</h4>
           <h5>${user.email}</h5>
         </div>
-      </a>
+      </div>
     `;
 }
 

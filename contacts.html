@@ -15,7 +15,7 @@
     <script src="assets/js/contacts_js.js" defer></script>
   </head>
 
-  <body onload="contacts_init()">
+  <body id="bodys" onload="contacts_init()">
     <div id="template" w3-include-html="./template.html"></div>
     <div id="contacts_body" class="contacts_body">
       <div class="header" w3-include-html="./header.html"></div>
@@ -73,7 +73,9 @@
                     <i class="fa-solid fa-phone log-icon"></i>
                   </div>
                   <div class="delete_save">
-                    <button>Cancel<i class="fa-solid fa-xmark"></i></button>
+                    <button onclick="closeAddContactPopup()">
+                      Cancel<i class="fa-solid fa-xmark"></i>
+                    </button>
                     <button onclick="addContactPopup()">
                       Create contact <i class="fa-solid fa-check"></i>
                     </button>
@@ -125,6 +127,7 @@
                 </div>
               </div>
             </form>
+
             <span onclick="closeEditContactPopup()" class="close_form"
               ><i class="fa-solid fa-xmark"></i
             ></span>
