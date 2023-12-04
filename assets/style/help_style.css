@@ -48,7 +48,7 @@ span{
 .zahlen-liste {
     list-style-type: none; /* Entfernt die Standardnummerierung */
     counter-reset: numerierung; /* Setzt den Zähler zurück */
-    padding-left: 20px; /* Fügt Platz für benutzerdefinierte Zahlen hinzu */
+    padding-left: 50px; /* Fügt Platz für benutzerdefinierte Zahlen hinzu */
 }
 
 .zahlen-liste li {
@@ -60,17 +60,23 @@ span{
     content: counter(numerierung) ".";
     counter-increment: numerierung;
     position: absolute; /* Stellt die Position für die benutzerdefinierten Zahlen ein */
-    left: -20px; /* Verschiebt die Zahlen nach links */
-    font-size: 18px; /* Ändert die Schriftgröße der Zahlen */
+    left: -50px; /* Verschiebt die Zahlen nach links */
+    font-size: 27px; /* Ändert die Schriftgröße der Zahlen */
     font-weight: bold; /* Ändert das Schriftgewicht der Zahlen */
 }
 
 .span_list{
     color: black;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .help_info{
     overflow-y: auto;
     margin-bottom: 10px;
     height: calc(100% - 10px - 152px - 120px);
+}
+
+.display-none{
+    display: none;
 }

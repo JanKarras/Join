@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style/legal_notice_style.css">
+    <link rel="stylesheet" href="./assets/style/fonts.css">
+    <link rel="stylesheet" href="./assets/style/font.css">
+    <script src="./assets/js/legal_notice._js.js"></script>
+    <script src="./assets/js/header_js.js"></script>
+    <script src="./assets/js/template_js.js"></script>
     <title>Document</title>
 </head>
-<body>
-    
+<body class="font" onload="legal_notice_init()">
+    <div id="template" w3-include-html="./template.html"></div>
+    <div id="legal_notice_body" class="legal_notice_body">
+        <div class="header" w3-include-html="./header.html"></div>
+        <div id="content">
+            <h1 class="legal_notice_h1">Legal Notice</h1>
+            <embed class="pdf" src="./assets/Impressum.pdf">
+        </div>
 </body>
 </html>
