@@ -72,6 +72,5 @@ span{
 .help_info{
     overflow-y: auto;
     margin-bottom: 10px;
-    height: calc(100% - 10px);
-    background-color: rebeccapurple;
+    height: calc(100% - 10px - 152px - 120px);
 }
