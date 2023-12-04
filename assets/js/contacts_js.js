@@ -101,6 +101,8 @@ function displayUserDetails(i) {
   let nameInitials = names[0].charAt(0).toUpperCase();
   nameInitials += names[names.length - 1].charAt(0).toUpperCase();
   userInfo.innerHTML += userDetailHTML(i, nameInitials);
+
+  document.querySelector(".info").classList.add("show-info");
 }
 
 function addBackgroundColor(i) {
@@ -127,9 +129,13 @@ function deleteUserByIndex(index) {
 }
 
 function openAddContactPopup() {
-  document.getElementById("addContactPopup").classList.add("show_add_contact");
+  document.getElementById("addContactPopup").classList.add("show");
   document.getElementById("overlay").style.display = "block";
-  document.getElementById("addContactPopup").classList.add("translate");
+}
+
+function closeAddContactPopup() {
+  document.getElementById("addContactPopup").classList.remove("show");
+  document.getElementById("overlay").style.display = "none";
 }
 
 function addContactPopup() {
@@ -156,13 +162,6 @@ function clearForm() {
   document.getElementById("addPhone").value = "";
 }
 
-function closeAddContactPopup() {
-  document
-    .getElementById("addContactPopup")
-    .classList.remove("show_add_contact");
-  document.getElementById("overlay").style.display = "none";
-}
-
 function openEditContactPopup(currentUserIndex) {
   const userColor = getUserColor(currentUserIndex);
   const user = users[currentUserIndex];
@@ -171,7 +170,7 @@ function openEditContactPopup(currentUserIndex) {
   document.getElementById("editPhone").value = user.telefon;
   contactInitials.innerText = initials;
   contactInitials.style.backgroundColor = userColor;
-  document.getElementById("editContactPopup").classList.add("show_add_contact");
+  document.getElementById("editContactPopup").classList.add("show");
   document.getElementById("overlay").style.display = "block";
 }
 
@@ -190,9 +189,7 @@ function saveChanges() {
 }
 
 function closeEditContactPopup() {
-  document
-    .getElementById("editContactPopup")
-    .classList.remove("show_add_contact");
+  document.getElementById("editContactPopup").classList.remove("show");
   document.getElementById("overlay").style.display = "none";
 }
 

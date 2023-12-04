@@ -14,6 +14,10 @@
   flex: 1;
 }
 
+.contacts_body {
+  position: relative;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -155,8 +159,6 @@ a h4 {
 
 ::-webkit-scrollbar {
   width: 10px;
-  height: 300px;
-  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -178,10 +180,6 @@ a h4 {
   color: #fff;
 }
 
-.contacts_edit p {
-  border: 3px solid #fff;
-}
-
 .contact_name h5 {
   font-weight: 400;
   color: #0d99ff;
@@ -198,6 +196,7 @@ a h4 {
   padding: 5rem 3.5rem;
   background-color: #f6f7f8;
   flex: 1;
+  position: relative;
 }
 
 .contacts_heading {
@@ -221,6 +220,16 @@ a h4 {
 .info {
   width: 28.8rem;
   height: 22rem;
+  position: absolute;
+  right: -24vw;
+  transform: translateX(-50%);
+  transition: all 0.5s ease-in-out;
+  display: none;
+}
+
+.info.show-info {
+  right: 0;
+  display: block;
 }
 
 .contacts_edit {
@@ -231,10 +240,12 @@ a h4 {
 }
 
 .contacts_edit p {
-  width: 5rem;
-  height: 5rem;
-  font-size: 2rem;
+  width: 7rem;
+  height: 7rem;
+  font-size: 2.5rem;
+  border: 3px solid #fff;
 }
+
 .contactname h3 {
   font-size: 2.2rem;
   font-weight: 300;
@@ -280,27 +291,28 @@ a h4 {
   margin-right: 0.5rem;
 }
 
-/* add contact */
 .add-contact,
 .edit-contact {
   width: 60vw;
   height: 37.125rem;
-  position: absolute;
-  left: 50%;
+  position: fixed;
   top: 50%;
-  transform: translate(-50%, -50%);
+  right: -60vw;
+  transform: translate(0, -50%);
   border-radius: 2rem;
   z-index: 1001;
-  display: none;
+  transition: right 0.3s ease-in-out;
+}
+
+.add-contact.show,
+.edit-contact.show {
+  right: 20%;
 }
 
 .show_add_contact {
   display: block;
 }
 
-.translate {
-  transform: translate(-50%, -50%);
-}
 .contact_img p {
   width: 120px;
   height: 120px;
