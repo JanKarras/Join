@@ -5,6 +5,11 @@ html {
   display: flex;
 }
 
+#bodys.fade-out {
+  opacity: 0;
+  transition: opacity 0.2 ease-in-out; /* Die Dauer und das Timing der Animation anpassen */
+}
+
 .side_bar {
   width: 14.5vw;
   max-width: 232px;
