@@ -1,6 +1,7 @@
 #bodys{
     max-width: 1440px;
     margin: auto;
+    overflow: hidden;
 }
 
 .header{
@@ -11,8 +12,8 @@
     margin-left: 70px;
     margin-top: 120px;
     width: 1014px;
-    overflow-y: auto;
-    height: 100%;
+    height: calc(100% - 120px);
+    max-height: calc(100% - 120px);
 }
 
 .help_body{
@@ -66,4 +67,11 @@ span{
 
 .span_list{
     color: black;
+}
+
+.help_info{
+    overflow-y: auto;
+    margin-bottom: 10px;
+    height: calc(100% - 10px);
+    background-color: rebeccapurple;
 }

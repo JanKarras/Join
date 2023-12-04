@@ -22,7 +22,6 @@ body {
   padding-right: 20px;
 }
 
-<<<<<<< HEAD
   .name {
     color: #29abe2;
     width: 55px;
@@ -35,20 +34,6 @@ body {
     font-size: 24px;
     margin-right: 70px;
   }
-=======
-.name {
-  color: #29abe2;
-  width: 3.6357615894039735099337748344371vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3.6357615894039735099337748344371vw;
-  border-radius: 50%;
-  border: solid #2a3647 3px;
-  font-size: 24px;
-  margin-right: 70px;
-}
->>>>>>> e4d7122bf9e4f7b067c76978e670e4034a2f0aaa
 
 .popup_menu {
   position: absolute;
