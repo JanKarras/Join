@@ -1,14 +1,7 @@
 let btns = ["summary", "add_task", "board", "contacts"];
 
-function init_include(name) {
-  let functionName = name.split(".")[0] + "_init";
-
-  // Überprüfe, ob die Funktion existiert, bevor du sie aufrufst
-  if (typeof window[functionName] === "function") {
-    window[functionName]();
-  } else {
-    console.error(`Die Funktion ${functionName} existiert nicht.`);
-  }
+function smoothPageTransition(nextPage) {
+  
 }
 
 async function menue_clicked(name) {
