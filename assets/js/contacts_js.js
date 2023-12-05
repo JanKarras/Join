@@ -41,8 +41,6 @@ let users = [
   },
 ];
 
-window.onload = contacts_init();
-
 const userName = document.getElementById("name_email");
 const userInfo = document.getElementById("contact_details");
 const contactInitials = document.getElementById("contactInitials");
@@ -53,8 +51,6 @@ let currentAlphabet = "";
 
 
 async function contacts_init() {
-  await includeHTML();
-  menue_clicked("contacts");
   displayUsers();
 }
 

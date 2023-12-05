@@ -13,11 +13,9 @@
     <title>Document</title>
 </head>
 
-<body class="font" id="bodys" onload="add_task_init()">
-    <div id="template" w3-include-html="./template.html"></div>
-    <div id="add_task_body" class="add_task_body">
-        <div class="header" w3-include-html="./header.html"></div>
-        <div id="content">
+<body class="font">
+    <div class="add_task_body">
+        <div>
             <div class="add_task_h1">Add Task</div>
             <div class="add_task_content">
                 <div class="add_taks_sides left_side">
@@ -78,23 +76,24 @@
                     </div>
                 </div>
             </div>
-            <footer>
-                <div class="required">
-                    <div class="star">*</div>
-                    <div>This field is required</div>
-                </div>
-                <div class="footer_btns_container">
-                    <div class="clear">
-                        <div>Clear</div>
-                        <img src="./assets/img/iconoir_cancel.png">
-                    </div>
-                    <div class="create">
-                        <div>Create Task</div>
-                        <img>
-                    </div>
-                </div>
-            </footer>
         </div>
+        <footer>
+            <div class="required">
+                <div class="star">*</div>
+                <div>This field is required</div>
+            </div>
+            <div class="footer_btns_container">
+                <div class="clear">
+                    <div>Clear</div>
+                    <img src="./assets/img/iconoir_cancel.png">
+                </div>
+                <div class="create">
+                    <div>Create Task</div>
+                    <img>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 
 </html>

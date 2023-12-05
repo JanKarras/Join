@@ -13,62 +13,58 @@
     <script src="./assets/js/template_js.js"></script>
 </head>
 
-<body class="font" id="bodys" onload="board_init()">
-    <div id="template" w3-include-html="./template.html"></div>
-    <div id="board_body" class="board_body">
-        <div class="header" w3-include-html="./header.html"></div>
-        <div id="content">
-            <div class="headline">
-                <span class="responsiveHeadline">
-                    <h1>Board</h1>
-                    <div class="plusForResponsive"><img src="./assets/img/board-img/addplus.png">
-                    </div>
-                </span>
-                <span class="inputAndButtonHeadline">
-                    <div class="inputDiv">
-                        <input id="input" placeholder="Find Task">
-                        <img src="./assets/img/board-img/lupe.png">
-                    </div>
-                    <div class="buttonAdd">Add task
-                        <img src="./assets/img/board-img/addplus.png">
-                    </div>
-
-                </span>
+<body class="font">
+    <div class="headline">
+        <span class="responsiveHeadline">
+            <h1>Board</h1>
+            <div class="plusForResponsive"><img src="./assets/img/board-img/addplus.png">
+            </div>
+        </span>
+        <span class="inputAndButtonHeadline">
+            <div class="inputDiv">
+                <input id="input" placeholder="Find Task">
+                <img src="./assets/img/board-img/lupe.png">
+            </div>
+            <div class="buttonAdd">Add task
+                <img src="./assets/img/board-img/addplus.png">
             </div>
 
-            <div class="taskContent">
-                <div class="taskContainer">
-                    <div class="taskCategoryName">
-                        <h3> To do</h3><span class="hoverPlusEffect"><img
-                                src="./assets/img/board-img/plusButtonTasks.png"></span>
-                    </div>
-                    <div id="taskCategoryToDo"></div>
-                </div>
+        </span>
+    </div>
 
-                <div class="taskContainer">
-                    <div class="taskCategoryName">
-                        <h3> In progress</h3><span class="hoverPlusEffect"><img
-                                src="./assets/img/board-img/plusButtonTasks.png"></span>
-                    </div>
-                    <div id="taskCategoryInProgress"></div>
-                </div>
-
-                <div class="taskContainer">
-                    <div class="taskCategoryName">
-                        <h3>Await feedback</h3><span class="hoverPlusEffect"><img
-                                src="./assets/img/board-img/plusButtonTasks.png"></span>
-                    </div>
-                    <div id="taskCategoryAwaitFeedback"></div>
-                </div>
-
-                <div class="taskContainer">
-                    <div class="taskCategoryName">
-                        <h3>Done</h3>
-                    </div>
-                    <div id="taskCategoryDone"></div>
-                </div>
+    <div class="taskContent">
+        <div class="taskContainer">
+            <div class="taskCategoryName">
+                <h3> To do</h3><span class="hoverPlusEffect"><img
+                        src="./assets/img/board-img/plusButtonTasks.png"></span>
             </div>
+            <div id="taskCategoryToDo"></div>
         </div>
+
+        <div class="taskContainer">
+            <div class="taskCategoryName">
+                <h3> In progress</h3><span class="hoverPlusEffect"><img
+                        src="./assets/img/board-img/plusButtonTasks.png"></span>
+            </div>
+            <div id="taskCategoryInProgress"></div>
+        </div>
+
+        <div class="taskContainer">
+            <div class="taskCategoryName">
+                <h3>Await feedback</h3><span class="hoverPlusEffect"><img
+                        src="./assets/img/board-img/plusButtonTasks.png"></span>
+            </div>
+            <div id="taskCategoryAwaitFeedback"></div>
+        </div>
+
+        <div class="taskContainer">
+            <div class="taskCategoryName">
+                <h3>Done</h3>
+            </div>
+            <div id="taskCategoryDone"></div>
+        </div>
+    </div>
+    </div>
     </div>
 
 

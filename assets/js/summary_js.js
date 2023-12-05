@@ -1,7 +1,5 @@
 
 async function summary_init(){
-    await includeHTML();
-    menue_clicked('summary');
     load_numbers();
     updateTime();
 }

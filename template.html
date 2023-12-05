@@ -1,76 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/style/template.css" />
-    <link rel="stylesheet" href="./assets/style/fonts.css" />
-    <link rel="stylesheet" href="./assets/style/font.css">
-    <script src="./assets/js/template_js.js"></script>
-    <script src="./assets/js/summary_js.js"></script>
-    <script src="./assets/js/add_task_js.js"></script>
-    <script src="./assets/js/board_js.js"></script>
-    <title>Document</title>
-  </head>
-  <body class="font" id="body" onload="template_init()">
-    <div class="width_monitor"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/style/template.css" />
+  <link rel="stylesheet" href="./assets/style/fonts.css" />
+  <link rel="stylesheet" href="./assets/style/font.css">
+  <script src="./assets/js/template_js.js"></script>
+  <script src="./assets/js/summary_js.js"></script>
+  <script src="./assets/js/add_task_js.js"></script>
+  <script src="./assets/js/board_js.js"></script>
+  <script src="./assets/js/header_js.js"></script>
+  <script src="./assets/js/contacts_js.js"></script>
+  <title>Document</title>
+</head>
+
+<body class="font" id="body" onload="template_init()">
+  <div>
     <div id="side_bar" class="side_bar">
       <div class="width_100 center_felx">
-        <img
-          src="./assets/img/logo-white.png"
-          class="siede_bar_logo_header"
-          alt="join_logo"
-        />
+        <img src="./assets/img/logo-white.png" class="siede_bar_logo_header" alt="join_logo" />
       </div>
       <nav class="nav">
         <div class="menu">
-          <a href="summary.html" onclick="smoothPageTransition('summary.html')"><div
-            id="summary"
-            class="btn_clicked menu_buttons"
-          >
-            <img
-              src="./assets/img/summary_icon.png"
-              class="side_bar_logos_img"
-            />
+          <div onclick="menue_clicked('summary')" id="summary" class="btn_clicked menu_buttons">
+            <img src="./assets/img/summary_icon.png" class="side_bar_logos_img" />
             <div class="menu_name">Summary</div>
           </div>
-          </a>
-          <a href="add_task.html" onclick="smoothPageTransition('add_task.html')"><div
-            id="add_task"
-            class="menu_buttons"
-          >
-            <img
-              src="./assets/img/add_task_icon.png"
-              class="side_bar_logos_img"
-            />
+          <div onclick="menue_clicked('add_task')" id="add_task" class="menu_buttons">
+            <img src="./assets/img/add_task_icon.png" class="side_bar_logos_img" />
             <div class="menu_name">Add Task</div>
           </div>
-        </a>
-          <a href="board.html" onclick="smoothPageTransition('board.html')"><div id="board" class="menu_buttons">
+          <div onclick="menue_clicked('board')" id="board" class="menu_buttons">
             <img src="./assets/img/board_icon.png" class="side_bar_logos_img" />
             <div class="menu_name">Board</div>
           </div>
-          <a href="contacts.html" onclick="smoothPageTransition('contacts.html')"><div
-            id="contacts"
-            class="menu_buttons"
-          >
-            <img
-              src="./assets/img/contacts_icon.png"
-              class="side_bar_logos_img"
-            />
+          <div onclick="menue_clicked('contacts')" id="contacts" class="menu_buttons">
+            <img src="./assets/img/contacts_icon.png" class="side_bar_logos_img" />
             <div class="menu_name">Contacts</div>
           </div>
-          </a>
         </div>
         <div class="legal">
-          <a href="./privacy_policy.html" target="_blank" class="nav_legal"
-            >Privacy Policy</a
-          >
-          <a href="./legal_notice.html" target="_blank" class="nav_legal"
-            >Legal notice</a
-          >
+          <a href="./privacy_policy.html" target="_blank" class="nav_legal">Privacy Policy</a>
+          <a href="./legal_notice.html" target="_blank" class="nav_legal">Legal notice</a>
         </div>
       </nav>
     </div>
-  </body>
+  </div>
+  <div class="header_content_container">
+    <div class="header" w3-include-html="./header.html"></div>
+    <div id="content" w3-include-html=""></div>
+</body>
+
 </html>
