@@ -1,9 +1,11 @@
-let btns = ["summary", "add_task", "board", "contacts"];
+let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "legal_notice"];
+let position;
 
 async function template_init(){
   await includeHTML();
   await includeHTML_with_name('summary');
   summary_init();
+  position = "summary";
 }
 
 async function menue_clicked(name) {
@@ -14,6 +16,8 @@ async function menue_clicked(name) {
   document.getElementById(name).classList.add("btn_clicked");
   await includeHTML_with_name(name);
   runAdditionalFunction(name);
+  if (name != "help")
+    position = name;
 }
 
 function runAdditionalFunction(name) {

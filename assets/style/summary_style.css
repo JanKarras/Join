@@ -37,6 +37,7 @@
   width: 560px;
 }
 
+
 .summary_top_card {
   display: flex;
   justify-content: space-evenly;
@@ -45,6 +46,13 @@
   width: 47.142857142857142857142857142857%;
   border: solid lightgray 1px;
   border-radius: 15px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.summary_top_card:hover{
+  background-color: #091931;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Fügt einen Schatten hinzu, um den Container hervorzuheben */
+  transform: scale(1.05);
 }
 
 .summary_icons {
@@ -58,6 +66,7 @@
   justify-content: center;
   align-items: center;
 }
+
 
 .text_cards {
   font-size: 20px;
@@ -73,6 +82,13 @@
   display: flex;
   justify-content: left;
   align-items: center;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.middlecards:hover{
+  background-color: #091931;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Fügt einen Schatten hinzu, um den Container hervorzuheben */
+  transform: scale(1.05);
 }
 
 .summary_middle_card {
@@ -117,6 +133,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.summary_bot_card_numbers:hover{
+  background-color: #091931;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Fügt einen Schatten hinzu, um den Container hervorzuheben */
+  transform: scale(1.05);
 }
 
 .summary_content {

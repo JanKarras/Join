@@ -304,66 +304,22 @@ footer {
   width: 186px;
   height: 56px;
   background-color: #2a3647;
-  font-weight: 500;
+  border-radius: 10px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
 }
 
-.create:hover {
-  color: #fff;
-  background-color: #29abe2;
-  box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
-  border: transparent;
-  cursor: pointer;
+.add_task_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 112px - 40px);
+  padding-bottom: 40px;
 }
 
-input[type="text"]::placeholder {
-  color: #999;
-  /* Farbe des Platzhaltertexts */
-  opacity: 0.8;
-  /* Transparenz des Platzhaltertexts */
-}
-
-textarea::placeholder {
-  color: #999;
-  /* Farbe des Platzhaltertexts */
-  opacity: 0.8;
-  /* Transparenz des Platzhaltertexts */
-}
-
-input[type="date"]::placeholder {
-  font-family: "Roboto", sans-serif;
-}
-
-input[type="date"] {
-  cursor: pointer;
-}
-
-input[type="date"]:invalid::-webkit-datetime-edit {
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  color: #999;
-}
-
-input::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  height: 20px;
-  width: 20px;
-}
-
-select,
-input[type="date"] {
-  /* for Firefox */
-  -moz-appearance: none;
-  /* for Safari, Chrome, Opera */
-  -webkit-appearance: none;
-}
-
-input:focus,
-textarea:focus {
-  outline: rgb(0, 204, 255);
-}
-
-input[type="date"]::placeholder {
-  font-family: "Roboto", sans-serif;
-  color: #999;
+.content {
+  height: calc(100% - 206px);
 }

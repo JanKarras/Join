@@ -53,10 +53,16 @@ nav a {
   display: flex;
   align-items: center;
   padding-left: 15%;
+  transition: background-color 0.3s;
+}
+
+.menu_buttons:hover{
+  background-color: #091931;
+  filter: brightness(1.9);
 }
 
 .btn_clicked {
-  background-color: #091931;
+  background-color: #091931 !important;
 }
 
 .side_bar_logos_img {
@@ -65,16 +71,28 @@ nav a {
 }
 
 .legal {
-  width: 85%;
-  padding-left: 15%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .nav_legal {
   padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.nav_legal_p{
   color: #696f77;
-  text-decoration: none;
+}
+
+.nav_legal:hover{
+  background-color: #091931;
+  filter: brightness(1.9);
 }
 
 .header {

@@ -1,0 +1,18 @@
+#content{
+    height: calc(100% - 206px);
+}
+
+.privacy_policy_body{
+    width: 90%;
+}
+
+.privacy_policy_h1{
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.privacy_policy_h2{
+    font-size: 27px;
+    font-weight: 700;
+}
