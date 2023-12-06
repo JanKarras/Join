@@ -52,38 +52,55 @@ function backToLogin() {
 
 // Login Functions
 
-let newUsers = [
-  {
-    name: "Henry",
-    email: "henry@web.dev",
-    password: "letsdoit",
-    confirmp: "letsdoit",
-  },
-];
-
-function registerUser() {
-  newUsers.push({
-    name: username.value,
-    email: email.value,
-    password: password.value,
-    confirmp: confirmPassword.value,
-  });
-  msgBox.style.visibility = "visible";
-  setTimeout(() => {
-    msgBox.style.visibility = "none";
-    backToLogin();
-  }, 2000);
-}
-
-function loginUser() {
-  let user = newUsers.find(
-    (user) =>
-      user.email == userEmail.value && user.password == userPassword.value
-  );
-  if (user) {
-    window.location.href = "template.html";
+async function registerUser() {
+  try {
+    const response = await getItem('users');
+    const usersData = response['data']['value'];
+    if (usersData) {
+      const usersArray = JSON.parse(usersData);
+      usersArray.push({
+        name: username.value,
+        email: email.value,
+        password: password.value,
+        confirmp: confirmPassword.value,
+      });
+      setItem('users', usersArray);
+      msgBox.style.visibility = "visible";
+      setTimeout(() => {
+        msgBox.style.visibility = "none";
+        backToLogin();
+      }, 2000);
+    }
+  }
+  catch (error) {
+    console.error('Error during Sign up:', error);
   }
 }
+
+async function loginUser() {
+  try {
+    const response = await getItem('users');
+    const usersData = response['data']['value'];
+
+    if (usersData) {
+      const usersArray = JSON.parse(usersData);
+      let user = usersArray.find(
+        (user) =>
+          user.email == userEmail.value && user.password == userPassword.value
+      );
+      if (user) {
+        window.location.href = `template.html?userEmail=${userEmail.value}`;
+      } else {
+        console.error('Invalid email or password');
+      }
+    } else {
+      console.error('Invalid user data format');
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+}
+
 function validateUser() {
   if (checkBox.checked) {
     button.disabled = false;

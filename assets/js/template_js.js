@@ -1,11 +1,14 @@
 let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "legal_notice"];
 let position;
+const urlParams = new URLSearchParams(window.location.search);
+const Email = urlParams.get('userEmail');
 
 async function template_init(){
   await includeHTML();
   await includeHTML_with_name('summary');
   summary_init();
   position = "summary";
+  console.log(Email);
 }
 
 async function menue_clicked(name) {
