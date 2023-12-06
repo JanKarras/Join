@@ -1,4 +1,4 @@
-let btns = ["summary", "add_task", "board", "contacts"];
+let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "legal_notice"];
 
 async function template_init(){
   await includeHTML();
