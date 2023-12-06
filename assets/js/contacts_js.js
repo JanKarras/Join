@@ -1,3 +1,7 @@
+async function contacts_init() {
+  displayUsers();
+}
+
 let users = [
   {
     name: "Anton Mayer",
@@ -41,20 +45,12 @@ let users = [
   },
 ];
 
-const userName = document.getElementById("name_email");
-const userInfo = document.getElementById("contact_details");
-const contactInitials = document.getElementById("contactInitials");
-
 let initials;
 let currentUserIndex;
 let currentAlphabet = "";
 
-
-async function contacts_init() {
-  displayUsers();
-}
-
 function displayUsers() {
+  const userName = document.getElementById("name_email");
   users.sort((a, b) => a.name.localeCompare(b.name));
   userName.innerHTML = "";
   for (let i = 0; i < users.length; i++) {
@@ -73,6 +69,7 @@ function displayUsers() {
 }
 
 function displayUserDetails(i) {
+  const userInfo = document.getElementById("contact_details");
   addBackgroundColor(i);
   userInfo.innerHTML = "";
   const user = users[i];
@@ -150,8 +147,8 @@ function openEditContactPopup(currentUserIndex) {
   document.getElementById("editName").value = user.name;
   document.getElementById("editEmail").value = user.email;
   document.getElementById("editPhone").value = user.telefon;
-  contactInitials.innerText = initials;
-  contactInitials.style.backgroundColor = userColor;
+  document.getElementById("contactInitials").innerText = initials;
+  document.getElementById("contactInitials").style.backgroundColor = userColor;
   document.getElementById("editContactPopup").classList.add("show");
   document.getElementById("overlay").style.display = "block";
 }
