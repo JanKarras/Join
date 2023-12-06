@@ -1,13 +1,36 @@
 #content{
-    height: calc(100% - 94px);
+    height: calc(100% - 206px);
 }
 
 .legal_notice_body{
-    width: 100%;
-    height: calc(100% - 112px - 40px);
+    width: 90%;
 }
 
 .legal_notice_h1{
     font-size: 61px;
     margin: 0;
+}
+
+.legal_notice_h2{
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.legal_notice_li{
+    font-size: 16px;
+}
+
+.legal_notice_h3{
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 20px;
+}
+
+.legal_notice_p{
+    padding-top: 0;
+    margin-top: 0;
+}
+
+span{
+    color: #29ABE2;
 }

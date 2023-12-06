@@ -1,27 +1,11 @@
-#bodys{
-    max-width: 1440px;
-    margin: auto;
-    overflow: hidden;
-}
-
-.header{
-    flex: 1;
-}
-
-#content{
-    margin-left: 70px;
-    margin-top: 120px;
-    width: 1014px;
-    height: calc(100% - 120px);
-    max-height: calc(100% - 120px);
-}
 
 .help_body{
-    width: 100%;
+    width: 90%;
 }
 
 .help_h1{
     font-size: 61px;
+    margin: 0;
 }
 
 .help_header{
@@ -79,4 +63,8 @@ span{
 
 .display-none{
     display: none;
+}
+
+.content{
+    height: calc(100% - 206px);
 }
