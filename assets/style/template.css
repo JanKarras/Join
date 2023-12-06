@@ -3,6 +3,7 @@ html {
   height: 100%;
   margin: 0;
   display: flex;
+  position: relative;
 }
 
 #body {
@@ -87,12 +88,13 @@ nav a {
 }
 
 .nav_legal_p{
-  color: #696f77;
+  color: #797D84;
+  transition: color 0.3s, transform 0.3s;
 }
 
-.nav_legal:hover{
-  background-color: #091931;
-  filter: brightness(1.9);
+.nav_legal_p:hover{
+  color: #29abe2;
+  transform: scale(1.1);
 }
 
 .header {

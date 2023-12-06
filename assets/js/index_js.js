@@ -81,7 +81,7 @@ function loginUser() {
       user.email == userEmail.value && user.password == userPassword.value
   );
   if (user) {
-    window.location.href = "summary.html";
+    window.location.href = "template.html";
   }
 }
 function validateUser() {
