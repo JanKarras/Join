@@ -53,10 +53,16 @@ nav a {
   display: flex;
   align-items: center;
   padding-left: 15%;
+  transition: background-color 0.3s;
+}
+
+.menu_buttons:hover{
+  background-color: #091931;
+  filter: brightness(1.9);
 }
 
 .btn_clicked {
-  background-color: #091931;
+  background-color: #091931 !important;
 }
 
 .side_bar_logos_img {
@@ -73,11 +79,20 @@ nav a {
 .nav_legal {
   padding-top: 10px;
   padding-bottom: 10px;
-  color: #696f77;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s;
+}
+
+.nav_legal_p{
+  color: #696f77;
+}
+
+.nav_legal:hover{
+  background-color: #091931;
+  filter: brightness(1.9);
 }
 
 .header {
