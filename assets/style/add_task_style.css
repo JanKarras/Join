@@ -130,7 +130,5 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     height: calc(100% - 112px - 40px);
-    margin-top: 112px;
-    margin-left: 96px;
     padding-bottom: 40px;
 }
