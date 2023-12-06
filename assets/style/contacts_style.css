@@ -1,23 +1,3 @@
-#bodys {
-  max-width: 1440px;
-  margin: auto;
-  /* position: relative; */
-}
-
-.header {
-  flex: 1;
-  width: calc(100vw - 14.5vw);
-  max-width: 1208px;
-}
-
-#content {
-  flex: 1;
-}
-
-.contacts_body {
-  position: relative;
-}
-
 * {
   margin: 0;
   padding: 0;
