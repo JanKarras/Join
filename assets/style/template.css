@@ -86,7 +86,9 @@ nav a {
 }
 
 #content{
-  height: calc(100% - 94px);
-  max-height: calc(100% - 94px);
+  height: calc(100% - 206px);
+  padding-left: calc(328px - 232px);
+  padding-top: calc(206px - 94px);
+  max-height: calc(100% - 206px);
   overflow: auto;
 }
