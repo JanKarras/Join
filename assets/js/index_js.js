@@ -30,7 +30,8 @@ let test = [
     "name": "Jan",
     "password": "cvwKg3bq",
     "tasks": [],
-    "contacts": []
+    "contacts": [],
+    "subtasks" : [],
   },
   {
     "email": "testemail",
