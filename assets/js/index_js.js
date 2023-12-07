@@ -24,7 +24,24 @@ const windowWidth = window.innerWidth;
 
 window.onload = load;
 
-function load() {
+let test = [
+  {
+    "email": "hs",
+    "name": "Jan",
+    "password": "cvwKg3bq",
+    "tasks": [],
+    "contacts": []
+  },
+  {
+    "email": "testemail",
+    "name": "test",
+    "password": "123",
+    "tasks": [],
+    "contacts": []
+  }
+]
+
+async function load() {
   if (windowWidth < 576) {
     logo.src = "./assets/img/logo-white.png";
   }
@@ -36,6 +53,13 @@ function load() {
     bodyContainer.style.background = "#f6f7f8";
     logo.src = "./assets/img/logo.svg";
   }, 800);
+  //const response = await getItem('users');
+  //const usersData = response['data']['value'];
+  //let usersArray = JSON.parse(usersData);
+  //usersArray = usersArray.slice(0, 2);
+  //setItem('users', usersArray);
+  //console.log(usersArray);
+  //setItem('users', test);
 }
 
 function insertSignup() {
@@ -52,38 +76,72 @@ function backToLogin() {
 
 // Login Functions
 
-let newUsers = [
-  {
-    name: "Henry",
-    email: "henry@web.dev",
-    password: "letsdoit",
-    confirmp: "letsdoit",
-  },
-];
-
-function registerUser() {
-  newUsers.push({
-    name: username.value,
-    email: email.value,
-    password: password.value,
-    confirmp: confirmPassword.value,
-  });
-  msgBox.style.visibility = "visible";
-  setTimeout(() => {
-    msgBox.style.visibility = "none";
-    backToLogin();
-  }, 2000);
-}
-
-function loginUser() {
-  let user = newUsers.find(
-    (user) =>
-      user.email == userEmail.value && user.password == userPassword.value
-  );
-  if (user) {
-    window.location.href = "summary.html";
+async function registerUser() {
+  try {
+    const response = await getItem('users');
+    const usersData = response['data']['value'];
+    if (usersData) {
+      const usersArray = JSON.parse(usersData);
+      if (check_email(usersArray, email.value) == 0) {
+        console.error('Email exists use another one:', error);
+      } else {
+        usersArray.push({
+          contacts: [],
+          name: username.value,
+          email: email.value,
+          password: password.value,
+          tasks: [],
+        });
+        setItem('users', usersArray);
+        msgBox.style.visibility = "visible";
+        setTimeout(() => {
+          msgBox.style.visibility = "none";
+          backToLogin();
+        }, 2000);
+      }
+    }
+  }
+  catch (error) {
+    console.error('Error during Sign up:', error);
   }
 }
+
+async function loginUser() {
+  try {
+    const response = await getItem('users');
+    const usersData = response['data']['value'];
+
+    if (usersData) {
+      const usersArray = JSON.parse(usersData);
+      let user = usersArray.find(
+        (user) =>
+          user.email == userEmail.value && user.password == userPassword.value
+      );
+      if (user) {
+        window.location.href = `template.html?userEmail=${userEmail.value}`;
+      } else {
+        console.error('Invalid email or password');
+      }
+    } else {
+      console.error('Invalid user data format');
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+}
+
+function check_email(usersArray, email) {
+  console.log(usersArray);
+  console.log(email);
+  for (let i = 0; i < usersArray.length; i++) {
+    const element = usersArray[i];
+    if (element['email'] == email) {
+      console.log("hs");
+      return 0;
+    }
+  }
+}
+
 function validateUser() {
   if (checkBox.checked) {
     button.disabled = false;

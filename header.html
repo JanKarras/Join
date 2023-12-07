@@ -15,13 +15,13 @@
     <p id="headline_header">Kanban Project Management Tool</p>
     <div class="help_name_container">
       <img onclick="menue_clicked('help')" class="help_icon_header" src="./assets/img/help.png" alt="help_icon" id="help" />
-      <div onclick="toggleMenu()" class="name">SM</div>
+      <div onclick="toggleMenu()" class="name" id="name">SM</div>
     </div>
   </div>
   <div id="popup_menu" class="popup_menu display_none">
     <div onclick="menue_clicked('privacy_policy')" class="nav_legal">Privacy Policy</div>
     <div onclick="menue_clicked('legal_notice')" class="nav_legal">Legal notice</div>
-    <div class="nav_legal">Log out</div>
+    <div onclick="log_out()" class="nav_legal">Log out</div>
   </div>
 </body>
 

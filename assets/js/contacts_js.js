@@ -1,49 +1,23 @@
 async function contacts_init() {
+  await set_users_contacts();
   displayUsers();
 }
 
-let users = [
-  {
-    name: "Anton Mayer",
-    email: "anton@outlook.com",
-    telefon: +491514567813,
-  },
-  {
-    name: "Anita Gant",
-    email: "anita@aol.com",
-    telefon: +491510527872,
-  },
-  {
-    name: "Elena James",
-    email: "elenajames@gmail.com",
-    telefon: +497714567894,
-  },
-  {
-    name: "Zoe Graber",
-    email: "zoegraber@web.de",
-    telefon: +4915145678512,
-  },
-  {
-    name: "Shawn Peter",
-    email: "sp@live.com",
-    telefon: +491602135121,
-  },
-  {
-    name: "Seun Dede",
-    email: "seun@outlook.com",
-    telefon: +491554567890,
-  },
-  {
-    name: "Christina Justus",
-    email: "cjustus@gmail.com",
-    telefon: +491781161324,
-  },
-  {
-    name: "Philip Chanel",
-    email: "philipchanel@yahoo.com",
-    telefon: +491514567890,
-  },
-];
+let users = [];
+
+async function set_users_contacts() {
+  let res = await getItem('users');
+  let value = res['data']['value'];
+  value = JSON.parse(value);
+  for (let i = 0; i < value.length; i++) {
+    const element = value[i];
+    if (element['email'] == Email)
+    {
+      users = element['contacts'];
+      break ;
+    }
+  }
+}
 
 let initials;
 let nameInitials;

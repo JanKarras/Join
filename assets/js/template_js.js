@@ -1,11 +1,24 @@
 let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "legal_notice"];
 let position;
+const urlParams = new URLSearchParams(window.location.search);
+const Email = urlParams.get('userEmail');
+let all_user = [];
 
 async function template_init(){
+  await get_all_user();
   await includeHTML();
   await includeHTML_with_name('summary');
   summary_init();
   position = "summary";
+  //console.log(all_user);
+}
+
+async function get_all_user(){
+    let res = await getItem('users');
+    let users = res['data']['value'];
+    users = JSON.parse(users);
+    all_user = users;
+    console.log(all_user);
 }
 
 async function menue_clicked(name) {

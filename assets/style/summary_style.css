@@ -1,5 +1,6 @@
 .content {
   height: calc(100% - 206px);
+  background-color: #f6f7f8;
 }
 
 .header_summary {

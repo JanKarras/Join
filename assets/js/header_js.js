@@ -14,3 +14,7 @@ function closeMenuOutsideClick() {
   document.getElementById("content").onclick = null;
   document.getElementById("headline_header").onclick = null;
 }
+
+function log_out(){
+  window.location.href = "index.html";
+}
