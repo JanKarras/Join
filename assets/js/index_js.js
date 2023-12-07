@@ -24,7 +24,17 @@ const windowWidth = window.innerWidth;
 
 window.onload = load;
 
-function load() {
+let test = [
+  {
+    "email": "karras.jan@web.de",
+    "name" : "Jan",
+    "password" : "cvwKg3bq",
+    "tasks" : [],
+    "contacts" : []
+  }
+]
+
+async function load() {
   if (windowWidth < 576) {
     logo.src = "./assets/img/logo-white.png";
   }
@@ -58,12 +68,15 @@ async function registerUser() {
     const usersData = response['data']['value'];
     if (usersData) {
       const usersArray = JSON.parse(usersData);
+      console.log(usersArray);
       usersArray.push({
+        contacts: [],
         name: username.value,
         email: email.value,
         password: password.value,
-        confirmp: confirmPassword.value,
+        tasks: [],
       });
+      console.log(usersArray);
       setItem('users', usersArray);
       msgBox.style.visibility = "visible";
       setTimeout(() => {
