@@ -27,17 +27,17 @@ window.onload = load;
 let test = [
   {
     "email": "hs",
-    "name" : "Jan",
-    "password" : "cvwKg3bq",
-    "tasks" : [],
-    "contacts" : []
+    "name": "Jan",
+    "password": "cvwKg3bq",
+    "tasks": [],
+    "contacts": []
   },
   {
     "email": "testemail",
-    "name" : "test",
-    "password" : "123",
-    "tasks" : [],
-    "contacts" : []
+    "name": "test",
+    "password": "123",
+    "tasks": [],
+    "contacts": []
   }
 ]
 
@@ -53,6 +53,12 @@ async function load() {
     bodyContainer.style.background = "#f6f7f8";
     logo.src = "./assets/img/logo.svg";
   }, 800);
+  //const response = await getItem('users');
+  //const usersData = response['data']['value'];
+  //let usersArray = JSON.parse(usersData);
+  //usersArray = usersArray.slice(0, 2);
+  //setItem('users', usersArray);
+  //console.log(usersArray);
   //setItem('users', test);
 }
 
@@ -76,21 +82,23 @@ async function registerUser() {
     const usersData = response['data']['value'];
     if (usersData) {
       const usersArray = JSON.parse(usersData);
-      console.log(usersArray);
-      usersArray.push({
-        contacts: [],
-        name: username.value,
-        email: email.value,
-        password: password.value,
-        tasks: [],
-      });
-      console.log(usersArray);
-      setItem('users', usersArray);
-      msgBox.style.visibility = "visible";
-      setTimeout(() => {
-        msgBox.style.visibility = "none";
-        backToLogin();
-      }, 2000);
+      if (check_email(usersArray, email.value) == 0) {
+        console.error('Email exists use another one:', error);
+      } else {
+        usersArray.push({
+          contacts: [],
+          name: username.value,
+          email: email.value,
+          password: password.value,
+          tasks: [],
+        });
+        setItem('users', usersArray);
+        msgBox.style.visibility = "visible";
+        setTimeout(() => {
+          msgBox.style.visibility = "none";
+          backToLogin();
+        }, 2000);
+      }
     }
   }
   catch (error) {
@@ -119,6 +127,18 @@ async function loginUser() {
     }
   } catch (error) {
     console.error('Error during login:', error);
+  }
+}
+
+function check_email(usersArray, email) {
+  console.log(usersArray);
+  console.log(email);
+  for (let i = 0; i < usersArray.length; i++) {
+    const element = usersArray[i];
+    if (element['email'] == email) {
+      console.log("hs");
+      return 0;
+    }
   }
 }
 
