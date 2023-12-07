@@ -2,26 +2,23 @@ let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "leg
 let position;
 const urlParams = new URLSearchParams(window.location.search);
 const Email = urlParams.get('userEmail');
-let user_infos = [];
+let all_user = [];
 
 async function template_init(){
-  await set_user_infos();
+  await get_all_user();
   await includeHTML();
   await includeHTML_with_name('summary');
   summary_init();
   position = "summary";
-  console.log(user_infos);
+  //console.log(all_user);
 }
 
-async function set_user_infos(){
+async function get_all_user(){
     let res = await getItem('users');
     let users = res['data']['value'];
     users = JSON.parse(users);
-    for (let i = 0; i < users.length; i++) {
-      const element = users[i];
-      if (element['email'] == Email)
-        user_infos = element;
-    }
+    all_user = users;
+    console.log(all_user);
 }
 
 async function menue_clicked(name) {

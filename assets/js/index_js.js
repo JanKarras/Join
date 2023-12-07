@@ -26,9 +26,16 @@ window.onload = load;
 
 let test = [
   {
-    "email": "karras.jan@web.de",
+    "email": "hs",
     "name" : "Jan",
     "password" : "cvwKg3bq",
+    "tasks" : [],
+    "contacts" : []
+  },
+  {
+    "email": "testemail",
+    "name" : "test",
+    "password" : "123",
     "tasks" : [],
     "contacts" : []
   }
@@ -46,6 +53,7 @@ async function load() {
     bodyContainer.style.background = "#f6f7f8";
     logo.src = "./assets/img/logo.svg";
   }, 800);
+  //setItem('users', test);
 }
 
 function insertSignup() {

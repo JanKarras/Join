@@ -6,7 +6,15 @@ async function summary_init(){
 }
 
 function set_name(){
-    const name = user_infos['name']
+    let name;
+    for (let i = 0; i < all_user.length; i++) {
+        const element = all_user[i];
+        if (element['email'] == Email)
+        {
+            name = element['name']
+            break ;
+        }
+    }
     document.getElementById('greeting_name').innerHTML = name;
     const name_parts = name.split(" ");
     let firt_name = name_parts[0].charAt(0).toUpperCase();
