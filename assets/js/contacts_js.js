@@ -46,6 +46,7 @@ let users = [
 ];
 
 let initials;
+let nameInitials;
 let currentUserIndex;
 let currentAlphabet = "";
 
@@ -57,7 +58,7 @@ function displayUsers() {
     const user = users[i];
     const firstAlphabet = user.name.charAt(0).toUpperCase();
     const names = user.name.split(" ");
-    let nameInitials = names[0].charAt(0).toUpperCase();
+    nameInitials = names[0].charAt(0).toUpperCase();
     nameInitials += names[names.length - 1].charAt(0).toUpperCase();
     if (firstAlphabet !== currentAlphabet) {
       userName.innerHTML += userHTML(i, firstAlphabet, nameInitials);

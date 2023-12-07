@@ -56,7 +56,7 @@ nav a {
   transition: background-color 0.3s;
 }
 
-.menu_buttons:hover{
+.menu_buttons:hover {
   background-color: #091931;
   filter: brightness(1.9);
 }
@@ -86,11 +86,11 @@ nav a {
   transition: background-color 0.3s;
 }
 
-.nav_legal_p{
+.nav_legal_p {
   color: #696f77;
 }
 
-.nav_legal:hover{
+.nav_legal:hover {
   background-color: #091931;
   filter: brightness(1.9);
 }

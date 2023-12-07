@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/style/add_task_style.css" />
-    <!-- <link rel="stylesheet" href="./assets/style/fonts.css">
-    <link rel="stylesheet" href="./assets/style/font.css"> -->
+
+    <!-- <link rel="stylesheet" href="./assets/style/fonts.css" />
+    <link rel="stylesheet" href="./assets/style/font.css" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,10 +16,14 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <script src="./assets/js/add_task_js.js"></script>
+
+    <link rel="stylesheet" href="./assets/style/add_task_style.css" />
+
     <script src="./assets/js/header_js.js"></script>
     <script src="./assets/js/template_js.js"></script>
-    <script src="assets/js/data.js"></script>
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/contacts_js.js"></script>
+    <script src="./assets/js/add_task_js.js"></script>
     <title>Document</title>
   </head>
 
@@ -37,22 +41,25 @@
               <input type="text" placeholder="Enter a title" required />
             </div>
             <div>
-              <div>
+              <div class="task-description">
                 <label class="description">Description</label>
                 <textarea
                   class="description_input"
                   placeholder="Enter a description"
                   required
-                  cols="5"
                 ></textarea>
               </div>
             </div>
             <div>
               <label>Assigned to</label>
-              <div class="contact-select" id="contactSelect">
-                <div class="select-box" onclick="toggleOptions()">
-                  <span id="selectedOption">Select a user</span>
-                  <span><i class="fa-solid fa-angle-down"></i></span>
+              <div class="contacts">
+                <div class="contact-select date_picker" id="contactSelect">
+                  <input
+                    class="select-box"
+                    onclick="toggleOptions()"
+                    placeholder="Select contacts to assign"
+                  />
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
                 </div>
                 <div class="options-container" id="optionsContainer"></div>
               </div>
@@ -95,26 +102,40 @@
               </div>
             </div>
             <div>
-              <div>
-                <div class="display_flex">
-                  <label class="name_of_input">Category</label>
-                  <div class="star">*</div>
-                </div>
+              <div class="contact-select" id="customSelect">
+                <div class="select-head date_picker" onclick="toggleCategory()">
+                  <div id="selectedCat">Select task category</div>
 
-                <div class="contact-select" id="contactSelect">
-                  <div class="select-box" onclick="toggleCategory()">
-                    <span id="selectedCategory">Select task category</span>
-                    <span><i class="fa-solid fa-angle-down"></i></span>
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
+                </div>
+                <div class="category-container" id="categoryContainer">
+                  <div
+                    class="option category_option"
+                    onclick="selectCategory('Techniker task')"
+                  >
+                    Techniker Task
                   </div>
-                  <div class="options-container" id="categoryContainer"></div>
+                  <div class="option" onclick="selectCategory('User Story')">
+                    User Story
+                  </div>
                 </div>
               </div>
             </div>
             <div>
               <label>Subtasks</label>
               <div class="date_picker">
-                <input type="text" placeholder="Add new subtask" />
-                <span><i class="fa-solid fa-plus"></i></span>
+                <input
+                  id="enter-subtask"
+                  type="text"
+                  placeholder="Add new subtask"
+                />
+                <span id="add-subtask" class="subtask" onclick="addSubtasks()"
+                  ><i class="fa-solid fa-plus"></i
+                ></span>
+                <span id="add_cancel_subtask" class="add_cancel">
+                  <i class="fa-solid fa-xmark mark"></i>
+                  <i class="fa-solid fa-check plus"></i>
+                </span>
               </div>
             </div>
           </div>
