@@ -10,7 +10,7 @@ async function template_init(){
   await includeHTML_with_name('summary');
   summary_init();
   position = "summary";
-  //console.log(all_user);
+  console.log(Email);
 }
 
 async function get_all_user(){

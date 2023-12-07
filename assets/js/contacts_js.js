@@ -1,9 +1,23 @@
+let users = [];
+
 async function contacts_init() {
   await set_users_contacts();
   displayUsers();
 }
 
-let users = [];
+async function push_users_contacts() {
+  let res = await getItem('users');
+  let value = res['data']['value'];
+  value = JSON.parse(value);
+  for (let i = 0; i < value.length; i++) {
+    const element = value[i];
+    if (element['email'] == Email) {
+      element['contacts'] = users;
+      break;
+    }
+  }
+  setItem('users', value);
+}
 
 async function set_users_contacts() {
   let res = await getItem('users');
@@ -11,10 +25,9 @@ async function set_users_contacts() {
   value = JSON.parse(value);
   for (let i = 0; i < value.length; i++) {
     const element = value[i];
-    if (element['email'] == Email)
-    {
+    if (element['email'] == Email) {
       users = element['contacts'];
-      break ;
+      break;
     }
   }
 }
@@ -76,6 +89,8 @@ function deleteUserByIndex(index) {
   currentUserIndex = index;
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
+    push_users_contacts();
+    set_users_contacts();
     displayUsers();
     displayUserDetails();
     closeEditContactPopup();
@@ -104,6 +119,8 @@ function addContactPopup() {
   users.sort((a, b) => a.name.localeCompare(b.name));
   const newUserIndex = users.findIndex((user) => user === newUser);
   currentUserIndex = newUserIndex;
+  push_users_contacts();
+  set_users_contacts();
   clearForm();
   closeAddContactPopup();
   displayUsers();
@@ -136,6 +153,8 @@ function saveChanges() {
   user.name = editedName;
   user.email = editedEmail;
   user.telefon = editedPhone;
+  push_users_contacts();
+  set_users_contacts();
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();
