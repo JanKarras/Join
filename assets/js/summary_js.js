@@ -36,7 +36,7 @@ function set_name() {
 }
 
 /**
- * Lädt die Anzahl der Aufgaben für den Benutzer mit der angegebenen E-Mail-Adresse und rendert die Zahlen.
+ * load the numbers of the tasks
  */
 function load_numbers() {
     for (let i = 0; i < all_user.length; i++) {
@@ -51,7 +51,7 @@ function load_numbers() {
 
 /**
  * Rendert die Anzahl der Aufgaben in verschiedenen Kategorien und Informationen zu dringenden Aufgaben.
- * @param {Array} tasks - Das Array der Aufgaben des Benutzers.
+ * @param {Array} tasks - the users array of the tasks
  */
 function render_numbers(tasks) {
     if (tasks.length != 0) {
@@ -78,8 +78,8 @@ function render_numbers(tasks) {
 }
 
 /**
- * Rendert das nächste fällige Datum für die Aufgaben des Benutzers.
- * @param {Array} tasks - Das Array der Aufgaben des Benutzers.
+ * Render the next date of the task wich is due soon.
+ * @param {Array} tasks - the users array of the tasks
  */
 function render_deadline(tasks) {
     let dates = [];
