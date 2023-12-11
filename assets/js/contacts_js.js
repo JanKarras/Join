@@ -1,35 +1,39 @@
 let users = [];
 
 async function contacts_init() {
-  await set_users_contacts();
+  await load_users_contacts();
   displayUsers();
 }
 
-async function push_users_contacts() {
-  let res = await getItem('users');
-  let value = res['data']['value'];
-  value = JSON.parse(value);
-  for (let i = 0; i < value.length; i++) {
-    const element = value[i];
+async function load_users_contacts() {
+  get_all_user();
+  users = [];
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
     if (element['email'] == Email) {
-      element['contacts'] = users;
+      for (let i = 0; i < element['contacts'].length; i++) {
+        const contact = element['contacts'][i];
+        users.push(contact);
+      }
       break;
     }
   }
-  setItem('users', value);
 }
 
 async function set_users_contacts() {
-  let res = await getItem('users');
-  let value = res['data']['value'];
-  value = JSON.parse(value);
-  for (let i = 0; i < value.length; i++) {
-    const element = value[i];
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
     if (element['email'] == Email) {
-      users = element['contacts'];
+      element['contacts'] = [];
+      for (let j = 0; j < users.length; j++) {
+        const user = users[j];
+        element['contacts'].push(user);
+      }
+      setItem('users',  all_user);
       break;
     }
   }
+  
 }
 
 let initials;
@@ -89,8 +93,8 @@ function deleteUserByIndex(index) {
   currentUserIndex = index;
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
-    push_users_contacts();
     set_users_contacts();
+    load_users_contacts();
     displayUsers();
     displayUserDetails();
     closeEditContactPopup();
@@ -119,8 +123,8 @@ function addContactPopup() {
   users.sort((a, b) => a.name.localeCompare(b.name));
   const newUserIndex = users.findIndex((user) => user === newUser);
   currentUserIndex = newUserIndex;
-  push_users_contacts();
   set_users_contacts();
+  load_users_contacts();
   clearForm();
   closeAddContactPopup();
   displayUsers();
@@ -153,8 +157,8 @@ function saveChanges() {
   user.name = editedName;
   user.email = editedEmail;
   user.telefon = editedPhone;
-  push_users_contacts();
   set_users_contacts();
+  load_users_contacts();
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();
