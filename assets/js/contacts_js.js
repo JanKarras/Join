@@ -1,10 +1,17 @@
 let users = [];
 
+/**
+ * Initializes the 'contacts' page by loading users' contacts and displaying them.
+ */
 async function contacts_init() {
   await load_users_contacts();
   displayUsers();
 }
 
+/**
+ * Loads the contacts of the logged-in user from the 'all_user' array.
+ * Populates the 'users' array with the loaded contacts.
+ */
 async function load_users_contacts() {
   get_all_user();
   users = [];
@@ -20,6 +27,10 @@ async function load_users_contacts() {
   }
 }
 
+/**
+ * Sets the contacts of the logged-in user in the 'all_user' array.
+ * Saves the updated 'all_user' array using the 'setItem' function.
+ */
 async function set_users_contacts() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
@@ -33,7 +44,6 @@ async function set_users_contacts() {
       break;
     }
   }
-  
 }
 
 let initials;
@@ -41,6 +51,10 @@ let nameInitials;
 let currentUserIndex;
 let currentAlphabet = "";
 
+/**
+ * Displays the list of users on the 'contacts' page and sorts them alphabetically.
+ * Initializes the user interface with user details.
+ */
 function displayUsers() {
   const userName = document.getElementById("name_email");
   users.sort((a, b) => a.name.localeCompare(b.name));
@@ -60,6 +74,12 @@ function displayUsers() {
   }
 }
 
+/**
+ * Displays details of a selected user on the 'contacts' page.
+ * Highlights the selected user and shows their information.
+ *
+ * @param {number} i - Index of the selected user.
+ */
 function displayUserDetails(i) {
   const userInfo = document.getElementById("contact_details");
   addBackgroundColor(i);
@@ -76,6 +96,11 @@ function displayUserDetails(i) {
   document.querySelector(".info").classList.add("show-info");
 }
 
+/**
+ * Adds background color to the selected user in the list.
+ *
+ * @param {number} i - Index of the selected user.
+ */
 function addBackgroundColor(i) {
   const contactNames = document.querySelectorAll(".contact_name");
   contactNames.forEach((contact) => {
@@ -89,6 +114,11 @@ function addBackgroundColor(i) {
   }
 }
 
+/**
+ * Deletes a user based on their index.
+ *
+ * @param {number} index - Index of the user to be deleted.
+ */
 function deleteUserByIndex(index) {
   currentUserIndex = index;
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
@@ -101,16 +131,25 @@ function deleteUserByIndex(index) {
   }
 }
 
+/**
+ * Opens the add contact popup by adding the 'show' class and displaying the overlay.
+ */
 function openAddContactPopup() {
   document.getElementById("addContactPopup").classList.add("show");
   document.getElementById("overlay").style.display = "block";
 }
 
+/**
+ * Closes the add contact popup by removing the 'show' class and hiding the overlay.
+ */
 function closeAddContactPopup() {
   document.getElementById("addContactPopup").classList.remove("show");
   document.getElementById("overlay").style.display = "none";
 }
 
+/**
+ * Adds a new contact based on the input values, sorts the users, and updates the display.
+ */
 function addContactPopup() {
   let newName = document.getElementById("addName").value;
   let newEmail = document.getElementById("addEmail").value;
@@ -131,12 +170,20 @@ function addContactPopup() {
   displayUserDetails(currentUserIndex);
 }
 
+/**
+ * Clears the input form by setting the values to an empty string.
+ */
 function clearForm() {
   document.getElementById("addName").value = "";
   document.getElementById("addEmail").value = "";
   document.getElementById("addPhone").value = "";
 }
 
+/**
+ * Opens the edit contact popup and sets initial values based on the selected user.
+ *
+ * @param {number} currentUserIndex - Index of the selected user.
+ */
 function openEditContactPopup(currentUserIndex) {
   const userColor = getUserColor(currentUserIndex);
   const user = users[currentUserIndex];
@@ -149,6 +196,9 @@ function openEditContactPopup(currentUserIndex) {
   document.getElementById("overlay").style.display = "block";
 }
 
+/**
+ * Saves the changes made in the edit contact popup, updates user details, and closes the popup.
+ */
 function saveChanges() {
   let user = users[currentUserIndex];
   let editedName = document.getElementById("editName").value;
@@ -165,6 +215,9 @@ function saveChanges() {
   addBackgroundColor(currentUserIndex);
 }
 
+/**
+ * Closes the edit contact popup by removing the 'show' class and hiding the overlay.
+ */
 function closeEditContactPopup() {
   document.getElementById("editContactPopup").classList.remove("show");
   document.getElementById("overlay").style.display = "none";
@@ -182,6 +235,12 @@ const colors = [
 
 const userColorMap = {};
 
+/**
+ * Gets the color for a user based on their index.
+ *
+ * @param {number} index - Index of the user.
+ * @returns {string} - Color code.
+ */
 function getUserColor(index) {
   if (!userColorMap[index]) {
     // If the user doesn't have a color assigned, assign one
@@ -191,6 +250,14 @@ function getUserColor(index) {
   return userColorMap[index];
 }
 
+/**
+ * Generates HTML for a user in the contacts list.
+ *
+ * @param {number} i - Index of the user.
+ * @param {string} firstAlphabet - First alphabet of the user's name.
+ * @param {string} nameInitials - Initials of the user's name.
+ * @returns {string} - HTML string.
+ */
 function userHTML(i, firstAlphabet, nameInitials) {
   const user = users[i];
   const userColor = getUserColor(i);
@@ -210,6 +277,13 @@ function userHTML(i, firstAlphabet, nameInitials) {
     `;
 }
 
+/**
+ * Generates HTML for a sorted user in the contacts list.
+ *
+ * @param {number} i - Index of the user.
+ * @param {string} nameInitials - Initials of the user's name.
+ * @returns {string} - HTML string.
+ */
 function sortedUserHTML(i, nameInitials) {
   const user = users[i];
   const userColor = getUserColor(i);
@@ -224,6 +298,13 @@ function sortedUserHTML(i, nameInitials) {
     `;
 }
 
+/**
+ * Generates HTML for the details of a user on the 'contacts' page.
+ *
+ * @param {number} i - Index of the user.
+ * @param {string} nameInitials - Initials of the user's name.
+ * @returns {string} - HTML string.
+ */
 function userDetailHTML(i, nameInitials) {
   const userColor = getUserColor(i);
   currentUserIndex = i;
