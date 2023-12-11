@@ -1,10 +1,84 @@
+let tasks = [
+  {
+    'to_do' : [{
+      'title' : "TestTitle",
+      'des' : "Description of the Title",
+      'ass_to' : ["test", "test1"],
+      'due' : "12.12.2023",
+      'prio' : "urgent",
+      'cat' : "Techniker",
+      'sub_tasks' : ["test", "test1"],
+    }],
+    'done' : [{
+      'title' : "TestTitle",
+      'des' : "Description of the Title",
+      'ass_to' : ["test", "test1"],
+      'due' : "15.12.2023",
+      'prio' : "urgent",
+      'cat' : "Techniker",
+      'sub_tasks' : ["test", "test1"],
+    }],
+    'in_progress' : [{
+      'title' : "TestTitle",
+      'des' : "Description of the Title",
+      'ass_to' : ["test", "test1"],
+      'due' : "23.12.2023",
+      'prio' : "urgent",
+      'cat' : "Techniker",
+      'sub_tasks' : ["test", "test1"],
+    }],
+    'feedback' : [{
+      'title' : "TestTitle",
+      'des' : "Description of the Title",
+      'ass_to' : ["test", "test1"],
+      'due' : "01.12.2023",
+      'prio' : "urgent",
+      'cat' : "Techniker",
+      'sub_tasks' : ["test", "test1"],
+    }],
+  }
+]
+
 async function add_task_init() {
+  await load_users_tasks()
   contacts();
 }
 
-function contacts() {
+async function load_users_tasks(){
+  get_all_user();
+  tasks = [];
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element['email'] == Email) {
+      for (let i = 0; i < element['contacts'].length; i++) {
+        const contact = element['contacts'][i];
+        users.push(contact);
+      }
+      break;
+    }
+  }
+}
+
+async function set_users_tasks() {
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element['email'] == Email) {
+      element['tasks'] = [];
+      for (let j = 0; j < tasks.length; j++) {
+        const task = tasks[j];
+        element['tasks'].push(task);
+      }
+      console.log(all_user);
+      setItem('users',  all_user);
+      break;
+    }
+  }
+}
+
+async function contacts() {
   const optionsContainer = document.getElementById("optionsContainer");
   optionsContainer.innerHTML = "";
+  await load_users_contacts();
   for (let i = 0; i < users.length; i++) {
     const names = users[i].name.split(" ");
     const nameInitials =

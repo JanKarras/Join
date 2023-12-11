@@ -13,7 +13,7 @@ async function contacts_init() {
  * Populates the 'users' array with the loaded contacts.
  */
 async function load_users_contacts() {
-  get_all_user();
+  await get_all_user();
   users = [];
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
