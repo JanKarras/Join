@@ -40,7 +40,7 @@ let tasks = [
 ]
 
 async function add_task_init() {
-  await load_users_tasks()
+  //await load_users_tasks()
   contacts();
 }
 

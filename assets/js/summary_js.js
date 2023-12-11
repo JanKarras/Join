@@ -36,19 +36,25 @@ function set_name(){
     document.getElementById('name').innerHTML = firt_name + second_name;
 }
 
+/**
+ * Lädt die Anzahl der Aufgaben für den Benutzer mit der angegebenen E-Mail-Adresse und rendert die Zahlen.
+ */
 function load_numbers(){
     for (let i = 0; i < all_user.length; i++) {
         const element = all_user[i];
         if (element['email'] == Email)
         {
             let tasks = element['tasks'];
-            console.log(tasks);
             render_numbers(tasks);
             break ;
         }
     }  
 }
 
+/**
+ * Rendert die Anzahl der Aufgaben in verschiedenen Kategorien und Informationen zu dringenden Aufgaben.
+ * @param {Array} tasks - Das Array der Aufgaben des Benutzers.
+ */
 function render_numbers(tasks){
     document.getElementById('to_do_nb').innerHTML = tasks[0]['to_do'].length;
     document.getElementById('done_nb').innerHTML = tasks[0]['done'].length;
@@ -71,7 +77,11 @@ function render_numbers(tasks){
     render_deadline(tasks);
 }
 
-function render_deadline(tasks){
+/**
+ * Rendert das nächste fällige Datum für die Aufgaben des Benutzers.
+ * @param {Array} tasks - Das Array der Aufgaben des Benutzers.
+ */
+function render_deadline(tasks) {
     let dates = [];
     for (let i = 0; i < tasks.length; i++) {
         const element = tasks[i];
@@ -80,8 +90,10 @@ function render_deadline(tasks){
         dates.push(element['in_progress'][0]['due']);
         dates.push(element['feedback'][0]['due']);
     }
-    let current_date =new Date();
+
+    let current_date = new Date();
     current_date.setHours(0, 0, 0, 0);
+
     function parseDate(dateString) {
         let parts = dateString.split('.');
         return new Date(parts[2], parts[1] - 1, parts[0]);
@@ -91,9 +103,13 @@ function render_deadline(tasks){
         let taskDate = parseDate(date);
         return taskDate > current_date;
     });
+
     futureDates.sort((a, b) => parseDate(a) - parseDate(b));
-    let nextDueDate = futureDates.length > 0 ? futureDates[0] : null;
-    console.log(nextDueDate);
+    let nextDueDate = futureDates.length > 0 ? parseDate(futureDates[0]) : null;
+
+    let formattedDate = nextDueDate ? nextDueDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Kein fälliges Datum';
+
+    document.getElementById('deadline').innerHTML = formattedDate;
 }
 
 /**
