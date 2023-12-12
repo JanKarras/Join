@@ -213,15 +213,6 @@ select:focus {
   padding: 0.9rem 1rem;
 }
 
-.add_cancel {
-  display: none;
-  gap: 0.9rem;
-}
-
-.add_cancel i {
-  font-size: 1.2rem;
-}
-
 .option:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
@@ -237,13 +228,6 @@ select:focus {
 .icon {
   transition: transform 0.3s;
   transform-origin: center;
-}
-
-.d-flex {
-  display: flex;
-}
-.d-none {
-  display: none;
 }
 
 #enter-subtask {
@@ -274,11 +258,6 @@ select:focus {
 
 .add_subtasks {
   display: none;
-}
-
-.subtask i {
-  right: 0px;
-  font-size: 1rem;
 }
 
 i:hover {
@@ -514,4 +493,90 @@ input[type="date"]::placeholder {
 
 .option .selected-contact {
   background-color: #2a3647;
+}
+
+.d-flex {
+  display: flex;
+}
+.d-none {
+  display: none;
+}
+
+.add_cancel {
+  visibility: hidden;
+}
+
+.delete-btn,
+.edit-btn {
+  display: none;
+}
+
+li:hover .delete-btn,
+li:hover .edit-btn {
+  display: inline;
+}
+
+.subtask-lists {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+/* Style for hiding buttons initially and revealing on hover */
+.delete-btn,
+.edit-btn,
+.edit-input,
+.save-btn {
+  display: none;
+}
+
+li:hover .delete-btn,
+li:hover .edit-btn {
+  display: inline;
+}
+
+li.editing .subtask-text,
+li.editing .delete-btn,
+li.editing .edit-btn {
+  display: none;
+}
+
+li.editing .edit-input,
+li.editing .delete-btn,
+li.editing .save-btn {
+  display: inline-block;
+}
+
+.d-block {
+  display: block;
+}
+
+.subtask-text {
+  margin-right: 12.1rem;
+}
+
+.delete-btn {
+  margin-right: 1rem;
+}
+
+li {
+  margin-left: 3rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem;
+  border-radius: 10px;
+}
+
+li:hover {
+  background-color: #e2e2e2;
+}
+
+#add-cancel-subtask i {
+  right: 0px;
+  font-size: 1.2rem;
+  margin-left: 0.8rem;
+}
+
+.subtask i {
+  font-size: 1.2rem;
 }

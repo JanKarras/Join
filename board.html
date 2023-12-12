@@ -1,172 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style/board_style.css">
-    <link rel="stylesheet" href="./assets/style/fonts.css">
-    <link rel="stylesheet" href="./assets/style/font.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style/add_task_style.css" />
+    <link rel="stylesheet" href="./assets/style/board_style.css" />
+    <!-- <link rel="stylesheet" href="./assets/style/fonts.css" />
+    <link rel="stylesheet" href="./assets/style/font.css" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <title>Board</title>
-    <script defer src="./assets/js/board_js.js"></script>
     <script src="./assets/js/header_js.js"></script>
     <script src="./assets/js/template_js.js"></script>
-</head>
+  </head>
 
-<body class="font">
-    <div class="headline">
-        <span class="responsiveHeadline">
+  <body class="font" id="bodys" onload="board_init()">
+    <div id="template" w3-include-html="./template.html"></div>
+    <div id="board_body" class="board_body">
+      <div class="header" w3-include-html="./header.html"></div>
+      <div id="content">
+        <div class="headline">
+          <span class="responsiveHeadline">
             <h1>Board</h1>
-            <div class="plusForResponsive"><img src="./assets/img/board-img/addplus.png">
+          </span>
+          <span class="inputAndButtonHeadline">
+            <div class="searchbar">
+              <input type="text" />
+              <span class="search"
+                ><img src="./assets/img/board-img/lupe.png"
+              /></span>
             </div>
-        </span>
-        <span class="inputAndButtonHeadline">
-            <div class="inputDiv">
-                <input id="input" placeholder="Find Task">
-                <img src="./assets/img/board-img/lupe.png">
+            <div class="buttonAdd">
+              Add task
+              <!-- <img src="./assets/img/board-img/addplus.png" /> -->
             </div>
-            <div class="buttonAdd">Add task
-                <img src="./assets/img/board-img/addplus.png">
-            </div>
-
-        </span>
-    </div>
-
-    <div class="taskContent">
-        <div class="taskContainer">
-            <div class="taskCategoryName">
-                <h3> To do</h3><span class="hoverPlusEffect"><img
-                        src="./assets/img/board-img/plusButtonTasks.png"></span>
-            </div>
-            <div id="taskCategoryToDo"></div>
+          </span>
         </div>
 
-        <div class="taskContainer">
-            <div class="taskCategoryName">
-                <h3> In progress</h3><span class="hoverPlusEffect"><img
-                        src="./assets/img/board-img/plusButtonTasks.png"></span>
+        <div class="taskContent">
+          <div class="task_cat">
+            <div class="taskContainer">
+              <div class="taskCategoryName">
+                <h3>To do</h3>
+                <span class="hoverPlusEffect"
+                  ><img src="./assets/img/board-img/plusButtonTasks.png"
+                /></span>
+              </div>
+              <div id="taskCategoryToDo">
+                <!-- task -->
+                <div class="user_task">
+                  <div class="user_story">User Story</div>
+                  <div class="user_topic">
+                    <h4>kochwelt page & recipe recommender</h4>
+                    <p>Build start page with recipe recommendation...</p>
+                  </div>
+                  <div class="task_progress">
+                    <div class="progress">
+                      <div class="progressbar" style="width: 0"></div>
+                    </div>
+                    <div class="subtasks">0/2 Subtasks</div>
+                  </div>
+                  <div class="user_assignment">
+                    <div class="members">
+                      <div>AS</div>
+                      <div>DE</div>
+                      <div>MB</div>
+                    </div>
+                    <span><img src="assets/img/urgent.png" alt="" /></span>
+                  </div>
+                </div>
+                <!-- end of task -->
+              </div>
             </div>
-            <div id="taskCategoryInProgress"></div>
-        </div>
+          </div>
 
-        <div class="taskContainer">
+          <div class="taskContainer">
             <div class="taskCategoryName">
-                <h3>Await feedback</h3><span class="hoverPlusEffect"><img
-                        src="./assets/img/board-img/plusButtonTasks.png"></span>
+              <h3>In progress</h3>
+              <span class="hoverPlusEffect"
+                ><img src="./assets/img/board-img/plusButtonTasks.png"
+              /></span>
             </div>
-            <div id="taskCategoryAwaitFeedback"></div>
-        </div>
+            <div id="taskCategoryInProgress">
+              <!-- task -->
+              <div class="user_task">
+                <div class="user_story">User Story</div>
+                <div class="user_topic">
+                  <h4>HTML base template creation</h4>
+                  <p>Create reusable HTML base templates...</p>
+                </div>
+                <div class="task_progress">
+                  <div class="progress">
+                    <div class="progressbar"></div>
+                  </div>
+                  <div class="subtasks">1/2 Subtasks</div>
+                </div>
+                <div class="user_assignment">
+                  <div class="members">
+                    <div>AS</div>
+                    <div>DE</div>
+                    <div>MB</div>
+                  </div>
+                  <span><img src="assets/img/medium.png" alt="" /></span>
+                </div>
+              </div>
+              <!-- end of task -->
+            </div>
+          </div>
 
-        <div class="taskContainer">
+          <div class="taskContainer">
             <div class="taskCategoryName">
-                <h3>Done</h3>
+              <h3>Await feedback</h3>
+              <span class="hoverPlusEffect"
+                ><img src="./assets/img/board-img/plusButtonTasks.png"
+              /></span>
             </div>
-            <div id="taskCategoryDone"></div>
+            <div id="taskCategoryAwaitFeedback">
+              <!-- task -->
+              <div class="user_task">
+                <div class="user_story techniker">Techniker Task</div>
+                <div class="user_topic">
+                  <h4>cCSS Architecture planning</h4>
+                  <p>Define css naming conventions and structure...</p>
+                </div>
+
+                <div class="user_assignment">
+                  <div class="members">
+                    <div>AS</div>
+                    <div>DE</div>
+                    <div>MB</div>
+                  </div>
+                  <span><img src="assets/img/medium.png" alt="" /></span>
+                </div>
+              </div>
+              <!-- end of task -->
+              <!-- task -->
+              <div class="user_task">
+                <div class="user_story">User Story</div>
+                <div class="user_topic">
+                  <h4>cCSS Architecture planning</h4>
+                  <p>Define css naming conventions and structure...</p>
+                </div>
+
+                <div class="user_assignment">
+                  <div class="members">
+                    <div>AS</div>
+                    <div>DE</div>
+                    <div>MB</div>
+                  </div>
+                  <span><img src="assets/img/urgent.png" alt="" /></span>
+                </div>
+              </div>
+              <!-- end of task -->
+            </div>
+          </div>
+
+          <div class="taskContainer">
+            <div class="taskCategoryName">
+              <h3>Done</h3>
+            </div>
+            <div id="taskCategoryDone">
+              <!-- task -->
+              <div class="user_task">
+                <div class="user_story teckniker_task techniker">
+                  Tecknical Task
+                </div>
+                <div class="user_topic">
+                  <h4>contact form and imprint</h4>
+                  <p>Create a contact form and imprint page...</p>
+                </div>
+                <div class="task_progress">
+                  <div class="progress">
+                    <div class="progressbar" style="width: 100%"></div>
+                  </div>
+                  <div class="subtasks">2/2 Subtasks</div>
+                </div>
+
+                <div class="user_assignment">
+                  <div class="members">
+                    <div>AS</div>
+                    <div>DE</div>
+                    <div>MB</div>
+                  </div>
+                  <span><img src="assets/img/urgent.png" alt="" /></span>
+                </div>
+              </div>
+              <!-- end of task -->
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-    </div>
 
+    <!-- <div id="editTaskPopUpWindowContent"></div>
 
+    <div id="editSelectedTask"></div> -->
 
-    <div id="editTaskPopUpWindowContent"></div>
-
-    <div id="editSelectedTask"></div>
     <div id="addTaskPopUpWindowContent">
-        <div class="popUpWindow">
-            <h1>Add Task</h1>
-            <form class="addTaskElementsPopUpWindow">
-                <span class="leftElementAddTaskPopUpWindow">
-                    <div class="title">
-                        <h3 class="titles">Title</h3>
-                        <input id="title" type="text" class="input" required placeholder="Enter a title">
-                    </div>
-                    <div>
-                        <h3 class="titles">Description</h3>
-                        <textarea placeholder="Description of the task" required id="description"
-                            class="description"></textarea>
-                    </div>
-                    <div>
-                        <h3 class="titles">Assigned to</h3>
-                        <div class="selectionAssignedTo" id="assignedToSelection">
-                            <div>
-                                <p>Select contacts to assign</p><img src="./assets/img/addtask-img/arrow_drop_down.png">
-                            </div>
-                        </div>
-                        <div class="createdTaskAssignedMember" id="assginedMembersCreateTask"></div>
-                        <div class="formError d-none" id="errorAssigned">Please, select atleast "Myself"</div>
-                    </div>
-                </span>
+      <div id="content">
+        <div class="add_task_h1">Add Task</div>
+        <div class="add_task_content">
+          <div class="add_taks_sides left_side">
+            <div>
+              <div class="display_flex">
+                <label class="name_of_input">Title</label>
+                <div class="star">*</div>
+              </div>
+              <input type="text" placeholder="Enter a title" required />
+            </div>
+            <div>
+              <div class="task-description">
+                <label class="description">Description</label>
+                <textarea
+                  class="description_input"
+                  placeholder="Enter a description"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div>
+              <label>Assigned to</label>
+              <div class="contacts">
+                <div class="contact-select date_picker" id="contactSelect">
+                  <input
+                    class="select-box"
+                    onclick="toggleOptions()"
+                    placeholder="Select contacts to assign"
+                  />
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
+                </div>
+                <div class="options-container" id="optionsContainer"></div>
+              </div>
+            </div>
+          </div>
 
-                <span class="rightElemenAddTaskPopUpWindow">
-                    <div>
-                        <h3>Due Date</h3>
-                        <div class="calender">
-                            <input type="date" required id="date" placeholder="tt.mm.yyyy">
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Prio</h3>
-                        <div class="priorities" id="priorities">
-                            <span id="selecturgent" onclick="highlightPriority('urgent')">
-                                <p>Urgent</p><img src="./assets/img/addtask-img/higPrio.png">
-                            </span>
-                            <span id="selectmedium" onclick="highlightPriority('medium')">
-                                <p>Medium</p><img src="./assets/img/addtask-img/mediumPrio.png">
-                            </span>
-                            <span id="selectlow" onclick="highlightPriority('low')">
-                                <p>Low</p><img src="./assets/img/addtask-img/lowPrio.png">
-                            </span>
-                        </div>
-                        <div class="formError d-none" id="errorPriority">What is the priority of the task?</div>
-                    </div>
-                    <div>
-                        <h3 class="titles">Category</h3>
-                        <div class="category" id="categorySelection" onclick="openCategorySelection()">
-                            <div>
-                                <p>Select task category</p><img src="./assets/img/addtask-img/arrow_drop_down.png">
-                            </div>
-                        </div>
-                        <div id="colorSelection">
-                            <div id="color1" onclick="selectColor('FF7A00', 1)"
-                                style="background-color: #FF7A00; cursor: pointer;"></div>
-                            <div id="color2" onclick="selectColor('FC71FF', 2)"
-                                style="background-color: #FC71FF; cursor: pointer;"></div>
-                            <div id="color3" onclick="selectColor('1FD7C1', 3)"
-                                style="background-color: #1FD7C1; cursor: pointer;"></div>
-                            <div id="color4" onclick="selectColor('FFC701', 4)"
-                                style="background-color: #FFC701; cursor: pointer;"></div>
-                            <div id="color5" onclick="selectColor('FFC701', 5)"
-                                style="background-color: #0038FF; cursor: pointer;"></div>
-                            <div id="color6" onclick="selectColor('068f43', 6)"
-                                style="background-color: #068f43; cursor: pointer;"></div>
-                        </div>
-                        <div class="formError d-none" id="errorCategory">You have to select a category. You can also
-                            create a new one with "New category".</div>
-                    </div>
-                    <div>
-                        <h3>Subtask</h3>
-                        <div class="addNewSubtask">
-                            <input id="subtask" placeholder="Add new subtask"><img onclick="createSubtask()"
-                                src="./assets/img/addtask-img/plus.png" style="cursor:pointer">
-                        </div>
-                        <div id="newCreatedSubtasks"></div>
-                    </div>
-                    <div class="clearAndCreateButtonPopUp">
-                        <div>
-                            <div class="clearButton">Cancel<img src=""></div>
-                        </div>
-                        <div>
-                            <button class="createButton" type="submit">Create Task</p><img
-                                    src=""></button>
-                        </div>
-                    </div>
-                </span>
-            </form>
+          <!-- ############# -->
+          <div class="seperator_add_task"></div>
+
+          <div class="add_taks_sides right_side">
+            <div>
+              <div class="display_flex">
+                <label class="name_of_input">Due date</label>
+                <div class="star">*</div>
+              </div>
+              <div class="date_picker">
+                <input
+                  required
+                  type="date"
+                  id="date_input"
+                  placeholder="tt/mm/jjjj"
+                />
+              </div>
+            </div>
+            <div>
+              <label>Prio</label>
+              <div class="prio">
+                <div class="prio_btns urgent">
+                  <label>Urgent</label>
+                  <span><i class="fa-solid fa-angles-up"></i></span>
+                </div>
+                <div class="prio_btns medium">
+                  <label>Medium</label>
+                  <span><i class="fa-solid fa-equals"></i></span>
+                </div>
+                <div class="prio_btns low">
+                  <label>Low</label>
+                  <span><i class="fa-solid fa-angles-down"></i></span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="contact-select" id="customSelect">
+                <div class="select-head date_picker" onclick="toggleCategory()">
+                  <div id="selectedCat">Select task category</div>
+
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
+                </div>
+                <div class="category-container" id="categoryContainer">
+                  <div
+                    class="option category_option"
+                    onclick="selectCategory('Techniker task')"
+                  >
+                    Techniker Task
+                  </div>
+                  <div class="option" onclick="selectCategory('User Story')">
+                    User Story
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ### -->
+            <div class="date_picker" onclick="enterSubtask()">
+              <input
+                id="enter-subtask"
+                type="text"
+                placeholder="Add new subtask"
+              />
+              <span id="add-subtask" class="subtask">
+                <i
+                  onclick="enterSubtask()"
+                  id="openAddTask"
+                  class="fa-solid fa-plus"
+                ></i>
+              </span>
+              <span id="add-cancel-subtask" class="add_cancel">
+                <i
+                  onclick="addSubtask()"
+                  id="delete-subtask"
+                  class="fa-solid fa-xmark"
+                ></i>
+                <i
+                  id="confirm-subtask"
+                  class="fa-solid fa-check"
+                  onclick="addSubtask()"
+                ></i>
+              </span>
+            </div>
+            <ul id="subtaskList" class="subtask-list"></ul>
+          </div>
+          <!--##################-->
         </div>
+        <footer>
+          <div class="required">
+            <div class="star">*</div>
+            <div>This field is required</div>
+          </div>
+          <div class="footer_btns_container">
+            <div class="clear">
+              <div>Clear</div>
+              <span><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <div class="create">
+              <div>Create Task</div>
+              <span><i class="fa-solid fa-check"></i></span>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
-    <div id="taskCreated"><img src="./assets/img/board-img/addedToBoard.png"></div>
+    <!-- <div id="taskCreated">
+      <img src="./assets/img/board-img/addedToBoard.png" />
+    </div> -->
 
-</body>
-
+    <script src="./assets/js/contacts_js.js"></script>
+    <script src="./assets/js/add_task_js.js"></script>
+    <script src="./assets/js/board_js.js"></script>
+  </body>
 </html>

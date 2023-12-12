@@ -1,3 +1,3 @@
-async function board_init(){
-    
+async function board_init() {
+  contacts();
 }

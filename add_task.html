@@ -102,6 +102,7 @@
               </div>
             </div>
             <div>
+              <label for="">Category</label>
               <div class="contact-select" id="customSelect">
                 <div class="select-head date_picker" onclick="toggleCategory()">
                   <div id="selectedCat">Select task category</div>
@@ -121,25 +122,35 @@
                 </div>
               </div>
             </div>
+            <!-- ### -->
             <div>
               <label>Subtasks</label>
-              <div class="date_picker">
+              <div class="date_picker" onclick="enterSubtasks()">
                 <input
                   id="enter-subtask"
                   type="text"
                   placeholder="Add new subtask"
                 />
-                <span id="add-subtask" class="subtask" onclick="addSubtasks()"
-                  ><i class="fa-solid fa-plus"></i
-                ></span>
-                <span id="add_cancel_subtask" class="add_cancel">
-                  <i class="fa-solid fa-xmark mark"></i>
-                  <i class="fa-solid fa-check plus"></i>
+                <span id="add-subtask" class="subtask">
+                  <i id="openAddTask" class="fa-solid fa-plus"></i>
+                </span>
+                <span id="add-cancel-subtask" class="add_cancel">
+                  <i
+                    onclick="clearInputField()"
+                    id="delete-subtask"
+                    class="fa-solid fa-xmark"
+                  ></i>
+                  <i
+                    id="confirm-subtask"
+                    class="fa-solid fa-check"
+                    onclick="addSubtask()"
+                  ></i>
                 </span>
               </div>
+              <ul id="subtaskList" class="subtask-list"></ul>
             </div>
           </div>
-          <!-- ################# -->
+          <!--##################-->
         </div>
         <footer>
           <div class="required">
