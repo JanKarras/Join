@@ -38,7 +38,7 @@
                 ><img src="./assets/img/board-img/lupe.png"
               /></span>
             </div>
-            <div class="buttonAdd">
+            <div class="buttonAdd" onclick="openAddTask()">
               Add task
               <!-- <img src="./assets/img/board-img/addplus.png" /> -->
             </div>
@@ -204,8 +204,11 @@
 
     <div id="editSelectedTask"></div> -->
 
-    <div id="addTaskPopUpWindowContent">
+    <div id="addTaskPopUpWindowContent" class="d-none">
       <div id="content">
+        <span class="close_window" onclick="closeAddTask()"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
         <div class="add_task_h1">Add Task</div>
         <div class="add_task_content">
           <div class="add_taks_sides left_side">
@@ -278,6 +281,10 @@
               </div>
             </div>
             <div>
+              <div class="display_flex">
+                <label class="name_of_input">Category</label>
+                <div class="star">*</div>
+              </div>
               <div class="contact-select" id="customSelect">
                 <div class="select-head date_picker" onclick="toggleCategory()">
                   <div id="selectedCat">Select task category</div>
@@ -298,33 +305,32 @@
               </div>
             </div>
             <!-- ### -->
-            <div class="date_picker" onclick="enterSubtask()">
-              <input
-                id="enter-subtask"
-                type="text"
-                placeholder="Add new subtask"
-              />
-              <span id="add-subtask" class="subtask">
-                <i
-                  onclick="enterSubtask()"
-                  id="openAddTask"
-                  class="fa-solid fa-plus"
-                ></i>
-              </span>
-              <span id="add-cancel-subtask" class="add_cancel">
-                <i
-                  onclick="addSubtask()"
-                  id="delete-subtask"
-                  class="fa-solid fa-xmark"
-                ></i>
-                <i
-                  id="confirm-subtask"
-                  class="fa-solid fa-check"
-                  onclick="addSubtask()"
-                ></i>
-              </span>
+            <div>
+              <label>Subtasks</label>
+              <div class="date_picker" onclick="enterSubtasks()">
+                <input
+                  id="enter-subtask"
+                  type="text"
+                  placeholder="Add new subtask"
+                />
+                <span id="add-subtask" class="subtask">
+                  <i id="openAddTask" class="fa-solid fa-plus"></i>
+                </span>
+                <span id="add-cancel-subtask" class="add_cancel">
+                  <i
+                    onclick="clearInputField()"
+                    id="delete-subtask"
+                    class="fa-solid fa-xmark"
+                  ></i>
+                  <i
+                    id="confirm-subtask"
+                    class="fa-solid fa-check"
+                    onclick="addSubtask()"
+                  ></i>
+                </span>
+              </div>
+              <ul id="subtaskList" class="subtask-list"></ul>
             </div>
-            <ul id="subtaskList" class="subtask-list"></ul>
           </div>
           <!--##################-->
         </div>
@@ -334,7 +340,7 @@
             <div>This field is required</div>
           </div>
           <div class="footer_btns_container">
-            <div class="clear">
+            <div class="clear" onclick="clearFields()">
               <div>Clear</div>
               <span><i class="fa-solid fa-xmark"></i></span>
             </div>
@@ -349,7 +355,7 @@
     <!-- <div id="taskCreated">
       <img src="./assets/img/board-img/addedToBoard.png" />
     </div> -->
-
+    <div class="overlay d-none"></div>
     <script src="./assets/js/contacts_js.js"></script>
     <script src="./assets/js/add_task_js.js"></script>
     <script src="./assets/js/board_js.js"></script>

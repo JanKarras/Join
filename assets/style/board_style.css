@@ -29,6 +29,7 @@ body {
   background-color: #f6f7f8;
   margin: 0;
   font-family: "Roboto", sans-serif;
+  position: relative;
 }
 
 #menu_board {
@@ -1013,4 +1014,75 @@ h1 {
 
 .search img {
   padding-left: 1rem;
+}
+
+#content {
+  width: 100%;
+}
+
+#addTaskPopUpWindowContent {
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 2;
+  padding: 4rem 3rem;
+  border-radius: 30px;
+}
+
+.close_window {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.font {
+  position: relative;
+}
+
+.add_task_content,
+.add_task_h1 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.left_side {
+  height: 376px;
+  gap: 2rem;
+}
+
+.left_side,
+.right_side {
+  width: 100%;
+  max-width: 440px;
+}
+
+.add_task_body {
+  width: 100%;
+}
+
+.add_task_h1 {
+  font-size: 50px;
+  font-weight: 600;
+  padding-bottom: 2rem;
+}
+
+.add_taks_sides {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

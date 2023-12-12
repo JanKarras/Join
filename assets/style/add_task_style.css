@@ -32,7 +32,7 @@ label {
 .add_task_h1 {
   font-size: 50px;
   font-weight: 600;
-  padding-bottom: 70px;
+  padding-bottom: 2rem;
 }
 
 .add_taks_sides {
@@ -180,6 +180,7 @@ select:focus {
   border: none;
   background: white;
 }
+
 .category-container {
   display: none;
   position: absolute;
@@ -271,10 +272,12 @@ i:hover {
   height: 424px;
 }
 
-.add_task_content {
+.add_task_content,
+.add_task_h1 {
   display: flex;
   justify-content: space-between;
   width: 88%;
+  margin: 0 auto;
 }
 
 .left_side {
