@@ -2,6 +2,13 @@
     height: calc(100% - 206px);
 }
 
+.content {
+    padding-left: calc(328px - 232px);
+    padding-top: calc(206px - 94px);
+    height: calc(100% - 206px);
+    overflow: auto;
+  }
+
 .legal_notice_body{
     width: 90%;
 }

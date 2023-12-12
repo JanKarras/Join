@@ -1,6 +1,8 @@
 .content {
+  padding-left: calc(328px - 232px);
+  padding-top: calc(206px - 94px);
   height: calc(100% - 206px);
-  background-color: #f6f7f8;
+  overflow: auto;
 }
 
 .header_summary {

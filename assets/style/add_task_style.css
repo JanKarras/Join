@@ -18,6 +18,8 @@
   height: 100%;
   max-height: calc(100vh - 94px);
   background: #f6f7f8;
+  padding: 2.5rem;
+  overflow: auto;
 }
 
 label {
@@ -58,7 +60,7 @@ label {
 }
 
 .right_side {
-  height: 416px;
+  /* height: 416px; */
 }
 
 .display_flex {
@@ -331,7 +333,8 @@ i:hover {
 }
 
 footer {
-  padding-top: 150px;
+  padding-top: 4rem;
+  padding-left: 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

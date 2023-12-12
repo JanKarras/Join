@@ -7,6 +7,7 @@ function openAddTask() {
   let overlay = document.querySelector(".overlay");
   addTask.classList.remove("d-none");
   overlay.classList.remove("d-none");
+  addTask.style.left = "50%"
 }
 function closeAddTask() {
   let addTask = document.getElementById("addTaskPopUpWindowContent");
