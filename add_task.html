@@ -102,7 +102,10 @@
               </div>
             </div>
             <div>
-              <label for="">Category</label>
+              <div class="display_flex">
+                <label class="name_of_input">Category</label>
+                <div class="star">*</div>
+              </div>
               <div class="contact-select" id="customSelect">
                 <div class="select-head date_picker" onclick="toggleCategory()">
                   <div id="selectedCat">Select task category</div>
@@ -158,7 +161,7 @@
             <div>This field is required</div>
           </div>
           <div class="footer_btns_container">
-            <div class="clear">
+            <div class="clear" onclick="clearFields()">
               <div>Clear</div>
               <span><i class="fa-solid fa-xmark"></i></span>
             </div>

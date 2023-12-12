@@ -1,57 +1,65 @@
 let tasks = [
   {
-    'to_do' : [{
-      'title' : "TestTitle",
-      'des' : "Description of the Title",
-      'ass_to' : ["test", "test1"],
-      'due' : "12.12.2023",
-      'prio' : "urgent",
-      'cat' : "Techniker",
-      'sub_tasks' : ["test", "test1"],
-    }],
-    'done' : [{
-      'title' : "TestTitle",
-      'des' : "Description of the Title",
-      'ass_to' : ["test", "test1"],
-      'due' : "15.12.2023",
-      'prio' : "urgent",
-      'cat' : "Techniker",
-      'sub_tasks' : ["test", "test1"],
-    }],
-    'in_progress' : [{
-      'title' : "TestTitle",
-      'des' : "Description of the Title",
-      'ass_to' : ["test", "test1"],
-      'due' : "23.12.2023",
-      'prio' : "urgent",
-      'cat' : "Techniker",
-      'sub_tasks' : ["test", "test1"],
-    }],
-    'feedback' : [{
-      'title' : "TestTitle",
-      'des' : "Description of the Title",
-      'ass_to' : ["test", "test1"],
-      'due' : "01.12.2023",
-      'prio' : "urgent",
-      'cat' : "Techniker",
-      'sub_tasks' : ["test", "test1"],
-    }],
-  }
-]
+    to_do: [
+      {
+        title: "TestTitle",
+        des: "Description of the Title",
+        ass_to: ["test", "test1"],
+        due: "12.12.2023",
+        prio: "urgent",
+        cat: "Techniker",
+        sub_tasks: ["test", "test1"],
+      },
+    ],
+    done: [
+      {
+        title: "TestTitle",
+        des: "Description of the Title",
+        ass_to: ["test", "test1"],
+        due: "15.12.2023",
+        prio: "urgent",
+        cat: "Techniker",
+        sub_tasks: ["test", "test1"],
+      },
+    ],
+    in_progress: [
+      {
+        title: "TestTitle",
+        des: "Description of the Title",
+        ass_to: ["test", "test1"],
+        due: "23.12.2023",
+        prio: "urgent",
+        cat: "Techniker",
+        sub_tasks: ["test", "test1"],
+      },
+    ],
+    feedback: [
+      {
+        title: "TestTitle",
+        des: "Description of the Title",
+        ass_to: ["test", "test1"],
+        due: "01.12.2023",
+        prio: "urgent",
+        cat: "Techniker",
+        sub_tasks: ["test", "test1"],
+      },
+    ],
+  },
+];
 
 async function add_task_init() {
   //await load_users_tasks()
   contacts();
 }
 
-async function load_users_tasks(){
+async function load_users_tasks() {
   get_all_user();
   tasks = [];
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
-    if (element['email'] == Email) {
-      for (let i = 0; i < element['contacts'].length; i++) {
-        const contact = element['contacts'][i];
+    if (element["email"] == Email) {
+      for (let i = 0; i < element["contacts"].length; i++) {
+        const contact = element["contacts"][i];
         users.push(contact);
       }
       break;
@@ -62,14 +70,14 @@ async function load_users_tasks(){
 async function set_users_tasks() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
-    if (element['email'] == Email) {
-      element['tasks'] = [];
+    if (element["email"] == Email) {
+      element["tasks"] = [];
       for (let j = 0; j < tasks.length; j++) {
         const task = tasks[j];
-        element['tasks'].push(task);
+        element["tasks"].push(task);
       }
       console.log(all_user);
-      setItem('users',  all_user);
+      setItem("users", all_user);
       break;
     }
   }
@@ -204,4 +212,38 @@ function saveSubtask(li) {
   textSpan.textContent = input.value;
   textSpan.style.display = "inline";
   input.style.display = "none";
+}
+
+// Reset fields
+function clearFields() {
+  // Clear input fields and textareas
+  const inputFields = document.querySelectorAll('input[type="text"], textarea');
+  inputFields.forEach((field) => {
+    field.value = "";
+  });
+  // Reset date
+  const dateInput = document.getElementById("date_input");
+  dateInput.value = "";
+
+  // Reset category
+  const selectedCat = document.getElementById("selectedCat");
+  selectedCat.innerText = "Select task category";
+
+  // Reset assigned to (assuming you want to clear the selected contacts)
+  const selectBox = document.querySelector(".select-box");
+  selectBox.value = "";
+
+  // Uncheck priority buttons
+  const prioButtons = document.querySelectorAll(".prio_btns");
+  prioButtons.forEach((button) => {
+    button.classList.remove("selected");
+  });
+
+  // Clear subtasks
+  const subtaskInput = document.getElementById("enter-subtask");
+  subtaskInput.value = "";
+
+  // Clear subtask list
+  const subtaskList = document.getElementById("subtaskList");
+  subtaskList.innerHTML = "";
 }
