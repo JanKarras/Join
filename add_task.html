@@ -80,22 +80,22 @@
                   required
                   type="date"
                   id="date_input"
-                  placeholder="tt/mm/jjjj"
+                
                 />
               </div>
             </div>
             <div>
               <label>Prio</label>
               <div class="prio">
-                <div class="prio_btns urgent">
+                <div class="prio_btns urgent" onclick="setPriority('urgent')">
                   <label>Urgent</label>
                   <span><i class="fa-solid fa-angles-up"></i></span>
                 </div>
-                <div class="prio_btns medium">
+                <div class="prio_btns medium" onclick="setPriority('medium')">
                   <label>Medium</label>
                   <span><i class="fa-solid fa-equals"></i></span>
                 </div>
-                <div class="prio_btns low">
+                <div class="prio_btns low" onclick="setPriority('low')">
                   <label>Low</label>
                   <span><i class="fa-solid fa-angles-down"></i></span>
                 </div>
@@ -165,7 +165,7 @@
               <div>Clear</div>
               <span><i class="fa-solid fa-xmark"></i></span>
             </div>
-            <div class="create">
+            <div class="create" onclick="insertTask()">
               <div>Create Task</div>
               <span><i class="fa-solid fa-check"></i></span>
             </div>

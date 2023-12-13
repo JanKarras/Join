@@ -1,47 +1,56 @@
 let tasks = [
   {
-    to_do: [
+    todo: [
       {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
+        title: "kochwelt page & recipe recommender",
+        des: "Build start page with recipe recommendation...",
+        ass_to: ["AS", "DE", "MB"],
         due: "12.12.2023",
         prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
-      },
-    ],
-    done: [
-      {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
-        due: "15.12.2023",
-        prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
+        cat: "User Story",
+        sub_tasks: [],
       },
     ],
     in_progress: [
       {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
+        title: "HTML base template creation",
+        des: "Create reusable HTML base templates...",
+        ass_to: ["AS", "DE"],
         due: "23.12.2023",
-        prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
+        prio: "medium",
+        cat: "User Story",
+        sub_tasks: ["Change header color"],
       },
     ],
     feedback: [
       {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
+        title: "CSS Architecture planning",
+        des: "Define CSS naming conventions and structure...",
+        ass_to: ["AS"],
+        due: "01.12.2023",
+        prio: "medium",
+        cat: "Techniker Task",
+        sub_tasks: [],
+      },
+      {
+        title: "CSS Architecture planning",
+        des: "Define CSS naming conventions and structure...",
+        ass_to: ["AS", "DE", "MB"],
         due: "01.12.2023",
         prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
+        cat: "User Story",
+        sub_tasks: [],
+      },
+    ],
+    done: [
+      {
+        title: "contact form and imprint",
+        des: "Create a contact form and imprint page...",
+        ass_to: ["AS", "DE", "MB"],
+        due: "15.12.2023",
+        prio: "urgent",
+        cat: "Techniker Task",
+        sub_tasks: [],
       },
     ],
   },
@@ -171,21 +180,6 @@ function clearInputField() {
   document.getElementById("enter-subtask").value = "";
 }
 
-function addTaskHTML(inputValue) {
-  return `<span class="subtask-text">
-  ${inputValue}
-  </span> 
-  <input type="text" class="edit-input d-none"> 
-  <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
- 
-  <span class="save-btn" onclick="saveSubtask(this.parentNode)"><i class="fa-solid fa-check"></i></span>
-  `;
-}
-
-{
-  /* <span class="edit-btn" onclick="editSubtask(this.parentNode)"><i class="fa-solid fa-pencil"></i></span>  */
-}
-
 // Function to delete a subtask
 function deleteSubtask(li) {
   const ul = document.getElementById("subtaskList");
@@ -247,3 +241,86 @@ function clearFields() {
   const subtaskList = document.getElementById("subtaskList");
   subtaskList.innerHTML = "";
 }
+
+function insertTask() {
+  const task = document.getElementById("taskCategoryInProgress");
+  task.innerHTML += taskHTML();
+}
+
+// Modify getTaskDetails to include priority
+function getTaskDetails() {
+  const title = document.querySelector(
+    '.add_task_content input[type="text"]'
+  ).value;
+  const description = document.querySelector(
+    ".add_task_content textarea"
+  ).value;
+  const category = document.getElementById("selectedCat").textContent.trim();
+  const dueDate = document.getElementById("date_input").value;
+  const prio = getSelectedPriority(); // Implement this function according to your needs
+
+  return { title, description, category, dueDate, prio };
+}
+
+function addTaskHTML(inputValue) {
+  return `<span class="subtask-text">
+  ${inputValue}
+  </span> 
+  <input type="text" class="edit-input d-none"> 
+  <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
+ 
+  <span class="save-btn" onclick="saveSubtask(this.parentNode)"><i class="fa-solid fa-check"></i></span>
+  `;
+}
+
+// Modify setPriority to include image source
+function setPriority(priority) {
+  let low = document.querySelector(".low");
+  let medium = document.querySelector(".medium");
+  let urgent = document.querySelector(".urgent");
+  let image = document.querySelector(".image");
+
+  // Use the retrieved priority value as needed (e.g., store it in a variable or update UI)
+  if (priority === "low") {
+    low.style.backgroundColor = "green";
+    image.src = "assets/img/low.png";
+  } else if (priority === "medium") {
+    medium.style.backgroundColor = "orange";
+    image.src = "assets/img/medium.png";
+  } else if (priority === "urgent") {
+    urgent.style.backgroundColor = "red";
+    image.src = "assets/img/urgent.png";
+  }
+
+  console.log("Selected Priority:", priority);
+}
+
+// Modify taskHTML to use the priority for setting the image source
+// function taskHTML() {
+//   const { title, description, category, dueDate, prio } = getTaskDetails();
+
+  // Set the priority before rendering the HTML
+  // setPriority(prio);
+
+//   return `
+//     <div class="user_task">
+//       <div class="user_story">${category}</div>
+//       <div class="user_topic">
+//         <h4>${title}</h4>
+//         <p>${description}</p>
+//       </div>
+//       <div class="task_progress">
+//         <div class="progress">
+//           <div class="progressbar" style="width: 0%"></div>
+//         </div>
+//         <div class="subtasks">0/2 Subtasks</div>
+//       </div>
+//       <div class="user_assignment">
+//         <div class="members">
+//           <div></div>
+//         </div>
+//         <span><img class="image" src="" /></span>
+//       </div>
+//       <div class="due_date">${dueDate}</div>
+//     </div>`;
+// }

@@ -18,7 +18,7 @@
   height: 100%;
   max-height: calc(100vh - 94px);
   background: #f6f7f8;
-  padding: 2.5rem;
+  padding: 10% 2%;
   overflow: auto;
 }
 
@@ -333,7 +333,7 @@ i:hover {
 }
 
 footer {
-  padding-top: 4rem;
+  padding-top: 12%;
   padding-left: 4rem;
   display: flex;
   justify-content: space-between;

@@ -55,29 +55,7 @@
                 /></span>
               </div>
               <div id="taskCategoryToDo">
-                <!-- task -->
-                <div class="user_task">
-                  <div class="user_story">User Story</div>
-                  <div class="user_topic">
-                    <h4>kochwelt page & recipe recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-                  </div>
-                  <div class="task_progress">
-                    <div class="progress">
-                      <div class="progressbar" style="width: 0"></div>
-                    </div>
-                    <div class="subtasks">0/2 Subtasks</div>
-                  </div>
-                  <div class="user_assignment">
-                    <div class="members">
-                      <div>AS</div>
-                      <div>DE</div>
-                      <div>MB</div>
-                    </div>
-                    <span><img src="assets/img/urgent.png" alt="" /></span>
-                  </div>
-                </div>
-                <!-- end of task -->
+               <!-- insert status = "to_do" here -->
               </div>
             </div>
           </div>
@@ -90,29 +68,7 @@
               /></span>
             </div>
             <div id="taskCategoryInProgress">
-              <!-- task -->
-              <div class="user_task">
-                <div class="user_story">User Story</div>
-                <div class="user_topic">
-                  <h4>HTML base template creation</h4>
-                  <p>Create reusable HTML base templates...</p>
-                </div>
-                <div class="task_progress">
-                  <div class="progress">
-                    <div class="progressbar"></div>
-                  </div>
-                  <div class="subtasks">1/2 Subtasks</div>
-                </div>
-                <div class="user_assignment">
-                  <div class="members">
-                    <div>AS</div>
-                    <div>DE</div>
-                    <div>MB</div>
-                  </div>
-                  <span><img src="assets/img/medium.png" alt="" /></span>
-                </div>
-              </div>
-              <!-- end of task -->
+             <!-- insert status = "in_progress" here -->
             </div>
           </div>
 
@@ -124,42 +80,7 @@
               /></span>
             </div>
             <div id="taskCategoryAwaitFeedback">
-              <!-- task -->
-              <div class="user_task">
-                <div class="user_story techniker">Techniker Task</div>
-                <div class="user_topic">
-                  <h4>cCSS Architecture planning</h4>
-                  <p>Define css naming conventions and structure...</p>
-                </div>
-
-                <div class="user_assignment">
-                  <div class="members">
-                    <div>AS</div>
-                    <div>DE</div>
-                    <div>MB</div>
-                  </div>
-                  <span><img src="assets/img/medium.png" alt="" /></span>
-                </div>
-              </div>
-              <!-- end of task -->
-              <!-- task -->
-              <div class="user_task">
-                <div class="user_story">User Story</div>
-                <div class="user_topic">
-                  <h4>cCSS Architecture planning</h4>
-                  <p>Define css naming conventions and structure...</p>
-                </div>
-
-                <div class="user_assignment">
-                  <div class="members">
-                    <div>AS</div>
-                    <div>DE</div>
-                    <div>MB</div>
-                  </div>
-                  <span><img src="assets/img/urgent.png" alt="" /></span>
-                </div>
-              </div>
-              <!-- end of task -->
+             <!-- insert status = "feedback" here -->
             </div>
           </div>
 
@@ -168,32 +89,7 @@
               <h3>Done</h3>
             </div>
             <div id="taskCategoryDone">
-              <!-- task -->
-              <div class="user_task">
-                <div class="user_story teckniker_task techniker">
-                  Tecknical Task
-                </div>
-                <div class="user_topic">
-                  <h4>contact form and imprint</h4>
-                  <p>Create a contact form and imprint page...</p>
-                </div>
-                <div class="task_progress">
-                  <div class="progress">
-                    <div class="progressbar" style="width: 100%"></div>
-                  </div>
-                  <div class="subtasks">2/2 Subtasks</div>
-                </div>
-
-                <div class="user_assignment">
-                  <div class="members">
-                    <div>AS</div>
-                    <div>DE</div>
-                    <div>MB</div>
-                  </div>
-                  <span><img src="assets/img/urgent.png" alt="" /></span>
-                </div>
-              </div>
-              <!-- end of task -->
+             <!-- insert status = "done" here -->
             </div>
           </div>
         </div>
@@ -217,12 +113,13 @@
                 <label class="name_of_input">Title</label>
                 <div class="star">*</div>
               </div>
-              <input type="text" placeholder="Enter a title" required />
+              <input id="title" type="text" placeholder="Enter a title" required />
             </div>
             <div>
               <div class="task-description">
                 <label class="description">Description</label>
                 <textarea
+                id="description"
                   class="description_input"
                   placeholder="Enter a description"
                   required
@@ -259,25 +156,23 @@
                   required
                   type="date"
                   id="date_input"
-                  placeholder="tt/mm/jjjj"
+                
                 />
               </div>
             </div>
-            <div>
-              <label>Prio</label>
-              <div class="prio">
-                <div class="prio_btns urgent">
-                  <label>Urgent</label>
-                  <span><i class="fa-solid fa-angles-up"></i></span>
-                </div>
-                <div class="prio_btns medium">
-                  <label>Medium</label>
-                  <span><i class="fa-solid fa-equals"></i></span>
-                </div>
-                <div class="prio_btns low">
-                  <label>Low</label>
-                  <span><i class="fa-solid fa-angles-down"></i></span>
-                </div>
+            <label>Prio</label>
+            <div class="prio">
+              <div class="prio_btns urgent" onclick="setPriority('urgent')">
+                <label>Urgent</label>
+                <span><i class="fa-solid fa-angles-up"></i></span>
+              </div>
+              <div class="prio_btns medium" onclick="setPriority('medium')">
+                <label>Medium</label>
+                <span><i class="fa-solid fa-equals"></i></span>
+              </div>
+              <div class="prio_btns low" onclick="setPriority('low')">
+                <label>Low</label>
+                <span><i class="fa-solid fa-angles-down"></i></span>
               </div>
             </div>
             <div>
@@ -344,7 +239,7 @@
               <div>Clear</div>
               <span><i class="fa-solid fa-xmark"></i></span>
             </div>
-            <div class="create">
+            <div class="create" onclick="insertTask()">
               <div>Create Task</div>
               <span><i class="fa-solid fa-check"></i></span>
             </div>
