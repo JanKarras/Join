@@ -13,16 +13,16 @@ async function contacts_init() {
  * Populates the 'users' array with the loaded contacts.
  */
 async function load_users_contacts() {
-  await get_all_user();
-  users = [];
+  users.length = 0;
   for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
-    if (element['email'] == Email) {
-      for (let i = 0; i < element['contacts'].length; i++) {
-        const contact = element['contacts'][i];
-        users.push(contact);
+    const user = all_user[i];
+    if (user['email'] == Email)
+    {
+      for (let j = 0; j < user['contacts'].length; j++) {
+        const conatact = user['contacts'][j];
+        users.push(conatact);
       }
-      break;
+      break ;
     }
   }
 }
@@ -33,17 +33,20 @@ async function load_users_contacts() {
  */
 async function set_users_contacts() {
   for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
-    if (element['email'] == Email) {
-      element['contacts'] = [];
+    const user = all_user[i];
+    if (user['email'] == Email) {
+      //console.log(user['contacts']);
+      user['contacts'].length = 0;
+      //console.log(user['contacts']);
       for (let j = 0; j < users.length; j++) {
-        const user = users[j];
-        element['contacts'].push(user);
+        const contacts = users[j];
+        user['contacts'].push(contacts);
       }
-      setItem('users',  all_user);
-      break;
+      break ;
     }
   }
+  await setItem('users', all_user);
+  await get_all_user();
 }
 
 let initials;
@@ -119,12 +122,13 @@ function addBackgroundColor(i) {
  *
  * @param {number} index - Index of the user to be deleted.
  */
-function deleteUserByIndex(index) {
+async function deleteUserByIndex(index) {
   currentUserIndex = index;
+  console.log(users);
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
-    set_users_contacts();
-    load_users_contacts();
+    await set_users_contacts();
+    await load_users_contacts();
     displayUsers();
     displayUserDetails();
     closeEditContactPopup();
@@ -150,20 +154,30 @@ function closeAddContactPopup() {
 /**
  * Adds a new contact based on the input values, sorts the users, and updates the display.
  */
-function addContactPopup() {
+async function addContactPopup() {
   let newName = document.getElementById("addName").value;
   let newEmail = document.getElementById("addEmail").value;
   let newTelefon = +document.getElementById("addPhone").value;
   if (!newName || !newEmail || !newTelefon) {
     return;
   }
+  for (let i = 0; i < users.length; i++) {
+    const element = users[i];
+    if (element['email'] == newEmail)
+      return ;
+  }
   const newUser = { name: newName, email: newEmail, telefon: newTelefon };
   users.push(newUser);
+  await set_users_contacts();
+  await load_users_contacts();
   users.sort((a, b) => a.name.localeCompare(b.name));
-  const newUserIndex = users.findIndex((user) => user === newUser);
-  currentUserIndex = newUserIndex;
-  set_users_contacts();
-  load_users_contacts();
+  for (let i = 0; i < users.length; i++) {
+    const element = users[i];
+    if (element['email'] == newEmail) {
+      currentUserIndex = i;
+      break ;
+    }
+  }
   clearForm();
   closeAddContactPopup();
   displayUsers();
@@ -199,7 +213,7 @@ function openEditContactPopup(currentUserIndex) {
 /**
  * Saves the changes made in the edit contact popup, updates user details, and closes the popup.
  */
-function saveChanges() {
+async function saveChanges() {
   let user = users[currentUserIndex];
   let editedName = document.getElementById("editName").value;
   let editedEmail = document.getElementById("editEmail").value;
@@ -207,8 +221,8 @@ function saveChanges() {
   user.name = editedName;
   user.email = editedEmail;
   user.telefon = editedPhone;
-  set_users_contacts();
-  load_users_contacts();
+  await set_users_contacts();
+  await load_users_contacts();
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();
