@@ -1,4 +1,7 @@
 let tasks = [];
+let selected_category;
+let selected_prio;
+let subtasksArray = [];
 
 async function add_task_init() {
   await load_users_tasks()
@@ -93,6 +96,7 @@ function toggleCategory() {
 function selectCategory(option) {
   const selectHead = document.getElementById("selectedCat");
   selectHead.textContent = `${option}`;
+  selected_category = option;
   toggleCategory();
 }
 
@@ -108,15 +112,22 @@ function enterSubtasks() {
 
 // Function to add a new subtask
 function addSubtask() {
-  const inputValue = document.getElementById("enter-subtask").value;
-  if (inputValue.trim() === "") {
-    return;
+  const subtaskInput = document.getElementById("enter-subtask");
+  const subtaskList = document.getElementById("subtaskList");
+
+  const subtaskText = subtaskInput.value.trim();
+  if (subtaskText !== "") {
+    // Füge den Subtask zum Array hinzu
+    subtasksArray.push(subtaskText);
+
+    // Füge den Subtask zur Liste hinzu
+    const li = document.createElement("li");
+    li.textContent = subtaskText;
+    subtaskList.appendChild(li);
+
+    // Leere das Eingabefeld
+    subtaskInput.value = "";
   }
-  const ul = document.getElementById("subtaskList");
-  const li = document.createElement("li");
-  li.innerHTML += addTaskHTML(inputValue);
-  ul.appendChild(li);
-  document.getElementById("enter-subtask").value = "";
 }
 
 //
@@ -201,9 +212,69 @@ function clearFields() {
   subtaskList.innerHTML = "";
 }
 
+function prio(prio) {
+  selected_prio = prio;
+}
 
-async function add_task(){
-  console.log(tasks);
+async function add_task() {
   let title = document.getElementById('title_input');
   let des = document.getElementById('description_input');
+  let due = document.getElementById('date_input')
+  let selectedContacts = get_contacts();
+  let cat = selected_category;
+  let sub = subtasksArray;
+  //console.log(tasks[0]['to_do']);
+  let array_to_push =
+    {
+      'cat': cat,
+      'des': des.value,
+      'due': due.value,
+      'prio': selected_prio,
+      'title': title.value,
+      'ass_to': selectedContacts,
+      'sub_tasks': sub,
+    }
+  await send_taks_to_user(array_to_push);
+}
+
+function get_contacts() {
+  selectedContacts = [];
+  let assignedToSelect = document.getElementById('optionsContainer');
+
+  // Überprüfe, ob es überhaupt Optionen gibt
+  if (assignedToSelect) {
+    assignedToSelect.querySelectorAll('.option').forEach((option) => {
+      let checkbox = option.querySelector('.checkbox');
+      if (checkbox && checkbox.checked) {
+        // Überprüfe, ob die Checkbox existiert und ausgewählt ist
+        selectedContacts.push({
+          index: option.dataset.index,
+          email: users[option.dataset.index].email,
+        });
+      }
+    });
+  } else {
+    selectedContact = [Email];
+  }
+  
+  return selectedContacts;
+}
+
+async function send_taks_to_user (array_to_push) {
+  for (let i = 0; i < all_user.length; i++) {
+    let user = all_user[i];
+    console.log(user);
+    const user_email = user['email'];
+    console.log(user_email);
+    for (let j = 0; j < array_to_push['ass_to'].length; j++) {
+      const element = array_to_push['ass_to'][j];
+      console.log(element);
+      if (user_email == element['email']){
+        user['taks'][0]['to_do'].push(array_to_push);
+        console.log(all_user);
+      }
+    }
+  }
+  //await setItem('users', all_user);
+  //await get_all_user();
 }
