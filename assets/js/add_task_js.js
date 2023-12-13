@@ -55,9 +55,10 @@ let tasks = [
     ],
   },
 ];
+let tasks = [];
 
 async function add_task_init() {
-  //await load_users_tasks()
+  await load_users_tasks();
   contacts();
 }
 
@@ -67,9 +68,9 @@ async function load_users_tasks() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element["email"] == Email) {
-      for (let i = 0; i < element["contacts"].length; i++) {
-        const contact = element["contacts"][i];
-        users.push(contact);
+      for (let i = 0; i < element["tasks"].length; i++) {
+        const contact = element["tasks"][i];
+        tasks.push(contact);
       }
       break;
     }
@@ -295,32 +296,14 @@ function setPriority(priority) {
   console.log("Selected Priority:", priority);
 }
 
-// Modify taskHTML to use the priority for setting the image source
-// function taskHTML() {
-//   const { title, description, category, dueDate, prio } = getTaskDetails();
+async function add_task() {
+  console.log(tasks);
+  let title = document.getElementById("title_input");
+  let des = document.getElementById("description_input");
+}
 
-  // Set the priority before rendering the HTML
-  // setPriority(prio);
-
-//   return `
-//     <div class="user_task">
-//       <div class="user_story">${category}</div>
-//       <div class="user_topic">
-//         <h4>${title}</h4>
-//         <p>${description}</p>
-//       </div>
-//       <div class="task_progress">
-//         <div class="progress">
-//           <div class="progressbar" style="width: 0%"></div>
-//         </div>
-//         <div class="subtasks">0/2 Subtasks</div>
-//       </div>
-//       <div class="user_assignment">
-//         <div class="members">
-//           <div></div>
-//         </div>
-//         <span><img class="image" src="" /></span>
-//       </div>
-//       <div class="due_date">${dueDate}</div>
-//     </div>`;
-// }
+async function add_task() {
+  console.log(tasks);
+  let title = document.getElementById("title_input");
+  let des = document.getElementById("description_input");
+}
