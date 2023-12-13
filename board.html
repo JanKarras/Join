@@ -55,7 +55,7 @@
                 /></span>
               </div>
               <div id="taskCategoryToDo">
-               <!-- insert status = "to_do" here -->
+                <!-- insert status = "to_do" here -->
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
               /></span>
             </div>
             <div id="taskCategoryInProgress">
-             <!-- insert status = "in_progress" here -->
+              <!-- insert status = "in_progress" here -->
             </div>
           </div>
 
@@ -80,7 +80,7 @@
               /></span>
             </div>
             <div id="taskCategoryAwaitFeedback">
-             <!-- insert status = "feedback" here -->
+              <!-- insert status = "feedback" here -->
             </div>
           </div>
 
@@ -89,7 +89,7 @@
               <h3>Done</h3>
             </div>
             <div id="taskCategoryDone">
-             <!-- insert status = "done" here -->
+              <!-- insert status = "done" here -->
             </div>
           </div>
         </div>
@@ -113,13 +113,18 @@
                 <label class="name_of_input">Title</label>
                 <div class="star">*</div>
               </div>
-              <input id="title" type="text" placeholder="Enter a title" required />
+              <input
+                id="title_input"
+                type="text"
+                placeholder="Enter a title"
+                required
+              />
             </div>
             <div>
               <div class="task-description">
                 <label class="description">Description</label>
                 <textarea
-                id="description"
+                  id="description_input"
                   class="description_input"
                   placeholder="Enter a description"
                   required
@@ -152,12 +157,7 @@
                 <div class="star">*</div>
               </div>
               <div class="date_picker">
-                <input
-                  required
-                  type="date"
-                  id="date_input"
-                
-                />
+                <input required type="date" id="date_input" />
               </div>
             </div>
             <label>Prio</label>

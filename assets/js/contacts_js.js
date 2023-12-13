@@ -17,9 +17,9 @@ async function load_users_contacts() {
   users = [];
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
-    if (element['email'] == Email) {
-      for (let i = 0; i < element['contacts'].length; i++) {
-        const contact = element['contacts'][i];
+    if (element["email"] == Email) {
+      for (let i = 0; i < element["contacts"].length; i++) {
+        const contact = element["contacts"][i];
         users.push(contact);
       }
       break;
@@ -34,13 +34,13 @@ async function load_users_contacts() {
 async function set_users_contacts() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
-    if (element['email'] == Email) {
-      element['contacts'] = [];
+    if (element["email"] == Email) {
+      element["contacts"] = [];
       for (let j = 0; j < users.length; j++) {
         const user = users[j];
-        element['contacts'].push(user);
+        element["contacts"].push(user);
       }
-      setItem('users',  all_user);
+      setItem("users", all_user);
       break;
     }
   }
@@ -335,3 +335,19 @@ function userDetailHTML(i, nameInitials) {
     </div>
     `;
 }
+
+// const STORAGE_TOKEN = "H1I85X9QLCB1ZLY4089RTOJWZT4OW2SC2T8KWC7I";
+// const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
+
+// async function setItem(key, value) {
+//   const payload = { key, value, token: STORAGE_TOKEN };
+//   return fetch(STORAGE_URL, {
+//     method: "POST",
+//     body: JSON.stringify(payload),
+//   }).then((res) => res.json());
+// }
+
+// async function getItem(key) {
+//   const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+//   return fetch(url).then((res) => res.json());
+// }

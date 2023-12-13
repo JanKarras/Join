@@ -3,15 +3,12 @@ async function board_init() {
   displayTasks();
 }
 
-
-
 function openAddTask() {
   let addTask = document.getElementById("addTaskPopUpWindowContent");
   let overlay = document.querySelector(".overlay");
   addTask.classList.remove("d-none");
   overlay.classList.remove("d-none");
   addTask.style.left = "50%";
-  
 }
 function closeAddTask() {
   let addTask = document.getElementById("addTaskPopUpWindowContent");
@@ -25,37 +22,29 @@ function displayTasks() {
   const inProgress = document.getElementById("taskCategoryInProgress");
   const awaitFeedback = document.getElementById("taskCategoryAwaitFeedback");
   const done = document.getElementById("taskCategoryDone");
-
-  // Clear the content of each container
-  todo.innerHTML = '';
-  inProgress.innerHTML = '';
-  awaitFeedback.innerHTML = '';
-  done.innerHTML = '';
+  todo.innerHTML = "";
+  inProgress.innerHTML = "";
+  awaitFeedback.innerHTML = "";
+  done.innerHTML = "";
 
   // Loop through each task status (to_do, in_progress, feedback, done)
   for (const status in tasks[0]) {
     if (tasks[0].hasOwnProperty(status)) {
       const tasksInStatus = tasks[0][status];
-
-      // Loop through tasks in the current status
       for (let i = 0; i < tasksInStatus.length; i++) {
         const task = tasksInStatus[i];
-
-        // Generate HTML for each task
         const taskHTML = generateTaskHTML(task, status);
-
-        // Insert the generated HTML into the corresponding container
         switch (status) {
-          case 'todo':
+          case "todo":
             todo.innerHTML += taskHTML;
             break;
-          case 'in_progress':
+          case "in_progress":
             inProgress.innerHTML += taskHTML;
             break;
-          case 'feedback':
+          case "feedback":
             awaitFeedback.innerHTML += taskHTML;
             break;
-          case 'done':
+          case "done":
             done.innerHTML += taskHTML;
             break;
         }
@@ -64,9 +53,7 @@ function displayTasks() {
   }
 }
 
-// Call the displayTasks function to show the tasks
 displayTasks();
-
 
 function generateTaskHTML(task, status) {
   let html = `
@@ -77,7 +64,7 @@ function generateTaskHTML(task, status) {
         <p>${task.des}</p>
       </div>`;
 
-  if (status === 'in_progress') {
+  if (status === "in_progress") {
     html += `
       <div class="task_progress">
         <div class="progress">
@@ -87,7 +74,7 @@ function generateTaskHTML(task, status) {
       </div>`;
   }
 
-  if (status === 'feedback') {
+  if (status === "feedback") {
     html += `
       <div class="task_progress">
         <div class="progress">
@@ -97,7 +84,7 @@ function generateTaskHTML(task, status) {
       </div>`;
   }
 
-  if (status === 'done') {
+  if (status === "done") {
     html += `
       <div class="task_progress">
         <div class="progress">
@@ -109,7 +96,9 @@ function generateTaskHTML(task, status) {
 
   html += `
     <div class="user_assignment">
-      <div class="members">${task.ass_to.map(member => `<div>${member}</div>`).join('')}</div>
+      <div class="members">${task.ass_to
+        .map((member) => `<div>${member}</div>`)
+        .join("")}</div>
       <span><img src="assets/img/${task.prio.toLowerCase()}.png" alt="" /></span>
     </div>
   </div>`;

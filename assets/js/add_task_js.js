@@ -55,54 +55,105 @@ let tasks = [
     ],
   },
 ];
-let tasks = [];
 
 async function add_task_init() {
   await load_users_tasks();
   contacts();
 }
 
-async function load_users_tasks() {
-  get_all_user();
-  tasks = [];
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
-    if (element["email"] == Email) {
-      for (let i = 0; i < element["tasks"].length; i++) {
-        const contact = element["tasks"][i];
-        tasks.push(contact);
-      }
-      break;
+// async function load_users_tasks() {
+//   get_all_user();
+//   tasks = [];
+//   for (let i = 0; i < all_user.length; i++) {
+//     const element = all_user[i];
+//     if (element["email"] == Email) {
+//       for (let i = 0; i < element["tasks"].length; i++) {
+//         const contact = element["tasks"][i];
+//         tasks.push(contact);
+//       }
+//       break;
+//     }
+//   }
+// }
+
+// async function set_users_tasks() {
+//   for (let i = 0; i < all_user.length; i++) {
+//     const element = all_user[i];
+//     if (element["email"] == Email) {
+//       element["tasks"] = [];
+//       for (let j = 0; j < tasks.length; j++) {
+//         const task = tasks[j];
+//         element["tasks"].push(task);
+//       }
+//       console.log(all_user);
+//       setItem("users", all_user);
+//       break;
+//     }
+//   }
+// }
+
+async function saveTasksToRemoteStorage() {
+  const remoteEndpoint = "https://remote-storage.developerakademie.org/item"; // Replace with your actual endpoint
+
+  try {
+    const response = await fetch(remoteEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(tasks),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to save tasks. Status: ${response.status}`);
     }
+
+    console.log("Tasks saved successfully!");
+  } catch (error) {
+    console.error("Error saving tasks:", error.message);
   }
 }
 
-async function set_users_tasks() {
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
-    if (element["email"] == Email) {
-      element["tasks"] = [];
-      for (let j = 0; j < tasks.length; j++) {
-        const task = tasks[j];
-        element["tasks"].push(task);
-      }
-      console.log(all_user);
-      setItem("users", all_user);
-      break;
+// Call the function to save tasks asynchronously
+saveTasksToRemoteStorage();
+
+async function getTasksFromRemoteStorage() {
+  const remoteEndpoint = "https://remote-storage.developerakademie.org/item"; // Replace with your actual endpoint
+
+  try {
+    const response = await fetch(remoteEndpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch tasks. Status: ${response.status}`);
     }
+
+    const tasksFromRemote = await response.json();
+    console.log("Tasks retrieved successfully:", tasksFromRemote);
+
+    // Optionally, you can update your local tasks array with the retrieved data
+    tasks = tasksFromRemote;
+  } catch (error) {
+    console.error("Error fetching tasks:", error.message);
   }
 }
 
-async function contacts() {
+// Call the function to get tasks from remote storage asynchronously
+getTasksFromRemoteStorage();
+
+function contacts() {
   const optionsContainer = document.getElementById("optionsContainer");
   optionsContainer.innerHTML = "";
-  await load_users_contacts();
+  // await load_users_contacts();
   for (let i = 0; i < users.length; i++) {
     const names = users[i].name.split(" ");
-    const nameInitials =
-      names[0].charAt(0).toUpperCase() +
-      names[names.length - 1].charAt(0).toUpperCase();
-    const userColor = getUserColor(i); // Use the getUserColor function from index.js
+    let nameInitials = names[0].charAt(0).toUpperCase();
+    nameInitials = names[names.length - 1].charAt(0).toUpperCase();
+    const userColor = getUserColor(i);
     optionsContainer.innerHTML += `
         <div class="option" data-index="${i}" onclick="addBackgroundColour(${i}); toggleCheckbox(${i})">
           <div class="c-name">
@@ -231,7 +282,7 @@ function clearFields() {
   // Uncheck priority buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
-    button.classList.remove("selected");
+    button.style.backgroundColor = "";
   });
 
   // Clear subtasks
@@ -246,21 +297,6 @@ function clearFields() {
 function insertTask() {
   const task = document.getElementById("taskCategoryInProgress");
   task.innerHTML += taskHTML();
-}
-
-// Modify getTaskDetails to include priority
-function getTaskDetails() {
-  const title = document.querySelector(
-    '.add_task_content input[type="text"]'
-  ).value;
-  const description = document.querySelector(
-    ".add_task_content textarea"
-  ).value;
-  const category = document.getElementById("selectedCat").textContent.trim();
-  const dueDate = document.getElementById("date_input").value;
-  const prio = getSelectedPriority(); // Implement this function according to your needs
-
-  return { title, description, category, dueDate, prio };
 }
 
 function addTaskHTML(inputValue) {
@@ -281,29 +317,56 @@ function setPriority(priority) {
   let urgent = document.querySelector(".urgent");
   let image = document.querySelector(".image");
 
-  // Use the retrieved priority value as needed (e.g., store it in a variable or update UI)
+  // reset the buttons
+  const prioButtons = document.querySelectorAll(".prio_btns");
+  prioButtons.forEach((button) => {
+    button.style.backgroundColor = "initial";
+  });
+
   if (priority === "low") {
     low.style.backgroundColor = "green";
-    image.src = "assets/img/low.png";
   } else if (priority === "medium") {
     medium.style.backgroundColor = "orange";
-    image.src = "assets/img/medium.png";
   } else if (priority === "urgent") {
     urgent.style.backgroundColor = "red";
-    image.src = "assets/img/urgent.png";
   }
 
   console.log("Selected Priority:", priority);
 }
 
-async function add_task() {
-  console.log(tasks);
-  let title = document.getElementById("title_input");
-  let des = document.getElementById("description_input");
-}
+function insertTask() {
+  // Extract values from input fields
+  const title = document.getElementById("title_input").value;
+  const description = document.getElementById("description_input").value;
+  const assignedTo = document.querySelector(".select-box").value;
+  const dueDate = document.getElementById("date_input").value;
 
-async function add_task() {
-  console.log(tasks);
-  let title = document.getElementById("title_input");
-  let des = document.getElementById("description_input");
+  // Extract priority value
+  let priority = "";
+  const priorityButtons = document.querySelectorAll(".prio_btns");
+  priorityButtons.forEach((button) => {
+    if (button.classList.contains("selected")) {
+      priority = button.classList[1]; // Assuming the class name represents the priority
+    }
+  });
+
+  // Extract category value
+  const category = document.getElementById("selectedCat").innerText;
+
+  // Extract subtasks
+  const subtaskListItems = document.querySelectorAll("#subtaskList li");
+  const subtasks = Array.from(subtaskListItems).map((item) => item.innerText);
+
+  const newTask = {
+    title: title,
+    des: description,
+    ass_to: assignedTo.split(","), // Convert assignedTo to an array
+    due: dueDate,
+    prio: priority,
+    cat: category,
+    sub_tasks: subtasks,
+  };
+  tasks[0].todo.push(newTask);
+  clearFields();
+  displayTasks();
 }
