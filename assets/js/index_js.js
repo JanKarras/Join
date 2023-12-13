@@ -81,7 +81,10 @@ async function registerUser() {
         console.error('Email exists use another one:', error);
       } else {
         usersArray.push({
-          contacts: [],
+          contacts: [{
+            'name' : username.value + "(You)",
+            'email' : email.value,
+          }],
           name: username.value,
           email: email.value,
           password: password.value,

@@ -9,8 +9,7 @@ async function add_task_init() {
 }
 
 async function load_users_tasks() {
-  get_all_user();
-  tasks = [];
+  tasks.length = 0;
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element["email"] == Email) {
@@ -32,7 +31,6 @@ async function set_users_tasks() {
         const task = tasks[j];
         element["tasks"].push(task);
       }
-      console.log(all_user);
       setItem("users", all_user);
       break;
     }
@@ -223,7 +221,6 @@ async function add_task() {
   let selectedContacts = get_contacts();
   let cat = selected_category;
   let sub = subtasksArray;
-  //console.log(tasks[0]['to_do']);
   let array_to_push =
     {
       'cat': cat,
@@ -234,7 +231,7 @@ async function add_task() {
       'ass_to': selectedContacts,
       'sub_tasks': sub,
     }
-  await send_taks_to_user(array_to_push);
+  send_task_to_contacts(array_to_push);
 }
 
 function get_contacts() {
@@ -256,25 +253,21 @@ function get_contacts() {
   } else {
     selectedContact = [Email];
   }
-  
   return selectedContacts;
 }
 
-async function send_taks_to_user (array_to_push) {
-  for (let i = 0; i < all_user.length; i++) {
-    let user = all_user[i];
-    console.log(user);
-    const user_email = user['email'];
-    console.log(user_email);
-    for (let j = 0; j < array_to_push['ass_to'].length; j++) {
-      const element = array_to_push['ass_to'][j];
-      console.log(element);
-      if (user_email == element['email']){
-        user['taks'][0]['to_do'].push(array_to_push);
-        console.log(all_user);
+async function send_task_to_contacts(array_to_push){
+  ass_to = array_to_push['ass_to'];
+  console.log(ass_to);
+  for (let i = 0; i < ass_to.length; i++) {
+    const contact = ass_to[i];
+    for (let j = 0; j < all_user.length; j++) {
+      let user = all_user[j];
+      console.log(user);
+      if (user['email'] == contact['email']) {
+        user['tasks'][0]['to_do'].push(array_to_push);
       }
     }
   }
-  //await setItem('users', all_user);
-  //await get_all_user();
+  await setItem('users', all_user);
 }

@@ -35,9 +35,7 @@ async function set_users_contacts() {
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
     if (user['email'] == Email) {
-      //console.log(user['contacts']);
       user['contacts'].length = 0;
-      //console.log(user['contacts']);
       for (let j = 0; j < users.length; j++) {
         const contacts = users[j];
         user['contacts'].push(contacts);
