@@ -38,7 +38,7 @@
                 <label class="name_of_input">Title</label>
                 <div class="star">*</div>
               </div>
-              <input type="text" placeholder="Enter a title" required />
+              <input id="title_input" type="text" placeholder="Enter a title" required />
             </div>
             <div>
               <div class="task-description">
@@ -47,6 +47,7 @@
                   class="description_input"
                   placeholder="Enter a description"
                   required
+                  id="description_input"
                 ></textarea>
               </div>
             </div>
@@ -165,7 +166,7 @@
               <div>Clear</div>
               <span><i class="fa-solid fa-xmark"></i></span>
             </div>
-            <div class="create">
+            <div onclick="add_task()" class="create">
               <div>Create Task</div>
               <span><i class="fa-solid fa-check"></i></span>
             </div>

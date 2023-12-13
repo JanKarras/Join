@@ -1,54 +1,7 @@
-let tasks = [
-  {
-    to_do: [
-      {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
-        due: "12.12.2023",
-        prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
-      },
-    ],
-    done: [
-      {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
-        due: "15.12.2023",
-        prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
-      },
-    ],
-    in_progress: [
-      {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
-        due: "23.12.2023",
-        prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
-      },
-    ],
-    feedback: [
-      {
-        title: "TestTitle",
-        des: "Description of the Title",
-        ass_to: ["test", "test1"],
-        due: "01.12.2023",
-        prio: "urgent",
-        cat: "Techniker",
-        sub_tasks: ["test", "test1"],
-      },
-    ],
-  },
-];
+let tasks = [];
 
 async function add_task_init() {
-  //await load_users_tasks()
+  await load_users_tasks()
   contacts();
 }
 
@@ -58,9 +11,9 @@ async function load_users_tasks() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element["email"] == Email) {
-      for (let i = 0; i < element["contacts"].length; i++) {
-        const contact = element["contacts"][i];
-        users.push(contact);
+      for (let i = 0; i < element["tasks"].length; i++) {
+        const contact = element["tasks"][i];
+        tasks.push(contact);
       }
       break;
     }
@@ -246,4 +199,11 @@ function clearFields() {
   // Clear subtask list
   const subtaskList = document.getElementById("subtaskList");
   subtaskList.innerHTML = "";
+}
+
+
+async function add_task(){
+  console.log(tasks);
+  let title = document.getElementById('title_input');
+  let des = document.getElementById('description_input');
 }
