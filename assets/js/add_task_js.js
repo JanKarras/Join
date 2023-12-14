@@ -1,7 +1,3 @@
-let tasks = [];
-let selected_category;
-let selected_prio;
-let subtasksArray = [];
 let tasks = [
   {
     todo: [
