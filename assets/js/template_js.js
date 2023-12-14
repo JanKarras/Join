@@ -9,7 +9,6 @@ let all_user = []; // Global array with all users
  * 
  */
 async function template_init(){
-  await get_all_user();
   await includeHTML();
   await includeHTML_with_name('summary');
   summary_init();
@@ -21,9 +20,9 @@ async function template_init(){
  */
 async function get_all_user(){
     let res = await getItem('users');
-    let users = res['data']['value'];
-    users = JSON.parse(users);
-    all_user = users;
+    let user_array = res['data']['value'];
+    user_array = JSON.parse(user_array);
+    all_user = user_array;
     console.log(all_user);
 }
 

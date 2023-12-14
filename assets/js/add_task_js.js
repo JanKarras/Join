@@ -1,3 +1,7 @@
+let tasks = [];
+let selected_category;
+let selected_prio;
+let subtasksArray = [];
 let tasks = [
   {
     todo: [
@@ -61,36 +65,55 @@ async function add_task_init() {
   contacts();
 }
 
-// async function load_users_tasks() {
-//   get_all_user();
-//   tasks = [];
-//   for (let i = 0; i < all_user.length; i++) {
-//     const element = all_user[i];
-//     if (element["email"] == Email) {
-//       for (let i = 0; i < element["tasks"].length; i++) {
-//         const contact = element["tasks"][i];
-//         tasks.push(contact);
-//       }
-//       break;
-//     }
-//   }
-// }
+async function load_users_tasks() {
+  tasks.length = 0;
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element["email"] == Email) {
+      for (let i = 0; i < element["tasks"].length; i++) {
+        const contact = element["tasks"][i];
+        tasks.push(contact);
+      }
+      break;
+    }
+  }
+}
 
-// async function set_users_tasks() {
-//   for (let i = 0; i < all_user.length; i++) {
-//     const element = all_user[i];
-//     if (element["email"] == Email) {
-//       element["tasks"] = [];
-//       for (let j = 0; j < tasks.length; j++) {
-//         const task = tasks[j];
-//         element["tasks"].push(task);
-//       }
-//       console.log(all_user);
-//       setItem("users", all_user);
-//       break;
-//     }
-//   }
-// }
+async function set_users_tasks() {
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element["email"] == Email) {
+      element["tasks"] = [];
+      for (let j = 0; j < tasks.length; j++) {
+        const task = tasks[j];
+        element["tasks"].push(task);
+      }
+      setItem("users", all_user);
+      break;
+    }
+  }
+}
+
+async function contacts() {
+  const optionsContainer = document.getElementById("optionsContainer");
+  optionsContainer.innerHTML = "";
+  await load_users_contacts();
+  for (let i = 0; i < users.length; i++) {
+    const names = users[i].name.split(" ");
+    const nameInitials =
+      names[0].charAt(0).toUpperCase() +
+      names[names.length - 1].charAt(0).toUpperCase();
+    const userColor = getUserColor(i); // Use the getUserColor function from index.js
+    optionsContainer.innerHTML += `
+        <div class="option" data-index="${i}" onclick="addBackgroundColour(${i}); toggleCheckbox(${i})">
+          <div class="c-name">
+            <span class="name_initials" style="background-color: ${userColor}">${nameInitials}</span>
+            <span>${users[i].name}</span>
+          </div>
+          <input type="checkbox" class="checkbox">
+        </div>`;
+  }
+}
 
 // Function to toggle checkbox state
 function toggleCheckbox(index) {
@@ -128,6 +151,7 @@ function toggleCategory() {
 function selectCategory(option) {
   const selectHead = document.getElementById("selectedCat");
   selectHead.textContent = `${option}`;
+  selected_category = option;
   toggleCategory();
 }
 
@@ -143,15 +167,22 @@ function enterSubtasks() {
 
 // Function to add a new subtask
 function addSubtask() {
-  const inputValue = document.getElementById("enter-subtask").value;
-  if (inputValue.trim() === "") {
-    return;
+  const subtaskInput = document.getElementById("enter-subtask");
+  const subtaskList = document.getElementById("subtaskList");
+
+  const subtaskText = subtaskInput.value.trim();
+  if (subtaskText !== "") {
+    // Füge den Subtask zum Array hinzu
+    subtasksArray.push(subtaskText);
+
+    // Füge den Subtask zur Liste hinzu
+    const li = document.createElement("li");
+    li.textContent = subtaskText;
+    subtaskList.appendChild(li);
+
+    // Leere das Eingabefeld
+    subtaskInput.value = "";
   }
-  const ul = document.getElementById("subtaskList");
-  const li = document.createElement("li");
-  li.innerHTML += addTaskHTML(inputValue);
-  ul.appendChild(li);
-  document.getElementById("enter-subtask").value = "";
 }
 
 //
@@ -221,79 +252,8 @@ function clearFields() {
   subtaskList.innerHTML = "";
 }
 
-function insertTask() {
-  const task = document.getElementById("taskCategoryInProgress");
-  task.innerHTML += taskHTML();
-}
-
-function addTaskHTML(inputValue) {
-  return `<span class="subtask-text">
-  ${inputValue}
-  </span> 
-  <input type="text" class="edit-input d-none"> 
-  <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
- 
-  <span class="save-btn" onclick="saveSubtask(this.parentNode)"><i class="fa-solid fa-check"></i></span>
-  `;
-}
-
-// Modify setPriority to include image source
-function setPriority(priority) {
-  let low = document.querySelector(".low");
-  let medium = document.querySelector(".medium");
-  let urgent = document.querySelector(".urgent");
-  let image = document.querySelector(".image");
-
-  // reset the buttons
-  const prioButtons = document.querySelectorAll(".prio_btns");
-  prioButtons.forEach((button) => {
-    button.style.backgroundColor = "initial";
-  });
-
-  if (priority === "low") {
-    low.style.backgroundColor = "green";
-  } else if (priority === "medium") {
-    medium.style.backgroundColor = "orange";
-  } else if (priority === "urgent") {
-    urgent.style.backgroundColor = "red";
-  }
-
-  console.log("Selected Priority:", priority);
-}
-
-function insertTask() {
-  // Extract values from input fields
-  const title = document.getElementById("title_input").value;
-  const description = document.getElementById("description_input").value;
-  const assignedTo = document.querySelector(".select-box").value;
-  const dueDate = document.getElementById("date_input").value;
-
-  // Extract priority value
-  let priority = "";
-  const priorityButtons = document.querySelectorAll(".prio_btns");
-  priorityButtons.forEach((button) => {
-    if (button.classList.contains("selected")) {
-      priority = button.classList[1]; // Assuming the class name represents the priority
-    }
-  });
-
-  // Extract category value
-  const category = document.getElementById("selectedCat").innerText;
-
-  // Extract subtasks
-  const subtaskListItems = document.querySelectorAll("#subtaskList li");
-  const subtasks = Array.from(subtaskListItems).map((item) => item.innerText);
-
-  const newTask = {
-    title: title,
-    des: description,
-    ass_to: assignedTo.split(","), // Convert assignedTo to an array
-    due: dueDate,
-    prio: priority,
-    cat: category,
-    sub_tasks: subtasks,
-  };
-  tasks[0].todo.push(newTask);
-  clearFields();
-  displayTasks();
+async function add_task() {
+  console.log(tasks);
+  let title = document.getElementById("title_input");
+  let des = document.getElementById("description_input");
 }
