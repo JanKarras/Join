@@ -68,6 +68,7 @@
                   <span><i class="fa-solid fa-angle-down icon"></i></span>
                 </div>
                 <div class="options-container" id="optionsContainer"></div>
+                <div class="selected_cont_initials"></div>
               </div>
             </div>
           </div>
@@ -115,7 +116,7 @@
                 </div>
                 <div class="category-container" id="categoryContainer">
                   <div
-                    class="option category_option"
+                    class="option"
                     onclick="selectCategory('Techniker task')"
                   >
                     Techniker Task
@@ -127,7 +128,7 @@
               </div>
             </div>
             <!-- ### -->
-            <div>
+            <div class="subtasks_list">
               <label>Subtasks</label>
               <div class="date_picker" onclick="enterSubtasks()">
                 <input
@@ -151,7 +152,7 @@
                   ></i>
                 </span>
               </div>
-              <ul id="subtaskList" class="subtask-list"></ul>
+              <ul id="subtaskList" class="subtask-list added_subtasks"></ul>
             </div>
           </div>
           <!--##################-->

@@ -120,13 +120,13 @@ function addBackgroundColor(i) {
  *
  * @param {number} index - Index of the user to be deleted.
  */
-async function deleteUserByIndex(index) {
+function deleteUserByIndex(index) {
   currentUserIndex = index;
   console.log(users);
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
-    await set_users_contacts();
-    await load_users_contacts();
+    // await set_users_contacts();
+    // await load_users_contacts();
     displayUsers();
     displayUserDetails();
     closeEditContactPopup();
@@ -152,7 +152,7 @@ function closeAddContactPopup() {
 /**
  * Adds a new contact based on the input values, sorts the users, and updates the display.
  */
-async function addContactPopup() {
+function addContactPopup() {
   let newName = document.getElementById("addName").value;
   let newEmail = document.getElementById("addEmail").value;
   let newTelefon = +document.getElementById("addPhone").value;
@@ -165,8 +165,8 @@ async function addContactPopup() {
   }
   const newUser = { name: newName, email: newEmail, telefon: newTelefon };
   users.push(newUser);
-  await set_users_contacts();
-  await load_users_contacts();
+  // await set_users_contacts();
+  // await load_users_contacts();
   users.sort((a, b) => a.name.localeCompare(b.name));
   for (let i = 0; i < users.length; i++) {
     const element = users[i];
@@ -210,7 +210,7 @@ function openEditContactPopup(currentUserIndex) {
 /**
  * Saves the changes made in the edit contact popup, updates user details, and closes the popup.
  */
-async function saveChanges() {
+function saveChanges() {
   let user = users[currentUserIndex];
   let editedName = document.getElementById("editName").value;
   let editedEmail = document.getElementById("editEmail").value;
@@ -218,8 +218,8 @@ async function saveChanges() {
   user.name = editedName;
   user.email = editedEmail;
   user.telefon = editedPhone;
-  await set_users_contacts();
-  await load_users_contacts();
+  // await set_users_contacts();
+  // await load_users_contacts();
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();
@@ -346,19 +346,3 @@ function userDetailHTML(i, nameInitials) {
     </div>
     `;
 }
-
-// const STORAGE_TOKEN = "H1I85X9QLCB1ZLY4089RTOJWZT4OW2SC2T8KWC7I";
-// const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
-
-// async function setItem(key, value) {
-//   const payload = { key, value, token: STORAGE_TOKEN };
-//   return fetch(STORAGE_URL, {
-//     method: "POST",
-//     body: JSON.stringify(payload),
-//   }).then((res) => res.json());
-// }
-
-// async function getItem(key) {
-//   const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-//   return fetch(url).then((res) => res.json());
-// }

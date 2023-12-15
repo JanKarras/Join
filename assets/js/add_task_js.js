@@ -57,66 +57,91 @@ let tasks = [
 ];
 
 async function add_task_init() {
-  await load_users_tasks();
+  // await load_users_tasks();
   contacts();
+  insertTask();
 }
 
-async function load_users_tasks() {
-  tasks.length = 0;
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
-    if (element["email"] == Email) {
-      for (let i = 0; i < element["tasks"].length; i++) {
-        const contact = element["tasks"][i];
-        tasks.push(contact);
-      }
-      break;
-    }
-  }
-}
+// async function load_users_tasks() {
+//   get_all_user();
+//   tasks = [];
+//   for (let i = 0; i < all_user.length; i++) {
+//     const element = all_user[i];
+//     if (element["email"] == Email) {
+//       for (let i = 0; i < element["tasks"].length; i++) {
+//         const contact = element["tasks"][i];
+//         tasks.push(contact);
+//       }
+//       break;
+//     }
+//   }
+// }
 
-async function set_users_tasks() {
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
-    if (element["email"] == Email) {
-      element["tasks"] = [];
-      for (let j = 0; j < tasks.length; j++) {
-        const task = tasks[j];
-        element["tasks"].push(task);
-      }
-      setItem("users", all_user);
-      break;
-    }
-  }
-}
+// async function set_users_tasks() {
+//   for (let i = 0; i < all_user.length; i++) {
+//     const element = all_user[i];
+//     if (element["email"] == Email) {
+//       element["tasks"] = [];
+//       for (let j = 0; j < tasks.length; j++) {
+//         const task = tasks[j];
+//         element["tasks"].push(task);
+//       }
+//       console.log(all_user);
+//       setItem("users", all_user);
+//       break;
+//     }
+//   }
+// }
 
-async function contacts() {
+function contacts() {
   const optionsContainer = document.getElementById("optionsContainer");
   optionsContainer.innerHTML = "";
-  await load_users_contacts();
+  // await load_users_contacts();
   for (let i = 0; i < users.length; i++) {
     const names = users[i].name.split(" ");
-    const nameInitials =
-      names[0].charAt(0).toUpperCase() +
-      names[names.length - 1].charAt(0).toUpperCase();
-    const userColor = getUserColor(i); // Use the getUserColor function from index.js
+    let nameInitials = names[0].charAt(0).toUpperCase();
+    nameInitials += names[names.length - 1].charAt(0).toUpperCase();
+    const userColor = getUserColor(i);
     optionsContainer.innerHTML += `
         <div class="option" data-index="${i}" onclick="addBackgroundColour(${i}); toggleCheckbox(${i})">
           <div class="c-name">
             <span class="name_initials" style="background-color: ${userColor}">${nameInitials}</span>
             <span>${users[i].name}</span>
           </div>
-          <input type="checkbox" class="checkbox">
+          <input type="checkbox" class="checkbox" data-name-initials="${nameInitials}">
         </div>`;
   }
 }
 
-// Function to toggle checkbox state
-function toggleCheckbox(index) {
+function toggleCheckbox(index, nameInitials) {
   const checkbox = document.querySelector(
     `.option[data-index="${index}"] .checkbox`
   );
   checkbox.checked = !checkbox.checked;
+
+  const selectedContInitials = document.querySelector(
+    ".selected_cont_initials"
+  );
+
+  if (checkbox.checked) {
+    // Retrieve nameInitials from data attribute
+    const nameInitials = checkbox.getAttribute("data-name-initials");
+
+    // Use span element with innerHTML
+    const newSpan = document.createElement("span");
+    newSpan.innerText = nameInitials;
+    selectedContInitials.appendChild(newSpan);
+  } else {
+    // Remove the corresponding span element for the unchecked checkbox
+    const nameInitials = checkbox.getAttribute("data-name-initials");
+    const spanToRemove = document.querySelector(
+      `.selected_cont_initials span:contains(${nameInitials})`
+    );
+
+    if (spanToRemove) {
+      selectedContInitials.removeChild(spanToRemove);
+    }
+  }
 }
 
 function addBackgroundColour(i) {
@@ -147,7 +172,6 @@ function toggleCategory() {
 function selectCategory(option) {
   const selectHead = document.getElementById("selectedCat");
   selectHead.textContent = `${option}`;
-  selected_category = option;
   toggleCategory();
 }
 
@@ -161,24 +185,24 @@ function enterSubtasks() {
   }
 }
 
-// Function to add a new subtask
 function addSubtask() {
-  const subtaskInput = document.getElementById("enter-subtask");
-  const subtaskList = document.getElementById("subtaskList");
-
-  const subtaskText = subtaskInput.value.trim();
-  if (subtaskText !== "") {
-    // Füge den Subtask zum Array hinzu
-    subtasksArray.push(subtaskText);
-
-    // Füge den Subtask zur Liste hinzu
-    const li = document.createElement("li");
-    li.textContent = subtaskText;
-    subtaskList.appendChild(li);
-
-    // Leere das Eingabefeld
-    subtaskInput.value = "";
+  const inputValue = document.getElementById("enter-subtask").value;
+  if (inputValue.trim() === "") {
+    return;
   }
+
+  const ul = document.getElementById("subtaskList");
+  const liElements = ul.getElementsByTagName("li");
+
+  // Return if there are already more than three li elements
+  if (liElements.length >= 3) {
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.innerHTML += addTaskHTML(inputValue);
+  ul.appendChild(li);
+  document.getElementById("enter-subtask").value = "";
 }
 
 //
@@ -229,14 +253,14 @@ function clearFields() {
   const selectedCat = document.getElementById("selectedCat");
   selectedCat.innerText = "Select task category";
 
-  // Reset assigned to (assuming you want to clear the selected contacts)
+  // Reset assigned to
   const selectBox = document.querySelector(".select-box");
   selectBox.value = "";
 
   // Uncheck priority buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
-    button.style.backgroundColor = "";
+    button.style.backgroundColor = "initial";
   });
 
   // Clear subtasks
@@ -248,8 +272,83 @@ function clearFields() {
   subtaskList.innerHTML = "";
 }
 
-async function add_task() {
-  console.log(tasks);
-  let title = document.getElementById("title_input");
-  let des = document.getElementById("description_input");
+function addTaskHTML(inputValue) {
+  return `<span class="subtask-text">
+  ${inputValue}
+  </span> 
+  <input type="text" class="edit-input d-none"> 
+  <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
+ 
+  <span class="save-btn" onclick="saveSubtask(this.parentNode)"><i class="fa-solid fa-check"></i></span>
+  `;
+}
+
+// Modify setPriority to include image source
+function setPriority(priority) {
+  let low = document.querySelector(".low");
+  let medium = document.querySelector(".medium");
+  let urgent = document.querySelector(".urgent");
+  let image = document.querySelector(".image");
+
+  // reset the buttons
+  const prioButtons = document.querySelectorAll(".prio_btns");
+  prioButtons.forEach((button) => {
+    button.style.backgroundColor = "initial";
+  });
+
+  if (priority === "low") {
+    low.style.backgroundColor = "green";
+  } else if (priority === "medium") {
+    medium.style.backgroundColor = "orange";
+  } else if (priority === "urgent") {
+    urgent.style.backgroundColor = "red";
+  }
+
+  console.log("Selected Priority:", priority);
+}
+
+function insertTask() {
+  // Extract values from input fields
+  const title = document.getElementById("title_input").value;
+  const description = document.getElementById("description_input").value;
+  const assignedTo = document.querySelector(".select-box").value;
+  const dueDate = document.getElementById("date_input").value;
+
+  // Extract priority value
+  let priority = "";
+  const priorityButtons = document.querySelectorAll(".prio_btns");
+  priorityButtons.forEach((button) => {
+    if (button.classList.contains("selected")) {
+      priority = button.classList[1]; // Assuming the class name represents the priority
+    }
+  });
+
+  // Extract category value
+  const category = document.getElementById("selectedCat").innerText;
+
+  // Extract subtasks
+  const subtaskListItems = document.querySelectorAll("#subtaskList li");
+  const subtasks = Array.from(subtaskListItems).map((item) => item.innerText);
+
+  if (!title || !dueDate || !description) {
+    return;
+  }
+
+  // Create a task object
+  const newTask = {
+    title: title,
+    des: description,
+    ass_to: assignedTo.split(","), // Convert assignedTo to an array
+    due: dueDate,
+    prio: priority,
+    cat: category,
+    sub_tasks: subtasks,
+  };
+
+  // Push the task object into the corresponding status array in the tasks array
+  tasks[0].todo.push(newTask);
+
+  // Clear input fields after inserting the task
+  clearFields();
+  displayTasks();
 }
