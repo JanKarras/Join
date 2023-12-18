@@ -1,9 +1,25 @@
+let tasks_board = [];
+
 async function board_init() {
+  await load_users_contacts();
+  await load_users_tasks_board();
   contacts();
   displayTasks();
 }
 
+async function load_users_tasks_board(){
+  tasks_board.length = 0;
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element['email'] == Email) {
+      tasks_board = element['tasks'];
+      break ; 
+    }
+  }
+}
+
 function openAddTask() {
+  add_task_init();
   let addTask = document.getElementById("addTaskPopUpWindowContent");
   let overlay = document.querySelector(".overlay");
   addTask.classList.remove("d-none");
@@ -28,9 +44,9 @@ function displayTasks() {
   done.innerHTML = "";
 
   // Loop through each task status (to_do, in_progress, feedback, done)
-  for (const status in tasks[0]) {
-    if (tasks[0].hasOwnProperty(status)) {
-      const tasksInStatus = tasks[0][status];
+  for (const status in tasks_board[0]) {
+    if (tasks_board[0].hasOwnProperty(status)) {
+      const tasksInStatus = tasks_board[0][status];
       for (let i = 0; i < tasksInStatus.length; i++) {
         const task = tasksInStatus[i];
         const taskHTML = generateTaskHTML(task, status);
@@ -52,8 +68,6 @@ function displayTasks() {
     }
   }
 }
-
-displayTasks();
 
 function generateTaskHTML(task, status) {
   let html = `

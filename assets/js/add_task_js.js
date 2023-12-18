@@ -1,102 +1,103 @@
-let tasks = [
-  {
-    todo: [
-      {
-        title: "kochwelt page & recipe recommender",
-        des: "Build start page with recipe recommendation...",
-        ass_to: ["AS", "DE", "MB"],
-        due: "12.12.2023",
-        prio: "urgent",
-        cat: "User Story",
-        sub_tasks: [],
-      },
-    ],
-    in_progress: [
-      {
-        title: "HTML base template creation",
-        des: "Create reusable HTML base templates...",
-        ass_to: ["AS", "DE"],
-        due: "23.12.2023",
-        prio: "medium",
-        cat: "User Story",
-        sub_tasks: ["Change header color"],
-      },
-    ],
-    feedback: [
-      {
-        title: "CSS Architecture planning",
-        des: "Define CSS naming conventions and structure...",
-        ass_to: ["AS"],
-        due: "01.12.2023",
-        prio: "medium",
-        cat: "Techniker Task",
-        sub_tasks: [],
-      },
-      {
-        title: "CSS Architecture planning",
-        des: "Define CSS naming conventions and structure...",
-        ass_to: ["AS", "DE", "MB"],
-        due: "01.12.2023",
-        prio: "urgent",
-        cat: "User Story",
-        sub_tasks: [],
-      },
-    ],
-    done: [
-      {
-        title: "contact form and imprint",
-        des: "Create a contact form and imprint page...",
-        ass_to: ["AS", "DE", "MB"],
-        due: "15.12.2023",
-        prio: "urgent",
-        cat: "Techniker Task",
-        sub_tasks: [],
-      },
-    ],
-  },
-];
+//let tasks = [
+//  {
+//    todo: [
+//      {
+//        title: "kochwelt page & recipe recommender",
+//        des: "Build start page with recipe recommendation...",
+//        ass_to: ["AS", "DE", "MB"],
+//        due: "12.12.2023",
+//        prio: "urgent",
+//        cat: "User Story",
+//        sub_tasks: [],
+//      },
+//    ],
+//    in_progress: [
+//      {
+//        title: "HTML base template creation",
+//        des: "Create reusable HTML base templates...",
+//        ass_to: ["AS", "DE"],
+//        due: "23.12.2023",
+//        prio: "medium",
+//        cat: "User Story",
+//        sub_tasks: ["Change header color"],
+//      },
+//    ],
+//    feedback: [
+//      {
+//        title: "CSS Architecture planning",
+//        des: "Define CSS naming conventions and structure...",
+//        ass_to: ["AS"],
+//        due: "01.12.2023",
+//        prio: "medium",
+//        cat: "Techniker Task",
+//        sub_tasks: [],
+//      },
+//      {
+//        title: "CSS Architecture planning",
+//        des: "Define CSS naming conventions and structure...",
+//        ass_to: ["AS", "DE", "MB"],
+//        due: "01.12.2023",
+//        prio: "urgent",
+//        cat: "User Story",
+//        sub_tasks: [],
+//      },
+//    ],
+//    done: [
+//      {
+//        title: "contact form and imprint",
+//        des: "Create a contact form and imprint page...",
+//        ass_to: ["AS", "DE", "MB"],
+//        due: "15.12.2023",
+//        prio: "urgent",
+//        cat: "Techniker Task",
+//        sub_tasks: [],
+//      },
+//    ],
+//  },
+//];
+
+let tasks = [];
+let ass_to_emails = [];
 
 async function add_task_init() {
-  // await load_users_tasks();
+  await load_users_contacts();
+  await load_users_tasks();
   contacts();
   insertTask();
 }
 
-// async function load_users_tasks() {
-//   get_all_user();
-//   tasks = [];
-//   for (let i = 0; i < all_user.length; i++) {
-//     const element = all_user[i];
-//     if (element["email"] == Email) {
-//       for (let i = 0; i < element["tasks"].length; i++) {
-//         const contact = element["tasks"][i];
-//         tasks.push(contact);
-//       }
-//       break;
-//     }
-//   }
-// }
+async function load_users_tasks(){
+  tasks.length = 0;
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element['email'] == Email) {
+      for (let j = 0; j < element['tasks'][0]['todo'].length; j++) {
+        const task = element['tasks'][0]['todo'][j];
+        tasks.push(task);
+      }
+      break ; 
+    }
+  }
+}
 
-// async function set_users_tasks() {
-//   for (let i = 0; i < all_user.length; i++) {
-//     const element = all_user[i];
-//     if (element["email"] == Email) {
-//       element["tasks"] = [];
-//       for (let j = 0; j < tasks.length; j++) {
-//         const task = tasks[j];
-//         element["tasks"].push(task);
-//       }
-//       console.log(all_user);
-//       setItem("users", all_user);
-//       break;
-//     }
-//   }
-// }
+async function set_users_tasks() {
+  for (let i = 0; i < all_user.length; i++) {
+    const element = all_user[i];
+    if (element["email"] == Email) {
+      element["tasks"].length = 0;
+      for (let j = 0; j < tasks.length; j++) {
+        const task = tasks[j];
+        element["tasks"].push(task);
+      }
+      setItem("users", all_user);
+      break;
+    }
+  }
+}
 
 function contacts() {
   const optionsContainer = document.getElementById("optionsContainer");
   optionsContainer.innerHTML = "";
-  // await load_users_contacts();
   for (let i = 0; i < users.length; i++) {
     const names = users[i].name.split(" ");
     let nameInitials = names[0].charAt(0).toUpperCase();
@@ -129,19 +130,21 @@ function toggleCheckbox(index, nameInitials) {
 
     // Use span element with innerHTML
     const newSpan = document.createElement("span");
-    newSpan.innerText = nameInitials;
-    selectedContInitials.appendChild(newSpan);
+    ass_to_emails.push(users[index]['email']);
   } else {
-    // Remove the corresponding span element for the unchecked checkbox
-    const nameInitials = checkbox.getAttribute("data-name-initials");
-    const spanToRemove = document.querySelector(
-      `.selected_cont_initials span:contains(${nameInitials})`
-    );
-
-    if (spanToRemove) {
-      selectedContInitials.removeChild(spanToRemove);
+    const removedIndex = ass_to_emails.findIndex((user) => user === users[index]['email']);
+    if (removedIndex !== -1) {
+      ass_to_emails.splice(removedIndex, 1);
     }
+    // Remove the corresponding span element for the unchecked checkbox
+    const spans = document.querySelectorAll(".selected_cont_initials span");
+    spans.forEach((span) => {
+      if (span.innerText === nameInitials) {
+        selectedContInitials.removeChild(span);
+      }
+    });
   }
+  console.log(ass_to_emails);
 }
 
 function addBackgroundColour(i) {
@@ -283,19 +286,21 @@ function addTaskHTML(inputValue) {
   `;
 }
 
+let prio;
+
 // Modify setPriority to include image source
 function setPriority(priority) {
   let low = document.querySelector(".low");
   let medium = document.querySelector(".medium");
   let urgent = document.querySelector(".urgent");
   let image = document.querySelector(".image");
-
+  
   // reset the buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
     button.style.backgroundColor = "initial";
   });
-
+  
   if (priority === "low") {
     low.style.backgroundColor = "green";
   } else if (priority === "medium") {
@@ -303,25 +308,15 @@ function setPriority(priority) {
   } else if (priority === "urgent") {
     urgent.style.backgroundColor = "red";
   }
-
+  prio = priority;
   console.log("Selected Priority:", priority);
 }
 
-function insertTask() {
+async function insertTask() {
   // Extract values from input fields
   const title = document.getElementById("title_input").value;
   const description = document.getElementById("description_input").value;
-  const assignedTo = document.querySelector(".select-box").value;
   const dueDate = document.getElementById("date_input").value;
-
-  // Extract priority value
-  let priority = "";
-  const priorityButtons = document.querySelectorAll(".prio_btns");
-  priorityButtons.forEach((button) => {
-    if (button.classList.contains("selected")) {
-      priority = button.classList[1]; // Assuming the class name represents the priority
-    }
-  });
 
   // Extract category value
   const category = document.getElementById("selectedCat").innerText;
@@ -338,17 +333,33 @@ function insertTask() {
   const newTask = {
     title: title,
     des: description,
-    ass_to: assignedTo.split(","), // Convert assignedTo to an array
+    ass_to: ass_to_emails, // Convert assignedTo to an array
     due: dueDate,
-    prio: priority,
+    prio: prio,
     cat: category,
     sub_tasks: subtasks,
   };
-
-  // Push the task object into the corresponding status array in the tasks array
-  tasks[0].todo.push(newTask);
-
-  // Clear input fields after inserting the task
+  tasks.push(newTask);
+  await send_taks_to_users(newTask);
   clearFields();
-  displayTasks();
+  await setItem('users', all_user);
+  await get_all_user();
+  if (position == 'board')
+    displayTasks();
+}
+
+async function send_taks_to_users(newTask){
+  for (let i = 0; i < all_user.length; i++) {
+    const user = all_user[i];
+    for (let j = 0; j < newTask['ass_to'].length; j++) {
+      if (newTask['ass_to'][j] == user['email'])
+      {
+        user['tasks'][0]['todo'].length = 0;
+        for (let k = 0; k < tasks.length; k++) {
+          const task = tasks[k];
+          user['tasks'][0]['todo'].push(task);
+        }
+      }
+    }
+  }
 }

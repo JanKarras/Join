@@ -36,14 +36,14 @@ function set_name() {
 }
 
 /**
- * load the numbers of the tasks
+ * load the numbers of the tasks_sum
  */
 function load_numbers() {
     for (let i = 0; i < all_user.length; i++) {
         const element = all_user[i];
         if (element['email'] == Email) {
-            let tasks = element['tasks'];
-            render_numbers(tasks);
+            let tasks_sum = element['tasks'];
+            render_numbers(tasks_sum);
             break;
         }
     }
@@ -51,46 +51,54 @@ function load_numbers() {
 
 /**
  * Rendert die Anzahl der Aufgaben in verschiedenen Kategorien und Informationen zu dringenden Aufgaben.
- * @param {Array} tasks - the users array of the tasks
+ * @param {Array} tasks_sum - the users array of the tasks_sum
  */
-function render_numbers(tasks) {
-    if (tasks.length != 0) {
-        document.getElementById('to_do_nb').innerHTML = tasks[0]['to_do'].length;
-        document.getElementById('done_nb').innerHTML = tasks[0]['done'].length;
-        document.getElementById('board_nb').innerHTML = tasks.length;
-        document.getElementById('progrss_nb').innerHTML = tasks[0]['in_progress'].length;
-        document.getElementById('feedback_nb').innerHTML = tasks[0]['feedback'].length;
+function render_numbers(tasks_sum) {
+    if (tasks_sum.length != 0) {
+        document.getElementById('to_do_nb').innerHTML = tasks_sum[0]['todo'].length;
+        document.getElementById('done_nb').innerHTML = tasks_sum[0]['done'].length;
+        document.getElementById('board_nb').innerHTML = tasks_sum.length;
+        document.getElementById('progrss_nb').innerHTML = tasks_sum[0]['in_progress'].length;
+        document.getElementById('feedback_nb').innerHTML = tasks_sum[0]['feedback'].length;
         let count = 0;
-        for (let i = 0; i < tasks.length; i++) {
-            const element = tasks[i];
-            if (element['done'][0]['prio'] == "urgent")
+        for (let i = 0; i < tasks_sum[0]['feedback'].length; i++) {
+            const element = tasks_sum[0]['feedback'][i];
+            if (element['prio'] == "urgent")
                 count++;
-            if (element['to_do'][0]['prio'] == "urgent")
+        }
+        for (let i = 0; i < tasks_sum[0]['todo'].length; i++) {
+            const element = tasks_sum[0]['todo'][i];
+            if (element['prio'] == "urgent")
                 count++;
-            if (element['in_progress'][0]['prio'] == "urgent")
-                count++;
-            if (element['feedback'][0]['prio'] == "urgent")
+        }
+        for (let i = 0; i < tasks_sum[0]['in_progress'].length; i++) {
+            const element = tasks_sum[0]['in_progress'][i];
+            if (element['prio'] == "urgent")
                 count++;
         }
         document.getElementById('urgent_nb').innerHTML = count;
-        render_deadline(tasks);
+        render_deadline(tasks_sum);
     }
 }
 
 /**
  * Render the next date of the task wich is due soon.
- * @param {Array} tasks - the users array of the tasks
+ * @param {Array} tasks_sum - the users array of the tasks_sum
  */
-function render_deadline(tasks) {
+function render_deadline(tasks_sum) {
     let dates = [];
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        dates.push(element['done'][0]['due']);
-        dates.push(element['to_do'][0]['due']);
-        dates.push(element['in_progress'][0]['due']);
-        dates.push(element['feedback'][0]['due']);
+    for (let i = 0; i < tasks_sum[0]['todo'].length; i++) {
+        const element = tasks_sum[0]['todo'][i]['due'];
+        dates.push(element);
     }
-
+    for (let i = 0; i < tasks_sum[0]['feedback'].length; i++) {
+        const element = tasks_sum[0]['feedback'][i]['due'];
+        dates.push(element);
+    }
+    for (let i = 0; i < tasks_sum[0]['in_progress'].length; i++) {
+        const element = tasks_sum[0]['in_progress'][i]['due'];
+        dates.push(element);
+    }
     let current_date = new Date();
     current_date.setHours(0, 0, 0, 0);
 
