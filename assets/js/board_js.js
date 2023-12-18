@@ -71,7 +71,7 @@ function displayTasks() {
 
 function generateTaskHTML(task, status) {
   let html = `
-    <div class="user_task">
+    <div class="user_task" draggable="true" ondragstart="drag(event)">
       <div class="user_story ${task.cat.toLowerCase()}">${task.cat}</div>
       <div class="user_topic">
         <h4>${task.title}</h4>
@@ -80,7 +80,7 @@ function generateTaskHTML(task, status) {
 
   if (status === "in_progress") {
     html += `
-      <div class="task_progress">
+      <div class="task_progress draggable="true" ondragstart="drag(event)"">
         <div class="progress">
           <div class="progressbar" style="width: 50%"></div>
         </div>
@@ -90,7 +90,7 @@ function generateTaskHTML(task, status) {
 
   if (status === "feedback") {
     html += `
-      <div class="task_progress">
+      <div class="task_progress draggable="true" ondragstart="drag(event)"">
         <div class="progress">
           <div class="progressbar d-none" style="width: 0%"></div>
         </div>
@@ -100,7 +100,7 @@ function generateTaskHTML(task, status) {
 
   if (status === "done") {
     html += `
-      <div class="task_progress">
+      <div class="task_progress draggable="true" ondragstart="drag(event)"">
         <div class="progress">
           <div class="progressbar" style="width: 100%"></div>
         </div>
@@ -119,3 +119,4 @@ function generateTaskHTML(task, status) {
 
   return html;
 }
+
