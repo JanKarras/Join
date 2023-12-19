@@ -83,17 +83,18 @@ function generateTaskHTML(task, status, index) {
 
   if (task.sub_tasks.length != 0) {
     let progressWidth = 0
+    letprogressWidthpercent = 0;
     const subtasksVisible = status !== "done" ? "" : "d-none";
     for (let i = 0; i < task.sub_tasks.length; i++) {
       const subtask = task.sub_tasks[i];
       if (subtask.endsWith("_finished"))
         progressWidth++;
     }
-    console.log(progressWidth);
+    progressWidthpercent = (progressWidth/task.sub_tasks.length) * 100;
     html += `
       <div class="task_progress" draggable="true" ondragstart="drag(event)" data-task-id="${taskId}">
         <div class="progress">
-          <div class="progressbar" style="width: ${progressWidth}"></div>
+          <div class="progressbar" style="width: ${progressWidthpercent}%"></div>
         </div>
         <div class="subtasks ${subtasksVisible}">${progressWidth}/${task.sub_tasks.length} Subtasks</div>
       </div>`;
@@ -178,6 +179,7 @@ function closePopup() {
     const popupContainer = document.getElementById('showDetail-container');
     popupContainer.style.display = 'none';
   }, 300); // Adjust the timing to match your CSS transition
+  displayTasks();
 }
 
 function stopPropagation(event) {
@@ -257,12 +259,16 @@ function render_details(numberPart, textPart) {
     sub.innerHTML = '';
     for (let i = 0; i < task.sub_tasks.length; i++) {
       const sub_task = task.sub_tasks[i];
+      let sub_task_string = sub_task;
+      if (sub_task.endsWith("_finished"))
+        sub_task_string = sub_task_string.replace("_finished", "");
       sub.innerHTML += `
-      <li class="list_element_sub_task" id="listelementsubtask_${i}">
-        <img class="check_img" id='check_${i}' src="./assets/img/Check_button_unchecked.png">
-        <div class="list_text_sub_task">${sub_task}</div>
+      <li onmouseout="not_hover_over_check(${i}, '${numberPart}', '${textPart}')" onmouseover="hover_over_check(${i}, '${numberPart}', '${textPart}')" class="list_element_sub_task" id="listelementsubtask_${i}" onclick="check(${i}, '${numberPart}', '${textPart}')">
+        <img class="check_img" id='check_${i}' src="">
+        <div class="list_text_sub_task">${sub_task_string}</div>
       </li>
       `
+      setImg(i, numberPart, textPart);
     }
   }
   else
@@ -283,4 +289,50 @@ function formatDate(inputDate) {
 
   // Return the formatted date
   return `${day}/${month}/${year}`;
+}
+
+function setImg(i, numberPart, textPart){
+  let task = tasks_board[0][textPart][numberPart];
+  if (task.sub_tasks[i].endsWith("_finished")){
+    document.getElementById('check_' + i).src = "./assets/img/Check_button.png"
+  }
+  else {
+    document.getElementById('check_' + i).src = "./assets/img/Check_button_unchecked.png"
+  }
+}
+
+async function check(i, nb, text){
+  let task = tasks_board[0][text][nb];
+  if (!task.sub_tasks[i].endsWith("_finished")){
+    task.sub_tasks[i] = task.sub_tasks[i] + "_finished";
+    all_user['tasks'] = tasks_board;
+    await setItem('users', all_user);
+    document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
+  }
+  else {
+    task.sub_tasks[i] = task.sub_tasks[i].replace("_finished", "");
+    all_user['tasks'] = tasks_board;
+    await setItem('users', all_user);
+    document.getElementById("check_" + i).src = "./assets/img/Check_button_unchecked.png"
+  }
+}
+
+function not_hover_over_check(i, nb, text){
+  let task = tasks_board[0][text][nb];
+  if (task.sub_tasks[i].endsWith("_finished")){
+    document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
+  }
+  else {
+    document.getElementById("check_" + i).src = "./assets/img/Check_button_unchecked.png"
+  }
+}
+
+function hover_over_check(i, nb, text) {
+  let task = tasks_board[0][text][nb];
+  if (!task.sub_tasks[i].endsWith("_finished")){
+    document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
+  }
+  else {
+    document.getElementById("check_" + i).src = "./assets/img/Check_button_unchecked.png"
+  }
 }
