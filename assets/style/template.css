@@ -12,6 +12,10 @@ html {
   margin: auto;
 }
 
+.height_100{
+  height: 100%;
+}
+
 .side_bar {
   width: 232px;
   max-width: 232px;
