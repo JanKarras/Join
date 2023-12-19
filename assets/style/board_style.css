@@ -1085,3 +1085,19 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.board_body{
+  height: 100%;
+}
+
+#content{
+  height: 100%;
+}
+
+.taskContent{
+  height: calc(100% - 172px);
+}
+
+.taskCategory{
+  height: 100%;
+}

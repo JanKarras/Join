@@ -120,13 +120,13 @@ function addBackgroundColor(i) {
  *
  * @param {number} index - Index of the user to be deleted.
  */
-function deleteUserByIndex(index) {
+async function deleteUserByIndex(index) {
   currentUserIndex = index;
   console.log(users);
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
-    // await set_users_contacts();
-    // await load_users_contacts();
+    await set_users_contacts();
+    await load_users_contacts();
     displayUsers();
     displayUserDetails();
     closeEditContactPopup();
@@ -152,7 +152,7 @@ function closeAddContactPopup() {
 /**
  * Adds a new contact based on the input values, sorts the users, and updates the display.
  */
-function addContactPopup() {
+async function addContactPopup() {
   let newName = document.getElementById("addName").value;
   let newEmail = document.getElementById("addEmail").value;
   let newTelefon = +document.getElementById("addPhone").value;
@@ -165,8 +165,8 @@ function addContactPopup() {
   }
   const newUser = { name: newName, email: newEmail, telefon: newTelefon };
   users.push(newUser);
-  // await set_users_contacts();
-  // await load_users_contacts();
+  await set_users_contacts();
+  await load_users_contacts();
   users.sort((a, b) => a.name.localeCompare(b.name));
   for (let i = 0; i < users.length; i++) {
     const element = users[i];
@@ -210,7 +210,7 @@ function openEditContactPopup(currentUserIndex) {
 /**
  * Saves the changes made in the edit contact popup, updates user details, and closes the popup.
  */
-function saveChanges() {
+async function saveChanges() {
   let user = users[currentUserIndex];
   let editedName = document.getElementById("editName").value;
   let editedEmail = document.getElementById("editEmail").value;
@@ -218,8 +218,8 @@ function saveChanges() {
   user.name = editedName;
   user.email = editedEmail;
   user.telefon = editedPhone;
-  // await set_users_contacts();
-  // await load_users_contacts();
+  await set_users_contacts();
+  await load_users_contacts();
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();

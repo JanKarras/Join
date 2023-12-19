@@ -46,7 +46,7 @@
         </div>
 
         <div class="taskContent">
-          <div class="task_cat">
+          <div class="taskContainer">
             <div class="taskContainer">
               <div class="taskCategoryName">
                 <h3>To do</h3>
@@ -54,7 +54,7 @@
                   ><img src="./assets/img/board-img/plusButtonTasks.png"
                 /></span>
               </div>
-              <div id="taskCategoryToDo" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <div id="todo" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <!-- insert status = "to_do" here -->
               </div>
             </div>
@@ -67,7 +67,7 @@
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
             </div>
-            <div id="taskCategoryInProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="in_progress" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- insert status = "in_progress" here -->
             </div>
           </div>
@@ -79,7 +79,7 @@
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
             </div>
-            <div id="taskCategoryAwaitFeedback" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="feedback" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- insert status = "feedback" here -->
             </div>
           </div>
@@ -88,7 +88,7 @@
             <div class="taskCategoryName">
               <h3>Done</h3>
             </div>
-            <div id="taskCategoryDone" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="done" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- insert status = "done" here -->
             </div>
           </div>
