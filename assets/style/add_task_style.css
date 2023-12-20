@@ -598,3 +598,9 @@ li:hover {
 .subtask i {
   font-size: 1.2rem;
 }
+
+@media (max-width: 990px) {
+  .form {
+    flex-direction: column;
+  }
+}

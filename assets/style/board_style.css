@@ -82,7 +82,7 @@ h1 {
   gap: 30px;
   width: 100%;
   max-width: 1500px;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 .buttonAdd {
@@ -1055,6 +1055,7 @@ h1 {
 .add_task_h1 {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   margin: 0 auto;
 }
@@ -1086,18 +1087,18 @@ h1 {
   justify-content: space-between;
 }
 
-.board_body{
+.board_body {
   height: 100%;
 }
 
-#content{
+#content {
   height: 100%;
 }
 
-.taskContent{
+.taskContent {
   height: calc(100% - 172px);
 }
 
-.taskCategory{
+.taskCategory {
   height: 100%;
 }

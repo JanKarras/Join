@@ -93,8 +93,35 @@ function displayUserDetails(i) {
   let nameInitials = names[0].charAt(0).toUpperCase();
   nameInitials += names[names.length - 1].charAt(0).toUpperCase();
   userInfo.innerHTML += userDetailHTML(i, nameInitials);
-
+  checkWidth();
   document.querySelector(".info").classList.add("show-info");
+  checkWidth();
+}
+
+function checkWidth() {
+  const contactDetail = document.querySelector(".contact_detail");
+  const contact = document.querySelector(".contact_sidebar");
+  if (window.innerWidth <= 835) {
+    contact.style.display = "none";
+    contactDetail.style.display = "block";
+  } else {
+    // contactDetail.style.display = "block";
+  }
+}
+
+function displayContacts() {
+  const contactDetail = document.querySelector(".contact_detail");
+  const contact = document.querySelector(".contact_sidebar");
+  contact.style.display = "block";
+  contactDetail.style.display = "none";
+  removeBackgroundColor();
+}
+
+function removeBackgroundColor() {
+  const contactNames = document.querySelectorAll(".contact_name");
+  contactNames.forEach((contact) => {
+    contact.classList.remove("selected-contact");
+  });
 }
 
 /**
@@ -103,10 +130,7 @@ function displayUserDetails(i) {
  * @param {number} i - Index of the selected user.
  */
 function addBackgroundColor(i) {
-  const contactNames = document.querySelectorAll(".contact_name");
-  contactNames.forEach((contact) => {
-    contact.classList.remove("selected-contact");
-  });
+  removeBackgroundColor();
   const selectedContact = document.querySelector(
     `.contact_name[data-index="${i}"]`
   );

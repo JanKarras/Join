@@ -23,18 +23,18 @@ body {
   background-color: white !important;
 }
 
-  .name {
-    color: #29abe2;
-    width: 55px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 55px;
-    border-radius: 50%;
-    border: solid #2a3647 3px;
-    font-size: 24px;
-    margin-right: 20px;
-  }
+.name {
+  color: #29abe2;
+  width: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  border-radius: 50%;
+  border: solid #2a3647 3px;
+  font-size: 24px;
+  margin-right: 20px;
+}
 
 .popup_menu {
   position: absolute;
@@ -61,4 +61,20 @@ body {
   margin-left: calc(328px - 232px);
   font-size: 20px;
 }
+.mobile_logo {
+  display: none;
+}
 
+@media (max-width: 520px) {
+  .header_container p {
+    display: none;
+  }
+  .mobile_logo {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+  }
+  .header_container {
+    padding-left: 1rem;
+  }
+}

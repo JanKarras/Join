@@ -16,8 +16,8 @@
   </head>
 
   <body>
+    <div class="overlay" id="overlay"></div>
     <div class="container">
-      <div class="overlay" id="overlay"></div>
       <section class="contacts">
         <div class="contact_sidebar">
           <div class="add_contact">
@@ -35,9 +35,16 @@
             <h2>Contacts</h2>
             <div class="partition"></div>
             <p>Better with a team</p>
+            <div class="partition partition2"></div>
+            <span class="arrow-left" onclick="displayContacts()"
+              ><i class="fa-solid fa-arrow-left"></i
+            ></span>
           </div>
           <div id="contact_details"></div>
         </div>
+        <span class="add_contact_mobile" onclick="openAddContactPopup()"
+          ><i class="fa-solid fa-user-plus"></i
+        ></span>
       </section>
       <div class="add-contact" id="addContactPopup">
         <form onclick="addContactPopup(); return false">
@@ -47,6 +54,7 @@
             <div class="contact_title">
               <h2>Add contact</h2>
               <p>Tasks are better with a team!</p>
+              <div class="partition2"></div>
             </div>
           </div>
           <div class="contact_img">
