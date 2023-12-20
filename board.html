@@ -251,6 +251,36 @@
       <img src="./assets/img/board-img/addedToBoard.png" />
     </div> -->
     <div class="overlay d-none"></div>
+    <div id="showDetail-container" class="showDetail-container">
+      <div class="background-container" onclick="closePopup()">
+        <div class="popup-container" onclick="stopPropagation(event)">
+          <div class="popup_header">
+            <div id="cat" class="user_story">techniker Task</div>
+            <span class="close" onclick="closePopup()">&times;</span>
+          </div>
+          <div class="popup-content">
+            <h1 id="title" class="title"></h1>
+            <div id="des" class="des"></div></div>
+            <div class="due">
+              Due Date:&emsp;
+              <div id="due" ></div>
+            </div>
+            <div id="prio_popup" class="prio_popup">
+              Priority:&emsp;
+              <div id="prio"></div>
+              <img id="prio_img" src="">
+            </div>
+            <div class="ass_to" id="ass_to_con">
+              Assigend To:
+              <div id="ass_to"></div></div>
+            <div id="sub" class="sub">
+              <div>Subtasks</div>
+              <div id="sub_list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="./assets/js/contacts_js.js"></script>
     <script src="./assets/js/add_task_js.js"></script>
     <script src="./assets/js/board_js.js"></script>

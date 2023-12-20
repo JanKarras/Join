@@ -12,6 +12,10 @@ html {
   margin: auto;
 }
 
+.height_100{
+  height: 100%;
+}
+
 .side_bar {
   width: 14.5rem;
 
@@ -102,6 +106,7 @@ nav a {
 
 .header_content_container {
   width: calc(100% - 232px);
+  height: 100%;
 }
 
 /* @media (max-width: 1057px) {
