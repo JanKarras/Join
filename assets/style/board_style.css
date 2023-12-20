@@ -121,12 +121,14 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
 }
 
 .taskCategoryName h3 {
   font-size: 18px;
   color: rgb(41, 54, 71, 0.8);
   font-weight: 800;
+
 }
 
 .user_task {
@@ -138,6 +140,7 @@ h1 {
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 1.2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .user_story {
@@ -189,20 +192,8 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.members {
-  display: flex;
-}
-.members div {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-color: orange;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  height: 42px;
 }
 
 body {
@@ -246,12 +237,17 @@ body {
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  max-height: 90vh;
   width: 525px;
-  overflow-y: auto;
   transition: margin-right 0.3s ease; /* Animationsübergang hinzugefügt */
   z-index: 1000; /* Höhere Z-Ebene für das Popup selbst */
   padding: 40px;
+}
+
+
+
+.edit_content, .parent_popup_content{
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .close {
@@ -322,6 +318,32 @@ body {
   color: initial; /* Setze die Textfarbe zurück oder auf eine andere Farbe */
 }
 
+.members {
+  display: flex;
+  position: relative;
+  height: 42px;
+}
+
+.inits_board {
+  position: absolute;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
+  margin-left: 10px; /* Abstand zwischen den Kreisen anpassen */
+}
+
+/* Styles für das erste .inits_board-Element */
+.inits_board:first-child {
+  left: 0; /* Das erste Element beginnt ganz links */
+}
+
+/* Styles für die weiteren .inits_board-Elemente */
+.inits_board:not(:first-child) {
+  left: calc(100% + 30px); /* 100% Breite des Containers minus Abstand */
+}
+
 .inits{
   display: flex;
   border-radius: 50%;
@@ -349,15 +371,106 @@ body {
   margin-left: 10px;
 }
 
-/*.list_element_sub_task:hover .check_img {
-  content: url('../img/Check_button.png');
-}*/
-
 .list_element_sub_task .check_img {
   width: 24px;
   height: 24px;
   margin-right: 10px;
   vertical-align: middle;
+}
+
+.popup_footer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+}
+
+.del, .edit {
+  display: flex;
+  align-items: center;
+  padding: 8px; /* Passe den Abstand nach Bedarf an */
+}
+
+.separator_popup {
+  width: 2px;
+  background-color: lightgrey;
+  height: 16px;
+  margin: 0 8px; /* Passe den Abstand nach Bedarf an */
+}
+
+.del_edit_name{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.2px;
+  margin-left: 8px;
+}
+
+.edit_head{
+  padding-top: 30px;
+}
+
+.header_edit{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+}
+
+.contacts{
+  position: relative;
+}
+
+.options-container {
+  position: absolute;
+  top: 100%; /* Setzt die Position unterhalb des contact-select Elements */
+  left: 0;
+  z-index: 1; /* Stelle sicher, dass die Optionen über anderen Elementen liegen */
+}
+
+.date_picker {
+  margin-top: 10px; /* Einen Abstand zwischen dem Kontaktelement und dem Subtask-Element hinzufügen */
+}
+
+.option_edit{
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  /* user-select: none; */
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.add_cancel {
+  visibility: hidden;
+}
+
+.contacts-open .add_cancel {
+  visibility: visible;
+}
+
+.inits_edit{
+  display: flex;
+  margin-top: 10px;
+}
+
+.footer_edit{
+  display: flex;
+  justify-content: end;
+  padding-top: 20px;
+}
+
+.added_subtasks_edit{
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  border: none;
+  background-color: white;
 }
 /* .hoverPlusEffect {
   display: flex;
