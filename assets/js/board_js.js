@@ -18,13 +18,15 @@ async function load_users_tasks_board() {
   }
 }
 
-function openAddTask() {
-  add_task_init();
+
+
+function openAddTask(name) {
+  add_task_init(name);
   let addTask = document.getElementById("addTaskPopUpWindowContent");
   let overlay = document.querySelector(".overlay");
   addTask.classList.remove("d-none");
   overlay.classList.remove("d-none");
-  addTask.style.left = "50%";
+  addTask.style.left = "50%"
 }
 function closeAddTask() {
   let addTask = document.getElementById("addTaskPopUpWindowContent");

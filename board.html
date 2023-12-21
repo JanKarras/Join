@@ -43,7 +43,7 @@
           <div class="taskContainer">
             <div class="taskCategoryName">
               <h3>To do</h3>
-              <span class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png" /></span>
+              <span onclick="openAddTask()" class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png" /></span>
             </div>
             <div id="todo" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- insert status = "to_do" here -->
@@ -54,7 +54,7 @@
         <div class="taskContainer">
           <div class="taskCategoryName">
             <h3>In progress</h3>
-            <span class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png" /></span>
+            <span onclick="openAddTask('in_progress')" class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png" /></span>
           </div>
           <div id="in_progress" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
             <!-- insert status = "in_progress" here -->
@@ -64,7 +64,7 @@
         <div class="taskContainer">
           <div class="taskCategoryName">
             <h3>Await feedback</h3>
-            <span class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png" /></span>
+            <span onclick="openAddTask('feedback')" class="hoverPlusEffect"><img src="./assets/img/board-img/plusButtonTasks.png" /></span>
           </div>
           <div id="feedback" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
             <!-- insert status = "feedback" here -->

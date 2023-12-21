@@ -58,21 +58,26 @@
 
 let tasks = [];
 let ass_to_emails = [];
+let insert_in;
 
-async function add_task_init() {
+async function add_task_init(name) {
+  if (name == undefined)
+  name = 'todo';
+  console.log(name);
+  insert_in = name;
   await load_users_contacts();
-  await load_users_tasks();
+  await load_users_tasks(name);
   contacts();
   insertTask();
 }
 
-async function load_users_tasks(){
+async function load_users_tasks(name){
   tasks.length = 0;
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element['email'] == Email) {
-      for (let j = 0; j < element['tasks'][0]['todo'].length; j++) {
-        const task = element['tasks'][0]['todo'][j];
+      for (let j = 0; j < element['tasks'][0][name].length; j++) {
+        const task = element['tasks'][0][name][j];
         tasks.push(task);
       }
       break ; 
@@ -354,10 +359,10 @@ async function send_taks_to_users(newTask){
     for (let j = 0; j < newTask['ass_to'].length; j++) {
       if (newTask['ass_to'][j] == user['email'])
       {
-        user['tasks'][0]['todo'].length = 0;
+        user['tasks'][0][insert_in].length = 0;
         for (let k = 0; k < tasks.length; k++) {
           const task = tasks[k];
-          user['tasks'][0]['todo'].push(task);
+          user['tasks'][0][insert_in].push(task);
         }
       }
     }
