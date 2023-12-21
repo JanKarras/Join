@@ -22,22 +22,22 @@
   <content class="summary_content">
     <div>
       <div class="summary_top_cards">
-        <div class="summary_top_card">
-          <img class="summary_icons" src="./assets/img/pen.png" />
+        <div onclick="menue_clicked('board')"  class="summary_top_card hover_pointer">
+          <img class="summary_icons hover_pen" src="./assets/img/pen.png" />
           <div class="summary_top_card_numbers">
             <h2 id="to_do_nb" class="h2">0</h2>
             <div class="text_cards">To-do</div>
           </div>
         </div>
-        <div class="summary_top_card">
-          <img class="summary_icons" src="./assets/img/check.png" />
+        <div onclick="menue_clicked('board')" class="summary_top_card hover_pointer">
+          <img class="summary_icons hover_check" src="./assets/img/check.png" />
           <div class="summary_top_card_numbers">
             <h2 id="done_nb" class="h2">0</h2>
             <div class="text_cards">Done</div>
           </div>
         </div>
       </div>
-      <div class="middlecards">
+      <div class="middlecards hover_pointer" onclick="menue_clicked('board')">
         <div class="summary_middle_card">
           <img class="summary_icons" src="./assets/img/top_arrow.png" />
           <div class="summary_top_card_numbers">
@@ -52,18 +52,18 @@
         </div>
       </div>
       <div class="bottom_cards">
-        <div class="summary_bot_card_numbers">
+        <div onclick="menue_clicked('board')" class="summary_bot_card_numbers hover_pointer">
           <h2 id="board_nb" class="h2">0</h2>
           <div class="text_cards">
             Taks in<br />
             Board
           </div>
         </div>
-        <div class="summary_bot_card_numbers">
+        <div onclick="menue_clicked('board')" class="summary_bot_card_numbers hover_pointer">
           <h2 id="progrss_nb" class="h2">0</h2>
           <div class="text_cards">Task in<br />Progress</div>
         </div>
-        <div class="summary_bot_card_numbers">
+        <div onclick="menue_clicked('board')" class="summary_bot_card_numbers hover_pointer">
           <h2 id="feedback_nb" class="h2">0</h2>
           <div class="text_cards">Awaiting<br />Feedback</div>
         </div>

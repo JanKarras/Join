@@ -52,10 +52,19 @@
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-.summary_top_card:hover{
+.summary_top_card:hover {
   background-color: #091931;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Fügt einen Schatten hinzu, um den Container hervorzuheben */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
+  color: white;
+}
+
+.summary_top_card:hover .hover_pen {
+  content: url('../img/pen_hover.png');
+}
+
+.summary_top_card:hover .hover_check {
+  content: url('../img/check_hover.png');
 }
 
 .summary_icons {
@@ -92,6 +101,7 @@
   background-color: #091931;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Fügt einen Schatten hinzu, um den Container hervorzuheben */
   transform: scale(1.05);
+  color: white;
 }
 
 .summary_middle_card {
@@ -143,6 +153,7 @@
   background-color: #091931;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Fügt einen Schatten hinzu, um den Container hervorzuheben */
   transform: scale(1.05);
+  color: white;
 }
 
 .summary_content {
