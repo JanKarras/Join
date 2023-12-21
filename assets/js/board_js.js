@@ -46,8 +46,13 @@ function displayTasks() {
   done.innerHTML = "";
 
   if (tasks_board[0]['todo'].length == 0)
-    todo.innerHTML = "<img src='./assets/img/Notasksfeedback.png'>";
-
+    todo.innerHTML = "<div class='notask'>No tasks to do</div>";
+  if (tasks_board[0]['in_progress'].length == 0)
+    inProgress.innerHTML = "<div class='notask'>No tasks in progress</div>";
+  if (tasks_board[0]['feedback'].length == 0)
+    awaitFeedback.innerHTML = "<div class='notask'>No tasks wating for feedback</div>";
+  if (tasks_board[0]['done'].length == 0)
+    done.innerHTML = "<div class='notask'>No tasks done</div>";
   // Loop through each task status (to_do, in_progress, feedback, done)
   for (const status in tasks_board[0]) {
     if (tasks_board[0].hasOwnProperty(status)) {
@@ -213,6 +218,8 @@ function closePopup() {
   }, 300); // Adjust the timing to match your CSS transition
   delElement.removeEventListener('click', delHandler);
   editElement.removeEventListener('click', editHandler);
+  document.getElementById('edit_container').classList.add('d-none')
+  document.getElementById('popup-container').classList.remove('d-none')
   displayTasks();
 }
 
@@ -300,7 +307,7 @@ function render_details(numberPart, textPart) {
       sub.innerHTML += `
       <li onmouseout="not_hover_over_check(${i}, '${numberPart}', '${textPart}')" onmouseover="hover_over_check(${i}, '${numberPart}', '${textPart}')" class="list_element_sub_task" id="listelementsubtask_${i}" onclick="check(${i}, '${numberPart}', '${textPart}')">
         <img class="check_img" id='check_${i}' src="">
-        <div class="list_text_sub_task">${sub_task_string}</div>
+        <div class="list_text_sub_task hover_pointer">${sub_task_string}</div>
       </li>
       `
       setImg(i, numberPart, textPart);
@@ -438,7 +445,9 @@ async function del(numberPart, textPart) {
 
 function edit(numberPart, textPart) {
   let task = tasks_board[0][textPart][numberPart];
-  let popup_html = document.getElementById("popup-container");
+  document.getElementById("popup-container").classList.add('d-none');
+  let popup_html = document.getElementById("edit_container");
+  popup_html.classList.remove('d-none');
   popup_html.innerHTML = "";
   popup_html.innerHTML = `
   <div class="edit_content">
@@ -505,7 +514,7 @@ function edit(numberPart, textPart) {
   <ul id="subtaskList_edit" class="subtask-list added_subtasks_edit"></ul>
 </div>
 <div class="footer_edit">
-  <img class="cancel_edit" src="./assets/img/board-img/Primary check button.png" onclick="finish_edit(${numberPart}, ${textPart})">
+  <img class="cancel_edit hover_pointer" src="./assets/img/board-img/Primary check button.png" onclick="finish_edit(${numberPart}, '${textPart}')">
 </div>
     `
   render_popup_edit(task);
@@ -551,35 +560,35 @@ function render_popup_edit(task) {
   render_sub_tasks(task.sub_tasks);
 }
 
-function render_initialz_edit(){
+function render_initialz_edit() {
   let initials = []
-    for (let i = 0; i < ass_to_emails_edit.length; i++) {
-      const ass = ass_to_emails_edit[i];
-      for (let j = 0; j < users.length; j++) {
-        const user = users[j];
-        if (user['email'] == ass) {
-          let name_parts = user['name'].split(" ");
-          let firt_name = name_parts[0].charAt(0).toUpperCase();
-          let second_name = "";
-          if (name_parts.length > 1) {
-            second_name = name_parts[name_parts.length - 1].charAt(0).toUpperCase();
-          }
-          initials.push({
-            'initials': firt_name + second_name,
-            'name': user['name'],
-            'color': getUserColor(j),
-          });
+  for (let i = 0; i < ass_to_emails_edit.length; i++) {
+    const ass = ass_to_emails_edit[i];
+    for (let j = 0; j < users.length; j++) {
+      const user = users[j];
+      if (user['email'] == ass) {
+        let name_parts = user['name'].split(" ");
+        let firt_name = name_parts[0].charAt(0).toUpperCase();
+        let second_name = "";
+        if (name_parts.length > 1) {
+          second_name = name_parts[name_parts.length - 1].charAt(0).toUpperCase();
         }
+        initials.push({
+          'initials': firt_name + second_name,
+          'name': user['name'],
+          'color': getUserColor(j),
+        });
       }
     }
-    let html = document.getElementById('selected_cont_initials');
-    html.innerHTML = ``;
-    for (let i = 0; i < initials.length; i++) {
-      const element = initials[i];
-      html.innerHTML += `
+  }
+  let html = document.getElementById('selected_cont_initials');
+  html.innerHTML = ``;
+  for (let i = 0; i < initials.length; i++) {
+    const element = initials[i];
+    html.innerHTML += `
       <div class="inits" style="background-color: ${element['color']};">${element['initials']}</div>
       `
-    }
+  }
 }//<div class="inits" style="background-color: #2ec5a4;">H</div>flex
 
 function toggleOptions_edit() {
@@ -664,7 +673,7 @@ function render_sub_tasks(sub_tasks) {
   }
 }
 
-async function finish_edit(numberPart, textPart){
+async function finish_edit(numberPart, textPart) {
   console.log(numberPart, textPart);
   let task = tasks_board[0][textPart][numberPart];
   task.title = document.getElementById('title_edit').value;
@@ -672,5 +681,5 @@ async function finish_edit(numberPart, textPart){
   task.ass_to = ass_to_emails_edit;
   task.des = document.getElementById('description_input_edit').value
   task.prio = prio_edit;
-
+  closePopup();
 }

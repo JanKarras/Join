@@ -103,8 +103,8 @@ function render_deadline(tasks_sum) {
     current_date.setHours(0, 0, 0, 0);
 
     function parseDate(dateString) {
-        let parts = dateString.split('.');
-        return new Date(parts[2], parts[1] - 1, parts[0]);
+        let parts = dateString.split('-');
+        return new Date(parts[0], parts[1] - 1, parts[2]);
     }
 
     let futureDates = dates.filter(date => {
@@ -115,7 +115,7 @@ function render_deadline(tasks_sum) {
     futureDates.sort((a, b) => parseDate(a) - parseDate(b));
     let nextDueDate = futureDates.length > 0 ? parseDate(futureDates[0]) : null;
 
-    let formattedDate = nextDueDate ? nextDueDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Kein fälliges Datum';
+    let formattedDate = nextDueDate ? nextDueDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'No';
 
     document.getElementById('deadline').innerHTML = formattedDate;
 }

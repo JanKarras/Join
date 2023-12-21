@@ -210,6 +210,7 @@
   <div class="overlay d-none"></div>
   <div id="showDetail-container" class="showDetail-container">
     <div class="background-container" onclick="closePopup()">
+      <div id="edit_container" class="d-none popup-container" onclick="stopPropagation(event)"></div>
       <div id="popup-container" class="popup-container" onclick="stopPropagation(event)">
         <div class="popup_header">
           <div id="cat" class="user_story">techniker Task</div>
@@ -238,15 +239,9 @@
             <div id="sub_list"></div>
           </div>
           <div class="popup_footer">
-            <div id="del" class="del">
-              <img src="./assets/img//board-img/editPopUpdelete.png">
-              <div class="del_edit_name">Delete</div>
-            </div>
+            <img class="del" id="del" src="./assets/img//board-img/can.png">
             <div class="separator_popup"></div>
-            <div id="edit" class="edit">
-              <img src="./assets/img//board-img/editPopUpEdit.png">
-              <div class="del_edit_name">Edit</div>
-            </div>
+            <img class="edit" id="edit" src="./assets/img//board-img/edit.png">
           </div>
         </div>
       </div>

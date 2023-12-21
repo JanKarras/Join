@@ -6,6 +6,10 @@ html {
   position: relative;
 }
 
+.hover_pointer{
+  cursor: pointer;
+}
+
 #body {
   width: 100%;
   max-width: 1440px;

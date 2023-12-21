@@ -141,6 +141,13 @@ h1 {
   gap: 1.5rem;
   margin-bottom: 1.2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.user_task:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5); /* Hier wird der stärkere Box-Shadow auf Hover festgelegt */
+  background-color: #f5f5f5; /* Hier wird die hellere Hintergrundfarbe auf Hover festgelegt */
 }
 
 .user_story {
@@ -168,6 +175,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
+
 .techniker {
   background-color: rgb(12, 150, 81);
 }
@@ -216,16 +224,19 @@ body {
 }
 
 .background-container {
-  background: rgba(0, 0, 0, 0.5); /* Transparente Hintergrundfarbe */
+  background: rgba(0, 0, 0, 0.5);
+  /* Transparente Hintergrundfarbe */
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-end; /* Änderung hier: Rechts ausrichten */
+  justify-content: flex-end;
+  /* Änderung hier: Rechts ausrichten */
   align-items: flex-start;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999; /* Hohe Z-Ebene für das Overlay */
+  z-index: 999;
+  /* Hohe Z-Ebene für das Overlay */
 }
 
 .popup-container {
@@ -233,19 +244,23 @@ body {
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
-  margin-right: -100%; /* Änderung hier: Startet außerhalb des Bildschirms */
+  margin-right: -100%;
+  /* Änderung hier: Startet außerhalb des Bildschirms */
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   width: 525px;
-  transition: margin-right 0.3s ease; /* Animationsübergang hinzugefügt */
-  z-index: 1000; /* Höhere Z-Ebene für das Popup selbst */
+  transition: margin-right 0.3s ease;
+  /* Animationsübergang hinzugefügt */
+  z-index: 1000;
+  /* Höhere Z-Ebene für das Popup selbst */
   padding: 40px;
 }
 
 
 
-.edit_content, .parent_popup_content{
+.edit_content,
+.parent_popup_content {
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -255,14 +270,14 @@ body {
   cursor: pointer;
 }
 
-.popup_header{
+.popup_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 24px;
 }
 
-.title{
+.title {
   font-weight: 700;
   font-size: 61px;
   line-height: 71.2px;
@@ -270,13 +285,13 @@ body {
   margin-bottom: 10px;
 }
 
-.des{
+.des {
   font-weight: 400;
   font-size: 20px;
   padding-bottom: 10px;
 }
 
-.due{
+.due {
   display: flex;
   font-weight: 400;
   font-size: 20px;
@@ -284,7 +299,7 @@ body {
   padding-bottom: 10px;
 }
 
-.prio_popup{
+.prio_popup {
   padding-top: 10px;
   padding-bottom: 10px;
   display: flex;
@@ -293,11 +308,11 @@ body {
   font-size: 20px;
 }
 
-#prio_img{
+#prio_img {
   padding-left: 10px;
 }
 
-.ass_to{
+.ass_to {
   display: flex;
   font-weight: 400;
   font-size: 20px;
@@ -306,7 +321,7 @@ body {
   flex-direction: column;
 }
 
-.list_element_ass_to{
+.list_element_ass_to {
   list-style: none;
   display: flex;
   align-items: center;
@@ -314,8 +329,10 @@ body {
 }
 
 .list_element_ass_to:hover {
-  background-color: initial; /* Setze die Hintergrundfarbe zurück oder auf eine andere Farbe */
-  color: initial; /* Setze die Textfarbe zurück oder auf eine andere Farbe */
+  background-color: initial;
+  /* Setze die Hintergrundfarbe zurück oder auf eine andere Farbe */
+  color: initial;
+  /* Setze die Textfarbe zurück oder auf eine andere Farbe */
 }
 
 .members {
@@ -331,20 +348,23 @@ body {
   height: 42px;
   text-align: center;
   line-height: 42px;
-  margin-left: 10px; /* Abstand zwischen den Kreisen anpassen */
+  margin-left: 10px;
+  /* Abstand zwischen den Kreisen anpassen */
 }
 
 /* Styles für das erste .inits_board-Element */
 .inits_board:first-child {
-  left: 0; /* Das erste Element beginnt ganz links */
+  left: 0;
+  /* Das erste Element beginnt ganz links */
 }
 
 /* Styles für die weiteren .inits_board-Elemente */
 .inits_board:not(:first-child) {
-  left: calc(100% + 30px); /* 100% Breite des Containers minus Abstand */
+  left: calc(100% + 30px);
+  /* 100% Breite des Containers minus Abstand */
 }
 
-.inits{
+.inits {
   display: flex;
   border-radius: 50%;
   width: 42px;
@@ -355,7 +375,7 @@ body {
   margin-right: 20px;
 }
 
-.sub{
+.sub {
   display: flex;
   font-weight: 400;
   font-size: 20px;
@@ -378,60 +398,66 @@ body {
   vertical-align: middle;
 }
 
-.popup_footer{
+.popup_footer {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: end;
 }
 
-.del, .edit {
+.del,
+.edit {
   display: flex;
   align-items: center;
-  padding: 8px; /* Passe den Abstand nach Bedarf an */
+  padding: 8px;
+  /* Passe den Abstand nach Bedarf an */
 }
 
 .separator_popup {
   width: 2px;
   background-color: lightgrey;
   height: 16px;
-  margin: 0 8px; /* Passe den Abstand nach Bedarf an */
+  margin: 0 8px;
+  /* Passe den Abstand nach Bedarf an */
 }
 
-.del_edit_name{
+.del_edit_name {
   font-weight: 400;
   font-size: 16px;
   line-height: 19.2px;
   margin-left: 8px;
 }
 
-.edit_head{
+.edit_head {
   padding-top: 30px;
 }
 
-.header_edit{
+.header_edit {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: end;
 }
 
-.contacts{
+.contacts {
   position: relative;
 }
 
 .options-container {
   position: absolute;
-  top: 100%; /* Setzt die Position unterhalb des contact-select Elements */
+  top: 100%;
+  /* Setzt die Position unterhalb des contact-select Elements */
   left: 0;
-  z-index: 1; /* Stelle sicher, dass die Optionen über anderen Elementen liegen */
+  z-index: 1;
+  /* Stelle sicher, dass die Optionen über anderen Elementen liegen */
 }
 
 .date_picker {
-  margin-top: 10px; /* Einen Abstand zwischen dem Kontaktelement und dem Subtask-Element hinzufügen */
+  margin-top: 10px;
+  /* Einen Abstand zwischen dem Kontaktelement und dem Subtask-Element hinzufügen */
 }
 
-.option_edit{
+.option_edit {
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
   margin-bottom: 0.3rem;
@@ -451,18 +477,18 @@ body {
   visibility: visible;
 }
 
-.inits_edit{
+.inits_edit {
   display: flex;
   margin-top: 10px;
 }
 
-.footer_edit{
+.footer_edit {
   display: flex;
   justify-content: end;
   padding-top: 20px;
 }
 
-.added_subtasks_edit{
+.added_subtasks_edit {
   padding: 0.5rem 1rem;
   width: 100%;
   max-height: 250px;
@@ -472,18 +498,52 @@ body {
   border: none;
   background-color: white;
 }
-/* .hoverPlusEffect {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-/* 
-.hoverPlusEffect:hover img {
+
+.hoverPlusEffect {
+  display: inline-block;
+  position: relative;
   cursor: pointer;
-  box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
-  filter: invert(54%) sepia(38%) saturate(920%) hue-rotate(153deg)
-    brightness(101%) contrast(90%);
 }
+
+.hoverPlusEffect img {
+  display: block;
+}
+
+.hoverPlusEffect:hover img {
+  content: url('../img/board-img/Property\ 1=Variant2.png');
+}
+
+.hover_pointer{
+  cursor: pointer;
+}
+
+.del{
+  cursor: pointer;
+}
+
+.del:hover{
+  content: url('../img/board-img/can_hover.png');
+}
+
+.edit{
+  cursor: pointer;
+}
+
+.edit:hover{
+  content: url('../img/board-img/edi_hover.png');
+}
+
+.notask{
+  width: 100%;
+  height: 48px;
+  text-align: center;
+  line-height: 48px;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  color: #A8A8A8;
+  border: 1px dashed #A8A8A8;
+}
+/* 
 
 .noTask {
   height: 20px;
@@ -1250,6 +1310,7 @@ body {
 .searchbar {
   position: relative;
 }
+
 .searchbar input {
   height: 100%;
   width: 100%;
@@ -1262,6 +1323,7 @@ body {
   top: 60%;
   transform: translateY(-50%);
   border-left: 1px solid #b8b6b6;
+  cursor: pointer;
 }
 
 .search img {
@@ -1291,6 +1353,7 @@ body {
     right: -80%;
     transform: translate(0, -50%);
   }
+
   to {
     right: 50%;
     transform: translate(-50%, -50%);
@@ -1313,6 +1376,7 @@ body {
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
 }
+
 .font {
   position: relative;
 }
