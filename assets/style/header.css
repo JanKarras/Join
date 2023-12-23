@@ -52,10 +52,6 @@ body {
   flex-direction: column;
 }
 
-.display_none {
-  display: none;
-}
-
 #headline_header {
   flex: 1;
   margin-left: calc(328px - 232px);
@@ -64,6 +60,12 @@ body {
 .mobile_logo {
   display: none;
 }
+
+/* @media (max-width: 650px) {
+  .header_container p {
+    font-size: 1rem;
+  }
+} */
 
 @media (max-width: 520px) {
   .header_container p {

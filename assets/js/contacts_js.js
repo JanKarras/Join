@@ -83,6 +83,8 @@ function displayUsers() {
  */
 function displayUserDetails(i) {
   const userInfo = document.getElementById("contact_details");
+  document.querySelector(".add_contact_mobile").classList.add("d-none-m");
+  document.querySelector(".edit_contact_mobile").classList.add("d-block-m");
   addBackgroundColor(i);
   userInfo.innerHTML = "";
   const user = users[i];
@@ -95,25 +97,22 @@ function displayUserDetails(i) {
   userInfo.innerHTML += userDetailHTML(i, nameInitials);
   checkWidth();
   document.querySelector(".info").classList.add("show-info");
-  checkWidth();
 }
 
 function checkWidth() {
   const contactDetail = document.querySelector(".contact_detail");
   const contact = document.querySelector(".contact_sidebar");
-  if (window.innerWidth <= 835) {
-    contact.style.display = "none";
-    contactDetail.style.display = "block";
-  } else {
-    // contactDetail.style.display = "block";
-  }
+  contact.classList.add("d-none");
+  contactDetail.classList.add("d-block");
 }
 
 function displayContacts() {
   const contactDetail = document.querySelector(".contact_detail");
   const contact = document.querySelector(".contact_sidebar");
-  contact.style.display = "block";
-  contactDetail.style.display = "none";
+  document.querySelector(".add_contact_mobile").classList.remove("d-none-m");
+  document.querySelector(".edit_contact_mobile").classList.remove("d-block-m");
+  contact.classList.remove("d-none");
+  contactDetail.classList.remove("d-block");
   removeBackgroundColor();
 }
 
@@ -173,6 +172,16 @@ function closeAddContactPopup() {
   document.getElementById("overlay").style.display = "none";
 }
 
+function openEditandDelete() {
+  document.querySelector(".contact_icon").style.display = "flex";
+  document.querySelector(".contact_icon").style.right = "1rem";
+}
+
+function closeEditandDelete() {
+  document.querySelector(".contact_icon").style.display = "none";
+  document.querySelector(".contact_icon").style.right = "77px";
+}
+
 /**
  * Adds a new contact based on the input values, sorts the users, and updates the display.
  */
@@ -229,6 +238,7 @@ function openEditContactPopup(currentUserIndex) {
   document.getElementById("contactInitials").style.backgroundColor = userColor;
   document.getElementById("editContactPopup").classList.add("show");
   document.getElementById("overlay").style.display = "block";
+  closeEditandDelete();
 }
 
 /**
@@ -256,6 +266,8 @@ async function saveChanges() {
 function closeEditContactPopup() {
   document.getElementById("editContactPopup").classList.remove("show");
   document.getElementById("overlay").style.display = "none";
+
+  displayUserDetails(currentUserIndex);
 }
 
 const colors = [
