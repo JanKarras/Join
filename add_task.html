@@ -32,8 +32,8 @@
       <div id="content">
         <div class="add_task_h1">Add Task</div>
         <div class="add_task_content">
-          <div class="add_taks_sides left_side">
-            <div>
+          <div class="left_side">
+            <div class="title2">
               <div class="display_flex">
                 <label class="name_of_input">Title</label>
                 <div class="star">*</div>
@@ -45,7 +45,7 @@
                 required
               />
             </div>
-            <div>
+            <div class="description2">
               <div class="task-description">
                 <label class="description">Description</label>
                 <textarea
@@ -56,7 +56,7 @@
                 ></textarea>
               </div>
             </div>
-            <div>
+            <div class="assign-to">
               <label>Assigned to</label>
               <div class="contacts">
                 <div class="contact-select date_picker" id="contactSelect">
@@ -71,13 +71,30 @@
                 <div class="selected_cont_initials"></div>
               </div>
             </div>
+            <div class="prios2">
+              <label>Prio</label>
+              <div class="prio">
+                <div class="prio_btns urgent" onclick="setPriority('urgent')">
+                  <label>Urgent</label>
+                  <span><i class="fa-solid fa-angles-up"></i></span>
+                </div>
+                <div class="prio_btns medium" onclick="setPriority('medium')">
+                  <label>Medium</label>
+                  <span><i class="fa-solid fa-equals"></i></span>
+                </div>
+                <div class="prio_btns low" onclick="setPriority('low')">
+                  <label>Low</label>
+                  <span><i class="fa-solid fa-angles-down"></i></span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- ############# -->
           <div class="seperator_add_task"></div>
 
-          <div class="add_taks_sides right_side">
-            <div>
+          <div class="add_task_sides right_side">
+            <div class="date">
               <div class="display_flex">
                 <label class="name_of_input">Due date</label>
                 <div class="star">*</div>
@@ -86,7 +103,16 @@
                 <input required type="date" id="date_input" />
               </div>
             </div>
-            <div>
+            <div class="date2">
+              <div class="display_flex">
+                <label class="name_of_input">Due date</label>
+                <div class="star">*</div>
+              </div>
+              <div class="date_picker">
+                <input required type="date" id="date_input" />
+              </div>
+            </div>
+            <div class="prios">
               <label>Prio</label>
               <div class="prio">
                 <div class="prio_btns urgent" onclick="setPriority('urgent')">
@@ -125,6 +151,21 @@
                     User Story
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="assign-to2">
+              <label>Assigned to</label>
+              <div class="contacts">
+                <div class="contact-select date_picker" id="contactSelect">
+                  <input
+                    class="select-box"
+                    onclick="toggleOptions()"
+                    placeholder="Select contacts to assign"
+                  />
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
+                </div>
+                <div class="options-container" id="optionsContainer"></div>
+                <div class="selected_cont_initials"></div>
               </div>
             </div>
             <!-- ### -->

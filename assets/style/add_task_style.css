@@ -18,7 +18,7 @@
   height: 100%;
   max-height: calc(100vh - 94px);
   background: #f6f7f8;
-  padding: 10% 2%;
+  padding: 3rem 2rem;
   overflow: auto;
 }
 
@@ -37,8 +37,7 @@ label {
   padding-bottom: 2rem;
 }
 
-.add_taks_sides {
-  width: 30.56vw;
+.add_task_sides {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,15 +51,10 @@ label {
 
 .description {
   display: flex;
-  padding-bottom: 0.6rem;
-}
-
-.left_side {
-  height: 376px;
 }
 
 .right_side {
-  /* height: 416px; */
+  height: 400px;
 }
 
 .display_flex {
@@ -282,17 +276,18 @@ i:hover {
   height: 424px;
 }
 
-.add_task_content,
-.add_task_h1 {
+.add_task_content {
   display: flex;
   justify-content: space-between;
-  width: 88%;
   margin: 0 auto;
+  padding: 0 3rem;
+  margin-bottom: 11rem;
 }
 
 .left_side {
-  height: 376px;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .left_side,
@@ -316,14 +311,14 @@ i:hover {
 
 .prio {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   align-items: center;
   margin-top: 10px;
 }
 
 .prio_btns {
-  width: 136px;
-  height: 56px;
+  width: 33%;
+  padding: 1rem 0.8rem;
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.09);
   display: flex;
@@ -338,15 +333,6 @@ i:hover {
 
 .required {
   display: flex;
-}
-
-footer {
-  padding-top: 12%;
-  padding-left: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 85%;
 }
 
 .footer_btns_container {
@@ -406,7 +392,6 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - 112px - 40px);
   padding-bottom: 40px;
 }
 
@@ -599,8 +584,100 @@ li:hover {
   font-size: 1.2rem;
 }
 
-@media (max-width: 990px) {
-  .form {
-    flex-direction: column;
+.prios2,
+.date2,
+.assign-to2 {
+  display: none;
+}
+footer {
+  padding-left: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+}
+
+@media (max-width: 1350px) {
+  .seperator_add_task {
+    display: none;
   }
+  .add_task_content {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 990px) {
+  .add_task_content {
+    padding: 2rem 1rem;
+  }
+  label,
+  .prio_btns span i {
+    font-size: 1rem;
+  }
+  .prio {
+    gap: 0.7rem;
+  }
+  .prio_btns {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 815px) {
+  #content {
+    width: 100%;
+  }
+
+  .content {
+    padding: 2rem 2rem;
+  }
+
+  .add_task_content {
+    flex-direction: column;
+    justify-content: initial;
+    gap: 2rem;
+    margin-bottom: 7rem;
+    padding: 2rem 0rem;
+  }
+
+  label,
+  .prio_btns span i {
+    font-size: 1rem;
+  }
+  .date,
+  .assign-to,
+  .prios {
+    display: none;
+  }
+  /* .left_side,
+  .add_task_sides {
+    height: 350px;
+  } */
+
+  .prios2,
+  .date2,
+  .assign-to2 {
+    display: block;
+  }
+
+  .add_task_h1 {
+    padding: 0rem;
+    font-size: 2rem;
+  }
+
+  /* .right_side {
+    height: 300px;
+  } */
+
+  .clear {
+    display: none;
+  }
+  footer {
+    width: 100%;
+    padding-left: 0;
+    gap: 1rem;
+  }
+  /* 
+  .d-none {
+    display: none;
+  } */
 }

@@ -6,7 +6,7 @@ html {
   position: relative;
 }
 
-.hover_pointer{
+.hover_pointer {
   cursor: pointer;
 }
 
@@ -16,7 +16,7 @@ html {
   margin: auto;
 }
 
-.height_100{
+.height_100 {
   height: 100%;
 }
 
@@ -161,7 +161,6 @@ nav a {
   }
   .side_bar {
     position: fixed;
-
     height: 5rem;
     bottom: 0;
     width: 100vw;

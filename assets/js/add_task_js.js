@@ -61,8 +61,7 @@ let ass_to_emails = [];
 let insert_in;
 
 async function add_task_init(name) {
-  if (name == undefined)
-  name = 'todo';
+  if (name == undefined) name = "todo";
   console.log(name);
   insert_in = name;
   await load_users_contacts();
@@ -71,16 +70,16 @@ async function add_task_init(name) {
   insertTask();
 }
 
-async function load_users_tasks(name){
+async function load_users_tasks(name) {
   tasks.length = 0;
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
-    if (element['email'] == Email) {
-      for (let j = 0; j < element['tasks'][0][name].length; j++) {
-        const task = element['tasks'][0][name][j];
+    if (element["email"] == Email) {
+      for (let j = 0; j < element["tasks"][0][name].length; j++) {
+        const task = element["tasks"][0][name][j];
         tasks.push(task);
       }
-      break ; 
+      break;
     }
   }
 }
@@ -135,12 +134,7 @@ function toggleCheckbox(index, nameInitials) {
 
     // Use span element with innerHTML
     const newSpan = document.createElement("span");
-    ass_to_emails.push(users[index]['email']);
-  } else {
-    const removedIndex = ass_to_emails.findIndex((user) => user === users[index]['email']);
-    if (removedIndex !== -1) {
-      ass_to_emails.splice(removedIndex, 1);
-    }
+
     // Remove the corresponding span element for the unchecked checkbox
     const spans = document.querySelectorAll(".selected_cont_initials span");
     spans.forEach((span) => {
@@ -149,7 +143,6 @@ function toggleCheckbox(index, nameInitials) {
       }
     });
   }
-  console.log(ass_to_emails);
 }
 
 function addBackgroundColour(i) {
@@ -299,13 +292,13 @@ function setPriority(priority) {
   let medium = document.querySelector(".medium");
   let urgent = document.querySelector(".urgent");
   let image = document.querySelector(".image");
-  
+
   // reset the buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
     button.style.backgroundColor = "initial";
   });
-  
+
   if (priority === "low") {
     low.style.backgroundColor = "green";
   } else if (priority === "medium") {
@@ -347,22 +340,20 @@ async function insertTask() {
   tasks.push(newTask);
   await send_taks_to_users(newTask);
   clearFields();
-  await setItem('users', all_user);
+  await setItem("users", all_user);
   await get_all_user();
-  if (position == 'board')
-    displayTasks();
+  if (position == "board") displayTasks();
 }
 
-async function send_taks_to_users(newTask){
+async function send_taks_to_users(newTask) {
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
-    for (let j = 0; j < newTask['ass_to'].length; j++) {
-      if (newTask['ass_to'][j] == user['email'])
-      {
-        user['tasks'][0][insert_in].length = 0;
+    for (let j = 0; j < newTask["ass_to"].length; j++) {
+      if (newTask["ass_to"][j] == user["email"]) {
+        user["tasks"][0][insert_in].length = 0;
         for (let k = 0; k < tasks.length; k++) {
           const task = tasks[k];
-          user['tasks'][0][insert_in].push(task);
+          user["tasks"][0][insert_in].push(task);
         }
       }
     }
