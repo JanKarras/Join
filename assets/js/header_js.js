@@ -3,7 +3,7 @@
  * Attaches event listeners to close the menu when clicking outside of it.
  */
 function toggleMenu() {
-  document.getElementById("popup_menu").classList.remove("display_none");
+  document.getElementById("popup_menu").classList.toggle("d-none");
   let close = function () {
     closeMenuOutsideClick();
   };
@@ -17,7 +17,7 @@ function toggleMenu() {
  * Adds the 'display_none' class to hide the menu and removes event listeners.
  */
 function closeMenuOutsideClick() {
-  document.getElementById("popup_menu").classList.add("display_none");
+  document.getElementById("popup_menu").classList.add("d-none");
   document.getElementById("side_bar").onclick = null;
   document.getElementById("content").onclick = null;
   document.getElementById("headline_header").onclick = null;
@@ -26,6 +26,6 @@ function closeMenuOutsideClick() {
 /**
  * Logs the user out by redirecting to the 'index.html' page.
  */
-function log_out(){
+function log_out() {
   window.location.href = "index.html";
 }

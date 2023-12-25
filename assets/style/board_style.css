@@ -460,7 +460,6 @@ body {
   margin-bottom: 0.3rem;
   border-radius: 10px;
   cursor: pointer;
-  /* user-select: none; */
   transition: 0.3s;
   display: flex;
   align-items: center;

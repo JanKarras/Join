@@ -29,6 +29,7 @@ label {
 
 .add_task_body {
   width: 100%;
+  position: relative;
 }
 
 .add_task_h1 {
@@ -522,10 +523,6 @@ li:hover .edit-btn {
   padding: 0 1rem;
 }
 
-ul {
-  background: #f6f7f8;
-}
-
 /* Style for hiding buttons initially and revealing on hover */
 .delete-btn,
 .edit-btn,
@@ -628,7 +625,7 @@ footer {
   }
 
   .content {
-    padding: 2rem 2rem;
+    padding: 2rem 2.5rem;
   }
 
   .add_task_content {
@@ -664,20 +661,34 @@ footer {
     font-size: 2rem;
   }
 
-  /* .right_side {
-    height: 300px;
-  } */
-
   .clear {
     display: none;
+  }
+  .create {
+    width: 120px;
+    height: 45px;
+    font-size: 1rem;
   }
   footer {
     width: 100%;
     padding-left: 0;
     gap: 1rem;
   }
-  /* 
-  .d-none {
-    display: none;
-  } */
+  .required-s {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 520px) {
+  footer {
+    position: absolute;
+    bottom: 5rem;
+  }
+  .add_task_content {
+    padding: 2rem 0rem;
+  }
+
+  .content {
+    padding: 2rem 1rem;
+  }
 }
