@@ -16,7 +16,7 @@
 
 .content {
   height: 100%;
-  max-height: calc(100vh - 94px);
+  max-height: calc(100dvh - 94px);
   background: #f6f7f8;
   padding: 3rem 2rem;
   overflow: auto;
@@ -33,7 +33,7 @@ label {
 }
 
 .add_task_h1 {
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: 600;
   padding-bottom: 2rem;
 }
@@ -151,6 +151,13 @@ select:focus {
   width: 100%;
 }
 
+.t-white {
+  color: white;
+}
+.t-white span i {
+  color: white;
+}
+
 .select-box {
   display: flex;
   align-items: center;
@@ -174,6 +181,7 @@ select:focus {
   border: 1px solid #ccc;
   border-top: none;
   border: none;
+  z-index: 1000;
 }
 
 .added_subtasks {
@@ -274,7 +282,7 @@ i:hover {
 
 .seperator_add_task {
   border-left: 3px solid #ecebeb;
-  height: 424px;
+  height: 418px;
 }
 
 .add_task_content {
@@ -581,7 +589,6 @@ li:hover {
   font-size: 1.2rem;
 }
 
-.prios2,
 .date2,
 .assign-to2 {
   display: none;
@@ -603,7 +610,7 @@ footer {
   }
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1015px) {
   .add_task_content {
     padding: 2rem 1rem;
   }
@@ -635,20 +642,21 @@ footer {
     margin-bottom: 7rem;
     padding: 2rem 0rem;
   }
+  .right_side {
+    height: 300px;
+  }
 
   label,
   .prio_btns span i {
     font-size: 1rem;
   }
-  .date,
-  .assign-to,
-  .prios {
+  .date {
     display: none;
   }
-  /* .left_side,
+
   .add_task_sides {
-    height: 350px;
-  } */
+    height: 370px;
+  }
 
   .prios2,
   .date2,
@@ -681,14 +689,37 @@ footer {
 
 @media (max-width: 520px) {
   footer {
-    position: absolute;
+    position: fixed;
     bottom: 5rem;
+    width: 100%;
+    gap: 1rem;
+    padding-right: 5rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    background-color: #f6f7f8;
+    z-index: 12345;
   }
+
   .add_task_content {
-    padding: 2rem 0rem;
+    padding: 6rem 0rem;
+    padding-bottom: 3rem;
   }
 
   .content {
     padding: 2rem 1rem;
+  }
+
+  .add_task_body {
+    position: relative;
+  }
+
+  .add_task_h1 {
+    position: fixed;
+    top: 5.8rem;
+    font-size: 3.2rem;
+    background-color: #f6f7f8;
+    z-index: 1234;
+    width: 100%;
+    padding: 2rem 0;
   }
 }

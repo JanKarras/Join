@@ -22,18 +22,18 @@ html {
 
 .side_bar {
   width: 14.5rem;
-
   height: 100%;
   background-color: #2a3647;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .siede_bar_logo_header {
   padding-top: 50px;
   padding-bottom: 50px;
-  width: 43px;
+  width: 80px;
   height: auto;
 }
 
@@ -126,10 +126,6 @@ nav a {
     width: 7.8rem;
     justify-content: center;
     gap: 1.5rem;
-  }
-  .width_100 {
-    height: 5 rem;
-    width: 3rem;
   }
 
   .menu_name {

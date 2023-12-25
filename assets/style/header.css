@@ -59,6 +59,7 @@ body {
   flex-direction: column;
   z-index: 10000;
   animation: show 0.3s;
+  display: none;
 }
 
 @keyframes show {
@@ -79,6 +80,12 @@ body {
   display: none;
 }
 
+@media (max-width: 815px) {
+  #headline_header {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 520px) {
   .header_container p {
     display: none;
@@ -90,5 +97,9 @@ body {
   }
   .header_container {
     padding-left: 1rem;
+  }
+
+  .popup_menu {
+    display: block;
   }
 }

@@ -19,7 +19,7 @@ a h4 {
 .content {
   padding-left: 0;
   padding-top: 0;
-  height: calc(100vh - 94px);
+  height: calc(100dvh - 94px);
   font-family: "Roboto", sans-serif;
 }
 
