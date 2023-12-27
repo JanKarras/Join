@@ -707,19 +707,27 @@ footer {
 
   .content {
     padding: 2rem 1rem;
+    overflow: scroll;
+
   }
 
   .add_task_body {
     position: relative;
   }
+  
 
   .add_task_h1 {
     position: fixed;
     top: 5.8rem;
-    font-size: 3.2rem;
+    font-size: 2rem;
     background-color: #f6f7f8;
     z-index: 1234;
     width: 100%;
-    padding: 2rem 0;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
   }
+  ::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
 }

@@ -69,7 +69,6 @@ a h4 {
   gap: 1rem;
   background-color: #2a3647;
   color: #fff;
-  transition: 0.5s;
   cursor: pointer;
 }
 
@@ -681,7 +680,7 @@ button i {
   .arrow-left {
     display: block;
     position: absolute;
-    right: 1rem;
+    right: 0;
     font-size: 1.5rem;
     color: #29abe2;
     cursor: pointer;
@@ -696,12 +695,28 @@ button i {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 545px) {
+  .contact_detail {
+    padding: 2.2rem 1rem;
+  }
   .add-contact,
   .edit-contact {
     width: 90vw;
     right: -90vw;
   }
+
+  /* .add-contact,
+  .edit-contact {
+    width: 60vw;
+    height: 37.125rem;
+    position: fixed;
+    bottom: -200%;
+    right: 20%;
+    transform: translate(0, -50%);
+    border-radius: 2rem;
+    z-index: 1001;
+    transition: all 0.3s ease-in-out;
+  } */
 
   .add-contact.show,
   .edit-contact.show {
@@ -788,5 +803,9 @@ button i {
     z-index: 10000;
     display: none;
     transition: all 0.5s ease-in-out;
+  }
+
+  .arrow-left {
+    right: 0rem;
   }
 }
