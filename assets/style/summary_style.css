@@ -175,3 +175,121 @@
   font-size: 64px;
   color: #29abe2;
 }
+
+
+@media (max-width: 1200px) {
+  .summary_content{
+    flex-direction: column-reverse;
+  }
+  .greeting_container{
+    display: flex;
+    padding-left: 0;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-bottom: 70px;
+  }
+  .greeting{
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .summary_seperator{
+    display: none;
+  }
+  .summary_txt{
+    display: none;
+  }
+  .greeting{
+    font-size: 32px;
+  }
+  .greeting_name{
+    font-size: 38px;
+  }
+  .summary_top_cards{
+    flex-direction: column;
+    height: fit-content;
+    justify-content: start;
+    align-items: start;
+  }
+  .card_seperator{
+    display: none;
+  }
+  .deadline_txt{
+    display: none;
+  }
+  .text_beneath_deadline{
+    display: none;
+  }
+  .middlecards{
+    width: fit-content;
+    height: 102px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .bottom_cards{
+    flex-direction: column;
+    height: fit-content;
+    justify-content: start;
+    align-items: start;
+  }
+  .summary_content{
+    width: 100%;
+  }
+  .summary_top_card{
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .summary_bot_card_numbers{
+    width: 266px;
+    height: 102px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 520px) {
+  .content{
+    width: 100%;
+    padding-left: 0px;
+    padding-top: 0px;
+    height: calc(100% - 88px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .summary_content{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .header_summary{
+    text-align: center;
+  }
+  .summary_h1{
+    padding-right: 0;
+  }
+  .summary_top_cards{
+    justify-content: center;
+    align-items: center;
+    width: 100%
+  }
+  .summary_top_card{
+    width: 266px;
+  }
+  .middlecards{
+    width: 100%;
+  }
+  .bottom_cards{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .header_content_container{
+    max-height: calc(100% - 80px);
+  }
+}
