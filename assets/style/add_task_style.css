@@ -36,12 +36,12 @@ label {
   font-size: 3rem;
   font-weight: 600;
   padding-bottom: 2rem;
+  padding-left: 3rem;
 }
 
 .add_task_sides {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .task-description {
@@ -56,6 +56,11 @@ label {
 
 .right_side {
   height: 400px;
+  gap: 1.5rem;
+}
+
+.left_side {
+  gap: 2rem;
 }
 
 .display_flex {
@@ -624,6 +629,10 @@ footer {
   .prio_btns {
     gap: 0.5rem;
   }
+  .add_task_h1 {
+    padding-left: 1rem;
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 815px) {
@@ -633,6 +642,9 @@ footer {
 
   .content {
     padding: 2rem 2.5rem;
+  }
+  .add_task_h1 {
+    padding-left: 0;
   }
 
   .add_task_content {
@@ -662,11 +674,6 @@ footer {
   .date2,
   .assign-to2 {
     display: block;
-  }
-
-  .add_task_h1 {
-    padding: 0rem;
-    font-size: 2rem;
   }
 
   .clear {
@@ -708,26 +715,25 @@ footer {
   .content {
     padding: 2rem 1rem;
     overflow: scroll;
-
   }
 
   .add_task_body {
     position: relative;
   }
-  
 
   .add_task_h1 {
     position: fixed;
     top: 5.8rem;
+
     font-size: 2rem;
     background-color: #f6f7f8;
     z-index: 1234;
     width: 100%;
     padding-top: 1rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
   }
   ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
-}
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
 }
