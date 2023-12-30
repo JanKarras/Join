@@ -44,7 +44,7 @@ function displayTasks() {
   done.innerHTML = "";
 
   // Loop through each task status (to_do, in_progress, feedback, done)
-  for (const status in tasks_board[0]) {
+  for (const status in tasks_board[0])
     if (tasks_board[0].hasOwnProperty(status)) {
       const tasksInStatus = tasks_board[0][status];
       for (let i = 0; i < tasksInStatus.length; i++) {
@@ -66,7 +66,6 @@ function displayTasks() {
         }
       }
     }
-  }
 }
 
 function generateTaskHTML(task, status, index) {

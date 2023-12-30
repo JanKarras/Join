@@ -59,7 +59,6 @@ body {
   flex-direction: column;
   z-index: 10000;
   animation: show 0.3s;
-  display: none;
 }
 
 @keyframes show {
@@ -98,8 +97,8 @@ body {
   .header_container {
     padding-left: 1rem;
   }
-  /*
-  .popup_menu {
+
+  /* .popup_menu {
     display: block;
-  }*/
+  } */
 }

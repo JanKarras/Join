@@ -5,22 +5,26 @@
 }
 
 .content {
-  padding-top: 5rem;
-  padding-left: 5rem;
-  /* width: calc(100% - 14.5rem); */
-  height: calc(100vh - 94px -5rem);
+  background: #f6f7f8;
+  height: calc(100% - 94px);
+}
+
+.summary_content {
+  width: 100%;
+  max-width: 63rem;
+  padding-left: 70px;
 }
 
 .header_summary {
   display: flex;
   align-items: center;
-  padding-bottom: 70px;
+  padding: 70px;
+  gap: 2rem;
 }
 
 .summary_seperator {
   border-left: 3px solid #8fd1ed;
   height: 61px;
-  padding-right: 80px;
 }
 .summary_seperator2 {
   display: none;
@@ -43,9 +47,14 @@
 .summary_top_cards {
   display: flex;
   gap: 2rem;
+  justify-content: space-between;
   align-items: center;
   height: 168px;
   width: 100%;
+}
+
+article {
+  flex: 1;
 }
 
 .summary_top_card {
@@ -53,7 +62,6 @@
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
-  width: 47.142857142857142857142857142857%;
   border: solid lightgray 1px;
   border-radius: 15px;
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
@@ -99,8 +107,9 @@
   margin-top: 32px;
   margin-bottom: 32px;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
@@ -116,18 +125,21 @@
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
-  width: 266px;
+  flex: 1;
 }
 
 .card_seperator {
-  border-left: 3px solid #eeeeee;
+  border-left: 3px solid rgb(238, 238, 238);
   height: 70%;
-  padding-right: 80px;
 }
+.deadline {
+  flex: 1;
 
+  text-align: center;
+}
 .deadline_txt {
   font-size: 21px;
-  font-weight: 800px;
+  font-weight: 600;
 }
 
 .text_beneath_deadline {
@@ -145,7 +157,6 @@
 }
 
 .summary_bot_card_numbers {
-  border: solid lightgray 1px;
   border-radius: 15px;
   flex: 1;
   height: 100%;
@@ -170,6 +181,14 @@
   width: 100%;
 }
 
+.summary_top_card,
+.middlecards,
+.summary_bot_card_numbers {
+  background: #fff;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .greeting_container {
   display: flex;
   flex-direction: column;
@@ -178,6 +197,7 @@
 
 .greeting {
   font-size: 47px;
+  padding-right: 2rem;
 }
 
 .greeting_name {
@@ -185,15 +205,18 @@
   color: #29abe2;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1253px) {
   .greeting {
     font-size: 2.5rem;
   }
   .greeting_name {
     font-size: 3rem;
   }
+  .summary_content {
+    gap: 2rem;
+  }
 }
-@media (max-width: 915px) {
+@media (max-width: 1076px) {
   .greeting {
     font-size: 2rem;
   }
@@ -223,16 +246,89 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 910px) {
   .greeting_container {
     display: none;
   }
   .summary_content {
-    justify-content: center;
-    padding: 0;
+    padding-left: 3rem;
+  }
+
+  .header_summary {
+    padding-left: 3rem;
+  }
+
+  article {
+    padding-right: 3rem;
   }
 
   .container {
     width: initial;
+  }
+  .card_seperator {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 656px) {
+  .header_summary {
+    padding-left: 1.5rem;
+  }
+  .summary_content {
+    padding-left: 0rem;
+    padding-bottom: 7rem;
+    overflow: hidden;
+  }
+  article {
+    padding: 0 1.5rem;
+  }
+  .content {
+    width: 100%;
+  }
+  .bottom_cards,
+  .middlecards,
+  .summary_top_cards {
+    gap: 1.5rem;
+    height: 8.5rem;
+  }
+
+  .deadline {
+    text-align: initial;
+  }
+
+  .deadline_txt,
+  .text_cards {
+    font-size: 16px;
+  }
+
+  .text_beneath_deadline {
+    font-size: 14px;
+  }
+  .summary_h1 {
+    font-size: 45px;
+  }
+
+  .header_summary {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .bottom_cards,
+  .middlecards,
+  .summary_top_cards {
+    gap: 1rem;
+    height: 8rem;
+  }
+
+  .h2 {
+    font-size: 3rem;
+  }
+  .header_summary {
+    padding-left: 1rem;
+  }
+  article {
+    padding: 0 1rem;
   }
 }
