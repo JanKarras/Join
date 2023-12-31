@@ -616,9 +616,6 @@ footer {
 }
 
 @media (max-width: 1015px) {
-  .add_task_content {
-    padding: 2rem 1rem;
-  }
   label,
   .prio_btns span i {
     font-size: 1rem;
@@ -635,13 +632,13 @@ footer {
   }
 }
 
-@media (max-width: 815px) {
+@media (max-width: 900px) {
   #content {
     width: 100%;
   }
 
   .content {
-    padding: 2rem 2.5rem;
+    padding: 2rem 4.5rem;
   }
   .add_task_h1 {
     padding-left: 0;
@@ -694,7 +691,13 @@ footer {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 650px) {
+  .content {
+    padding: 2rem 2rem;
+  }
+}
+
+@media (max-width: 576px) {
   footer {
     position: fixed;
     bottom: 5rem;
@@ -714,7 +717,6 @@ footer {
 
   .content {
     padding: 2rem 1rem;
-    overflow: scroll;
   }
 
   .add_task_body {

@@ -574,11 +574,12 @@ body {
 #addTaskPopUpWindowContent {
   position: absolute;
   width: 80%;
+  height: 80%;
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
   z-index: 2;
-  padding: 4rem 3rem;
+  padding: 4rem 2rem;
   border-radius: 30px;
   transition: right 3s ease-in-out;
   animation: show 0.2s;
@@ -618,50 +619,6 @@ body {
   position: relative;
 }
 
-.add_task_content,
-.add_task_h1 {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.left_side {
-  height: 376px;
-  gap: 2rem;
-}
-
-.left_side,
-.right_side {
-  width: 100%;
-  max-width: 440px;
-}
-
-.add_task_body {
-  width: 100%;
-}
-
-.add_task_h1 {
-  font-size: 50px;
-  font-weight: 600;
-  padding-bottom: 2rem;
-}
-
-.add_taks_sides {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.board_body {
-  height: 100%;
-}
-
-#content {
-  height: 100%;
-}
-
 .taskContent {
   height: calc(100% - 172px);
 }
@@ -676,6 +633,13 @@ body {
 
 .addT {
   display: none;
+}
+
+@media (max-width: 900px) {
+  #addTaskPopUpWindowContent {
+    padding: 4rem 6rem;
+    overflow: auto;
+  }
 }
 
 @media (max-width: 835px) {
@@ -715,8 +679,14 @@ body {
 }
 
 @media (max-width: 576px) {
-  .content {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  #addTaskPopUpWindowContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: 90%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }

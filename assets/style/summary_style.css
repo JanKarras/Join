@@ -6,13 +6,15 @@
 
 .content {
   background: #f6f7f8;
-  height: calc(100% - 94px);
+  height: calc(100vh);
+  margin-bottom: 0;
 }
 
 .summary_content {
   width: 100%;
   max-width: 63rem;
   padding-left: 70px;
+  /* height: 100vh; */
 }
 
 .header_summary {

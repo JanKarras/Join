@@ -41,7 +41,7 @@
               </div>
               <div class="buttonAdd" onclick="openAddTask()">
                 <span>Add task</span>
-                <span class="addT"><i class="fa-solid fa-plus"></i></span>
+                <span class="addT" onclick="menue_clicked('add_task')"><i class="fa-solid fa-plus"></i></span>
               
                 <!-- <img src="./assets/img/board-img/addplus.png" /> -->
               </div>
@@ -61,7 +61,7 @@
             <div class="taskContainer">
               <div class="taskCategoryName">
                 <h3>To do</h3>
-                <span class="hoverPlusEffect"
+                <span class="hoverPlusEffect" onclick="openAddTask()"
                   ><img src="./assets/img/board-img/plusButtonTasks.png"
                 /></span>
               </div>
@@ -74,7 +74,7 @@
           <div class="taskContainer">
             <div class="taskCategoryName">
               <h3>In progress</h3>
-              <span class="hoverPlusEffect"
+              <span class="hoverPlusEffect" onclick="openAddTask()"
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
             </div>
@@ -86,7 +86,7 @@
           <div class="taskContainer">
             <div class="taskCategoryName">
               <h3>Await feedback</h3>
-              <span class="hoverPlusEffect"
+              <span class="hoverPlusEffect" onclick="openAddTask()"
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
             </div>
@@ -118,7 +118,7 @@
         ></span>
         <div class="add_task_h1">Add Task</div>
         <div class="add_task_content">
-          <div class="add_taks_sides left_side">
+          <div class="add_task_sides left_side">
             <div>
               <div class="display_flex">
                 <label class="name_of_input">Title</label>
@@ -161,7 +161,7 @@
           <!-- ############# -->
           <div class="seperator_add_task"></div>
 
-          <div class="add_taks_sides right_side">
+          <div class="add_task_sides right_side">
             <div>
               <div class="display_flex">
                 <label class="name_of_input">Due date</label>
