@@ -41,13 +41,15 @@
               </div>
               <div class="buttonAdd" onclick="openAddTask()">
                 <span>Add task</span>
-                <span class="addT" onclick="menue_clicked('add_task')"><i class="fa-solid fa-plus"></i></span>
-              
+                <span class="addT" onclick="menue_clicked('add_task')"
+                  ><i class="fa-solid fa-plus"></i
+                ></span>
+
                 <!-- <img src="./assets/img/board-img/addplus.png" /> -->
               </div>
             </span>
           </div>
-         
+
           <div class="searchbar searchbar2">
             <input type="text" />
             <span class="search"
@@ -64,11 +66,18 @@
                 <span class="hoverPlusEffect" onclick="openAddTask()"
                   ><img src="./assets/img/board-img/plusButtonTasks.png"
                 /></span>
-                <span class="hoverPlusEffect-mobile" onclick="menue_clicked('add_task')"
-                ><img src="./assets/img/board-img/plusButtonTasks.png"
-              /></span>
+                <span
+                  class="hoverPlusEffect-mobile"
+                  onclick="menue_clicked('add_task')"
+                  ><img src="./assets/img/board-img/plusButtonTasks.png"
+                /></span>
               </div>
-              <div id="todo" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <div
+                id="todo"
+                class="taskCategory"
+                ondrop="drop(event)"
+                ondragover="allowDrop(event)"
+              >
                 <!-- insert status = "to_do" here -->
               </div>
             </div>
@@ -80,11 +89,18 @@
               <span class="hoverPlusEffect" onclick="openAddTask()"
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
-              <span class="hoverPlusEffect-mobile" onclick="menue_clicked('add_task')"
-              ><img src="./assets/img/board-img/plusButtonTasks.png"
-            /></span>
+              <span
+                class="hoverPlusEffect-mobile"
+                onclick="menue_clicked('add_task')"
+                ><img src="./assets/img/board-img/plusButtonTasks.png"
+              /></span>
             </div>
-            <div id="in_progress" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div
+              id="in_progress"
+              class="taskCategory"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            >
               <!-- insert status = "in_progress" here -->
             </div>
           </div>
@@ -95,11 +111,18 @@
               <span class="hoverPlusEffect" onclick="openAddTask()"
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
-              <span class="hoverPlusEffect-mobile" onclick="menue_clicked('add_task')"
+              <span
+                class="hoverPlusEffect-mobile"
+                onclick="menue_clicked('add_task')"
                 ><img src="./assets/img/board-img/plusButtonTasks.png"
               /></span>
             </div>
-            <div id="feedback" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div
+              id="feedback"
+              class="taskCategory"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            >
               <!-- insert status = "feedback" here -->
             </div>
           </div>
@@ -108,7 +131,12 @@
             <div class="taskCategoryName">
               <h3>Done</h3>
             </div>
-            <div id="done" class="taskCategory" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div
+              id="done"
+              class="taskCategory"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            >
               <!-- insert status = "done" here -->
             </div>
           </div>
@@ -280,23 +308,24 @@
           </div>
           <div class="popup-content">
             <h1 id="title" class="title"></h1>
-            <div id="des" class="des"></div></div>
-            <div class="due">
-              Due Date:&emsp;
-              <div id="due" ></div>
-            </div>
-            <div id="prio_popup" class="prio_popup">
-              Priority:&emsp;
-              <div id="prio"></div>
-              <img id="prio_img" src="">
-            </div>
-            <div class="ass_to" id="ass_to_con">
-              Assigend To:
-              <div id="ass_to"></div></div>
-            <div id="sub" class="sub">
-              <div>Subtasks</div>
-              <div id="sub_list"></div>
-            </div>
+            <div id="des" class="des"></div>
+          </div>
+          <div class="due">
+            Due Date:&emsp;
+            <div id="due"></div>
+          </div>
+          <div id="prio_popup" class="prio_popup">
+            Priority:&emsp;
+            <div id="prio"></div>
+            <img id="prio_img" src="" />
+          </div>
+          <div class="ass_to" id="ass_to_con">
+            Assigend To:
+            <div id="ass_to"></div>
+          </div>
+          <div id="sub" class="sub">
+            <div>Subtasks</div>
+            <div id="sub_list"></div>
           </div>
         </div>
       </div>

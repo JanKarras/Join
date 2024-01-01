@@ -10,6 +10,10 @@
   background: #f6f7f8;
 }
 
+#content {
+  overflow: auto;
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;

@@ -14,12 +14,11 @@
   flex: 1;
 }
 
-.content {
-  height: 100%;
-  max-height: calc(100dvh - 94px);
+#content {
+  height: calc(100vh - 94px);
   background: #f6f7f8;
   padding: 3rem 2rem;
-  overflow: auto;
+  overflow: hidden;
 }
 
 label {
