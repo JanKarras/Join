@@ -571,6 +571,11 @@ body {
   width: 100%;
 }
 
+.hoverPlusEffect-mobile,
+.hoverPlusEffect-mobile img {
+  display: none;
+}
+
 #addTaskPopUpWindowContent {
   position: absolute;
   width: 80%;
@@ -683,6 +688,13 @@ body {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     width: 90%;
+  }
+  .hoverPlusEffect {
+    display: none;
+  }
+  .hoverPlusEffect-mobile,
+  .hoverPlusEffect-mobile img {
+    display: block;
   }
 }
 
