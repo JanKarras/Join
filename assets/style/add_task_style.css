@@ -35,7 +35,6 @@ label {
   font-size: 3rem;
   font-weight: 600;
   padding-bottom: 2rem;
-  padding-left: 3rem;
 }
 
 .add_task_sides {
@@ -78,17 +77,27 @@ label {
   transition: 0.3s;
 }
 
+.low.active label,
+.low.active i {
+  color: white;
+}
+.medium.active label,
+.medium.active i {
+  color: white;
+}
+.urgent.active label,
+.urgent.active i {
+  color: white;
+}
+
 .urgent.red {
   background: red;
-  color: white;
 }
 .medium.red {
   background: orange;
-  color: white;
 }
 .low.red {
   background: green;
-  color: white;
 }
 
 .low:hover,
@@ -293,8 +302,7 @@ i:hover {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0 3rem;
-  margin-bottom: 11rem;
+  margin-bottom: 9rem;
 }
 
 .left_side {
@@ -629,11 +637,16 @@ footer {
     padding-left: 1rem;
     font-size: 2rem;
   }
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
 }
 
 @media (max-width: 900px) {
   #content {
     width: 100%;
+    overflow: auto;
   }
 
   .content {
@@ -646,9 +659,9 @@ footer {
   .add_task_content {
     flex-direction: column;
     justify-content: initial;
-    gap: 2rem;
     margin-bottom: 7rem;
     padding: 2rem 0rem;
+    gap: 0;
   }
   .right_side {
     height: 300px;
@@ -709,32 +722,23 @@ footer {
     z-index: 12345;
   }
 
-  .add_task_content {
-    padding: 6rem 0rem;
-    padding-bottom: 3rem;
-  }
-
-  .content {
+  #content {
     padding: 2rem 1rem;
   }
 
   .add_task_body {
     position: relative;
+    width: 100%;
   }
 
   .add_task_h1 {
     position: fixed;
     top: 5.8rem;
-
     font-size: 2rem;
     background-color: #f6f7f8;
     z-index: 1234;
     width: 100%;
     padding-top: 1rem;
     padding-bottom: 0.5rem;
-  }
-  ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
   }
 }

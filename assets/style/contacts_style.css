@@ -466,7 +466,7 @@ button i {
 }
 .contact_info,
 .add_new_contact {
-  min-width: 281px;
+  /* min-width: 281px; */
 }
 .partition2 {
   display: none;

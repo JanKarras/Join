@@ -7,19 +7,20 @@
 .summary_content {
   width: 100%;
   max-width: 63rem;
-  padding-left: 70px;
+  padding-left: 5.5rem;
 }
 
 #content {
   background-color: #f6f7f8;
   height: calc(100vh - 94px);
-  /* overflow-y: scroll; */
 }
 
 .header_summary {
   display: flex;
   align-items: center;
-  padding: 70px;
+  padding-top: 3rem;
+  padding-left: 5.5rem;
+  padding-bottom: 3rem;
   gap: 2rem;
 }
 

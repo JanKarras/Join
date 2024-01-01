@@ -85,7 +85,7 @@ body {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 576px) {
   .header_container p {
     display: none;
   }

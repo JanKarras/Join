@@ -295,20 +295,23 @@ function setPriority(priority) {
   let low = document.querySelector(".low");
   let medium = document.querySelector(".medium");
   let urgent = document.querySelector(".urgent");
-  let image = document.querySelector(".image");
 
   // reset the buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
     button.style.backgroundColor = "initial";
+    button.classList.remove("active");
   });
 
   if (priority === "low") {
     low.style.backgroundColor = "green";
+    low.classList.add("active");
   } else if (priority === "medium") {
     medium.style.backgroundColor = "orange";
+    medium.classList.add("active");
   } else if (priority === "urgent") {
     urgent.style.backgroundColor = "red";
+    urgent.classList.add("active");
   }
   prio = priority;
   console.log("Selected Priority:", priority);
