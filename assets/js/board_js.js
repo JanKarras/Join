@@ -102,7 +102,7 @@ function generateTaskHTML(task, status, index) {
       <div class="members">${task.ass_to
         .map((member) => `<div>${member}</div>`)
         .join("")}</div>
-      <span><img src="assets/img/${task.prio.toLowerCase()}.png" alt="" /></span>
+     
     </div>
   </div>`;
 
