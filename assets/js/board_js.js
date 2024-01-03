@@ -45,14 +45,21 @@ function displayTasks() {
   awaitFeedback.innerHTML = "";
   done.innerHTML = "";
 
-  if (tasks_board[0]['todo'].length == 0)
+  if (tasks_board[0]['todo'] && tasks_board[0]['todo'].length === 0) {
     todo.innerHTML = "<div class='notask'>No tasks to do</div>";
-  if (tasks_board[0]['in_progress'].length == 0)
+  }
+
+  if (tasks_board[0]['in_progress'] && tasks_board[0]['in_progress'].length === 0) {
     inProgress.innerHTML = "<div class='notask'>No tasks in progress</div>";
-  if (tasks_board[0]['feedback'].length == 0)
-    awaitFeedback.innerHTML = "<div class='notask'>No tasks wating for feedback</div>";
-  if (tasks_board[0]['done'].length == 0)
+  }
+
+  if (tasks_board[0]['feedback'] && tasks_board[0]['feedback'].length === 0) {
+    awaitFeedback.innerHTML = "<div class='notask'>No tasks waiting for feedback</div>";
+  }
+
+  if (tasks_board[0]['done'] && tasks_board[0]['done'].length === 0) {
     done.innerHTML = "<div class='notask'>No tasks done</div>";
+  }
   // Loop through each task status (to_do, in_progress, feedback, done)
   for (const status in tasks_board[0]) {
     if (tasks_board[0].hasOwnProperty(status)) {
@@ -408,6 +415,7 @@ async function search() {
   await load_users_tasks_board();
   let temp = searchTasks();
   tasks_board = temp[0];
+  console.log(tasks_board)
   displayTasks();
 }
 
@@ -432,7 +440,7 @@ function searchTasks() {
       searchResults.push({ [categoryName]: matchingTasks });
     }
   });
-
+  console.log(searchResults);
   return (searchResults);
 }
 
