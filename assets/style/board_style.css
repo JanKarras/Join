@@ -113,7 +113,7 @@ footer {
 
 .taskContainer {
   flex: 1;
-  min-width: 250px;
+  min-width: 200px;
   max-width: 350px;
   min-height: 100px;
   display: flex;
@@ -572,7 +572,7 @@ body {
 
 #content {
   width: 100%;
-  background-color: #f6f7f8;
+  background-color: white;
   height: 100%;
 }
 
@@ -592,7 +592,7 @@ body {
   /* padding: 4rem 2rem; */
   border-radius: 30px;
   transition: right 3s ease-in-out;
-  animation: show 0.2s;
+  animation: sho 0.2s;
   overflow: hidden;
 }
 
@@ -603,8 +603,7 @@ body {
   }
 
   to {
-    right: 50%;
-    transform: translate(-50%, -50%);
+    right: 20%;
   }
 }
 
@@ -647,7 +646,7 @@ body {
 
 @media (max-width: 900px) {
   #addTaskPopUpWindowContent {
-    padding: 4rem 6rem;
+    /* padding: 4rem 6rem; */
     overflow: auto;
   }
 }
