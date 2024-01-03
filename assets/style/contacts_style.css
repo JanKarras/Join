@@ -158,6 +158,7 @@ a h4 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -329,12 +330,12 @@ form {
 .add_contact_title {
   width: 40%;
   height: 37.125rem;
-  padding: 2rem;
+  padding: 3rem;
   background-color: #2a3647;
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
   display: flex;
-  justify-content: center;
+
   align-items: center;
   position: relative;
 }
@@ -520,6 +521,17 @@ button i {
     justify-content: center;
     align-items: center;
   }
+
+  .add-contact,
+  .edit-contact {
+    width: 80vw;
+    right: -80vw;
+  }
+
+  .add-contact.show,
+  .edit-contact.show {
+    right: 10%;
+  }
 }
 
 @media (max-width: 1043px) {
@@ -534,11 +546,6 @@ button i {
 
   .contact_sidebar {
     padding: 0 2rem;
-  }
-
-  .contact_title p {
-    font-size: 0.5rem;
-    letter-spacing: 1px;
   }
 }
 
@@ -575,7 +582,10 @@ button i {
   }
 }
 
-@media (max-width: 835px) {
+@media (max-width: 842px) {
+  #content {
+    width: 100%;
+  }
   form {
     flex-direction: column;
     height: 100%;

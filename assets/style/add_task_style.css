@@ -18,7 +18,7 @@
   height: calc(100vh - 94px);
   background: #f6f7f8;
   padding: 3rem 2rem;
-  overflow: hidden;
+  overflow: auto;
 }
 
 label {

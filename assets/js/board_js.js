@@ -185,10 +185,9 @@ function stopPropagation(event) {
 
 function render_details(numberPart, textPart) {
   let task = tasks_board[0][textPart][numberPart];
-  console.log(task);
+
   const cat = document.getElementById("cat");
   if (task.cat == "Techniker task") {
-    console.log("techniker");
     cat.classList.add("techniker");
     cat.classList.add("task");
   } else {
@@ -234,7 +233,7 @@ function render_details(numberPart, textPart) {
         }
       }
     }
-    console.log(initials);
+
     document.getElementById("ass_to_con").classList.remove("d-none");
     let ass_to = document.getElementById("ass_to");
     ass_to.innerHTML = "";
