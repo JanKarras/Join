@@ -88,7 +88,14 @@ async function registerUser() {
           name: username.value,
           email: email.value,
           password: password.value,
-          tasks: [],
+          tasks: [
+            {
+              todo: [],
+              in_progress: [],
+              feedback: [],
+              done: [],
+            },
+          ],
         });
         setItem('users', usersArray);
         msgBox.style.visibility = "visible";
