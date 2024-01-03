@@ -7,10 +7,12 @@
   height: 100%;
   max-height: calc(100vh - 94px);
   padding: 2.5rem;
+  background-color: #F6F7F8 !important;
 }
 
 #content {
   overflow: auto;
+  background-color: #F6F7F8 !important;
 }
 
 body {
