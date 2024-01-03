@@ -702,6 +702,12 @@ body {
   .hoverPlusEffect-mobile img {
     display: block;
   }
+  .popup-container{
+    width: 70vw;
+  }
+  .title{
+    font-size: 32px;
+  }
 }
 
 ::-webkit-scrollbar {
