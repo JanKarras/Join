@@ -352,6 +352,9 @@ async function insertTask() {
   await get_all_user();
   if (position == 'board')
     displayTasks();
+  else {
+    slideInImage();
+  }
 }
 
 async function send_taks_to_users(newTask){
@@ -368,4 +371,17 @@ async function send_taks_to_users(newTask){
       }
     }
   }
+}
+
+function slideInImage() {
+  var image = document.getElementById('slide-in-image');
+  
+  // Bild nach oben schieben
+  image.style.bottom = '50%';
+  
+
+  // Timer für die Ausführung der Funktion nach 2 Sekunden
+  setTimeout(function() {
+    menue_clicked('board');
+  }, 2000);
 }

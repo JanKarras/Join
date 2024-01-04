@@ -119,7 +119,6 @@ nav a {
 
 .header_content_container {
   width: calc(100% - 232px);
-  height: 100%;
 }
 
 /* @media (max-width: 1057px) {

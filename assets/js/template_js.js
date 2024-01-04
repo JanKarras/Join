@@ -46,6 +46,10 @@ async function menue_clicked(name) {
   runAdditionalFunction(name);
   if (name != "help")
     position = name;
+  if (name == 'board')
+    document.getElementById('header_content_container').style.height = '100%';
+  else
+    document.getElementById('header_content_container').style.height = '';
 }
 
 /**

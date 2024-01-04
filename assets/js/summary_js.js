@@ -57,7 +57,7 @@ function render_numbers(tasks_sum) {
   if (tasks_sum.length != 0) {
     document.getElementById("to_do_nb").innerHTML = tasks_sum[0]["todo"].length;
     document.getElementById("done_nb").innerHTML = tasks_sum[0]["done"].length;
-    document.getElementById("board_nb").innerHTML = tasks_sum.length;
+    document.getElementById("board_nb").innerHTML = tasks_sum[0]["todo"].length + tasks_sum[0]["done"].length + tasks_sum[0]["in_progress"].length + tasks_sum[0]["feedback"].length;
     document.getElementById("progrss_nb").innerHTML =
       tasks_sum[0]["in_progress"].length;
     document.getElementById("feedback_nb").innerHTML =
