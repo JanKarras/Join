@@ -7,12 +7,12 @@
   height: 100%;
   max-height: calc(100vh - 94px);
   padding: 2.5rem;
-  background-color: #F6F7F8 !important;
+  background-color: #f6f7f8 !important;
 }
 
 #content {
   overflow: auto;
-  background-color: #F6F7F8 !important;
+  background-color: #f6f7f8 !important;
 }
 
 body {
@@ -663,9 +663,9 @@ body {
   }
 }
 @media (max-width: 777px) {
-  .buttonAdd {
+  /* .buttonAdd {
     padding: 0.3rem 0.5rem;
-  }
+  } */
   .buttonAdd span {
     display: none;
   }
@@ -702,10 +702,10 @@ body {
   .hoverPlusEffect-mobile img {
     display: block;
   }
-  .popup-container{
+  .popup-container {
     width: 70vw;
   }
-  .title{
+  .title {
     font-size: 32px;
   }
 }
