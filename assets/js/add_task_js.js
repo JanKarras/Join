@@ -65,6 +65,7 @@ async function add_task_init(name) {
   name = 'todo';
   console.log(name);
   insert_in = name;
+  ass_to_emails.length = 0;
   await load_users_contacts();
   await load_users_tasks(name);
   contacts();

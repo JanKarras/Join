@@ -142,7 +142,7 @@ function generateTaskHTML(task, status, index) {
       const color = initials[i]['color'];
       html += `<div class="inits_board" style="background-color: ${color};">${inizial}</div>`
     }
-    if (task.prio.length != 0) {
+    if (task.prio && task.prio.length != 0) {
       html += `
         </div><span><img src="assets/img/${task.prio.toLowerCase()}.png" alt="" /></span>
         </div>
@@ -260,9 +260,11 @@ function render_details(numberPart, textPart) {
     document.getElementById('prio_popup').classList.add('d-none');
   }
   else {
-    document.getElementById('prio_popup').classList.remove('d-none');
-    document.getElementById('prio').innerHTML = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
-    document.getElementById('prio_img').src = "./assets/img/" + task.prio + ".png";
+    if (task.prio) {
+      document.getElementById('prio_popup').classList.remove('d-none');
+      document.getElementById('prio').innerHTML = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
+      document.getElementById('prio_img').src = "./assets/img/" + task.prio + ".png";
+    }
   }
   if (task.ass_to.length != 0) {
     let initials = []
@@ -283,6 +285,15 @@ function render_details(numberPart, textPart) {
             'color': getUserColor(j),
           });
         }
+      }
+    }
+    if (initials.length == 0) {
+      for (let i = 0; i < task.ass_to.length; i++) {
+        initials.push({
+          'initials': 'GG',
+          'name': 'guest',
+          'color': getUserColor(i),
+        });
       }
     }
     document.getElementById('ass_to_con').classList.remove('d-none')
