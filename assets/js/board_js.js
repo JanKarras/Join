@@ -326,7 +326,7 @@ async function showDetail(taskId) {
   const textPart = taskId.substring(0, lastUnderscoreIndex);
   (numberPart, textPart);
   await openPopup();
-  render_details(numberPart, textPart);
+  renderDetails(numberPart, textPart);
 }
 
 /**
@@ -370,14 +370,38 @@ function stopPropagation(event) {
 }
 
 /**
- * Renders the details of a task using the provided task information.
+ * Rendert die Details eines Tasks basierend auf dem task numberPart und textPart.
  *
- * @param {string} numberPart - The numerical part of the task ID.
- * @param {string} textPart - The text part of the task ID.
+ * @param {number} numberPart - Der numerische Teil der Aufgaben-ID.
+ * @param {string} textPart - Der textliche Teil der Aufgaben-ID (z.B. "todo", "in_progress").
  */
-function render_details(numberPart, textPart) {
+function renderDetails(numberPart, textPart) {
   let task = tasksBoard[0][textPart][numberPart];
   (task);
+  renderCatTitleDesPrio(task);
+  if (task.ass_to.length != 0) {
+    let initials = getInitials(task);
+    renderInitialsDetail(initials, task);
+  }
+  else
+    document.getElementById('ass_to_con').classList.add('d-none');
+  (task.sub_tasks.length)
+  if (task.sub_tasks.length != 0) {
+    renderSubTasksDetail(task, numberPart, textPart);
+  }
+  else {
+    document.getElementById('sub').classList.add('d-none');
+    document.getElementById('sub_head').classList.add('d-none');
+  }
+  addEventListenerDetail(numberPart, textPart);
+}
+
+/**
+ * Rendert die Kategorie, den Titel, die Beschreibung und die Priorität eines Tasks.
+ *
+ * @param {object} task - Der Task-Objekt.
+ */
+function renderCatTitleDesPrio(task){
   const cat = document.getElementById('cat')
   if (task.cat == "Techniker task") {
     ("techniker");
@@ -407,54 +431,77 @@ function render_details(numberPart, textPart) {
       document.getElementById('prio_img').src = "./assets/img/" + task.prio + ".png";
     }
   }
-  if (task.ass_to.length != 0) {
-    let initials = []
-    for (let i = 0; i < task.ass_to.length; i++) {
-      const ass = task.ass_to[i];
-      for (let j = 0; j < users.length; j++) {
-        const user = users[j];
-        if (user['email'] == ass) {
-          let name_parts = user['name'].split(" ");
-          let firt_name = name_parts[0].charAt(0).toUpperCase();
-          let second_name = "";
-          if (name_parts.length > 1) {
-            second_name = name_parts[name_parts.length - 1].charAt(0).toUpperCase();
-          }
-          initials.push({
-            'initials': firt_name + second_name,
-            'name': user['name'],
-            'color': getUserColor(j),
-          });
+}
+
+/**
+ * Ruft die Initialen der zugewiesenen Benutzer ab.
+ *
+ * @param {object} task - Der Task-Objekt.
+ * @returns {Array} - Ein Array mit den Initialen der zugewiesenen Benutzer.
+ */
+function getInitials(task){
+  let initials = []
+  for (let i = 0; i < task.ass_to.length; i++) {
+    const ass = task.ass_to[i];
+    for (let j = 0; j < users.length; j++) {
+      const user = users[j];
+      if (user['email'] == ass) {
+        let name_parts = user['name'].split(" ");
+        let firt_name = name_parts[0].charAt(0).toUpperCase();
+        let second_name = "";
+        if (name_parts.length > 1) {
+          second_name = name_parts[name_parts.length - 1].charAt(0).toUpperCase();
         }
-      }
-    }
-    if (initials.length == 0) {
-      for (let i = 0; i < task.ass_to.length; i++) {
         initials.push({
-          'initials': 'GG',
-          'name': 'guest',
-          'color': getUserColor(i),
+          'initials': firt_name + second_name,
+          'name': user['name'],
+          'color': getUserColor(j),
         });
       }
     }
-    document.getElementById('ass_to_con').classList.remove('d-none')
-    let ass_to = document.getElementById('ass_to');
-    ass_to.innerHTML = '';
+  }
+  return (initials);
+}
+
+/**
+ * Rendert die Initialen der zugewiesenen Benutzer im Detailbereich.
+ *
+ * @param {Array} initials - Ein Array mit den Initialen der zugewiesenen Benutzer.
+ * @param {object} task - Der Task-Objekt.
+ */
+function renderInitialsDetail(initials, task){
+  if (initials.length == 0) {
     for (let i = 0; i < task.ass_to.length; i++) {
-      const ass = task.ass_to[i];
-      ass_to.innerHTML += `
-        <li class='list_element_ass_to'>
-          <div class="inits" style="background-color: ${initials[i]['color']};">${initials[i]['initials']}</div>
-          <div class="names">${initials[i]['name']}</div>
-        </li>
-      `
+      initials.push({
+        'initials': 'GG',
+        'name': 'guest',
+        'color': getUserColor(i),
+      });
     }
   }
-  else
-    document.getElementById('ass_to_con').classList.add('d-none');
-  (task.sub_tasks.length)
-  if (task.sub_tasks.length != 0) {
-    document.getElementById('sub').classList.remove('d-none');
+  document.getElementById('ass_to_con').classList.remove('d-none')
+  let ass_to = document.getElementById('ass_to');
+  ass_to.innerHTML = '';
+  for (let i = 0; i < task.ass_to.length; i++) {
+    const ass = task.ass_to[i];
+    ass_to.innerHTML += `
+      <li class='list_element_ass_to'>
+        <div class="inits" style="background-color: ${initials[i]['color']};">${initials[i]['initials']}</div>
+        <div class="names">${initials[i]['name']}</div>
+      </li>
+    `
+  }
+}
+
+/**
+ * Rendert die Details der Teilaufgaben eines Tasks.
+ *
+ * @param {object} task - Der Task-Objekt.
+ * @param {number} numberPart - Der numerische Teil der Aufgaben-ID.
+ * @param {string} textPart - Der textliche Teil der Aufgaben-ID (z.B. "todo", "in_progress").
+ */
+function renderSubTasksDetail(task, numberPart, textPart){
+  document.getElementById('sub').classList.remove('d-none');
     document.getElementById('sub_head').classList.remove('d-none');
     let sub = document.getElementById('sub_list');
     sub.innerHTML = '';
@@ -471,11 +518,15 @@ function render_details(numberPart, textPart) {
       `
       setImg(i, numberPart, textPart);
     }
-  }
-  else {
-    document.getElementById('sub').classList.add('d-none');
-    document.getElementById('sub_head').classList.add('d-none');
-  }
+}
+
+/**
+ * Fügt Event-Listener für die Detailansicht hinzu.
+ *
+ * @param {number} numberPart - Der numerische Teil der Aufgaben-ID.
+ * @param {string} textPart - Der textliche Teil der Aufgaben-ID (z.B. "todo", "in_progress").
+ */
+function addEventListenerDetail(numberPart, textPart){
   delElement = document.getElementById('del');
   editElement = document.getElementById('edit');
 
