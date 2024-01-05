@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: add_task_js.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: add_task_js.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+let tasks = [];
+let ass_to_emails = [];
+let insert_in;
+
+/**
+ * Initializes the addition of a new task.
+ * If the 'name' parameter is undefined, sets it to 'todo'.
+ * Clears the 'ass_to_emails' array.
+ * Asynchronously loads user contacts and tasks for the specified name.
+ * Calls the 'contacts' function and 'insertTask' function.
+ * 
+ * @param {string} name - The name of the task; defaults to 'todo' if undefined.
+ */
+async function add_task_init(name) {
+  if (name == undefined)
+  name = 'todo';
+  insert_in = name;
+  ass_to_emails.length = 0;
+  await load_users_contacts();
+  await load_users_tasks(name);
+  contacts();
+  insertTask();
+}
+
+/**
+ * Asynchronously loads tasks for a specific user and task list.
+ * Clears the 'tasks' array and populates it with tasks from the specified task list ('name').
+ * 
+ * @param {string} name - The name of the task list to load tasks from.
+ */
+async function load_users_tasks(name){
+  tasks.length = 0;
+  for (let i = 0; i &lt; all_user.length; i++) {
+    const element = all_user[i];
+    if (element['email'] == Email) {
+      for (let j = 0; j &lt; element['tasks'][0][name].length; j++) {
+        const task = element['tasks'][0][name][j];
+        tasks.push(task);
+      }
+      break ; 
+    }
+  }
+}
+
+/**
+ * Asynchronously sets the tasks for the current user in the 'all_user' array.
+ * Clears the existing tasks for the user and populates the 'tasks' array into the user's 'tasks'.
+ * Saves the updated 'all_user' array to the browser storage using the 'setItem' function.
+ */
+async function set_users_tasks() {
+  for (let i = 0; i &lt; all_user.length; i++) {
+    const element = all_user[i];
+    if (element["email"] == Email) {
+      element["tasks"].length = 0;
+      for (let j = 0; j &lt; tasks.length; j++) {
+        const task = tasks[j];
+        element["tasks"].push(task);
+      }
+      setItem("users", all_user);
+      break;
+    }
+  }
+}
+
+/**
+ * Populates the 'optionsContainer' with user contacts.
+ * Iterates through the 'users' array and creates HTML elements for each user.
+ * Displays user initials, name, and a checkbox in the 'optionsContainer'.
+ * Adds event listeners for background color change and checkbox toggle.
+ */
+function contacts() {
+  const optionsContainer = document.getElementById("optionsContainer");
+  optionsContainer.innerHTML = "";
+  for (let i = 0; i &lt; users.length; i++) {
+    const names = users[i].name.split(" ");
+    let nameInitials = names[0].charAt(0).toUpperCase();
+    nameInitials += names[names.length - 1].charAt(0).toUpperCase();
+    const userColor = getUserColor(i);
+    optionsContainer.innerHTML += `
+        &lt;div class="option" data-index="${i}" onclick="addBackgroundColour(${i}); toggleCheckbox(${i})">
+          &lt;div class="c-name">
+            &lt;span class="name_initials" style="background-color: ${userColor}">${nameInitials}&lt;/span>
+            &lt;span>${users[i].name}&lt;/span>
+          &lt;/div>
+          &lt;input type="checkbox" class="checkbox" data-name-initials="${nameInitials}">
+        &lt;/div>`;
+  }
+}
+
+/**
+ * Toggles the state of the checkbox for the user at the specified index.
+ * Updates the 'ass_to_emails' array based on checkbox state changes.
+ * Updates the display of selected initials in the UI.
+ *
+ * @param {number} index - The index of the user in the 'users' array.
+ * @param {string} nameInitials - The initials of the user.
+ */
+function toggleCheckbox(index, nameInitials) {
+  const checkbox = document.querySelector(
+    `.option[data-index="${index}"] .checkbox`
+  );
+  checkbox.checked = !checkbox.checked;
+
+  const selectedContInitials = document.querySelector(
+    ".selected_cont_initials"
+  );
+
+  if (checkbox.checked) {
+    // Retrieve nameInitials from data attribute
+    const nameInitials = checkbox.getAttribute("data-name-initials");
+
+    // Use span element with innerHTML
+    const newSpan = document.createElement("span");
+    ass_to_emails.push(users[index]['email']);
+  } else {
+    const removedIndex = ass_to_emails.findIndex((user) => user === users[index]['email']);
+    if (removedIndex !== -1) {
+      ass_to_emails.splice(removedIndex, 1);
+    }
+    // Remove the corresponding span element for the unchecked checkbox
+    const spans = document.querySelectorAll(".selected_cont_initials span");
+    spans.forEach((span) => {
+      if (span.innerText === nameInitials) {
+        selectedContInitials.removeChild(span);
+      }
+    });
+  }
+}
+
+/**
+ * Toggles the background color for the selected contact at the specified index.
+ *
+ * @param {number} i - The index of the contact in the 'users' array.
+ */
+function addBackgroundColour(i) {
+  const selectedContact = document.querySelector(`.option[data-index="${i}"]`);
+  if (selectedContact) {
+    selectedContact.classList.toggle("selected-contact");
+  }
+}
+
+/**
+ * Toggles the visibility of the options container and updates the toggle icon.
+ */
+function toggleOptions() {
+  const optionsContainer = document.getElementById("optionsContainer");
+  const toggleIcon = document.querySelector(".contact-select");
+  toggleIcon.classList.toggle("active");
+  optionsContainer.style.display =
+    optionsContainer.style.display === "block" ? "none" : "block";
+}
+
+/**
+ * Toggles the visibility of the category select container and updates the toggle icon.
+ */
+function toggleCategory() {
+  const categorySelect = document.getElementById("categoryContainer");
+  const toggleIcon = document.querySelector(".select-head");
+  toggleIcon.classList.toggle("active");
+  categorySelect.classList.toggle("active");
+}
+
+/**
+ * Sets the selected category and updates the displayed text in the category select header.
+ * Closes the category select container by calling the 'toggleCategory' function.
+ *
+ * @param {string} option - The selected category option.
+ */
+function selectCategory(option) {
+  const selectHead = document.getElementById("selectedCat");
+  selectHead.textContent = `${option}`;
+  toggleCategory();
+}
+
+/**
+ * Toggles the visibility and style of subtask-related elements.
+ * Adds or removes the 'add_cancel' class from the 'add-cancel-subtask' element.
+ * Adds or removes the 'd-none' class from the 'add-subtask' element.
+ * Blurs the focus from the 'enter-subtask' element when the 'add_cancel' class is present.
+ */
+function enterSubtasks() {
+  const addCancel = document.getElementById("add-cancel-subtask");
+  const addSubtask = document.getElementById("add-subtask");
+  addCancel.classList.toggle("add_cancel");
+  addSubtask.classList.toggle("d-none");
+  if (addCancel.classList.contains("add_cancel")) {
+    document.getElementById("enter-subtask").blur();
+  }
+}
+
+/**
+ * Adds a subtask to the subtask list.
+ * Retrieves the input value from the 'enter-subtask' element.
+ * Checks if the input value is empty and returns if true.
+ * Checks if there are already three or more subtasks and returns if true.
+ * Creates a new 'li' element and appends it to the 'subtaskList' element.
+ * Clears the input value of the 'enter-subtask' element.
+ */
+function addSubtask() {
+  const inputValue = document.getElementById("enter-subtask").value;
+  if (inputValue.trim() === "") {
+    return;
+  }
+
+  const ul = document.getElementById("subtaskList");
+  const liElements = ul.getElementsByTagName("li");
+
+  // Return if there are already more than three li elements
+  if (liElements.length >= 3) {
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.innerHTML += addTaskHTML(inputValue);
+  ul.appendChild(li);
+  document.getElementById("enter-subtask").value = "";
+}
+
+/**
+ * Clears the input value of the 'enter-subtask' field.
+ */
+function clearInputField() {
+  document.getElementById("enter-subtask").value = "";
+}
+
+/**
+ * Deletes a subtask by removing its corresponding 'li' element from the subtask list.
+ *
+ * @param {HTMLElement} li - The 'li' element to be deleted.
+ */
+function deleteSubtask(li) {
+  const ul = document.getElementById("subtaskList");
+  ul.removeChild(li);
+}
+
+/**
+ * Enables editing mode for a subtask by displaying an input field and hiding the text.
+ *
+ * @param {HTMLElement} li - The 'li' element representing the subtask.
+ */
+function editSubtask(li) {
+  const textSpan = li.querySelector(".subtask-text");
+  const input = li.querySelector(".edit-input");
+
+  li.classList.add("editing");
+  textSpan.style.display = "none";
+  input.style.display = "inline-block";
+  input.value = textSpan.textContent;
+}
+
+/**
+ * Saves the edited content of a subtask, updating the text and switching back to display mode.
+ *
+ * @param {HTMLElement} li - The 'li' element representing the subtask.
+ */
+function saveSubtask(li) {
+  const textSpan = li.querySelector(".subtask-text");
+  const input = li.querySelector(".edit-input");
+
+  li.classList.remove("editing");
+  textSpan.textContent = input.value;
+  textSpan.style.display = "inline";
+  input.style.display = "none";
+}
+
+/**
+ * Clears input fields, resets date, category, and assigned-to, unchecks priority buttons,
+ * and clears subtask-related elements.
+ */
+function clearFields() {
+  // Clear input fields and textareas
+  const inputFields = document.querySelectorAll('input[type="text"], textarea');
+  inputFields.forEach((field) => {
+    field.value = "";
+  });
+  // Reset date
+  const dateInput = document.getElementById("date_input");
+  dateInput.value = "";
+
+  // Reset category
+  const selectedCat = document.getElementById("selectedCat");
+  selectedCat.innerText = "Select task category";
+
+  // Reset assigned to
+  const selectBox = document.querySelector(".select-box");
+  selectBox.value = "";
+
+  // Uncheck priority buttons
+  const prioButtons = document.querySelectorAll(".prio_btns");
+  prioButtons.forEach((button) => {
+    button.style.backgroundColor = "initial";
+  });
+
+  // Clear subtasks
+  const subtaskInput = document.getElementById("enter-subtask");
+  subtaskInput.value = "";
+
+  // Clear subtask list
+  const subtaskList = document.getElementById("subtaskList");
+  subtaskList.innerHTML = "";
+}
+
+/**
+ * Generates HTML markup for a subtask with the provided input value.
+ * Includes text display, an edit input field, delete button, and save button.
+ *
+ * @param {string} inputValue - The text content of the subtask.
+ * @returns {string} - HTML markup for the subtask.
+ */
+function addTaskHTML(inputValue) {
+  return `&lt;span class="subtask-text">
+  ${inputValue}
+  &lt;/span> 
+  &lt;input type="text" class="edit-input d-none"> 
+  &lt;span class="delete-btn" onclick="deleteSubtask(this.parentNode)">&lt;i class="fa-regular fa-trash-can">&lt;/i>&lt;/span>
+ 
+  &lt;span class="save-btn" onclick="saveSubtask(this.parentNode)">&lt;i class="fa-solid fa-check">&lt;/i>&lt;/span>
+  `;
+}
+
+let prio;
+
+/**
+ * Sets the priority for a task by updating the button colors and storing the selected priority.
+ *
+ * @param {string} priority - The priority level ("low", "medium", or "urgent").
+ */
+function setPriority(priority) {
+  let low = document.querySelector(".low");
+  let medium = document.querySelector(".medium");
+  let urgent = document.querySelector(".urgent");
+  let image = document.querySelector(".image");
+  
+  // reset the buttons
+  const prioButtons = document.querySelectorAll(".prio_btns");
+  prioButtons.forEach((button) => {
+    button.style.backgroundColor = "initial";
+  });
+  
+  if (priority === "low") {
+    low.style.backgroundColor = "green";
+  } else if (priority === "medium") {
+    medium.style.backgroundColor = "orange";
+  } else if (priority === "urgent") {
+    urgent.style.backgroundColor = "red";
+  }
+  prio = priority;
+}
+
+/**
+ * Inserts a new task into the tasks array and sends it to users.
+ * Clears input fields, updates user storage, retrieves updated user data,
+ * and displays tasks on the board or slides in the image (based on the 'position' variable).
+ */
+async function insertTask() {
+  // Extract values from input fields
+  const title = document.getElementById("title_input").value;
+  const description = document.getElementById("description_input").value;
+  const dueDate = document.getElementById("date_input").value;
+
+  // Extract category value
+  const category = document.getElementById("selectedCat").innerText;
+
+  // Extract subtasks
+  const subtaskListItems = document.querySelectorAll("#subtaskList li");
+  const subtasks = Array.from(subtaskListItems).map((item) => item.innerText);
+
+  if (!title || !dueDate || !description) {
+    return;
+  }
+
+  // Create a task object
+  const newTask = {
+    title: title,
+    des: description,
+    ass_to: ass_to_emails, // Convert assignedTo to an array
+    due: dueDate,
+    prio: prio,
+    cat: category,
+    sub_tasks: subtasks,
+  };
+  tasks.push(newTask);
+  await send_taks_to_users(newTask);
+  clearFields();
+  await setItem('users', all_user);
+  await get_all_user();
+  if (position == 'board')
+    displayTasks();
+  else {
+    slideInImage();
+  }
+}
+
+/**
+ * Sends a new task to the assigned users by updating their 'tasks' array.
+ *
+ * @param {object} newTask - The new task object to be sent to users.
+ */
+async function send_taks_to_users(newTask){
+  for (let i = 0; i &lt; all_user.length; i++) {
+    const user = all_user[i];
+    for (let j = 0; j &lt; newTask['ass_to'].length; j++) {
+      if (newTask['ass_to'][j] == user['email'])
+      {
+        user['tasks'][0][insert_in].length = 0;
+        for (let k = 0; k &lt; tasks.length; k++) {
+          const task = tasks[k];
+          user['tasks'][0][insert_in].push(task);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Slides in the image by moving it upwards and triggers the 'menue_clicked' function after 2 seconds.
+ */
+function slideInImage() {
+  var image = document.getElementById('slide-in-image');
+  
+  // Bild nach oben schieben
+  image.style.bottom = '50%';
+  
+
+  // Timer für die Ausführung der Funktion nach 2 Sekunden
+  setTimeout(function() {
+    menue_clicked('board');
+  }, 2000);
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addBackgroundColor">addBackgroundColor</a></li><li><a href="global.html#addBackgroundColour">addBackgroundColour</a></li><li><a href="global.html#addBackgroundColour_edit">addBackgroundColour_edit</a></li><li><a href="global.html#addContactPopup">addContactPopup</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#addTaskHTML">addTaskHTML</a></li><li><a href="global.html#add_task_init">add_task_init</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#backToLogin">backToLogin</a></li><li><a href="global.html#board_init">board_init</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#checkWidth">checkWidth</a></li><li><a href="global.html#check_email">check_email</a></li><li><a href="global.html#clearFields">clearFields</a></li><li><a href="global.html#clearForm">clearForm</a></li><li><a href="global.html#clearInputField">clearInputField</a></li><li><a href="global.html#closeAddContactPopup">closeAddContactPopup</a></li><li><a href="global.html#closeAddTask">closeAddTask</a></li><li><a href="global.html#closeEditContactPopup">closeEditContactPopup</a></li><li><a href="global.html#closeEditandDelete">closeEditandDelete</a></li><li><a href="global.html#closeMenuOutsideClick">closeMenuOutsideClick</a></li><li><a href="global.html#closePopup">closePopup</a></li><li><a href="global.html#contacts">contacts</a></li><li><a href="global.html#contacts_edit">contacts_edit</a></li><li><a href="global.html#contacts_init">contacts_init</a></li><li><a href="global.html#createDelHandler">createDelHandler</a></li><li><a href="global.html#createEditHandler">createEditHandler</a></li><li><a href="global.html#del">del</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteUserByIndex">deleteUserByIndex</a></li><li><a href="global.html#displayContacts">displayContacts</a></li><li><a href="global.html#displayTasks">displayTasks</a></li><li><a href="global.html#displayUserDetails">displayUserDetails</a></li><li><a href="global.html#displayUsers">displayUsers</a></li><li><a href="global.html#drag">drag</a></li><li><a href="global.html#drop">drop</a></li><li><a href="global.html#dropped">dropped</a></li><li><a href="global.html#edit">edit</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#enterSubtasks">enterSubtasks</a></li><li><a href="global.html#finish_edit">finish_edit</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#generateTaskHTML">generateTaskHTML</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getUserColor">getUserColor</a></li><li><a href="global.html#get_all_user">get_all_user</a></li><li><a href="global.html#guest_login">guest_login</a></li><li><a href="global.html#help_init">help_init</a></li><li><a href="global.html#hover_over_check">hover_over_check</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#includeHTML_with_name">includeHTML_with_name</a></li><li><a href="global.html#insertSignup">insertSignup</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#load_numbers">load_numbers</a></li><li><a href="global.html#load_users_contacts">load_users_contacts</a></li><li><a href="global.html#load_users_tasks">load_users_tasks</a></li><li><a href="global.html#load_users_tasks_board">load_users_tasks_board</a></li><li><a href="global.html#log_out">log_out</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#menue_clicked">menue_clicked</a></li><li><a href="global.html#not_hover_over_check">not_hover_over_check</a></li><li><a href="global.html#openAddContactPopup">openAddContactPopup</a></li><li><a href="global.html#openAddTask">openAddTask</a></li><li><a href="global.html#openEditContactPopup">openEditContactPopup</a></li><li><a href="global.html#openEditandDelete">openEditandDelete</a></li><li><a href="global.html#openPopup">openPopup</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeBackgroundColor">removeBackgroundColor</a></li><li><a href="global.html#render_deadline">render_deadline</a></li><li><a href="global.html#render_details">render_details</a></li><li><a href="global.html#render_initialz_edit">render_initialz_edit</a></li><li><a href="global.html#render_numbers">render_numbers</a></li><li><a href="global.html#render_popup_edit">render_popup_edit</a></li><li><a href="global.html#render_sub_tasks">render_sub_tasks</a></li><li><a href="global.html#runAdditionalFunction">runAdditionalFunction</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#saveSubtask">saveSubtask</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#searchTasks">searchTasks</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#send_taks_to_users">send_taks_to_users</a></li><li><a href="global.html#setImg">setImg</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setPriority">setPriority</a></li><li><a href="global.html#setPriority_edit">setPriority_edit</a></li><li><a href="global.html#set_name">set_name</a></li><li><a href="global.html#set_tasks_board">set_tasks_board</a></li><li><a href="global.html#set_users_contacts">set_users_contacts</a></li><li><a href="global.html#set_users_tasks">set_users_tasks</a></li><li><a href="global.html#showDetail">showDetail</a></li><li><a href="global.html#slideInImage">slideInImage</a></li><li><a href="global.html#sortedUserHTML">sortedUserHTML</a></li><li><a href="global.html#stopPropagation">stopPropagation</a></li><li><a href="global.html#summary_init">summary_init</a></li><li><a href="global.html#template_init">template_init</a></li><li><a href="global.html#toggleCategory">toggleCategory</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleCheckbox_edit">toggleCheckbox_edit</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#toggleOptions">toggleOptions</a></li><li><a href="global.html#toggleOptions_edit">toggleOptions_edit</a></li><li><a href="global.html#updateTime">updateTime</a></li><li><a href="global.html#userDetailHTML">userDetailHTML</a></li><li><a href="global.html#userHTML">userHTML</a></li><li><a href="global.html#validateUser">validateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jan 05 2024 19:56:05 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
