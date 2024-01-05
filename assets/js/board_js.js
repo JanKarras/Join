@@ -113,80 +113,140 @@ function displayTasksInStatus(status, tasksInStatus) {
 }
 
 /**
- * Generates HTML markup for a task based on its details.
+ * Generates HTML markup for a task based on task data, status, and index.
  *
- * @param {object} task - The task object containing details such as title, description, subtasks, assignments, etc.
- * @param {string} status - The status of the task (e.g., "todo", "in_progress", "feedback", "done").
- * @param {number} index - The index of the task within its status category.
+ * @param {object} task - The task object containing details.
+ * @param {string} status - The status of the task (e.g., "todo", "in_progress").
+ * @param {number} index - The index of the task.
  * @returns {string} - HTML markup for the task.
  */
 function generateTaskHTML(task, status, index) {
-  // Generiere eine eindeutige ID für jeden Task
-  const taskId = `${status}_${index}`;
+  const taskId = generateTaskId(status, index);
+  let html = createTaskHTMLStructure(task, taskId);
+  if (task.sub_tasks.length !== 0) {
+    html += createSubtasksHTML(task, status);
+  }
+  if (task.ass_to.length !== 0) {
+    html += createUserAssignmentsHTML(task);
+  }
+  return html;
+}
 
-  let html = `
+/**
+ * Generates a unique task ID based on status and index.
+ *
+ * @param {string} status - The status of the task (e.g., "todo", "in_progress").
+ * @param {number} index - The index of the task.
+ * @returns {string} - The unique task ID.
+ */
+function generateTaskId(status, index) {
+  return `${status}_${index}`;
+}
+
+/**
+ * Creates the basic HTML structure for a task.
+ *
+ * @param {object} task - The task object containing details.
+ * @param {string} taskId - The unique task ID.
+ * @returns {string} - HTML markup for the task structure.
+ */
+function createTaskHTMLStructure(task, taskId) {
+  return `
     <div class="user_task" draggable="true" ondragstart="drag(event)" data-task-id="${taskId}" onclick="showDetail('${taskId}')">
       <div class="user_story ${task.cat.toLowerCase()}">${task.cat}</div>
       <div class="user_topic">
         <h4>${task.title}</h4>
         <p>${task.des}</p>
       </div>`;
+}
 
-  if (task.sub_tasks.length != 0) {
-    let progressWidth = 0
-    letprogressWidthpercent = 0;
-    const subtasksVisible = status !== "done" ? "" : "d-none";
-    for (let i = 0; i < task.sub_tasks.length; i++) {
-      const subtask = task.sub_tasks[i];
-      if (subtask.endsWith("_finished"))
-        progressWidth++;
+/**
+ * Creates HTML markup for subtasks, including progress bar.
+ *
+ * @param {object} task - The task object containing details.
+ * @param {string} status - The status of the task (e.g., "todo", "in_progress").
+ * @param {string} taskId - The unique task ID.
+ * @returns {string} - HTML markup for subtasks.
+ */
+function createSubtasksHTML(task, status, taskId) {
+  let progressWidth = calculateSubtaskProgress(task);
+  const subtasksVisible = status !== "done" ? "" : "d-none";
+  const progressWidthPercent = (progressWidth / task.sub_tasks.length) * 100;
+  return `
+    <div class="task_progress" draggable="true" ondragstart="drag(event)" data-task-id="${taskId}">
+      <div class="progress">
+        <div class="progressbar" style="width: ${progressWidthPercent}%"></div>
+      </div>
+      <div class="subtasks ${subtasksVisible}">${progressWidth}/${task.sub_tasks.length} Subtasks</div>
+    </div>`;
+}
+
+/**
+ * Calculates the progress width for subtasks based on completion.
+ *
+ * @param {object} task - The task object containing details.
+ * @returns {number} - The width of the progress bar based on subtask completion.
+ */
+function calculateSubtaskProgress(task) {
+  let progressWidth = 0;
+  for (let i = 0; i < task.sub_tasks.length; i++) {
+    const subtask = task.sub_tasks[i];
+    if (subtask.endsWith("_finished")) {
+      progressWidth++;
     }
-    progressWidthpercent = (progressWidth / task.sub_tasks.length) * 100;
-    html += `
-      <div class="task_progress" draggable="true" ondragstart="drag(event)" data-task-id="${taskId}">
-        <div class="progress">
-          <div class="progressbar" style="width: ${progressWidthpercent}%"></div>
-        </div>
-        <div class="subtasks ${subtasksVisible}">${progressWidth}/${task.sub_tasks.length} Subtasks</div>
-      </div>`;
   }
-  if (task.ass_to.length != 0) {
-    let initials = []
-    for (let i = 0; i < task.ass_to.length; i++) {
-      const ass = task.ass_to[i];
-      for (let j = 0; j < users.length; j++) {
-        const user = users[j];
-        if (user['email'] == ass) {
-          let name_parts = user['name'].split(" ");
-          let firt_name = name_parts[0].charAt(0).toUpperCase();
-          let second_name = "";
-          if (name_parts.length > 1) {
-            second_name = name_parts[name_parts.length - 1].charAt(0).toUpperCase();
-          }
-          initials.push({
-            'initials': firt_name + second_name,
-            'color': getUserColor(j),
-          });
-        }
-      }
-    }
-    html += `<div class="user_assignment"><div class="members">`
-    for (let i = 0; i < initials.length; i++) {
-      const inizial = initials[i]['initials'];
-      const color = initials[i]['color'];
-      html += `<div class="inits_board" style="background-color: ${color};">${inizial}</div>`
-    }
-    if (task.prio && task.prio.length != 0) {
-      html += `
-        </div><span><img src="assets/img/${task.prio.toLowerCase()}.png" alt="" /></span>
-        </div>
-      </div>`;
-    }
-    else {
-      html += `</div>`;
-    }
+  return progressWidth;
+}
+
+/**
+ * Creates HTML markup for user assignments, including initials and priority icon.
+ *
+ * @param {object} task - The task object containing details.
+ * @returns {string} - HTML markup for user assignments.
+ */
+function createUserAssignmentsHTML(task) {
+  const initials = getAssigneeInitials(task);
+  let html = `<div class="user_assignment"><div class="members">`;
+  for (let i = 0; i < initials.length; i++) {
+    const inizial = initials[i]['initials'];
+    const color = initials[i]['color'];
+    html += `<div class="inits_board" style="background-color: ${color};">${inizial}</div>`;
+  }
+  if (task.prio && task.prio.length !== 0) {
+    html += `</div><span><img src="assets/img/${task.prio.toLowerCase()}.png" alt="" /></span></div>`;
+  } else {
+    html += `</div>`;
   }
   return html;
+}
+
+/**
+ * Retrieves initials and color for assigned users.
+ *
+ * @param {object} task - The task object containing details.
+ * @returns {Array} - An array of objects containing user initials and color.
+ */
+function getAssigneeInitials(task) {
+  const initials = [];
+  for (let i = 0; i < task.ass_to.length; i++) {
+    const ass = task.ass_to[i];
+    for (let j = 0; j < users.length; j++) {
+      const user = users[j];
+      if (user['email'] === ass) {
+        const name_parts = user['name'].split(" ");
+        const first_name = name_parts[0].charAt(0).toUpperCase();
+        let second_name = "";
+        if (name_parts.length > 1) {
+          second_name = name_parts[name_parts.length - 1].charAt(0).toUpperCase();
+        }
+        initials.push({
+          'initials': first_name + second_name,
+          'color': getUserColor(j),
+        });
+      }
+    }
+  }
+  return initials;
 }
 
 /**
@@ -237,7 +297,7 @@ async function dropped(taskId, dropCategoryId) {
   (textPart)
   tasksBoard[0][dropCategoryId].push(tasksBoard[0][textPart][numberPart])
   tasksBoard[0][textPart].splice(numberPart, 1);
-  await set_tasksBoard();
+  await setTasksBoard();
   await setItem('users', all_user);
   displayTasks();
 }
@@ -245,7 +305,7 @@ async function dropped(taskId, dropCategoryId) {
 /**
  * Sets the 'tasksBoard' array in the current user's data.
  */
-async function set_tasksBoard() {
+async function setTasksBoard() {
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
     if (user['email'] == Email) {
@@ -404,7 +464,7 @@ function render_details(numberPart, textPart) {
       if (sub_task.endsWith("_finished"))
         sub_task_string = sub_task_string.replace("_finished", "");
       sub.innerHTML += `
-      <li onmouseout="not_hover_over_check(${i}, '${numberPart}', '${textPart}')" onmouseover="hover_over_check(${i}, '${numberPart}', '${textPart}')" class="list_element_sub_task" id="listelementsubtask_${i}" onclick="check(${i}, '${numberPart}', '${textPart}')">
+      <li onmouseout="notHoverOverCheck(${i}, '${numberPart}', '${textPart}')" onmouseover="hoverOverCheck(${i}, '${numberPart}', '${textPart}')" class="list_element_sub_task" id="listelementsubtask_${i}" onclick="check(${i}, '${numberPart}', '${textPart}')">
         <img class="check_img" id='check_${i}' src="">
         <div class="list_text_sub_task hover_pointer">${sub_task_string}</div>
       </li>
@@ -523,7 +583,7 @@ async function check(i, nb, text) {
  * @param {string} nb - The numerical part of the task ID.
  * @param {string} text - The text part of the task ID.
  */
-function not_hover_over_check(i, nb, text) {
+function notHoverOverCheck(i, nb, text) {
   let task = tasksBoard[0][text][nb];
   if (task.sub_tasks[i].endsWith("_finished")) {
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
@@ -540,7 +600,7 @@ function not_hover_over_check(i, nb, text) {
  * @param {string} nb - The numerical part of the task ID.
  * @param {string} text - The text part of the task ID.
  */
-function hover_over_check(i, nb, text) {
+function hoverOverCheck(i, nb, text) {
   let task = tasksBoard[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
@@ -577,20 +637,16 @@ async function search() {
 function searchTasks() {
   let searchInput = document.getElementById('search_bar_input').value.toLowerCase();
   let searchResults = [];
-
   tasksBoard.forEach((taskCategory, categoryName) => {
     let matchingTasks = {};
-
     Object.entries(taskCategory).forEach(([category, tasksArray]) => {
       let filteredTasks = tasksArray.filter((task) =>
         task.title.toLowerCase().includes(searchInput) || task.des.toLowerCase().includes(searchInput)
       );
-
       if (filteredTasks.length > 0) {
         matchingTasks[category] = filteredTasks;
       }
     });
-
     if (Object.keys(matchingTasks).length > 0) {
       searchResults.push({ [categoryName]: matchingTasks });
     }
@@ -610,7 +666,7 @@ function searchTasks() {
  */
 async function del(numberPart, textPart) {
   tasksBoard[0][textPart].splice(numberPart, 1);
-  await set_tasksBoard();
+  await setTasksBoard();
   await setItem('users', all_user);
   closePopup();
 }
@@ -642,15 +698,15 @@ function edit(numberPart, textPart) {
     <input required type="date" id="date_input_edit">
     <div class="edit_head">Priority</div>
     <div class="prio">
-      <div id="urgent_edit" class="prio_btns urgent" onclick="setPriority_edit('urgent')">
+      <div id="urgent_edit" class="prio_btns urgent" onclick="setPriorityEdit('urgent')">
         <label>Urgent</label>
         <span><i class="fa-solid fa-angles-up"></i></span>
       </div>
-      <div id="medium_edit" class="prio_btns medium" onclick="setPriority_edit('medium')">
+      <div id="medium_edit" class="prio_btns medium" onclick="setPriorityEdit('medium')">
         <label>Medium</label>
         <span><i class="fa-solid fa-equals"></i></span>
       </div>
-      <div id="low_edit" class="prio_btns low" onclick="setPriority_edit('low')">
+      <div id="low_edit" class="prio_btns low" onclick="setPriorityEdit('low')">
         <label>Low</label>
         <span><i class="fa-solid fa-angles-down"></i></span>
       </div>
@@ -660,7 +716,7 @@ function edit(numberPart, textPart) {
   <div class="contact-select date_picker" id="contactSelect_edit">
     <input
       class="select-box"
-      onclick="toggleOptions_edit()"
+      onclick="toggleOptionsEdit()"
       placeholder="Select contacts to assign"
     />
     <span><i class="fa-solid fa-angle-down icon"></i></span>
@@ -694,13 +750,13 @@ function edit(numberPart, textPart) {
   <ul id="subtaskList_edit" class="subtask-list added_subtasks_edit"></ul>
 </div>
 <div class="footer_edit">
-  <img class="cancel_edit hover_pointer" src="./assets/img/board-img/Primary check button.png" onclick="finish_edit(${numberPart}, '${textPart}')">
+  <img class="cancel_edit hover_pointer" src="./assets/img/board-img/Primary check button.png" onclick="finishEdit(${numberPart}, '${textPart}')">
 </div>
     `
-  render_popup_edit(task);
+  renderPopupEdit(task);
 }
 
-let prio_edit;
+let prio_edit; //prio of the task the user wants to edit
 
 /**
  * Sets the priority for editing a task.
@@ -710,7 +766,7 @@ let prio_edit;
  * 
  * @param {string} str - The selected priority ('urgent', 'medium', or 'low').
  */
-function setPriority_edit(str) {
+function setPriorityEdit(str) {
   prio_edit = str;
   if (prio_edit == 'urgent') {
     document.getElementById(prio_edit + "_edit").style.backgroundColor = 'red';
@@ -736,27 +792,27 @@ let assToEmails_edit;
  * 
  * @param {Object} task - The task object containing details such as title, description, due date, etc.
  */
-function render_popup_edit(task) {
+function renderPopupEdit(task) {
   (task);
   document.getElementById('title_edit').value = task.title;
   document.getElementById('description_input_edit').value = task.des;
   document.getElementById('date_input_edit').value = task.due;
   if (task.prio == 'urgent')
-    setPriority_edit('urgent')
+    setPriorityEdit('urgent')
   if (task.prio == 'medium')
-    setPriority_edit('medium')
+    setPriorityEdit('medium')
   if (task.prio == 'low')
-    setPriority_edit('low')
+    setPriorityEdit('low')
   assToEmails_edit = task.ass_to;
-  render_initialz_edit();
-  contacts_edit();
-  render_sub_tasks(task.sub_tasks);
+  renderInitialsEdit();
+  contactsEdit();
+  renderSubTasks(task.sub_tasks);
 }
 
 /**
  * Renders the initials for assigned contacts in the edit popup.
  */
-function render_initialz_edit() {
+function renderInitialsEdit() {
   let initials = []
   for (let i = 0; i < assToEmails_edit.length; i++) {
     const ass = assToEmails_edit[i];
@@ -790,7 +846,7 @@ function render_initialz_edit() {
 /**
  * Toggles the display of contact options in the edit popup.
  */
-function toggleOptions_edit() {
+function toggleOptionsEdit() {
   const optionsContainer = document.getElementById("optionsContainer_edit");
   const toggleIcon = document.querySelector(".contact-select");
   toggleIcon.classList.toggle("active");
@@ -834,25 +890,23 @@ function toggleCheckbox_edit(index, nameInitials) {
       }
     });
   }
-  render_initialz_edit();
+  renderInitialsEdit();
 }
 
 /**
  * Populates the optionsContainer_edit with user options for assigning tasks.
  */
-function contacts_edit() {
+function contactsEdit() {
   const optionsContainer = document.getElementById("optionsContainer_edit");
   optionsContainer.innerHTML = "";
-
   for (let i = 0; i < users.length; i++) {
     const names = users[i].name.split(" ");
     let nameInitials = names[0].charAt(0).toUpperCase();
     nameInitials += names[names.length - 1].charAt(0).toUpperCase();
     const userColor = getUserColor(i);
     const isChecked = assToEmails_edit.includes(users[i]['email']); // Prüfe, ob die E-Mail-Adresse ausgewählt ist
-
     optionsContainer.innerHTML += `
-        <div class="option_edit ${isChecked ? 'selected-contact' : ''}" data-index="${i}" onclick="addBackgroundColour_edit(${i}); toggleCheckbox_edit(${i})">
+        <div class="option_edit ${isChecked ? 'selected-contact' : ''}" data-index="${i}" onclick="addBackgroundColourEdit(${i}); toggleCheckbox_edit(${i})">
           <div class="c-name">
             <span class="name_initials" style="background-color: ${userColor}">${nameInitials}</span>
             <span>${users[i].name}</span>
@@ -866,7 +920,7 @@ function contacts_edit() {
  * Toggles the 'selected-contact' class to add or remove background color for the selected contact.
  * @param {number} i - The index of the contact.
  */
-function addBackgroundColour_edit(i) {
+function addBackgroundColourEdit(i) {
   const selectedContact = document.querySelector(`.option_edit[data-index="${i}"]`);
   if (selectedContact) {
     selectedContact.classList.toggle("selected-contact");
@@ -877,10 +931,9 @@ function addBackgroundColour_edit(i) {
  * Renders the subtasks in the popup's subtask list.
  * @param {Array} sub_tasks - An array of subtasks to be rendered.
  */
-function render_sub_tasks(sub_tasks) {
+function renderSubTasks(sub_tasks) {
   const ul = document.getElementById("subtaskList_edit");
   ul.innerHTML = ""; // Clear previous content
-
   for (const sub_task of sub_tasks) {
     const li = document.createElement("li");
     li.innerHTML += addTaskHTML(sub_task);
@@ -893,7 +946,7 @@ function render_sub_tasks(sub_tasks) {
  * @param {number} numberPart - The index of the task within its category.
  * @param {string} textPart - The category of the task (e.g., 'todo', 'in_progress', etc.).
  */
-async function finish_edit(numberPart, textPart) {
+async function finishEdit(numberPart, textPart) {
   (numberPart, textPart);
   let task = tasksBoard[0][textPart][numberPart];
   task.title = document.getElementById('title_edit').value;

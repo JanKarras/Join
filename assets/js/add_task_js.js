@@ -335,8 +335,10 @@ async function insertTask() {
   clearFields();
   await setItem('users', all_user);
   await get_all_user();
-  if (position == 'board')
+  if (position == 'board'){
+    await loadUserstasksBoard();
     displayTasks();
+  }
   else
     slideInImage();
 }
