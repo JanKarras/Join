@@ -77,7 +77,7 @@ async function registerUser() {
     const usersData = response['data']['value'];
     if (usersData) {
       const usersArray = JSON.parse(usersData);
-      if (check_email(usersArray, email.value) == 0) {
+      if (checkEmail(usersArray, email.value) == 0) {
         console.error('Email exists use another one:', error);
       } else {
         usersArray.push({
@@ -158,7 +158,7 @@ async function guest_login() {
  * @param {string} email - Email to check for uniqueness.
  * @returns {number|undefined} - 0 if the email exists, 1 otherwise.
  */
-function check_email(usersArray, email) {
+function checkEmail(usersArray, email) {
   for (let i = 0; i < usersArray.length; i++) {
     const element = usersArray[i];
     if (element['email'] == email) {

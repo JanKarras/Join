@@ -4,8 +4,8 @@
  * Calls 'loadNumbers' to load relevant numbers or data on the page.
  * Calls 'updateTime' to update the greeting message based on the current time.
  */
-async function summary_init() {
-  await get_all_user();
+async function summaryInit() {
+  await getAllUser();
   setName();
   loadNumbers();
   updateTime();
@@ -13,13 +13,13 @@ async function summary_init() {
 
 /**
  * Sets the user's name on the webpage.
- * Retrieves the user's name from the 'all_user' array based on the logged-in email.
+ * Retrieves the user's name from the 'allUser' array based on the logged-in email.
  * Displays a greeting message with the full name and a shortened version with initials.
  */
 function setName() {
   let name;
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const element = allUser[i];
     if (element["email"] == Email) {
       name = element["name"];
       break;
@@ -39,8 +39,8 @@ function setName() {
  * load the numbers of the tasks_sum
  */
 function loadNumbers() {
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const element = allUser[i];
     if (element["email"] == Email) {
       let tasks_sum = element["tasks"];
       renderNumbers(tasks_sum);

@@ -26,6 +26,6 @@ function closeMenuOutsideClick() {
 /**
  * Logs the user out by redirecting to the 'index.html' page.
  */
-function log_out() {
+function logOut() {
   window.location.href = "index.html";
 }

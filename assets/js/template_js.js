@@ -2,47 +2,47 @@ let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "leg
 let position; //the position on wich side we are on our website
 const urlParams = new URLSearchParams(window.location.search);
 const Email = urlParams.get('userEmail'); //the logged in Email to get the right infomrations (conatacts, taks, ...)
-let all_user = []; // Global array with all users
+let allUser = []; // Global array with all users
 
 /**
  * This function is used to call all the functions that we need to initialize our 'template.html'. It sets our position to our starting side, which is 'summary'.
  * 
  */
-async function template_init(){
+async function templateInit(){
   await includeHTML();
-  await includeHTML_with_name('summary');
-  summary_init();
+  await includeHTMLWithName('summary');
+  summaryInit();
   position = "summary";
 }
 
 /**
- * This function populates the 'all_user' array with information retrieved from the backend.
+ * This function populates the 'allUser' array with information retrieved from the backend.
  */
-async function get_all_user(){
+async function getAllUser(){
     let res = await getItem('users');
     let user_array = res['data']['value'];
     user_array = JSON.parse(user_array);
-    all_user = user_array;
-    console.log(all_user);
+    allUser = user_array;
+    console.log(allUser);
 }
 
 /**
  * Navigates through the website by handling button clicks.
  * Adds the 'btn_clicked' class to the clicked button, removing it from the previously selected button.
  * Uses the 'btns' array containing the IDs of all buttons.
- * Reloads the new webpage using 'includeHTML_with_name'.
+ * Reloads the new webpage using 'includeHTMLWithName'.
  * Calls 'runAdditionalFunction' with the 'name' parameter.
  * Updates the 'position' variable to the 'name' parameter, except when 'name' is 'help'.
  * 
  * @param {*} name - The ID of the clicked button.
  */
-async function menue_clicked(name) {
+async function menueClicked(name) {
   for (let i = 0; i < btns.length; i++) {
     const element = btns[i];
     document.getElementById(element).classList.remove("btn_clicked");
   }
   document.getElementById(name).classList.add("btn_clicked");
-  await includeHTML_with_name(name);
+  await includeHTMLWithName(name);
   runAdditionalFunction(name);
   if (name != "help")
     position = name;
@@ -61,7 +61,7 @@ async function menue_clicked(name) {
  * @param {*} name - The identifier used to construct the initialization function name.
  */
 function runAdditionalFunction(name) {
-  const initFunctionName = name + "_init";
+  const initFunctionName = name + "Init";
   if (typeof window[initFunctionName] === 'function') {
     window[initFunctionName]();
   } else {
@@ -76,14 +76,13 @@ function runAdditionalFunction(name) {
  * 
  * @param {string} fileName - The name of the HTML file (without the file extension) to be included.
  */
-async function includeHTML_with_name(fileName) {
+async function includeHTMLWithName(fileName) {
   try {
     let container = document.querySelector("#content"); // Verwende eine spezifische ID für das Container-Element
     if (!container) {
       console.error("Container with ID 'content' not found.");
       return;
     }
-
     let resp = await fetch(fileName + ".html");
     if (resp.ok) {
       container.innerHTML = await resp.text();

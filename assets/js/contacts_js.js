@@ -3,19 +3,19 @@ let users = []; //Array of the contacts that the logged in user have
 /**
  * Initializes the 'contacts' page by loading users' contacts and displaying them.
  */
-async function contacts_init() {
-  await load_users_contacts();
+async function contactsInit() {
+  await loadUsersContacts();
   displayUsers();
 }
 
 /**
- * Loads the contacts of the logged-in user from the 'all_user' array.
+ * Loads the contacts of the logged-in user from the 'allUser' array.
  * Populates the 'users' array with the loaded contacts.
  */
-async function load_users_contacts() {
+async function loadUsersContacts() {
   users.length = 0;
-  for (let i = 0; i < all_user.length; i++) {
-    const user = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const user = allUser[i];
     if (user["email"] == Email) {
       for (let j = 0; j < user["contacts"].length; j++) {
         const conatact = user["contacts"][j];
@@ -27,24 +27,24 @@ async function load_users_contacts() {
 }
 
 /**
- * Sets the contacts of the logged-in user in the 'all_user' array.
- * Saves the updated 'all_user' array using the 'setItem' function.
+ * Sets the contacts of the logged-in user in the 'allUser' array.
+ * Saves the updated 'allUser' array using the 'setItem' function.
  */
-async function set_users_contacts() {
-  for (let i = 0; i < all_user.length; i++) {
-    const user = all_user[i];
+async function setUsersContacts() {
+  for (let i = 0; i < allUser.length; i++) {
+    const user = allUser[i];
     if (user["email"] == Email) {
       user["contacts"].length = 0;
       for (let j = 0; j < users.length; j++) {
         const contacts = users[j];
         user["contacts"].push(contacts);
       }
-      setItem("users", all_user);
+      setItem("users", allUser);
       break;
     }
   }
-  await setItem("users", all_user);
-  await get_all_user();
+  await setItem("users", allUser);
+  await getAllUser();
 }
 
 let initials; //Array of the initilas of the contacts
@@ -157,8 +157,8 @@ async function deleteUserByIndex(index) {
   (users);
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
-    await set_users_contacts();
-    await load_users_contacts();
+    await setUsersContacts();
+    await loadUsersContacts();
     displayUsers();
     displayUserDetails();
     closeEditContactPopup();
@@ -215,8 +215,8 @@ async function addContactPopup() {
   }
   const newUser = { name: newName, email: newEmail, telefon: newTelefon };
   users.push(newUser);
-  await set_users_contacts();
-  await load_users_contacts();
+  await setUsersContacts();
+  await loadUsersContacts();
   users.sort((a, b) => a.name.localeCompare(b.name));
   for (let i = 0; i < users.length; i++) {
     const element = users[i];
@@ -269,8 +269,8 @@ async function saveChanges() {
   user.name = editedName;
   user.email = editedEmail;
   user.telefon = editedPhone;
-  await set_users_contacts();
-  await load_users_contacts();
+  await setUsersContacts();
+  await loadUsersContacts();
   closeEditContactPopup();
   displayUserDetails(currentUserIndex);
   displayUsers();

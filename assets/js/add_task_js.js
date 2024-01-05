@@ -12,12 +12,12 @@ let insertIn; //Variable in wich category a task will be inserted -> todo, in pr
  * 
  * @param {string} name - The name of the task; defaults to 'todo' if undefined.
  */
-async function add_task_init(name) {
+async function add_taskInit(name) {
   if (name == undefined)
   name = 'todo';
   insertIn = name;
   assToEmails.length = 0;
-  await load_users_contacts();
+  await loadUsersContacts();
   await loadUsersTasks(name);
   contacts();
   insertTask();
@@ -31,8 +31,8 @@ async function add_task_init(name) {
  */
 async function loadUsersTasks(name){
   tasks.length = 0;
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const element = allUser[i];
     if (element['email'] == Email) {
       for (let j = 0; j < element['tasks'][0][name].length; j++) {
         const task = element['tasks'][0][name][j];
@@ -44,20 +44,20 @@ async function loadUsersTasks(name){
 }
 
 /**
- * Asynchronously sets the tasks for the current user in the 'all_user' array.
+ * Asynchronously sets the tasks for the current user in the 'allUser' array.
  * Clears the existing tasks for the user and populates the 'tasks' array into the user's 'tasks'.
- * Saves the updated 'all_user' array to the browser storage using the 'setItem' function.
+ * Saves the updated 'allUser' array to the browser storage using the 'setItem' function.
  */
 async function setUsersTasks() {
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const element = allUser[i];
     if (element["email"] == Email) {
       element["tasks"].length = 0;
       for (let j = 0; j < tasks.length; j++) {
         const task = tasks[j];
         element["tasks"].push(task);
       }
-      setItem("users", all_user);
+      setItem("users", allUser);
       break;
     }
   }
@@ -333,8 +333,8 @@ async function insertTask() {
   tasks.push(newTask);
   await sendTaksToUsers(newTask);
   clearFields();
-  await setItem('users', all_user);
-  await get_all_user();
+  await setItem('users', allUser);
+  await getAllUser();
   if (position == 'board'){
     await loadUserstasksBoard();
     displayTasks();
@@ -349,8 +349,8 @@ async function insertTask() {
  * @param {object} newTask - The new task object to be sent to users.
  */
 async function sendTaksToUsers(newTask){
-  for (let i = 0; i < all_user.length; i++) {
-    const user = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const user = allUser[i];
     for (let j = 0; j < newTask['ass_to'].length; j++) {
       if (newTask['ass_to'][j] == user['email'])
       {
@@ -365,12 +365,12 @@ async function sendTaksToUsers(newTask){
 }
 
 /**
- * Slides in the image by moving it upwards and triggers the 'menue_clicked' function after 2 seconds.
+ * Slides in the image by moving it upwards and triggers the 'menueClicked' function after 2 seconds.
  */
 function slideInImage() {
   var image = document.getElementById('slide-in-image');
   image.style.bottom = '50%';
   setTimeout(function() {
-    menue_clicked('board');
+    menueClicked('board');
   }, 2000);
 }

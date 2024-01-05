@@ -3,8 +3,8 @@ let tasksBoard = []; //Array of all tasks that should be display in the board
 /**
  * Initializes the board by loading user contacts and tasks, displaying contacts, and rendering tasks on the board.
  */
-async function board_init() {
-  await load_users_contacts();
+async function boardInit() {
+  await loadUsersContacts();
   await loadUserstasksBoard();
   contacts();
   displayTasks();
@@ -15,8 +15,8 @@ async function board_init() {
  */
 async function loadUserstasksBoard() {
   tasksBoard.length = 0;
-  for (let i = 0; i < all_user.length; i++) {
-    const element = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const element = allUser[i];
     if (element['email'] == Email) {
       tasksBoard = element['tasks'].slice();
       break;
@@ -298,7 +298,7 @@ async function dropped(taskId, dropCategoryId) {
   tasksBoard[0][dropCategoryId].push(tasksBoard[0][textPart][numberPart])
   tasksBoard[0][textPart].splice(numberPart, 1);
   await setTasksBoard();
-  await setItem('users', all_user);
+  await setItem('users', allUser);
   displayTasks();
 }
 
@@ -306,8 +306,8 @@ async function dropped(taskId, dropCategoryId) {
  * Sets the 'tasksBoard' array in the current user's data.
  */
 async function setTasksBoard() {
-  for (let i = 0; i < all_user.length; i++) {
-    const user = all_user[i];
+  for (let i = 0; i < allUser.length; i++) {
+    const user = allUser[i];
     if (user['email'] == Email) {
       user['tasks'] = tasksBoard;
       break;
@@ -564,14 +564,14 @@ async function check(i, nb, text) {
   let task = tasksBoard[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
     task.sub_tasks[i] = task.sub_tasks[i] + "_finished";
-    all_user['tasks'] = tasksBoard;
-    await setItem('users', all_user);
+    allUser['tasks'] = tasksBoard;
+    await setItem('users', allUser);
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
   }
   else {
     task.sub_tasks[i] = task.sub_tasks[i].replace("_finished", "");
-    all_user['tasks'] = tasksBoard;
-    await setItem('users', all_user);
+    allUser['tasks'] = tasksBoard;
+    await setItem('users', allUser);
     document.getElementById("check_" + i).src = "./assets/img/Check_button_unchecked.png"
   }
 }
@@ -667,7 +667,7 @@ function searchTasks() {
 async function del(numberPart, textPart) {
   tasksBoard[0][textPart].splice(numberPart, 1);
   await setTasksBoard();
-  await setItem('users', all_user);
+  await setItem('users', allUser);
   closePopup();
 }
 
