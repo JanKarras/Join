@@ -1,5 +1,8 @@
 let tasks_board = [];
 
+/**
+ * Initializes the board by loading user contacts and tasks, displaying contacts, and rendering tasks on the board.
+ */
 async function board_init() {
   await load_users_contacts();
   await load_users_tasks_board();
@@ -7,6 +10,9 @@ async function board_init() {
   displayTasks();
 }
 
+/**
+ * Loads user tasks for the board by copying them from the user's 'tasks' array.
+ */
 async function load_users_tasks_board() {
   tasks_board.length = 0;
   for (let i = 0; i < all_user.length; i++) {
@@ -18,8 +24,11 @@ async function load_users_tasks_board() {
   }
 }
 
-
-
+/**
+ * Opens the add task window, initializes the task, and displays the window with an overlay.
+ *
+ * @param {string} name - The name parameter for task initialization.
+ */
 function openAddTask(name) {
   add_task_init(name);
   let addTask = document.getElementById("addTaskPopUpWindowContent");
@@ -28,6 +37,10 @@ function openAddTask(name) {
   overlay.classList.remove("d-none");
   addTask.style.left = "50%"
 }
+
+/**
+ * Closes the add task window and hides the overlay.
+ */
 function closeAddTask() {
   let addTask = document.getElementById("addTaskPopUpWindowContent");
   let overlay = document.querySelector(".overlay");
@@ -35,6 +48,10 @@ function closeAddTask() {
   overlay.classList.add("d-none");
 }
 
+/**
+ * Displays tasks in different statuses on the board.
+ * Clears existing content in task containers and generates HTML for each task.
+ */
 function displayTasks() {
   const todo = document.getElementById("todo");
   const inProgress = document.getElementById("in_progress");
@@ -86,6 +103,14 @@ function displayTasks() {
   }
 }
 
+/**
+ * Generates HTML markup for a task based on its details.
+ *
+ * @param {object} task - The task object containing details such as title, description, subtasks, assignments, etc.
+ * @param {string} status - The status of the task (e.g., "todo", "in_progress", "feedback", "done").
+ * @param {number} index - The index of the task within its status category.
+ * @returns {string} - HTML markup for the task.
+ */
 function generateTaskHTML(task, status, index) {
   // Generiere eine eindeutige ID für jeden Task
   const taskId = `${status}_${index}`;
@@ -155,16 +180,32 @@ function generateTaskHTML(task, status, index) {
   return html;
 }
 
+/**
+ * Allows dropping of draggable elements by preventing the default behavior of the drop event.
+ *
+ * @param {Event} event - The drop event.
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
 
+/**
+ * Initiates the drag operation by setting the task ID as data to be transferred during dragging.
+ *
+ * @param {DragEvent} event - The drag event.
+ */
 function drag(event) {
   // Übergebe die Task-ID während des Dragging
   const taskId = event.currentTarget.getAttribute("data-task-id");
   event.dataTransfer.setData("text/plain", taskId);
 }
 
+/**
+ * Handles the drop event by preventing the default behavior, retrieving the task ID and drop category ID,
+ * and invoking the 'dropped' function with the extracted values.
+ *
+ * @param {DragEvent} event - The drop event.
+ */
 function drop(event) {
   event.preventDefault();
   const taskId = event.dataTransfer.getData("text/plain");
@@ -172,12 +213,19 @@ function drop(event) {
   dropped(taskId, dropCategoryId);
 }
 
+/**
+ * Handles the dropped event by moving a task from one category to another.
+ * Updates the 'tasks_board' array, sets it to storage, updates user data, and refreshes the displayed tasks.
+ *
+ * @param {string} taskId - The ID of the task being dragged.
+ * @param {string} dropCategoryId - The ID of the category where the task is dropped.
+ */
 async function dropped(taskId, dropCategoryId) {
   const lastUnderscoreIndex = taskId.lastIndexOf('_');
   const numberPart = taskId.substring(lastUnderscoreIndex + 1);
   const textPart = taskId.substring(0, lastUnderscoreIndex);
-  console.log(numberPart)
-  console.log(textPart)
+  (numberPart)
+  (textPart)
   tasks_board[0][dropCategoryId].push(tasks_board[0][textPart][numberPart])
   tasks_board[0][textPart].splice(numberPart, 1);
   await set_tasks_board();
@@ -185,6 +233,9 @@ async function dropped(taskId, dropCategoryId) {
   displayTasks();
 }
 
+/**
+ * Sets the 'tasks_board' array in the current user's data.
+ */
 async function set_tasks_board() {
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
@@ -195,15 +246,23 @@ async function set_tasks_board() {
   }
 }
 
+/**
+ * Shows the details of a task identified by its taskId.
+ *
+ * @param {string} taskId - The ID of the task for which details are to be displayed.
+ */
 async function showDetail(taskId) {
   const lastUnderscoreIndex = taskId.lastIndexOf('_');
   const numberPart = taskId.substring(lastUnderscoreIndex + 1);
   const textPart = taskId.substring(0, lastUnderscoreIndex);
-  console.log(numberPart, textPart);
+  (numberPart, textPart);
   await openPopup();
   render_details(numberPart, textPart);
 }
 
+/**
+ * Opens the details popup by displaying it and applying a sliding-in animation from the right.
+ */
 async function openPopup() {
   const popupContainer = document.getElementById('showDetail-container');
   popupContainer.style.display = 'block';
@@ -213,9 +272,11 @@ async function openPopup() {
     const innerPopup = document.querySelector('.popup-container');
     innerPopup.style.marginRight = '0';
   }, 50);
-
 }
 
+/**
+ * Closes the details popup by sliding it out to the right and hiding it after the animation.
+ */
 function closePopup() {
   const innerPopup = document.querySelector('.popup-container');
   innerPopup.style.marginRight = '-100%'; // Slide out to the right
@@ -230,16 +291,27 @@ function closePopup() {
   displayTasks();
 }
 
+/**
+ * Stops the propagation of the given event to prevent it from reaching parent elements.
+ *
+ * @param {Event} event - The event for which propagation should be stopped.
+ */
 function stopPropagation(event) {
   event.stopPropagation();
 }
 
+/**
+ * Renders the details of a task using the provided task information.
+ *
+ * @param {string} numberPart - The numerical part of the task ID.
+ * @param {string} textPart - The text part of the task ID.
+ */
 function render_details(numberPart, textPart) {
   let task = tasks_board[0][textPart][numberPart];
-  console.log(task);
+  (task);
   const cat = document.getElementById('cat')
   if (task.cat == "Techniker task") {
-    console.log("techniker");
+    ("techniker");
     cat.classList.add("techniker")
     cat.classList.add("task")
   }
@@ -311,7 +383,7 @@ function render_details(numberPart, textPart) {
   }
   else
     document.getElementById('ass_to_con').classList.add('d-none');
-  console.log(task.sub_tasks.length)
+  (task.sub_tasks.length)
   if (task.sub_tasks.length != 0) {
     document.getElementById('sub').classList.remove('d-none');
     document.getElementById('sub_head').classList.remove('d-none');
@@ -347,19 +419,38 @@ function render_details(numberPart, textPart) {
 
 var delElement, delHandler, editElement, editHandler;
 
+/**
+ * Creates a delete event handler function for a specific task identified by its number and text parts.
+ *
+ * @param {string} numberPart - The numerical part of the task ID.
+ * @param {string} textPart - The text part of the task ID.
+ * @returns {Function} - The delete event handler function.
+ */
 function createDelHandler(numberPart, textPart) {
   return function delHandler() {
     del(numberPart, textPart);
   };
 }
 
+/**
+ * Creates an edit event handler function for a specific task identified by its number and text parts.
+ *
+ * @param {string} numberPart - The numerical part of the task ID.
+ * @param {string} textPart - The text part of the task ID.
+ * @returns {Function} - The edit event handler function.
+ */
 function createEditHandler(numberPart, textPart) {
   return function editHandler() {
     edit(numberPart, textPart);
   };
 }
 
-
+/**
+ * Formats the input date in the "DD/MM/YYYY" format.
+ *
+ * @param {string} inputDate - The input date in the "YYYY-MM-DD" format.
+ * @returns {string} - The formatted date in the "DD/MM/YYYY" format.
+ */
 function formatDate(inputDate) {
   // Split the input date into parts
   const parts = inputDate.split("-");
@@ -376,6 +467,13 @@ function formatDate(inputDate) {
   return `${day}/${month}/${year}`;
 }
 
+/**
+ * Sets the image source for the checkbox based on the completion status of a subtask.
+ *
+ * @param {number} i - The index of the subtask.
+ * @param {string} numberPart - The numerical part of the task ID.
+ * @param {string} textPart - The text part of the task ID.
+ */
 function setImg(i, numberPart, textPart) {
   let task = tasks_board[0][textPart][numberPart];
   if (task.sub_tasks[i].endsWith("_finished")) {
@@ -386,6 +484,13 @@ function setImg(i, numberPart, textPart) {
   }
 }
 
+/**
+ * Handles the completion status of a subtask and updates the user's tasks accordingly.
+ *
+ * @param {number} i - The index of the subtask.
+ * @param {string} nb - The numerical part of the task ID.
+ * @param {string} text - The text part of the task ID.
+ */
 async function check(i, nb, text) {
   let task = tasks_board[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
@@ -402,6 +507,13 @@ async function check(i, nb, text) {
   }
 }
 
+/**
+ * Handles the appearance of the checkbox when not hovered over a subtask.
+ *
+ * @param {number} i - The index of the subtask.
+ * @param {string} nb - The numerical part of the task ID.
+ * @param {string} text - The text part of the task ID.
+ */
 function not_hover_over_check(i, nb, text) {
   let task = tasks_board[0][text][nb];
   if (task.sub_tasks[i].endsWith("_finished")) {
@@ -412,6 +524,13 @@ function not_hover_over_check(i, nb, text) {
   }
 }
 
+/**
+ * Handles the appearance of the checkbox when hovered over a subtask.
+ *
+ * @param {number} i - The index of the subtask.
+ * @param {string} nb - The numerical part of the task ID.
+ * @param {string} text - The text part of the task ID.
+ */
 function hover_over_check(i, nb, text) {
   let task = tasks_board[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
@@ -422,14 +541,30 @@ function hover_over_check(i, nb, text) {
   }
 }
 
+/**
+ * Asynchronously searches for tasks and updates the display.
+ * 
+ * Calls the 'load_users_tasks_board' function to ensure the tasks are up-to-date,
+ * then performs a search using the 'searchTasks' function, updates the 'tasks_board'
+ * accordingly, and finally updates the display by calling 'displayTasks'.
+ */
 async function search() {
   await load_users_tasks_board();
   let temp = searchTasks();
   tasks_board = temp[0];
-  console.log(tasks_board)
+  (tasks_board)
   displayTasks();
 }
 
+/**
+ * Searches for tasks based on the input value in the search bar.
+ *
+ * Retrieves the search input value, iterates through task categories,
+ * and filters tasks that match the search criteria (title or description).
+ * Constructs an array of search results organized by task categories.
+ *
+ * @returns {Array} - An array containing the search results organized by task categories.
+ */
 function searchTasks() {
   let searchInput = document.getElementById('search_bar_input').value.toLowerCase();
   let searchResults = [];
@@ -451,10 +586,19 @@ function searchTasks() {
       searchResults.push({ [categoryName]: matchingTasks });
     }
   });
-  console.log(searchResults);
+  (searchResults);
   return (searchResults);
 }
 
+/**
+ * Asynchronously deletes a task from the 'tasks_board'.
+ * 
+ * Removes the task from the specified category and updates the data in 'tasks_board',
+ * then saves the updated data to local storage and closes the task details popup.
+ * 
+ * @param {number} numberPart - The index of the task within its category.
+ * @param {string} textPart - The category to which the task belongs.
+ */
 async function del(numberPart, textPart) {
   tasks_board[0][textPart].splice(numberPart, 1);
   await set_tasks_board();
@@ -462,6 +606,14 @@ async function del(numberPart, textPart) {
   closePopup();
 }
 
+/**
+ * Opens the edit popup for a task.
+ * 
+ * Retrieves the task details, displays the edit popup, and populates it with the task information.
+ * 
+ * @param {number} numberPart - The index of the task within its category.
+ * @param {string} textPart - The category to which the task belongs.
+ */
 function edit(numberPart, textPart) {
   let task = tasks_board[0][textPart][numberPart];
   document.getElementById("popup-container").classList.add('d-none');
@@ -541,6 +693,14 @@ function edit(numberPart, textPart) {
 
 let prio_edit;
 
+/**
+ * Sets the priority for editing a task.
+ * 
+ * Updates the priority_edit variable based on the selected priority and adjusts the styling
+ * of priority buttons accordingly in the edit popup.
+ * 
+ * @param {string} str - The selected priority ('urgent', 'medium', or 'low').
+ */
 function setPriority_edit(str) {
   prio_edit = str;
   if (prio_edit == 'urgent') {
@@ -562,8 +722,13 @@ function setPriority_edit(str) {
 
 let ass_to_emails_edit;
 
+/**
+ * Renders the content of the edit popup based on the provided task.
+ * 
+ * @param {Object} task - The task object containing details such as title, description, due date, etc.
+ */
 function render_popup_edit(task) {
-  console.log(task);
+  (task);
   document.getElementById('title_edit').value = task.title;
   document.getElementById('description_input_edit').value = task.des;
   document.getElementById('date_input_edit').value = task.due;
@@ -579,6 +744,9 @@ function render_popup_edit(task) {
   render_sub_tasks(task.sub_tasks);
 }
 
+/**
+ * Renders the initials for assigned contacts in the edit popup.
+ */
 function render_initialz_edit() {
   let initials = []
   for (let i = 0; i < ass_to_emails_edit.length; i++) {
@@ -610,6 +778,9 @@ function render_initialz_edit() {
   }
 }//<div class="inits" style="background-color: #2ec5a4;">H</div>flex
 
+/**
+ * Toggles the display of contact options in the edit popup.
+ */
 function toggleOptions_edit() {
   const optionsContainer = document.getElementById("optionsContainer_edit");
   const toggleIcon = document.querySelector(".contact-select");
@@ -618,7 +789,12 @@ function toggleOptions_edit() {
     optionsContainer.style.display === "block" ? "none" : "block";
 }
 
-
+/**
+ * Toggles the state of a checkbox and updates the selected initials display.
+ *
+ * @param {number} index - The index of the user in the users array.
+ * @param {string} nameInitials - The initials of the user.
+ */
 function toggleCheckbox_edit(index, nameInitials) {
   const checkbox = document.querySelector(
     `.option_edit[data-index="${index}"] .checkbox`
@@ -652,6 +828,9 @@ function toggleCheckbox_edit(index, nameInitials) {
   render_initialz_edit();
 }
 
+/**
+ * Populates the optionsContainer_edit with user options for assigning tasks.
+ */
 function contacts_edit() {
   const optionsContainer = document.getElementById("optionsContainer_edit");
   optionsContainer.innerHTML = "";
@@ -674,6 +853,10 @@ function contacts_edit() {
   }
 }
 
+/**
+ * Toggles the 'selected-contact' class to add or remove background color for the selected contact.
+ * @param {number} i - The index of the contact.
+ */
 function addBackgroundColour_edit(i) {
   const selectedContact = document.querySelector(`.option_edit[data-index="${i}"]`);
   if (selectedContact) {
@@ -681,6 +864,10 @@ function addBackgroundColour_edit(i) {
   }
 }
 
+/**
+ * Renders the subtasks in the popup's subtask list.
+ * @param {Array} sub_tasks - An array of subtasks to be rendered.
+ */
 function render_sub_tasks(sub_tasks) {
   const ul = document.getElementById("subtaskList_edit");
   ul.innerHTML = ""; // Clear previous content
@@ -692,8 +879,13 @@ function render_sub_tasks(sub_tasks) {
   }
 }
 
+/**
+ * Finishes the editing process, updates the task details, and closes the popup.
+ * @param {number} numberPart - The index of the task within its category.
+ * @param {string} textPart - The category of the task (e.g., 'todo', 'in_progress', etc.).
+ */
 async function finish_edit(numberPart, textPart) {
-  console.log(numberPart, textPart);
+  (numberPart, textPart);
   let task = tasks_board[0][textPart][numberPart];
   task.title = document.getElementById('title_edit').value;
   task.due = document.getElementById('date_input_edit').value;

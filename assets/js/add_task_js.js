@@ -1,69 +1,20 @@
-//let tasks = [
-//  {
-//    todo: [
-//      {
-//        title: "kochwelt page & recipe recommender",
-//        des: "Build start page with recipe recommendation...",
-//        ass_to: ["AS", "DE", "MB"],
-//        due: "12.12.2023",
-//        prio: "urgent",
-//        cat: "User Story",
-//        sub_tasks: [],
-//      },
-//    ],
-//    in_progress: [
-//      {
-//        title: "HTML base template creation",
-//        des: "Create reusable HTML base templates...",
-//        ass_to: ["AS", "DE"],
-//        due: "23.12.2023",
-//        prio: "medium",
-//        cat: "User Story",
-//        sub_tasks: ["Change header color"],
-//      },
-//    ],
-//    feedback: [
-//      {
-//        title: "CSS Architecture planning",
-//        des: "Define CSS naming conventions and structure...",
-//        ass_to: ["AS"],
-//        due: "01.12.2023",
-//        prio: "medium",
-//        cat: "Techniker Task",
-//        sub_tasks: [],
-//      },
-//      {
-//        title: "CSS Architecture planning",
-//        des: "Define CSS naming conventions and structure...",
-//        ass_to: ["AS", "DE", "MB"],
-//        due: "01.12.2023",
-//        prio: "urgent",
-//        cat: "User Story",
-//        sub_tasks: [],
-//      },
-//    ],
-//    done: [
-//      {
-//        title: "contact form and imprint",
-//        des: "Create a contact form and imprint page...",
-//        ass_to: ["AS", "DE", "MB"],
-//        due: "15.12.2023",
-//        prio: "urgent",
-//        cat: "Techniker Task",
-//        sub_tasks: [],
-//      },
-//    ],
-//  },
-//];
 
 let tasks = [];
 let ass_to_emails = [];
 let insert_in;
 
+/**
+ * Initializes the addition of a new task.
+ * If the 'name' parameter is undefined, sets it to 'todo'.
+ * Clears the 'ass_to_emails' array.
+ * Asynchronously loads user contacts and tasks for the specified name.
+ * Calls the 'contacts' function and 'insertTask' function.
+ * 
+ * @param {string} name - The name of the task; defaults to 'todo' if undefined.
+ */
 async function add_task_init(name) {
   if (name == undefined)
   name = 'todo';
-  console.log(name);
   insert_in = name;
   ass_to_emails.length = 0;
   await load_users_contacts();
@@ -72,6 +23,12 @@ async function add_task_init(name) {
   insertTask();
 }
 
+/**
+ * Asynchronously loads tasks for a specific user and task list.
+ * Clears the 'tasks' array and populates it with tasks from the specified task list ('name').
+ * 
+ * @param {string} name - The name of the task list to load tasks from.
+ */
 async function load_users_tasks(name){
   tasks.length = 0;
   for (let i = 0; i < all_user.length; i++) {
@@ -86,6 +43,11 @@ async function load_users_tasks(name){
   }
 }
 
+/**
+ * Asynchronously sets the tasks for the current user in the 'all_user' array.
+ * Clears the existing tasks for the user and populates the 'tasks' array into the user's 'tasks'.
+ * Saves the updated 'all_user' array to the browser storage using the 'setItem' function.
+ */
 async function set_users_tasks() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
@@ -101,6 +63,12 @@ async function set_users_tasks() {
   }
 }
 
+/**
+ * Populates the 'optionsContainer' with user contacts.
+ * Iterates through the 'users' array and creates HTML elements for each user.
+ * Displays user initials, name, and a checkbox in the 'optionsContainer'.
+ * Adds event listeners for background color change and checkbox toggle.
+ */
 function contacts() {
   const optionsContainer = document.getElementById("optionsContainer");
   optionsContainer.innerHTML = "";
@@ -120,6 +88,14 @@ function contacts() {
   }
 }
 
+/**
+ * Toggles the state of the checkbox for the user at the specified index.
+ * Updates the 'ass_to_emails' array based on checkbox state changes.
+ * Updates the display of selected initials in the UI.
+ *
+ * @param {number} index - The index of the user in the 'users' array.
+ * @param {string} nameInitials - The initials of the user.
+ */
 function toggleCheckbox(index, nameInitials) {
   const checkbox = document.querySelector(
     `.option[data-index="${index}"] .checkbox`
@@ -150,9 +126,13 @@ function toggleCheckbox(index, nameInitials) {
       }
     });
   }
-  console.log(ass_to_emails);
 }
 
+/**
+ * Toggles the background color for the selected contact at the specified index.
+ *
+ * @param {number} i - The index of the contact in the 'users' array.
+ */
 function addBackgroundColour(i) {
   const selectedContact = document.querySelector(`.option[data-index="${i}"]`);
   if (selectedContact) {
@@ -160,7 +140,9 @@ function addBackgroundColour(i) {
   }
 }
 
-//
+/**
+ * Toggles the visibility of the options container and updates the toggle icon.
+ */
 function toggleOptions() {
   const optionsContainer = document.getElementById("optionsContainer");
   const toggleIcon = document.querySelector(".contact-select");
@@ -169,7 +151,9 @@ function toggleOptions() {
     optionsContainer.style.display === "block" ? "none" : "block";
 }
 
-//
+/**
+ * Toggles the visibility of the category select container and updates the toggle icon.
+ */
 function toggleCategory() {
   const categorySelect = document.getElementById("categoryContainer");
   const toggleIcon = document.querySelector(".select-head");
@@ -177,13 +161,24 @@ function toggleCategory() {
   categorySelect.classList.toggle("active");
 }
 
-//
+/**
+ * Sets the selected category and updates the displayed text in the category select header.
+ * Closes the category select container by calling the 'toggleCategory' function.
+ *
+ * @param {string} option - The selected category option.
+ */
 function selectCategory(option) {
   const selectHead = document.getElementById("selectedCat");
   selectHead.textContent = `${option}`;
   toggleCategory();
 }
 
+/**
+ * Toggles the visibility and style of subtask-related elements.
+ * Adds or removes the 'add_cancel' class from the 'add-cancel-subtask' element.
+ * Adds or removes the 'd-none' class from the 'add-subtask' element.
+ * Blurs the focus from the 'enter-subtask' element when the 'add_cancel' class is present.
+ */
 function enterSubtasks() {
   const addCancel = document.getElementById("add-cancel-subtask");
   const addSubtask = document.getElementById("add-subtask");
@@ -194,6 +189,14 @@ function enterSubtasks() {
   }
 }
 
+/**
+ * Adds a subtask to the subtask list.
+ * Retrieves the input value from the 'enter-subtask' element.
+ * Checks if the input value is empty and returns if true.
+ * Checks if there are already three or more subtasks and returns if true.
+ * Creates a new 'li' element and appends it to the 'subtaskList' element.
+ * Clears the input value of the 'enter-subtask' element.
+ */
 function addSubtask() {
   const inputValue = document.getElementById("enter-subtask").value;
   if (inputValue.trim() === "") {
@@ -214,18 +217,28 @@ function addSubtask() {
   document.getElementById("enter-subtask").value = "";
 }
 
-//
+/**
+ * Clears the input value of the 'enter-subtask' field.
+ */
 function clearInputField() {
   document.getElementById("enter-subtask").value = "";
 }
 
-// Function to delete a subtask
+/**
+ * Deletes a subtask by removing its corresponding 'li' element from the subtask list.
+ *
+ * @param {HTMLElement} li - The 'li' element to be deleted.
+ */
 function deleteSubtask(li) {
   const ul = document.getElementById("subtaskList");
   ul.removeChild(li);
 }
 
-// Function to edit a subtask
+/**
+ * Enables editing mode for a subtask by displaying an input field and hiding the text.
+ *
+ * @param {HTMLElement} li - The 'li' element representing the subtask.
+ */
 function editSubtask(li) {
   const textSpan = li.querySelector(".subtask-text");
   const input = li.querySelector(".edit-input");
@@ -236,7 +249,11 @@ function editSubtask(li) {
   input.value = textSpan.textContent;
 }
 
-// Function to save an edited subtask
+/**
+ * Saves the edited content of a subtask, updating the text and switching back to display mode.
+ *
+ * @param {HTMLElement} li - The 'li' element representing the subtask.
+ */
 function saveSubtask(li) {
   const textSpan = li.querySelector(".subtask-text");
   const input = li.querySelector(".edit-input");
@@ -247,7 +264,10 @@ function saveSubtask(li) {
   input.style.display = "none";
 }
 
-// Reset fields
+/**
+ * Clears input fields, resets date, category, and assigned-to, unchecks priority buttons,
+ * and clears subtask-related elements.
+ */
 function clearFields() {
   // Clear input fields and textareas
   const inputFields = document.querySelectorAll('input[type="text"], textarea');
@@ -281,6 +301,13 @@ function clearFields() {
   subtaskList.innerHTML = "";
 }
 
+/**
+ * Generates HTML markup for a subtask with the provided input value.
+ * Includes text display, an edit input field, delete button, and save button.
+ *
+ * @param {string} inputValue - The text content of the subtask.
+ * @returns {string} - HTML markup for the subtask.
+ */
 function addTaskHTML(inputValue) {
   return `<span class="subtask-text">
   ${inputValue}
@@ -294,7 +321,11 @@ function addTaskHTML(inputValue) {
 
 let prio;
 
-// Modify setPriority to include image source
+/**
+ * Sets the priority for a task by updating the button colors and storing the selected priority.
+ *
+ * @param {string} priority - The priority level ("low", "medium", or "urgent").
+ */
 function setPriority(priority) {
   let low = document.querySelector(".low");
   let medium = document.querySelector(".medium");
@@ -315,9 +346,13 @@ function setPriority(priority) {
     urgent.style.backgroundColor = "red";
   }
   prio = priority;
-  console.log("Selected Priority:", priority);
 }
 
+/**
+ * Inserts a new task into the tasks array and sends it to users.
+ * Clears input fields, updates user storage, retrieves updated user data,
+ * and displays tasks on the board or slides in the image (based on the 'position' variable).
+ */
 async function insertTask() {
   // Extract values from input fields
   const title = document.getElementById("title_input").value;
@@ -357,6 +392,11 @@ async function insertTask() {
   }
 }
 
+/**
+ * Sends a new task to the assigned users by updating their 'tasks' array.
+ *
+ * @param {object} newTask - The new task object to be sent to users.
+ */
 async function send_taks_to_users(newTask){
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
@@ -373,6 +413,9 @@ async function send_taks_to_users(newTask){
   }
 }
 
+/**
+ * Slides in the image by moving it upwards and triggers the 'menue_clicked' function after 2 seconds.
+ */
 function slideInImage() {
   var image = document.getElementById('slide-in-image');
   

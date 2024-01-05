@@ -99,6 +99,10 @@ function displayUserDetails(i) {
   document.querySelector(".info").classList.add("show-info");
 }
 
+/**
+ * Checks the width of the screen and adjusts the visibility of contact elements accordingly.
+ * Hides the contact sidebar and displays the contact detail when the screen width changes.
+ */
 function checkWidth() {
   const contactDetail = document.querySelector(".contact_detail");
   const contact = document.querySelector(".contact_sidebar");
@@ -106,6 +110,11 @@ function checkWidth() {
   contactDetail.classList.add("d-block");
 }
 
+/**
+ * Displays contact elements and removes the mobile-specific classes.
+ * Shows the contact sidebar and hides the contact detail.
+ * Removes the background color applied to elements.
+ */
 function displayContacts() {
   const contactDetail = document.querySelector(".contact_detail");
   const contact = document.querySelector(".contact_sidebar");
@@ -116,6 +125,10 @@ function displayContacts() {
   removeBackgroundColor();
 }
 
+/**
+ * Removes the 'selected-contact' class from all contact name elements.
+ * This class is typically used to indicate a selected contact with a background color.
+ */
 function removeBackgroundColor() {
   const contactNames = document.querySelectorAll(".contact_name");
   contactNames.forEach((contact) => {
@@ -145,7 +158,7 @@ function addBackgroundColor(i) {
  */
 async function deleteUserByIndex(index) {
   currentUserIndex = index;
-  console.log(users);
+  (users);
   if (currentUserIndex >= 0 && currentUserIndex < users.length) {
     users.splice(currentUserIndex, 1);
     await set_users_contacts();
@@ -172,11 +185,19 @@ function closeAddContactPopup() {
   document.getElementById("overlay").style.display = "none";
 }
 
+/**
+ * Displays the edit and delete icons for contacts.
+ * Adjusts the CSS properties to show the icons with a right margin.
+ */
 function openEditandDelete() {
   document.querySelector(".contact_icon").style.display = "flex";
   document.querySelector(".contact_icon").style.right = "1rem";
 }
 
+/**
+ * Hides the edit and delete icons for contacts.
+ * Adjusts the CSS properties to hide the icons with a right margin.
+ */
 function closeEditandDelete() {
   document.querySelector(".contact_icon").style.display = "none";
   document.querySelector(".contact_icon").style.right = "77px";
