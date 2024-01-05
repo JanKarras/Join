@@ -1,12 +1,12 @@
 
-let tasks = [];
-let ass_to_emails = [];
-let insert_in;
+let tasks = []; //Array of the tasks that are assigend to the logged in user
+let assToEmails = []; //Array if the Emails that a new task is assigend to
+let insertIn; //Variable in wich category a task will be inserted -> todo, in progress or feedback
 
 /**
  * Initializes the addition of a new task.
  * If the 'name' parameter is undefined, sets it to 'todo'.
- * Clears the 'ass_to_emails' array.
+ * Clears the 'assToEmails' array.
  * Asynchronously loads user contacts and tasks for the specified name.
  * Calls the 'contacts' function and 'insertTask' function.
  * 
@@ -15,10 +15,10 @@ let insert_in;
 async function add_task_init(name) {
   if (name == undefined)
   name = 'todo';
-  insert_in = name;
-  ass_to_emails.length = 0;
+  insertIn = name;
+  assToEmails.length = 0;
   await load_users_contacts();
-  await load_users_tasks(name);
+  await loadUsersTasks(name);
   contacts();
   insertTask();
 }
@@ -29,7 +29,7 @@ async function add_task_init(name) {
  * 
  * @param {string} name - The name of the task list to load tasks from.
  */
-async function load_users_tasks(name){
+async function loadUsersTasks(name){
   tasks.length = 0;
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
@@ -48,7 +48,7 @@ async function load_users_tasks(name){
  * Clears the existing tasks for the user and populates the 'tasks' array into the user's 'tasks'.
  * Saves the updated 'all_user' array to the browser storage using the 'setItem' function.
  */
-async function set_users_tasks() {
+async function setUsersTasks() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element["email"] == Email) {
@@ -90,35 +90,25 @@ function contacts() {
 
 /**
  * Toggles the state of the checkbox for the user at the specified index.
- * Updates the 'ass_to_emails' array based on checkbox state changes.
+ * Updates the 'assToEmails' array based on checkbox state changes.
  * Updates the display of selected initials in the UI.
  *
  * @param {number} index - The index of the user in the 'users' array.
  * @param {string} nameInitials - The initials of the user.
  */
 function toggleCheckbox(index, nameInitials) {
-  const checkbox = document.querySelector(
-    `.option[data-index="${index}"] .checkbox`
-  );
+  const checkbox = document.querySelector(`.option[data-index="${index}"] .checkbox`);
   checkbox.checked = !checkbox.checked;
-
-  const selectedContInitials = document.querySelector(
-    ".selected_cont_initials"
-  );
-
+  const selectedContInitials = document.querySelector(".selected_cont_initials");
   if (checkbox.checked) {
-    // Retrieve nameInitials from data attribute
     const nameInitials = checkbox.getAttribute("data-name-initials");
-
-    // Use span element with innerHTML
     const newSpan = document.createElement("span");
-    ass_to_emails.push(users[index]['email']);
+    assToEmails.push(users[index]['email']);
   } else {
-    const removedIndex = ass_to_emails.findIndex((user) => user === users[index]['email']);
+    const removedIndex = assToEmails.findIndex((user) => user === users[index]['email']);
     if (removedIndex !== -1) {
-      ass_to_emails.splice(removedIndex, 1);
+      assToEmails.splice(removedIndex, 1);
     }
-    // Remove the corresponding span element for the unchecked checkbox
     const spans = document.querySelectorAll(".selected_cont_initials span");
     spans.forEach((span) => {
       if (span.innerText === nameInitials) {
@@ -202,15 +192,11 @@ function addSubtask() {
   if (inputValue.trim() === "") {
     return;
   }
-
   const ul = document.getElementById("subtaskList");
   const liElements = ul.getElementsByTagName("li");
-
-  // Return if there are already more than three li elements
   if (liElements.length >= 3) {
     return;
   }
-
   const li = document.createElement("li");
   li.innerHTML += addTaskHTML(inputValue);
   ul.appendChild(li);
@@ -242,7 +228,6 @@ function deleteSubtask(li) {
 function editSubtask(li) {
   const textSpan = li.querySelector(".subtask-text");
   const input = li.querySelector(".edit-input");
-
   li.classList.add("editing");
   textSpan.style.display = "none";
   input.style.display = "inline-block";
@@ -257,7 +242,6 @@ function editSubtask(li) {
 function saveSubtask(li) {
   const textSpan = li.querySelector(".subtask-text");
   const input = li.querySelector(".edit-input");
-
   li.classList.remove("editing");
   textSpan.textContent = input.value;
   textSpan.style.display = "inline";
@@ -269,34 +253,22 @@ function saveSubtask(li) {
  * and clears subtask-related elements.
  */
 function clearFields() {
-  // Clear input fields and textareas
   const inputFields = document.querySelectorAll('input[type="text"], textarea');
   inputFields.forEach((field) => {
     field.value = "";
   });
-  // Reset date
   const dateInput = document.getElementById("date_input");
   dateInput.value = "";
-
-  // Reset category
   const selectedCat = document.getElementById("selectedCat");
   selectedCat.innerText = "Select task category";
-
-  // Reset assigned to
   const selectBox = document.querySelector(".select-box");
   selectBox.value = "";
-
-  // Uncheck priority buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
     button.style.backgroundColor = "initial";
   });
-
-  // Clear subtasks
   const subtaskInput = document.getElementById("enter-subtask");
   subtaskInput.value = "";
-
-  // Clear subtask list
   const subtaskList = document.getElementById("subtaskList");
   subtaskList.innerHTML = "";
 }
@@ -314,12 +286,11 @@ function addTaskHTML(inputValue) {
   </span> 
   <input type="text" class="edit-input d-none"> 
   <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
- 
   <span class="save-btn" onclick="saveSubtask(this.parentNode)"><i class="fa-solid fa-check"></i></span>
   `;
 }
 
-let prio;
+let prio; //Variable for the selected prio if an task
 
 /**
  * Sets the priority for a task by updating the button colors and storing the selected priority.
@@ -331,13 +302,8 @@ function setPriority(priority) {
   let medium = document.querySelector(".medium");
   let urgent = document.querySelector(".urgent");
   let image = document.querySelector(".image");
-  
-  // reset the buttons
   const prioButtons = document.querySelectorAll(".prio_btns");
-  prioButtons.forEach((button) => {
-    button.style.backgroundColor = "initial";
-  });
-  
+  prioButtons.forEach((button) => {button.style.backgroundColor = "initial";});
   if (priority === "low") {
     low.style.backgroundColor = "green";
   } else if (priority === "medium") {
@@ -354,42 +320,25 @@ function setPriority(priority) {
  * and displays tasks on the board or slides in the image (based on the 'position' variable).
  */
 async function insertTask() {
-  // Extract values from input fields
   const title = document.getElementById("title_input").value;
   const description = document.getElementById("description_input").value;
   const dueDate = document.getElementById("date_input").value;
-
-  // Extract category value
   const category = document.getElementById("selectedCat").innerText;
-
-  // Extract subtasks
   const subtaskListItems = document.querySelectorAll("#subtaskList li");
   const subtasks = Array.from(subtaskListItems).map((item) => item.innerText);
-
   if (!title || !dueDate || !description) {
     return;
   }
-
-  // Create a task object
-  const newTask = {
-    title: title,
-    des: description,
-    ass_to: ass_to_emails, // Convert assignedTo to an array
-    due: dueDate,
-    prio: prio,
-    cat: category,
-    sub_tasks: subtasks,
-  };
+  const newTask = {title: title, des: description, ass_to: assToEmails, due: dueDate, prio: prio, cat: category, sub_tasks: subtasks,};
   tasks.push(newTask);
-  await send_taks_to_users(newTask);
+  await sendTaksToUsers(newTask);
   clearFields();
   await setItem('users', all_user);
   await get_all_user();
   if (position == 'board')
     displayTasks();
-  else {
+  else
     slideInImage();
-  }
 }
 
 /**
@@ -397,16 +346,16 @@ async function insertTask() {
  *
  * @param {object} newTask - The new task object to be sent to users.
  */
-async function send_taks_to_users(newTask){
+async function sendTaksToUsers(newTask){
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
     for (let j = 0; j < newTask['ass_to'].length; j++) {
       if (newTask['ass_to'][j] == user['email'])
       {
-        user['tasks'][0][insert_in].length = 0;
+        user['tasks'][0][insertIn].length = 0;
         for (let k = 0; k < tasks.length; k++) {
           const task = tasks[k];
-          user['tasks'][0][insert_in].push(task);
+          user['tasks'][0][insertIn].push(task);
         }
       }
     }
@@ -418,12 +367,7 @@ async function send_taks_to_users(newTask){
  */
 function slideInImage() {
   var image = document.getElementById('slide-in-image');
-  
-  // Bild nach oben schieben
   image.style.bottom = '50%';
-  
-
-  // Timer für die Ausführung der Funktion nach 2 Sekunden
   setTimeout(function() {
     menue_clicked('board');
   }, 2000);

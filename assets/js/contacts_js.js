@@ -1,4 +1,4 @@
-let users = [];
+let users = []; //Array of the contacts that the logged in user have
 
 /**
  * Initializes the 'contacts' page by loading users' contacts and displaying them.
@@ -47,10 +47,10 @@ async function set_users_contacts() {
   await get_all_user();
 }
 
-let initials;
-let nameInitials;
-let currentUserIndex;
-let currentAlphabet = "";
+let initials; //Array of the initilas of the contacts
+let nameInitials; //Initials as string
+let currentUserIndex; //Index of the current selected contact
+let currentAlphabet = ""; //First char of the first name
 
 /**
  * Displays the list of users on the 'contacts' page and sorts them alphabetically.
@@ -88,9 +88,8 @@ function displayUserDetails(i) {
   addBackgroundColor(i);
   userInfo.innerHTML = "";
   const user = users[i];
-  if (!user) {
+  if (!user)
     return;
-  }
   const names = user.name.split(" ");
   let nameInitials = names[0].charAt(0).toUpperCase();
   nameInitials += names[names.length - 1].charAt(0).toUpperCase();
@@ -143,12 +142,9 @@ function removeBackgroundColor() {
  */
 function addBackgroundColor(i) {
   removeBackgroundColor();
-  const selectedContact = document.querySelector(
-    `.contact_name[data-index="${i}"]`
-  );
-  if (selectedContact) {
+  const selectedContact = document.querySelector(`.contact_name[data-index="${i}"]`);
+  if (selectedContact)
     selectedContact.classList.add("selected-contact");
-  }
 }
 
 /**
@@ -287,7 +283,6 @@ async function saveChanges() {
 function closeEditContactPopup() {
   document.getElementById("editContactPopup").classList.remove("show");
   document.getElementById("overlay").style.display = "none";
-
   displayUserDetails(currentUserIndex);
 }
 
@@ -299,9 +294,9 @@ const colors = [
   "orange",
   "#dd5d13",
   "#1e796a",
-];
+]; //Array of Colors for the contacts
 
-const userColorMap = {};
+const userColorMap = {}; //Array with the colors for the contacts get by index
 
 /**
  * Gets the color for a user based on their index.

@@ -1,13 +1,13 @@
 /**
  * Initializes the 'summary' page by calling necessary functions.
- * Calls 'set_name' to display the user's name on the page.
- * Calls 'load_numbers' to load relevant numbers or data on the page.
+ * Calls 'setName' to display the user's name on the page.
+ * Calls 'loadNumbers' to load relevant numbers or data on the page.
  * Calls 'updateTime' to update the greeting message based on the current time.
  */
 async function summary_init() {
   await get_all_user();
-  set_name();
-  load_numbers();
+  setName();
+  loadNumbers();
   updateTime();
 }
 
@@ -16,7 +16,7 @@ async function summary_init() {
  * Retrieves the user's name from the 'all_user' array based on the logged-in email.
  * Displays a greeting message with the full name and a shortened version with initials.
  */
-function set_name() {
+function setName() {
   let name;
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
@@ -38,12 +38,12 @@ function set_name() {
 /**
  * load the numbers of the tasks_sum
  */
-function load_numbers() {
+function loadNumbers() {
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element["email"] == Email) {
       let tasks_sum = element["tasks"];
-      render_numbers(tasks_sum);
+      renderNumbers(tasks_sum);
       break;
     }
   }
@@ -53,7 +53,7 @@ function load_numbers() {
  * Rendert die Anzahl der Aufgaben in verschiedenen Kategorien und Informationen zu dringenden Aufgaben.
  * @param {Array} tasks_sum - the users array of the tasks_sum
  */
-function render_numbers(tasks_sum) {
+function renderNumbers(tasks_sum) {
   if (tasks_sum.length != 0) {
     document.getElementById("to_do_nb").innerHTML = tasks_sum[0]["todo"].length;
     document.getElementById("done_nb").innerHTML = tasks_sum[0]["done"].length;
@@ -76,52 +76,88 @@ function render_numbers(tasks_sum) {
       if (element["prio"] == "urgent") count++;
     }
     document.getElementById("urgent_nb").innerHTML = count;
-    render_deadline(tasks_sum);
+    renderDeadline(tasks_sum);
   }
 }
 
 /**
- * Render the next date of the task wich is due soon.
- * @param {Array} tasks_sum - the users array of the tasks_sum
+ * Render the next due date based on task summaries and update the HTML element with id "deadline".
+ *
+ * @param {Array} tasks_sum - An array containing task summaries.
  */
-function render_deadline(tasks_sum) {
+function renderDeadline(tasks_sum) {
+  const dates = getAllDueDates(tasks_sum);
+  const futureDates = getFutureDates(dates);
+  const nextDueDate = getNextDueDate(futureDates);
+
+  updateDeadlineElement(nextDueDate);
+}
+
+/**
+ * Extracts all due dates from different task statuses.
+ *
+ * @param {Array} tasks_sum - An array containing task summaries.
+ * @returns {Array} - An array of due dates.
+ */
+function getAllDueDates(tasks_sum) {
   let dates = [];
-  for (let i = 0; i < tasks_sum[0]["todo"].length; i++) {
-    const element = tasks_sum[0]["todo"][i]["due"];
-    dates.push(element);
-  }
-  for (let i = 0; i < tasks_sum[0]["feedback"].length; i++) {
-    const element = tasks_sum[0]["feedback"][i]["due"];
-    dates.push(element);
-  }
-  for (let i = 0; i < tasks_sum[0]["in_progress"].length; i++) {
-    const element = tasks_sum[0]["in_progress"][i]["due"];
-    dates.push(element);
-  }
-  let current_date = new Date();
+  ["todo", "feedback", "in_progress"].forEach((status) => {
+    dates = dates.concat(tasks_sum[0][status].map((task) => task.due));
+  });
+  return dates;
+}
+
+/**
+ * Filters out past dates and returns an array of future due dates.
+ *
+ * @param {Array} dates - An array of due dates.
+ * @returns {Array} - An array of future due dates.
+ */
+function getFutureDates(dates) {
+  const current_date = new Date();
   current_date.setHours(0, 0, 0, 0);
 
-  function parseDate(dateString) {
-    let parts = dateString.split("-");
-    return new Date(parts[0], parts[1] - 1, parts[2]);
-  }
-
-  let futureDates = dates.filter((date) => {
+  return dates.filter((date) => {
     let taskDate = parseDate(date);
     return taskDate > current_date;
   });
+}
 
+/**
+ * Finds and returns the next due date from an array of future due dates.
+ *
+ * @param {Array} futureDates - An array of future due dates.
+ * @returns {Date|null} - The next due date or null if none exists.
+ */
+function getNextDueDate(futureDates) {
   futureDates.sort((a, b) => parseDate(a) - parseDate(b));
-  let nextDueDate = futureDates.length > 0 ? parseDate(futureDates[0]) : null;
+  return futureDates.length > 0 ? parseDate(futureDates[0]) : null;
+}
 
-  let formattedDate = nextDueDate
+/**
+ * Parses a date string in the format "YYYY-MM-DD" and returns a Date object.
+ *
+ * @param {string} dateString - A string representing a date in "YYYY-MM-DD" format.
+ * @returns {Date} - A Date object parsed from the input string.
+ */
+function parseDate(dateString) {
+  const parts = dateString.split("-");
+  return new Date(parts[0], parts[1] - 1, parts[2]);
+}
+
+/**
+ * Updates the HTML element with id "deadline" based on the provided due date.
+ *
+ * @param {Date|null} nextDueDate - The next due date or null if none exists.
+ */
+function updateDeadlineElement(nextDueDate) {
+  const formattedDate = nextDueDate
     ? nextDueDate.toLocaleDateString("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
       })
     : "No";
-
   document.getElementById("deadline").innerHTML = formattedDate;
 }
 

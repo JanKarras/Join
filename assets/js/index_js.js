@@ -121,7 +121,6 @@ async function loginUser() {
   try {
     const response = await getItem('users');
     const usersData = response['data']['value'];
-
     if (usersData) {
       const usersArray = JSON.parse(usersData);
       let user = usersArray.find(

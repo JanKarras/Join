@@ -1,11 +1,11 @@
-let tasks_board = [];
+let tasksBoard = []; //Array of all tasks that should be display in the board
 
 /**
  * Initializes the board by loading user contacts and tasks, displaying contacts, and rendering tasks on the board.
  */
 async function board_init() {
   await load_users_contacts();
-  await load_users_tasks_board();
+  await loadUserstasksBoard();
   contacts();
   displayTasks();
 }
@@ -13,12 +13,12 @@ async function board_init() {
 /**
  * Loads user tasks for the board by copying them from the user's 'tasks' array.
  */
-async function load_users_tasks_board() {
-  tasks_board.length = 0;
+async function loadUserstasksBoard() {
+  tasksBoard.length = 0;
   for (let i = 0; i < all_user.length; i++) {
     const element = all_user[i];
     if (element['email'] == Email) {
-      tasks_board = element['tasks'].slice();
+      tasksBoard = element['tasks'].slice();
       break;
     }
   }
@@ -49,57 +49,66 @@ function closeAddTask() {
 }
 
 /**
- * Displays tasks in different statuses on the board.
- * Clears existing content in task containers and generates HTML for each task.
+ * Display tasks on the HTML page based on the tasksBoard data.
  */
 function displayTasks() {
   const todo = document.getElementById("todo");
   const inProgress = document.getElementById("in_progress");
   const awaitFeedback = document.getElementById("feedback");
   const done = document.getElementById("done");
+  clearTaskContainers(todo, inProgress, awaitFeedback, done);
+  displayNoTaskMessage(todo, tasksBoard[0]['todo'], "No tasks to do");
+  displayNoTaskMessage(inProgress, tasksBoard[0]['in_progress'], "No tasks in progress");
+  displayNoTaskMessage(awaitFeedback, tasksBoard[0]['feedback'], "No tasks waiting for feedback");
+  displayNoTaskMessage(done, tasksBoard[0]['done'], "No tasks done");
+  for (const status in tasksBoard[0]) {
+    if (tasksBoard[0].hasOwnProperty(status)) {
+      const tasksInStatus = tasksBoard[0][status];
+      displayTasksInStatus(status, tasksInStatus);
+    }
+  }
+}
+
+/**
+ * Clear the content of task containers.
+ *
+ * @param {HTMLElement} todo - The todo container element.
+ * @param {HTMLElement} inProgress - The in-progress container element.
+ * @param {HTMLElement} awaitFeedback - The feedback container element.
+ * @param {HTMLElement} done - The done container element.
+ */
+function clearTaskContainers(todo, inProgress, awaitFeedback, done) {
   todo.innerHTML = "";
   inProgress.innerHTML = "";
   awaitFeedback.innerHTML = "";
   done.innerHTML = "";
+}
 
-  if (tasks_board[0]['todo'] && tasks_board[0]['todo'].length === 0) {
-    todo.innerHTML = "<div class='notask'>No tasks to do</div>";
+/**
+ * Display a message in the task container if there are no tasks in the specified category.
+ *
+ * @param {HTMLElement} container - The task container element.
+ * @param {Array} tasks - The array of tasks in the specified category.
+ * @param {string} message - The message to display if there are no tasks.
+ */
+function displayNoTaskMessage(container, tasks, message) {
+  if (tasks && tasks.length === 0) {
+    container.innerHTML = `<div class='notask'>${message}</div>`;
   }
+}
 
-  if (tasks_board[0]['in_progress'] && tasks_board[0]['in_progress'].length === 0) {
-    inProgress.innerHTML = "<div class='notask'>No tasks in progress</div>";
-  }
-
-  if (tasks_board[0]['feedback'] && tasks_board[0]['feedback'].length === 0) {
-    awaitFeedback.innerHTML = "<div class='notask'>No tasks waiting for feedback</div>";
-  }
-
-  if (tasks_board[0]['done'] && tasks_board[0]['done'].length === 0) {
-    done.innerHTML = "<div class='notask'>No tasks done</div>";
-  }
-  // Loop through each task status (to_do, in_progress, feedback, done)
-  for (const status in tasks_board[0]) {
-    if (tasks_board[0].hasOwnProperty(status)) {
-      const tasksInStatus = tasks_board[0][status];
-      for (let i = 0; i < tasksInStatus.length; i++) {
-        const task = tasksInStatus[i];
-        const taskHTML = generateTaskHTML(task, status, i);
-        switch (status) {
-          case "todo":
-            todo.innerHTML += taskHTML;
-            break;
-          case "in_progress":
-            inProgress.innerHTML += taskHTML;
-            break;
-          case "feedback":
-            awaitFeedback.innerHTML += taskHTML;
-            break;
-          case "done":
-            done.innerHTML += taskHTML;
-            break;
-        }
-      }
-    }
+/**
+ * Display tasks in the specified status category.
+ *
+ * @param {string} status - The status category (e.g., "todo", "in_progress").
+ * @param {Array} tasksInStatus - The array of tasks in the specified status category.
+ */
+function displayTasksInStatus(status, tasksInStatus) {
+  const container = document.getElementById(status);
+  for (let i = 0; i < tasksInStatus.length; i++) {
+    const task = tasksInStatus[i];
+    const taskHTML = generateTaskHTML(task, status, i);
+    container.innerHTML += taskHTML;
   }
 }
 
@@ -215,7 +224,7 @@ function drop(event) {
 
 /**
  * Handles the dropped event by moving a task from one category to another.
- * Updates the 'tasks_board' array, sets it to storage, updates user data, and refreshes the displayed tasks.
+ * Updates the 'tasksBoard' array, sets it to storage, updates user data, and refreshes the displayed tasks.
  *
  * @param {string} taskId - The ID of the task being dragged.
  * @param {string} dropCategoryId - The ID of the category where the task is dropped.
@@ -226,21 +235,21 @@ async function dropped(taskId, dropCategoryId) {
   const textPart = taskId.substring(0, lastUnderscoreIndex);
   (numberPart)
   (textPart)
-  tasks_board[0][dropCategoryId].push(tasks_board[0][textPart][numberPart])
-  tasks_board[0][textPart].splice(numberPart, 1);
-  await set_tasks_board();
+  tasksBoard[0][dropCategoryId].push(tasksBoard[0][textPart][numberPart])
+  tasksBoard[0][textPart].splice(numberPart, 1);
+  await set_tasksBoard();
   await setItem('users', all_user);
   displayTasks();
 }
 
 /**
- * Sets the 'tasks_board' array in the current user's data.
+ * Sets the 'tasksBoard' array in the current user's data.
  */
-async function set_tasks_board() {
+async function set_tasksBoard() {
   for (let i = 0; i < all_user.length; i++) {
     const user = all_user[i];
     if (user['email'] == Email) {
-      user['tasks'] = tasks_board;
+      user['tasks'] = tasksBoard;
       break;
     }
   }
@@ -307,7 +316,7 @@ function stopPropagation(event) {
  * @param {string} textPart - The text part of the task ID.
  */
 function render_details(numberPart, textPart) {
-  let task = tasks_board[0][textPart][numberPart];
+  let task = tasksBoard[0][textPart][numberPart];
   (task);
   const cat = document.getElementById('cat')
   if (task.cat == "Techniker task") {
@@ -475,7 +484,7 @@ function formatDate(inputDate) {
  * @param {string} textPart - The text part of the task ID.
  */
 function setImg(i, numberPart, textPart) {
-  let task = tasks_board[0][textPart][numberPart];
+  let task = tasksBoard[0][textPart][numberPart];
   if (task.sub_tasks[i].endsWith("_finished")) {
     document.getElementById('check_' + i).src = "./assets/img/Check_button.png"
   }
@@ -492,16 +501,16 @@ function setImg(i, numberPart, textPart) {
  * @param {string} text - The text part of the task ID.
  */
 async function check(i, nb, text) {
-  let task = tasks_board[0][text][nb];
+  let task = tasksBoard[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
     task.sub_tasks[i] = task.sub_tasks[i] + "_finished";
-    all_user['tasks'] = tasks_board;
+    all_user['tasks'] = tasksBoard;
     await setItem('users', all_user);
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
   }
   else {
     task.sub_tasks[i] = task.sub_tasks[i].replace("_finished", "");
-    all_user['tasks'] = tasks_board;
+    all_user['tasks'] = tasksBoard;
     await setItem('users', all_user);
     document.getElementById("check_" + i).src = "./assets/img/Check_button_unchecked.png"
   }
@@ -515,7 +524,7 @@ async function check(i, nb, text) {
  * @param {string} text - The text part of the task ID.
  */
 function not_hover_over_check(i, nb, text) {
-  let task = tasks_board[0][text][nb];
+  let task = tasksBoard[0][text][nb];
   if (task.sub_tasks[i].endsWith("_finished")) {
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
   }
@@ -532,7 +541,7 @@ function not_hover_over_check(i, nb, text) {
  * @param {string} text - The text part of the task ID.
  */
 function hover_over_check(i, nb, text) {
-  let task = tasks_board[0][text][nb];
+  let task = tasksBoard[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
   }
@@ -544,15 +553,15 @@ function hover_over_check(i, nb, text) {
 /**
  * Asynchronously searches for tasks and updates the display.
  * 
- * Calls the 'load_users_tasks_board' function to ensure the tasks are up-to-date,
- * then performs a search using the 'searchTasks' function, updates the 'tasks_board'
+ * Calls the 'loadUserstasksBoard' function to ensure the tasks are up-to-date,
+ * then performs a search using the 'searchTasks' function, updates the 'tasksBoard'
  * accordingly, and finally updates the display by calling 'displayTasks'.
  */
 async function search() {
-  await load_users_tasks_board();
+  await loadUserstasksBoard();
   let temp = searchTasks();
-  tasks_board = temp[0];
-  (tasks_board)
+  tasksBoard = temp[0];
+  (tasksBoard)
   displayTasks();
 }
 
@@ -569,7 +578,7 @@ function searchTasks() {
   let searchInput = document.getElementById('search_bar_input').value.toLowerCase();
   let searchResults = [];
 
-  tasks_board.forEach((taskCategory, categoryName) => {
+  tasksBoard.forEach((taskCategory, categoryName) => {
     let matchingTasks = {};
 
     Object.entries(taskCategory).forEach(([category, tasksArray]) => {
@@ -591,17 +600,17 @@ function searchTasks() {
 }
 
 /**
- * Asynchronously deletes a task from the 'tasks_board'.
+ * Asynchronously deletes a task from the 'tasksBoard'.
  * 
- * Removes the task from the specified category and updates the data in 'tasks_board',
+ * Removes the task from the specified category and updates the data in 'tasksBoard',
  * then saves the updated data to local storage and closes the task details popup.
  * 
  * @param {number} numberPart - The index of the task within its category.
  * @param {string} textPart - The category to which the task belongs.
  */
 async function del(numberPart, textPart) {
-  tasks_board[0][textPart].splice(numberPart, 1);
-  await set_tasks_board();
+  tasksBoard[0][textPart].splice(numberPart, 1);
+  await set_tasksBoard();
   await setItem('users', all_user);
   closePopup();
 }
@@ -615,7 +624,7 @@ async function del(numberPart, textPart) {
  * @param {string} textPart - The category to which the task belongs.
  */
 function edit(numberPart, textPart) {
-  let task = tasks_board[0][textPart][numberPart];
+  let task = tasksBoard[0][textPart][numberPart];
   document.getElementById("popup-container").classList.add('d-none');
   let popup_html = document.getElementById("edit_container");
   popup_html.classList.remove('d-none');
@@ -720,7 +729,7 @@ function setPriority_edit(str) {
   }
 }
 
-let ass_to_emails_edit;
+let assToEmails_edit;
 
 /**
  * Renders the content of the edit popup based on the provided task.
@@ -738,7 +747,7 @@ function render_popup_edit(task) {
     setPriority_edit('medium')
   if (task.prio == 'low')
     setPriority_edit('low')
-  ass_to_emails_edit = task.ass_to;
+  assToEmails_edit = task.ass_to;
   render_initialz_edit();
   contacts_edit();
   render_sub_tasks(task.sub_tasks);
@@ -749,8 +758,8 @@ function render_popup_edit(task) {
  */
 function render_initialz_edit() {
   let initials = []
-  for (let i = 0; i < ass_to_emails_edit.length; i++) {
-    const ass = ass_to_emails_edit[i];
+  for (let i = 0; i < assToEmails_edit.length; i++) {
+    const ass = assToEmails_edit[i];
     for (let j = 0; j < users.length; j++) {
       const user = users[j];
       if (user['email'] == ass) {
@@ -811,11 +820,11 @@ function toggleCheckbox_edit(index, nameInitials) {
 
     // Use span element with innerHTML
     const newSpan = document.createElement("span");
-    ass_to_emails_edit.push(users[index]['email']);
+    assToEmails_edit.push(users[index]['email']);
   } else {
-    const removedIndex = ass_to_emails_edit.findIndex((user) => user === users[index]['email']);
+    const removedIndex = assToEmails_edit.findIndex((user) => user === users[index]['email']);
     if (removedIndex !== -1) {
-      ass_to_emails_edit.splice(removedIndex, 1);
+      assToEmails_edit.splice(removedIndex, 1);
     }
     // Remove the corresponding span element for the unchecked checkbox
     const spans = document.querySelectorAll(".selected_cont_initials span");
@@ -840,7 +849,7 @@ function contacts_edit() {
     let nameInitials = names[0].charAt(0).toUpperCase();
     nameInitials += names[names.length - 1].charAt(0).toUpperCase();
     const userColor = getUserColor(i);
-    const isChecked = ass_to_emails_edit.includes(users[i]['email']); // Prüfe, ob die E-Mail-Adresse ausgewählt ist
+    const isChecked = assToEmails_edit.includes(users[i]['email']); // Prüfe, ob die E-Mail-Adresse ausgewählt ist
 
     optionsContainer.innerHTML += `
         <div class="option_edit ${isChecked ? 'selected-contact' : ''}" data-index="${i}" onclick="addBackgroundColour_edit(${i}); toggleCheckbox_edit(${i})">
@@ -886,10 +895,10 @@ function render_sub_tasks(sub_tasks) {
  */
 async function finish_edit(numberPart, textPart) {
   (numberPart, textPart);
-  let task = tasks_board[0][textPart][numberPart];
+  let task = tasksBoard[0][textPart][numberPart];
   task.title = document.getElementById('title_edit').value;
   task.due = document.getElementById('date_input_edit').value;
-  task.ass_to = ass_to_emails_edit;
+  task.ass_to = assToEmails_edit;
   task.des = document.getElementById('description_input_edit').value
   task.prio = prio_edit;
   closePopup();
