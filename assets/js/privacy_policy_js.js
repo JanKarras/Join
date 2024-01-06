@@ -1,2 +1,2 @@
-async function privacy_policy_init(){
+async function privacy_policyInit(){
 }

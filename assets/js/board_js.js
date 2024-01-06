@@ -30,7 +30,7 @@ async function loadUserstasksBoard() {
  * @param {string} name - The name parameter for task initialization.
  */
 function openAddTask(name) {
-  add_task_init(name);
+  add_taskInit(name);
   let addTask = document.getElementById("addTaskPopUpWindowContent");
   let overlay = document.querySelector(".overlay");
   addTask.classList.remove("d-none");
@@ -227,6 +227,7 @@ function createUserAssignmentsHTML(task) {
  * @returns {Array} - An array of objects containing user initials and color.
  */
 function getAssigneeInitials(task) {
+  //console.log(task.ass_to);
   const initials = [];
   for (let i = 0; i < task.ass_to.length; i++) {
     const ass = task.ass_to[i];
@@ -246,6 +247,7 @@ function getAssigneeInitials(task) {
       }
     }
   }
+  //console.log(initials);
   return initials;
 }
 

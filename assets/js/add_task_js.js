@@ -354,7 +354,6 @@ async function sendTaksToUsers(newTask){
     for (let j = 0; j < newTask['ass_to'].length; j++) {
       if (newTask['ass_to'][j] == user['email'])
       {
-        user['tasks'][0][insertIn].length = 0;
         for (let k = 0; k < tasks.length; k++) {
           const task = tasks[k];
           user['tasks'][0][insertIn].push(task);

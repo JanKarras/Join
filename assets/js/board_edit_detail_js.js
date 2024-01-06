@@ -52,7 +52,7 @@ function edit(numberPart, textPart) {
     </div>
     <div id="selected_cont_initials" class="selected_cont_initials inits_edit"></div>
   <div class="edit_head">Subtasks</div>
-  <div class="date_picker" onclick="enterSubtasks_edit()">
+  <div class="date_picker" onclick="enterSubtasksEdit(${numberPart}, '${textPart}')">
     <input
       id="enter-subtask_edit"
       type="text"
@@ -63,7 +63,7 @@ function edit(numberPart, textPart) {
     </span>
     <span id="add-cancel-subtask_edit" class="add_cancel">
       <i
-        onclick="clearInputField_edit()"
+        onclick="clearInputFieldEdit()"
         id="delete-subtask_edit"
         class="fa-solid fa-xmark"
       ></i>
@@ -281,5 +281,33 @@ function edit(numberPart, textPart) {
     task.ass_to = assToEmails_edit;
     task.des = document.getElementById('description_input_edit').value
     task.prio = prio_edit;
+    await setChangesToAllUser(numberPart, textPart);
     closePopup();
   }
+
+function enterSubtasksEdit(){
+  const addCancel = document.getElementById("add-cancel-subtask_edit");
+  const addSubtask = document.getElementById("add-subtask_edit");
+  addCancel.classList.toggle("add_cancel");
+  addSubtask.classList.toggle("d-none");
+  if (addCancel.classList.contains("add_cancel")) {
+    document.getElementById("enter-subtask").blur();
+  }
+}
+
+function clearInputFieldEdit(){
+  document.getElementById('enter-subtask_edit').value = "";
+}
+
+async function setChangesToAllUser(numberPart, textPart){
+  let emails = tasksBoard[0][textPart][numberPart].ass_to;
+    for (let i = 0; i < allUser.length; i++) {
+      const user = allUser[i];
+      for (let j = 0; j < emails.length; j++) {
+        const email = emails[j];
+        if (user.email == email){
+          user.tasks[0][textPart][numberPart] = tasksBoard[0][textPart][numberPart];
+        }
+      }
+    }
+}
