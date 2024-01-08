@@ -274,17 +274,22 @@ function edit(numberPart, textPart) {
    * @param {string} textPart - The category of the task (e.g., 'todo', 'in_progress', etc.).
    */
   async function finishEdit(numberPart, textPart) {
-    (numberPart, textPart);
+    let temp_task = JSON.parse(JSON.stringify(tasksBoard[0][textPart][numberPart]));
     let task = tasksBoard[0][textPart][numberPart];
     task.title = document.getElementById('title_edit').value;
     task.due = document.getElementById('date_input_edit').value;
     task.ass_to = assToEmails_edit;
     task.des = document.getElementById('description_input_edit').value
     task.prio = prio_edit;
-    await setChangesToAllUser(numberPart, textPart, task);
+    await setChangesToAllUser(numberPart, textPart, task, temp_task);
+    await setItem('users', allUser);
     closePopup();
   }
 
+  /**
+ * Toggles the visibility of the add subtask input field and the cancel button.
+ * Also blurs the enter-subtask element when the cancel button is toggled.
+ */
 function enterSubtasksEdit(){
   const addCancel = document.getElementById("add-cancel-subtask_edit");
   const addSubtask = document.getElementById("add-subtask_edit");
@@ -295,10 +300,36 @@ function enterSubtasksEdit(){
   }
 }
 
+/**
+ * Clears the value of the enter-subtask_edit input field.
+ */
 function clearInputFieldEdit(){
   document.getElementById('enter-subtask_edit').value = "";
 }
 
-async function setChangesToAllUser(numberPart, textPart, task){
-  
+/**
+ * Sets changes to tasks for all users based on the specified parameters.
+ * @param {number} numberPart - The numeric part.
+ * @param {string} textPart - The text part.
+ * @param {object} task - The task object with changes.
+ * @param {object[]} temp_task - The original task object before changes.
+ */
+async function setChangesToAllUser(numberPart, textPart, task, temp_task){
+  let emails = tasksBoard[0][textPart][numberPart].ass_to;
+    for (let i = 0; i < allUser.length; i++) {
+      const user = allUser[i];
+      for (let j = 0; j < emails.length; j++) {
+        const email = emails[j];
+        if (user.email == email){
+          if (email != Email){
+            for (let k = 0; k < user.tasks[0][textPart].length; k++) {
+              const element = user.tasks[0][textPart][k];
+              if (JSON.stringify(element) === JSON.stringify(temp_task)){
+                user.tasks[0][textPart][k] = task;
+              }
+            }
+          }
+        }
+      }
+    }
 }

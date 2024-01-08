@@ -295,18 +295,56 @@ function setImg(i, numberPart, textPart) {
  * @param {string} text - The text part of the task ID.
  */
 async function check(i, nb, text) {
+  let temp_task = JSON.parse(JSON.stringify(tasksBoard[0][text][nb]));
   let task = tasksBoard[0][text][nb];
   if (!task.sub_tasks[i].endsWith("_finished")) {
     task.sub_tasks[i] = task.sub_tasks[i] + "_finished";
     allUser['tasks'] = tasksBoard;
-    await setItem('users', allUser);
+    await sendSubTaskCheckedToAllUsers(i, nb, text, temp_task, task);
+    //await setItem('users', allUser);
     document.getElementById("check_" + i).src = "./assets/img/Check_button.png"
   }
   else {
     task.sub_tasks[i] = task.sub_tasks[i].replace("_finished", "");
     allUser['tasks'] = tasksBoard;
-    await setItem('users', allUser);
+    await sendSubTaskCheckedToAllUsers(i, nb, text, temp_task, task);
+    //await setItem('users', allUser);
     document.getElementById("check_" + i).src = "./assets/img/Check_button_unchecked.png"
+  }
+}
+
+/**
+ * Sends changes related to the status of a subtask to all users.
+ * @param {number} i - The index of the subtask.
+ * @param {number} numberPart - The numeric part.
+ * @param {string} textPart - The text part.
+ * @param {object} temp_task - The original task object before changes.
+ * @param {object} task - The task object with changes.
+ * @returns {void}
+ * @async
+ */
+async function sendSubTaskCheckedToAllUsers(i, numberPart, textPart, temp_task, task){
+  let emails = tasksBoard[0][textPart][numberPart].ass_to;
+  for (let i = 0; i < allUser.length; i++) {
+    const user = allUser[i];
+    for (let j = 0; j < emails.length; j++) {
+      const email = emails[j];
+      if (user.email == email){
+        if (email != Email){
+          for (let k = 0; k < user.tasks[0][textPart].length; k++) {
+            const element = user.tasks[0][textPart][k];
+            if (JSON.stringify(element) === JSON.stringify(temp_task)){
+              if (!user.tasks[0][textPart][k].sub_tasks[i - 1].endsWith("_finished")){
+                user.tasks[0][textPart][k].sub_tasks[i - 1] = user.tasks[0][textPart][k].sub_tasks[i - 1] + "_finished"
+              }
+              else {
+                user.tasks[0][textPart][k].sub_tasks[i - 1] = user.tasks[0][textPart][k].sub_tasks[i - 1].replace("_finished", "");
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 

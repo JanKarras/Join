@@ -295,13 +295,40 @@ async function dropped(taskId, dropCategoryId) {
   const lastUnderscoreIndex = taskId.lastIndexOf('_');
   const numberPart = taskId.substring(lastUnderscoreIndex + 1);
   const textPart = taskId.substring(0, lastUnderscoreIndex);
-  (numberPart)
-  (textPart)
   tasksBoard[0][dropCategoryId].push(tasksBoard[0][textPart][numberPart])
   tasksBoard[0][textPart].splice(numberPart, 1);
+  console.log(tasksBoard);
   await setTasksBoard();
+  await sendChangeToAllUser(textPart, numberPart , dropCategoryId);
   await setItem('users', allUser);
   displayTasks();
+}
+
+/**
+ * Sends changes to all users based on the specified parameters.
+ * @param {string} textPart - The text part.
+ * @param {number} numberPart - The numeric part.
+ * @param {string} dropCategoryId - The drop category ID.
+ */
+async function sendChangeToAllUser(textPart, numberPart, dropCategoryId){
+  let emails = tasksBoard[0][dropCategoryId][tasksBoard[0][dropCategoryId].length - 1].ass_to;
+  for (let i = 0; i < allUser.length; i++) {
+    const user = allUser[i];
+    for (let j = 0; j < emails.length; j++) {
+      const email = emails[j];
+      if (user.email == email){
+        if (email != Email){
+          user.tasks[0][dropCategoryId].push(tasksBoard[0][dropCategoryId][tasksBoard[0][dropCategoryId].length - 1]);
+          for (let k = 0; k < user.tasks[0][textPart].length; k++) {
+            const element = user.tasks[0][textPart][k];
+            if (JSON.stringify(element) === JSON.stringify(tasksBoard[0][dropCategoryId][tasksBoard[0][dropCategoryId].length - 1])){
+              user.tasks[0][textPart].splice(k , 1);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /**
