@@ -408,22 +408,19 @@ async function del(numberPart, textPart) {
         if (email != Email){
           for (let k = 0; k < user.tasks[0][textPart].length; k++) {
             const element = user.tasks[0][textPart][k];
-            if (JSON.stringify(element) === JSON.stringify(tasksBoard[0][textPart][numberPart])) {
+            if (JSON.stringify(element) === JSON.stringify(tasksBoard[0][textPart][numberPart]))
               user.tasks[0][textPart].splice(k, 1);
-            }
           }
         }
       }
     }
   }
-  console.log(allUser);
   for (let i = 0; i < allUser.length; i++) {
     const user = allUser[i];
     for (let j = 0; j < emails.length; j++) {
       const email = emails[j];
-      if (user.email == email && email == Email) {
+      if (user.email == email && email == Email)
         user.tasks[0][textPart].splice(numberPart, 1);
-      }
     }
   }
   await setItem('users', allUser);

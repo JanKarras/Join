@@ -281,7 +281,7 @@ function edit(numberPart, textPart) {
     task.ass_to = assToEmails_edit;
     task.des = document.getElementById('description_input_edit').value
     task.prio = prio_edit;
-    await setChangesToAllUser(numberPart, textPart);
+    await setChangesToAllUser(numberPart, textPart, task);
     closePopup();
   }
 
@@ -299,15 +299,6 @@ function clearInputFieldEdit(){
   document.getElementById('enter-subtask_edit').value = "";
 }
 
-async function setChangesToAllUser(numberPart, textPart){
-  let emails = tasksBoard[0][textPart][numberPart].ass_to;
-    for (let i = 0; i < allUser.length; i++) {
-      const user = allUser[i];
-      for (let j = 0; j < emails.length; j++) {
-        const email = emails[j];
-        if (user.email == email){
-          user.tasks[0][textPart][numberPart] = tasksBoard[0][textPart][numberPart];
-        }
-      }
-    }
+async function setChangesToAllUser(numberPart, textPart, task){
+  
 }
