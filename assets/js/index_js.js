@@ -162,6 +162,7 @@ function checkEmail(usersArray, email) {
     const element = usersArray[i];
     if (element["email"] == email) {
       console.log("hs");
+    if (element['email'] == email) {
       return 0;
     }
   }

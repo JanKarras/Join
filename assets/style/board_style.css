@@ -371,8 +371,23 @@ body {
 }
 
 /* Styles für die weiteren .inits_board-Elemente */
-.inits_board:not(:first-child) {
+.inits_board:nth-child(2) {
   left: calc(100% + 30px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits_board:nth-child(3) {
+  left: calc(100% + 60px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits_board:nth-child(4) {
+  left: calc(100% + 90px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits_board:nth-child(5) {
+  left: calc(100% + 120px);
   /* 100% Breite des Containers minus Abstand */
 }
 

@@ -23,7 +23,6 @@ async function getAllUser(){
     let user_array = res['data']['value'];
     user_array = JSON.parse(user_array);
     allUser = user_array;
-    console.log(allUser);
 }
 
 /**
