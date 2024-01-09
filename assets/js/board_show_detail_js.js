@@ -60,7 +60,6 @@ function stopPropagation(event) {
  */
 function renderDetails(numberPart, textPart) {
   let task = tasksBoard[0][textPart][numberPart];
-  (task);
   renderCatTitleDesPrio(task);
   if (task.ass_to.length != 0) {
     let initials = getInitials(task);

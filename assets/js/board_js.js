@@ -247,7 +247,7 @@ function getAssigneeInitials(task) {
       }
     }
   }
-  //console.log(initials);
+  console.log(initials);
   return initials;
 }
 
