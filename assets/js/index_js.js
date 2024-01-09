@@ -168,18 +168,18 @@ function checkEmail(usersArray, email) {
     }
     return 1;
   }
+}
 
-  /**
-   * Validates user input by enabling or disabling the registration button based on the checkbox status.
-   * Adds or removes a CSS class for styling purposes.
-   */
-  function validateUser() {
-    if (checkBox.checked) {
-      button.disabled = false;
-      registerButton.classList.add("signin");
-    } else {
-      button.disabled = true;
-      registerButton.classList.remove("signin");
-    }
+/**
+ * Validates user input by enabling or disabling the registration button based on the checkbox status.
+ * Adds or removes a CSS class for styling purposes.
+ */
+function validateUser() {
+  if (checkBox.checked) {
+    button.disabled = false;
+    registerButton.classList.add("signin");
+  } else {
+    button.disabled = true;
+    registerButton.classList.remove("signin");
   }
 }
