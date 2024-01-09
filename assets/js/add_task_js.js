@@ -329,10 +329,16 @@ async function insertTask() {
   clearFields();
   await setItem("users", allUser);
   await getAllUser();
-  if (position == "board") {
+  console.log(position);
+  if (position.trim() === "board") {
     await loadUserstasksBoard();
     displayTasks();
-  } else slideInImage();
+    setTimeout(() => {
+      successMessage.classList.remove("d-flex")
+    }, 2000);
+  } else {
+    slideInImage();
+  }
 }
 
 /**
