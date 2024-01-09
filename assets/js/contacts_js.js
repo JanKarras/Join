@@ -263,21 +263,25 @@ function openEditContactPopup(currentUserIndex) {
  * Saves the changes made in the edit contact popup, updates user details, and closes the popup.
  */
 async function saveChanges() {
-  console.log("t");
-  let user = users[currentUserIndex];
-  let editedName = document.getElementById("editName").value;
-  let editedEmail = document.getElementById("editEmail").value;
-  let editedPhone = document.getElementById("editPhone").value;
-  user.name = editedName;
-  user.email = editedEmail;
-  user.telefon = editedPhone;
-  await setUsersContacts();
-  await loadUsersContacts();
-  closeEditContactPopup();
-  displayUserDetails(currentUserIndex);
-  displayUsers();
-  addBackgroundColor(currentUserIndex);
+  try {
+    let user = users[currentUserIndex];
+    let editedName = document.getElementById("editName").value;
+    let editedEmail = document.getElementById("editEmail").value;
+    let editedPhone = document.getElementById("editPhone").value;
+    user.name = editedName;
+    user.email = editedEmail;
+    user.telefon = editedPhone;
+    await setUsersContacts();
+    await loadUsersContacts();
+    closeEditContactPopup();
+    displayUserDetails(currentUserIndex);
+    displayUsers();
+    addBackgroundColor(currentUserIndex);
+  } catch (error) {
+    console.error("Error in saveChanges:", error);
+  }
 }
+
 
 /**
  * Closes the edit contact popup by removing the 'show' class and hiding the overlay.

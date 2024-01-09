@@ -105,7 +105,7 @@
         ></span>
       </div>
       <div class="edit-contact" id="editContactPopup">
-        <form>
+        <form form onsubmit="saveChanges(); return false;">
           <div class="add_contact_title">
             <img src="assets/img/logo-white.png" alt="" class="join_logo" />
 
@@ -149,7 +149,7 @@
                 >
                   Delete
                 </button>
-                <button onsubmit="saveChanges(); return false">
+                <button type="button" onclick="saveChanges(); return false">
                   Save<i class="fa-solid fa-check"></i>
                 </button>
               </div>
