@@ -214,6 +214,7 @@ async function addContactPopup() {
     if (element["email"] == newEmail) return;
   }
   const newUser = { name: newName, email: newEmail, telefon: newTelefon };
+  let array = [{'name':"guest(You)", 'email':"guest", 'tel':"123"}]
   users.push(newUser);
   await setUsersContacts();
   await loadUsersContacts();
@@ -262,6 +263,7 @@ function openEditContactPopup(currentUserIndex) {
  * Saves the changes made in the edit contact popup, updates user details, and closes the popup.
  */
 async function saveChanges() {
+  console.log("t");
   let user = users[currentUserIndex];
   let editedName = document.getElementById("editName").value;
   let editedEmail = document.getElementById("editEmail").value;
