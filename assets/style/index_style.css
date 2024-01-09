@@ -278,13 +278,15 @@ input {
   background-color: #2a3647;
   color: #fff;
   position: absolute;
-  top: 60px;
-  right: 150px;
+  bottom: -20%;
+  right: 40%;
+  transform: translate(0%, -50%);
+  z-index: 10000;
+  transition: all 0.3s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
-  visibility: hidden;
 }
 /* Media Query */
 @media (max-width: 992px) {

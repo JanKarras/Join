@@ -17,7 +17,7 @@
 #content {
   height: calc(100% - 94px);
   background: #f6f7f8;
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem;
   overflow: auto;
 }
 
@@ -743,12 +743,44 @@ footer {
   }
 }
 
-#slide-in-image {
+/* #slide-in-image {
   position: absolute;
-  bottom: -100%; /* Startposition außerhalb des sichtbaren Bereichs */
+  bottom: -100%; 
   left: 50%;
   z-index: 10;
   transform: translateX(-50%, 50%);
   transition: bottom 0.5s ease-in-out;
-  display: none;
+} */
+
+.error {
+  border: 1px solid red;
+}
+
+.success-message,
+.display-error {
+  position: absolute;
+  left: 60%;
+  transform: translate(-50%, 0%);
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+}
+
+.success-message {
+  top: -10%;
+}
+
+.display-error {
+  top: 18%;
+}
+.success-message.d-flex,
+.display-error.d-flex {
+  top: 17%;
+}
+.display-error {
+  /* display: flex; */
+  color: red;
+}
+
+.d-flex {
+  display: flex;
 }

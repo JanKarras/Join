@@ -13,12 +13,10 @@ let msgBox = document.getElementById("msgBox");
 let checkBox = document.getElementById("checkbox");
 const button = document.getElementById("signin-button");
 
-
 const signInContainer = document.querySelector(".signin-container1");
 const signInForm = document.querySelector(".sign-in-form");
 const legality = document.querySelector(".legality");
 const registerButton = document.querySelector(".register-button");
-
 
 const windowWidth = window.innerWidth;
 
@@ -73,18 +71,20 @@ function backToLogin() {
  */
 async function registerUser() {
   try {
-    const response = await getItem('users');
-    const usersData = response['data']['value'];
+    const response = await getItem("users");
+    const usersData = response["data"]["value"];
     if (usersData) {
       const usersArray = JSON.parse(usersData);
       if (checkEmail(usersArray, email.value) == 0) {
-        console.error('Email exists use another one:', error);
+        console.error("Email exists use another one:", error);
       } else {
         usersArray.push({
-          contacts: [{
-            'name' : username.value + "(You)",
-            'email' : email.value,
-          }],
+          contacts: [
+            {
+              name: username.value + "(You)",
+              email: email.value,
+            },
+          ],
           name: username.value,
           email: email.value,
           password: password.value,
@@ -97,17 +97,16 @@ async function registerUser() {
             },
           ],
         });
-        setItem('users', usersArray);
-        msgBox.style.visibility = "visible";
+        setItem("users", usersArray);
+        msgBox.style.bottom = "50%";
         setTimeout(() => {
-          msgBox.style.visibility = "none";
+          msgBox.style.bottom = "-100%";
           backToLogin();
         }, 2000);
       }
     }
-  }
-  catch (error) {
-    console.error('Error during Sign up:', error);
+  } catch (error) {
+    console.error("Error during Sign up:", error);
   }
 }
 
@@ -119,8 +118,8 @@ async function registerUser() {
  */
 async function loginUser() {
   try {
-    const response = await getItem('users');
-    const usersData = response['data']['value'];
+    const response = await getItem("users");
+    const usersData = response["data"]["value"];
     if (usersData) {
       const usersArray = JSON.parse(usersData);
       let user = usersArray.find(
@@ -130,13 +129,13 @@ async function loginUser() {
       if (user) {
         window.location.href = `template.html?userEmail=${userEmail.value}`;
       } else {
-        console.error('Invalid email or password');
+        console.error("Invalid email or password");
       }
     } else {
-      console.error('Invalid user data format');
+      console.error("Invalid user data format");
     }
   } catch (error) {
-    console.error('Error during login:', error);
+    console.error("Error during login:", error);
   }
 }
 
@@ -161,7 +160,7 @@ async function guest_login() {
 function checkEmail(usersArray, email) {
   for (let i = 0; i < usersArray.length; i++) {
     const element = usersArray[i];
-    if (element['email'] == email) {
+    if (element["email"] == email) {
       console.log("hs");
       return 0;
     }

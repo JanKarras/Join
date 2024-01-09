@@ -1,44 +1,39 @@
-
 let tasks = []; //Array of the tasks that are assigend to the logged in user
 let assToEmails = []; //Array if the Emails that a new task is assigend to
 let insertIn; //Variable in wich category a task will be inserted -> todo, in progress or feedback
-
 /**
  * Initializes the addition of a new task.
  * If the 'name' parameter is undefined, sets it to 'todo'.
  * Clears the 'assToEmails' array.
  * Asynchronously loads user contacts and tasks for the specified name.
  * Calls the 'contacts' function and 'insertTask' function.
- * 
+ *
  * @param {string} name - The name of the task; defaults to 'todo' if undefined.
  */
 async function add_taskInit(name) {
-  if (name == undefined)
-  name = 'todo';
+  if (name == undefined) name = "todo";
   insertIn = name;
   assToEmails.length = 0;
   await loadUsersContacts();
   await loadUsersTasks(name);
   contacts();
-  insertTask();
 }
-
 /**
  * Asynchronously loads tasks for a specific user and task list.
  * Clears the 'tasks' array and populates it with tasks from the specified task list ('name').
- * 
+ *
  * @param {string} name - The name of the task list to load tasks from.
  */
-async function loadUsersTasks(name){
+async function loadUsersTasks(name) {
   tasks.length = 0;
   for (let i = 0; i < allUser.length; i++) {
     const element = allUser[i];
-    if (element['email'] == Email) {
-      for (let j = 0; j < element['tasks'][0][name].length; j++) {
-        const task = element['tasks'][0][name][j];
+    if (element["email"] == Email) {
+      for (let j = 0; j < element["tasks"][0][name].length; j++) {
+        const task = element["tasks"][0][name][j];
         tasks.push(task);
       }
-      break ; 
+      break;
     }
   }
 }
@@ -62,7 +57,6 @@ async function setUsersTasks() {
     }
   }
 }
-
 /**
  * Populates the 'optionsContainer' with user contacts.
  * Iterates through the 'users' array and creates HTML elements for each user.
@@ -87,7 +81,6 @@ function contacts() {
         </div>`;
   }
 }
-
 /**
  * Toggles the state of the checkbox for the user at the specified index.
  * Updates the 'assToEmails' array based on checkbox state changes.
@@ -97,15 +90,21 @@ function contacts() {
  * @param {string} nameInitials - The initials of the user.
  */
 function toggleCheckbox(index, nameInitials) {
-  const checkbox = document.querySelector(`.option[data-index="${index}"] .checkbox`);
+  const checkbox = document.querySelector(
+    `.option[data-index="${index}"] .checkbox`
+  );
   checkbox.checked = !checkbox.checked;
-  const selectedContInitials = document.querySelector(".selected_cont_initials");
+  const selectedContInitials = document.querySelector(
+    ".selected_cont_initials"
+  );
   if (checkbox.checked) {
     const nameInitials = checkbox.getAttribute("data-name-initials");
     const newSpan = document.createElement("span");
-    assToEmails.push(users[index]['email']);
+    assToEmails.push(users[index]["email"]);
   } else {
-    const removedIndex = assToEmails.findIndex((user) => user === users[index]['email']);
+    const removedIndex = assToEmails.findIndex(
+      (user) => user === users[index]["email"]
+    );
     if (removedIndex !== -1) {
       assToEmails.splice(removedIndex, 1);
     }
@@ -163,12 +162,6 @@ function selectCategory(option) {
   toggleCategory();
 }
 
-/**
- * Toggles the visibility and style of subtask-related elements.
- * Adds or removes the 'add_cancel' class from the 'add-cancel-subtask' element.
- * Adds or removes the 'd-none' class from the 'add-subtask' element.
- * Blurs the focus from the 'enter-subtask' element when the 'add_cancel' class is present.
- */
 function enterSubtasks() {
   const addCancel = document.getElementById("add-cancel-subtask");
   const addSubtask = document.getElementById("add-subtask");
@@ -179,14 +172,6 @@ function enterSubtasks() {
   }
 }
 
-/**
- * Adds a subtask to the subtask list.
- * Retrieves the input value from the 'enter-subtask' element.
- * Checks if the input value is empty and returns if true.
- * Checks if there are already three or more subtasks and returns if true.
- * Creates a new 'li' element and appends it to the 'subtaskList' element.
- * Clears the input value of the 'enter-subtask' element.
- */
 function addSubtask() {
   const inputValue = document.getElementById("enter-subtask").value;
   if (inputValue.trim() === "") {
@@ -202,7 +187,6 @@ function addSubtask() {
   ul.appendChild(li);
   document.getElementById("enter-subtask").value = "";
 }
-
 /**
  * Clears the input value of the 'enter-subtask' field.
  */
@@ -272,7 +256,6 @@ function clearFields() {
   const subtaskList = document.getElementById("subtaskList");
   subtaskList.innerHTML = "";
 }
-
 /**
  * Generates HTML markup for a subtask with the provided input value.
  * Includes text display, an edit input field, delete button, and save button.
@@ -291,7 +274,6 @@ function addTaskHTML(inputValue) {
 }
 
 let prio; //Variable for the selected prio if an task
-
 /**
  * Sets the priority for a task by updating the button colors and storing the selected priority.
  *
@@ -301,9 +283,10 @@ function setPriority(priority) {
   let low = document.querySelector(".low");
   let medium = document.querySelector(".medium");
   let urgent = document.querySelector(".urgent");
-  let image = document.querySelector(".image");
   const prioButtons = document.querySelectorAll(".prio_btns");
-  prioButtons.forEach((button) => {button.style.backgroundColor = "initial";});
+  prioButtons.forEach((button) => {
+    button.style.backgroundColor = "initial";
+  });
   if (priority === "low") {
     low.style.backgroundColor = "green";
   } else if (priority === "medium") {
@@ -324,23 +307,32 @@ async function insertTask() {
   const description = document.getElementById("description_input").value;
   const dueDate = document.getElementById("date_input").value;
   const category = document.getElementById("selectedCat").innerText;
+  const successMessage = document.getElementById("success-message");
   const subtaskListItems = document.querySelectorAll("#subtaskList li");
   const subtasks = Array.from(subtaskListItems).map((item) => item.innerText);
-  if (!title || !dueDate || !description) {
+  if (!validateFields()) {
+    displayError();
     return;
   }
-  const newTask = {title: title, des: description, ass_to: assToEmails, due: dueDate, prio: prio, cat: category, sub_tasks: subtasks,};
+  successMessage.classList.add("d-flex");
+  const newTask = {
+    title: title,
+    des: description,
+    ass_to: assToEmails,
+    due: dueDate,
+    prio: prio,
+    cat: category,
+    sub_tasks: subtasks,
+  };
   tasks.push(newTask);
   await sendTaksToUsers(newTask);
   clearFields();
-  await setItem('users', allUser);
+  await setItem("users", allUser);
   await getAllUser();
-  if (position == 'board'){
+  if (position == "board") {
     await loadUserstasksBoard();
     displayTasks();
-  }
-  else
-    slideInImage();
+  } else slideInImage();
 }
 
 /**
@@ -348,15 +340,14 @@ async function insertTask() {
  *
  * @param {object} newTask - The new task object to be sent to users.
  */
-async function sendTaksToUsers(newTask){
+async function sendTaksToUsers(newTask) {
   for (let i = 0; i < allUser.length; i++) {
     const user = allUser[i];
-    for (let j = 0; j < newTask['ass_to'].length; j++) {
-      if (newTask['ass_to'][j] == user['email'])
-      {
+    for (let j = 0; j < newTask["ass_to"].length; j++) {
+      if (newTask["ass_to"][j] == user["email"]) {
         for (let k = 0; k < tasks.length; k++) {
           const task = tasks[k];
-          user['tasks'][0][insertIn].push(task);
+          user["tasks"][0][insertIn].push(task);
         }
       }
     }
@@ -367,9 +358,41 @@ async function sendTaksToUsers(newTask){
  * Slides in the image by moving it upwards and triggers the 'menueClicked' function after 2 seconds.
  */
 function slideInImage() {
-  var image = document.getElementById('slide-in-image');
-  image.style.bottom = '50%';
-  setTimeout(function() {
-    menueClicked('board');
+  var image = document.getElementById("slide-in-image");
+  image.style.bottom = "50%";
+  setTimeout(function () {
+    menueClicked("board");
+  }, 2000);
+}
+
+function validateFields() {
+  let titleInput = document.getElementById("title_input");
+  let dateInput = document.getElementById("date_input");
+  let selectedCat = document.getElementById("selectedCat");
+  let selectedHead = document.getElementById("select-head");
+  titleInput.classList.remove("error");
+  dateInput.classList.remove("error");
+  selectedCat.classList.remove("error");
+  if (!titleInput.value.trim()) {
+    titleInput.classList.add("error");
+    return false;
+  }
+  if (!dateInput.value) {
+    dateInput.classList.add("error");
+    return false;
+  }
+  if (selectedCat.innerText === "Select task category") {
+    selectedHead.classList.add("error");
+    return false;
+  }
+  // If all fields are filled, return true
+  return true;
+}
+
+function displayError() {
+  const error = document.getElementById("error-message");
+  error.classList.add("d-flex");
+  setTimeout(() => {
+    error.classList.remove("d-flex");
   }, 2000);
 }

@@ -3,9 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- <link rel="stylesheet" href="./assets/style/fonts.css" />
-    <link rel="stylesheet" href="./assets/style/font.css" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,7 +13,6 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="./assets/style/add_task_style.css" />
 
     <script src="./assets/js/header_js.js"></script>
@@ -28,7 +24,18 @@
   </head>
 
   <body class="font">
-    <img id="slide-in-image" src="./assets/img/addtask-img/task_added_to_board.png" alt="Sliding Image">
+    <div id="success-message" class="d-non success-message">
+      <img
+        id="slide-in-image"
+        src="./assets/img/addtask-img/task_added_to_board.png"
+        alt="Sliding Image"
+      />
+    </div>
+
+    <div id="error-message" class="d-none display-error">
+      <span>Please fill out all required fields!</span>
+    </div>
+
     <div id="add_task_body" class="add_task_body">
       <div id="content">
         <div class="add_task_h1">Add Task</div>
@@ -110,7 +117,11 @@
                 <div class="star">*</div>
               </div>
               <div class="contact-select" id="customSelect">
-                <div class="select-head date_picker" onclick="toggleCategory()">
+                <div
+                  id="select-head"
+                  class="select-head date_picker"
+                  onclick="toggleCategory()"
+                >
                   <div id="selectedCat">Select task category</div>
 
                   <span><i class="fa-solid fa-angle-down icon"></i></span>

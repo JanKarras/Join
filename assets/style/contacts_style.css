@@ -153,6 +153,18 @@ a h4 {
   background: #c5c5c5;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .contact_name span,
 .contacts_edit p {
   display: flex;
