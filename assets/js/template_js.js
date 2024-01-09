@@ -1,4 +1,4 @@
-let btns = ["summary", "add_task", "board", "contacts" , "privacy_policy" , "legal_notice"]; //array with all  the ids of the buttons
+let btns = ["summary", "add_task", "board", "contacts", "privacy_policy", "legal_notice"]; //array with all  the ids of the buttons
 let position; //the position on wich side we are on our website
 const urlParams = new URLSearchParams(window.location.search);
 const Email = urlParams.get('userEmail'); //the logged in Email to get the right infomrations (conatacts, taks, ...)
@@ -8,8 +8,17 @@ let allUser = []; // Global array with all users
  * This function is used to call all the functions that we need to initialize our 'template.html'. It sets our position to our starting side, which is 'summary'.
  * 
  */
-async function templateInit(){
+async function templateInit() {
   await includeHTML();
+  if (Email == "privacy_policy" || Email == "legal_notice") {
+    if (Email == "privacy_policy") {
+      await includeHTMLWithName('privacy_policy');
+    }
+    if (Email == "legal_notice") {
+      await includeHTMLWithName('legal_notice');
+    }
+    return;
+  }
   await includeHTMLWithName('summary');
   summaryInit();
   position = "summary";
@@ -18,11 +27,11 @@ async function templateInit(){
 /**
  * This function populates the 'allUser' array with information retrieved from the backend.
  */
-async function getAllUser(){
-    let res = await getItem('users');
-    let user_array = res['data']['value'];
-    user_array = JSON.parse(user_array);
-    allUser = user_array;
+async function getAllUser() {
+  let res = await getItem('users');
+  let user_array = res['data']['value'];
+  user_array = JSON.parse(user_array);
+  allUser = user_array;
 }
 
 /**
@@ -41,14 +50,29 @@ async function menueClicked(name) {
     document.getElementById(element).classList.remove("btn_clicked");
   }
   document.getElementById(name).classList.add("btn_clicked");
-  await includeHTMLWithName(name);
-  runAdditionalFunction(name);
-  if (name != "help")
-    position = name;
-  if (name == 'board')
-    document.getElementById('header_content_container').style.height = '100%';
-  else
-    document.getElementById('header_content_container').style.height = '';
+  if (Email != "privacy_policy" && Email != "legal_notice") {
+    await includeHTMLWithName(name);
+    runAdditionalFunction(name);
+    if (name != "help")
+      position = name;
+    if (name == 'board')
+      document.getElementById('header_content_container').style.height = '100%';
+    else
+      document.getElementById('header_content_container').style.height = '';
+  } else {
+    if (name == "privacy_policy" || name == "legal_notice") {
+      await includeHTMLWithName(name);
+      runAdditionalFunction(name);
+      if (name != "help")
+        position = name;
+      if (name == 'board')
+        document.getElementById('header_content_container').style.height = '100%';
+      else
+        document.getElementById('header_content_container').style.height = '';
+    } else {
+      window.location.href = `index.html`;
+    }
+  }
 }
 
 /**

@@ -1,2 +1,2 @@
-async function legal_notice_init(){
+async function legal_noticeInit(){
 }
