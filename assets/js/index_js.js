@@ -162,7 +162,6 @@ function checkEmail(usersArray, email) {
   for (let i = 0; i < usersArray.length; i++) {
     const element = usersArray[i];
     if (element['email'] == email) {
-      console.log("hs");
       return 0;
     }
   }

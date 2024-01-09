@@ -227,7 +227,6 @@ function createUserAssignmentsHTML(task) {
  * @returns {Array} - An array of objects containing user initials and color.
  */
 function getAssigneeInitials(task) {
-  //console.log(task.ass_to);
   const initials = [];
   for (let i = 0; i < task.ass_to.length; i++) {
     const ass = task.ass_to[i];
@@ -247,7 +246,6 @@ function getAssigneeInitials(task) {
       }
     }
   }
-  console.log(initials);
   return initials;
 }
 
@@ -297,7 +295,6 @@ async function dropped(taskId, dropCategoryId) {
   const textPart = taskId.substring(0, lastUnderscoreIndex);
   tasksBoard[0][dropCategoryId].push(tasksBoard[0][textPart][numberPart])
   tasksBoard[0][textPart].splice(numberPart, 1);
-  console.log(tasksBoard);
   await setTasksBoard();
   await sendChangeToAllUser(textPart, numberPart , dropCategoryId);
   await setItem('users', allUser);
