@@ -17,6 +17,7 @@ async function add_taskInit(name) {
   await loadUsersContacts();
   await loadUsersTasks(name);
   contacts();
+  setPriority("medium");
 }
 /**
  * Asynchronously loads tasks for a specific user and task list.
@@ -329,7 +330,6 @@ async function insertTask() {
   clearFields();
   await setItem("users", allUser);
   await getAllUser();
-  console.log(position);
   if (position.trim() === "board") {
     await loadUserstasksBoard();
     displayTasks();

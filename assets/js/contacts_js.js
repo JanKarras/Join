@@ -278,7 +278,6 @@ async function saveChanges() {
     displayUsers();
     addBackgroundColor(currentUserIndex);
   } catch (error) {
-    console.error("Error in saveChanges:", error);
   }
 }
 

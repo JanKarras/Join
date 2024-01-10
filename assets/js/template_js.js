@@ -79,7 +79,6 @@ async function menueClicked(name) {
  * Executes an additional function based on the provided 'name'.
  * It constructs the initialization function name by appending '_init' to the 'name'.
  * Checks if the constructed function exists in the global scope (window) and executes it if it does.
- * Outputs an error to the console if the function is not found.
  * 
  * @param {*} name - The identifier used to construct the initialization function name.
  */
@@ -88,7 +87,6 @@ function runAdditionalFunction(name) {
   if (typeof window[initFunctionName] === 'function') {
     window[initFunctionName]();
   } else {
-    console.error(`Function ${initFunctionName} not found.`);
   }
 }
 
@@ -103,7 +101,6 @@ async function includeHTMLWithName(fileName) {
   try {
     let container = document.querySelector("#content"); // Verwende eine spezifische ID für das Container-Element
     if (!container) {
-      console.error("Container with ID 'content' not found.");
       return;
     }
     let resp = await fetch(fileName + ".html");
@@ -111,10 +108,8 @@ async function includeHTMLWithName(fileName) {
       container.innerHTML = await resp.text();
       container.removeAttribute("w3-include-html"); // Entferne das Attribut
     } else {
-      console.error("Page not found: " + fileName + ".html");
     }
   } catch (error) {
-    console.error("Error fetching or including the HTML file:", error);
   }
 }
 

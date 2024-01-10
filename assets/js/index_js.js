@@ -76,7 +76,6 @@ async function registerUser() {
     if (usersData) {
       const usersArray = JSON.parse(usersData);
       if (checkEmail(usersArray, email.value) == 0) {
-        console.error("Email exists use another one:", error);
       } else {
         usersArray.push({
           contacts: [
@@ -106,7 +105,6 @@ async function registerUser() {
       }
     }
   } catch (error) {
-    console.error("Error during Sign up:", error);
   }
 }
 
@@ -129,13 +127,10 @@ async function loginUser() {
       if (user) {
         window.location.href = `template.html?userEmail=${userEmail.value}`;
       } else {
-        console.error("Invalid email or password");
       }
     } else {
-      console.error("Invalid user data format");
     }
   } catch (error) {
-    console.error("Error during login:", error);
   }
 }
 
@@ -161,7 +156,6 @@ function checkEmail(usersArray, email) {
   for (let i = 0; i < usersArray.length; i++) {
     const element = usersArray[i];
     if (element["email"] == email) {
-      console.log("hs");
       if (element["email"] == email) {
         return 0;
       }
