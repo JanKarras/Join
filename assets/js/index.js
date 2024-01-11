@@ -125,8 +125,10 @@ async function loginUser() {
           user.email == userEmail.value && user.password == userPassword.value
       );
       if (user) {
+        document.getElementById('passwordError').classList.add('d-none')
         window.location.href = `template.html?userEmail=${userEmail.value}`;
       } else {
+        document.getElementById('passwordError').classList.remove('d-none')
       }
     } else {
     }

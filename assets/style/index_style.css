@@ -400,3 +400,8 @@ input {
 .legality {
   bottom: 5%;
 }
+
+.passwordError{
+  color: red;
+  padding-bottom: 32px;
+}

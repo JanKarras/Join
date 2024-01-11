@@ -14,6 +14,7 @@ async function add_taskInit(name) {
   if (name == undefined) name = "todo";
   insertIn = name;
   assToEmails.length = 0;
+  assToEmails.push(Email);
   await loadUsersContacts();
   await loadUsersTasks(name);
   contacts();
@@ -101,7 +102,10 @@ function toggleCheckbox(index, nameInitials) {
   if (checkbox.checked) {
     const nameInitials = checkbox.getAttribute("data-name-initials");
     const newSpan = document.createElement("span");
-    assToEmails.push(users[index]["email"]);
+    if (checkForEmail(users[index]["email"]) === 1){
+      assToEmails.push(users[index]["email"]);
+      console.log(assToEmails);
+    }
   } else {
     const removedIndex = assToEmails.findIndex(
       (user) => user === users[index]["email"]
@@ -116,6 +120,15 @@ function toggleCheckbox(index, nameInitials) {
       }
     });
   }
+}
+
+function checkForEmail(email){
+  for (let i = 0; i < assToEmails.length; i++) {
+    const element = assToEmails[i];
+    if (element === email)
+      return 0;
+  }
+  return 1;
 }
 
 /**
@@ -335,7 +348,8 @@ async function insertTask() {
     displayTasks();
     setTimeout(() => {
       successMessage.classList.remove("d-flex")
-    }, 2000);
+      closeAddTask();
+    }, 1000);
   } else {
     slideInImage();
   }
@@ -351,10 +365,8 @@ async function sendTaksToUsers(newTask) {
     const user = allUser[i];
     for (let j = 0; j < newTask["ass_to"].length; j++) {
       if (newTask["ass_to"][j] == user["email"]) {
-        for (let k = 0; k < tasks.length; k++) {
-          const task = tasks[k];
+          const task = tasks[tasks.length - 1];
           user["tasks"][0][insertIn].push(task);
-        }
       }
     }
   }
