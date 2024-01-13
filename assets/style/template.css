@@ -24,6 +24,11 @@ html {
   overflow: auto;
 }
 
+.header_content_container {
+  width: calc(100vw - 14.5rem);
+  height: calc(100vh - 94px);
+}
+
 .height_100 {
   height: 100%;
 }

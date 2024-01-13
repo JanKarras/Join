@@ -90,6 +90,7 @@ footer {
   width: 100%;
   max-width: 1500px;
   flex-wrap: wrap;
+  padding-bottom: 3rem;
 }
 
 .buttonAdd {
@@ -717,9 +718,6 @@ body {
     padding-right: 1.5rem;
     width: 90%;
   }
-  .hoverPlusEffect {
-    display: none;
-  }
   .hoverPlusEffect-mobile,
   .hoverPlusEffect-mobile img {
     display: block;
@@ -735,4 +733,12 @@ body {
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.display-error {
+  top: 4rem;
 }

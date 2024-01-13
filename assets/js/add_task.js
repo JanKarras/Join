@@ -74,15 +74,16 @@ function contacts() {
     nameInitials += names[names.length - 1].charAt(0).toUpperCase();
     const userColor = getUserColor(i);
     optionsContainer.innerHTML += `
-        <div class="option" data-index="${i}" onclick="addBackgroundColour(${i}); toggleCheckbox(${i})">
+        <div class="option" data-index="${i}" onclick="addBackgroundColour(${i}), toggleCheckbox(${i})">
           <div class="c-name">
             <span class="name_initials" style="background-color: ${userColor}">${nameInitials}</span>
             <span>${users[i].name}</span>
           </div>
-          <input type="checkbox" class="checkbox" data-name-initials="${nameInitials}">
+          <input onclick="addBackgroundColour(${i}), toggleCheckbox(${i})" type="checkbox" class="checkbox" data-name-initials="${nameInitials}">
         </div>`;
   }
 }
+
 /**
  * Toggles the state of the checkbox for the user at the specified index.
  * Updates the 'assToEmails' array based on checkbox state changes.
@@ -95,14 +96,15 @@ function toggleCheckbox(index, nameInitials) {
   const checkbox = document.querySelector(
     `.option[data-index="${index}"] .checkbox`
   );
-  checkbox.checked = !checkbox.checked;
   const selectedContInitials = document.querySelector(
     ".selected_cont_initials"
   );
   if (checkbox.checked) {
-    const nameInitials = checkbox.getAttribute("data-name-initials");
-    const newSpan = document.createElement("span");
-    if (checkForEmail(users[index]["email"]) === 1){
+    // const nameInitials = checkbox.getAttribute("data-name-initials");
+    // const newSpan = document.createElement("span");
+    bcolor(index);
+
+    if (checkForEmail(users[index]["email"]) === 1) {
       assToEmails.push(users[index]["email"]);
       console.log(assToEmails);
     }
@@ -122,11 +124,17 @@ function toggleCheckbox(index, nameInitials) {
   }
 }
 
-function checkForEmail(email){
+function bcolor(i) {
+  const selectedContact = document.querySelector(`.option[data-index="${i}"]`);
+  if (selectedContact) {
+    selectedContact.classList.add("selected-contact");
+  }
+}
+
+function checkForEmail(email) {
   for (let i = 0; i < assToEmails.length; i++) {
     const element = assToEmails[i];
-    if (element === email)
-      return 0;
+    if (element === email) return 0;
   }
   return 1;
 }
@@ -137,6 +145,10 @@ function checkForEmail(email){
  * @param {number} i - The index of the contact in the 'users' array.
  */
 function addBackgroundColour(i) {
+  const checkbox = document.querySelector(
+    `.option[data-index="${i}"] .checkbox`
+  );
+  checkbox.checked = !checkbox.checked;
   const selectedContact = document.querySelector(`.option[data-index="${i}"]`);
   if (selectedContact) {
     selectedContact.classList.toggle("selected-contact");
@@ -146,12 +158,29 @@ function addBackgroundColour(i) {
 /**
  * Toggles the visibility of the options container and updates the toggle icon.
  */
-function toggleOptions() {
+function toggleOptions(event) {
   const optionsContainer = document.getElementById("optionsContainer");
   const toggleIcon = document.querySelector(".contact-select");
   toggleIcon.classList.toggle("active");
   optionsContainer.style.display =
     optionsContainer.style.display === "block" ? "none" : "block";
+  event.stopPropagation();
+  if (optionsContainer.style.display === "block") {
+    document.body.addEventListener("click", closeOptions);
+  } else {
+    document.body.removeEventListener("click", closeOptions);
+  }
+}
+
+/**
+ * Hides the options/contacts when a click occurs outside the container
+ */
+function closeOptions(event) {
+  const optionsContainer = document.getElementById("optionsContainer");
+  if (!optionsContainer.contains(event.target)) {
+    optionsContainer.style.display = "none";
+    document.body.removeAttribute("onclick");
+  }
 }
 
 /**
@@ -188,19 +217,29 @@ function enterSubtasks() {
 
 function addSubtask() {
   const inputValue = document.getElementById("enter-subtask").value;
+  const subtaskList = document.getElementById("subtaskList");
+
   if (inputValue.trim() === "") {
     return;
   }
-  const ul = document.getElementById("subtaskList");
-  const liElements = ul.getElementsByTagName("li");
-  if (liElements.length >= 3) {
-    return;
-  }
-  const li = document.createElement("li");
-  li.innerHTML += addTaskHTML(inputValue);
-  ul.appendChild(li);
+  const newSubtask = document.createElement("li");
+  newSubtask.innerHTML = addTaskHTML(inputValue);
+  const editBtn = newSubtask.querySelector(".edit-btn");
+  const deleteBtn = newSubtask.querySelector(".delete-btn");
+  const saveBtn = newSubtask.querySelector(".save-btn");
+  editBtn.addEventListener("click", function () {
+    editSubtask(this.parentNode.parentNode);
+  });
+  deleteBtn.addEventListener("click", function () {
+    deleteSubtask(this.parentNode);
+  });
+  saveBtn.addEventListener("click", function () {
+    saveSubtask(this.parentNode.parentNode);
+  });
+  subtaskList.appendChild(newSubtask);
   document.getElementById("enter-subtask").value = "";
 }
+
 /**
  * Clears the input value of the 'enter-subtask' field.
  */
@@ -213,9 +252,9 @@ function clearInputField() {
  *
  * @param {HTMLElement} li - The 'li' element to be deleted.
  */
-function deleteSubtask(li) {
-  const ul = document.getElementById("subtaskList");
-  ul.removeChild(li);
+function deleteSubtask(element) {
+  const listItem = element.closest("li");
+  listItem.remove();
 }
 
 /**
@@ -223,13 +262,17 @@ function deleteSubtask(li) {
  *
  * @param {HTMLElement} li - The 'li' element representing the subtask.
  */
-function editSubtask(li) {
-  const textSpan = li.querySelector(".subtask-text");
-  const input = li.querySelector(".edit-input");
-  li.classList.add("editing");
-  textSpan.style.display = "none";
-  input.style.display = "inline-block";
-  input.value = textSpan.textContent;
+function editSubtask(parentNode) {
+  const subtaskText = parentNode.querySelector(".subtask-text");
+  const editInput = parentNode.querySelector(".edit-input");
+  const editBtn = parentNode.querySelector(".edit-btn");
+  const saveBtn = parentNode.querySelector(".save-btn");
+  const li = document.getElementsByTagName("li");
+  console.log("subtaskText:", subtaskText);
+  editInput.value = subtaskText.innerText;
+  parentNode.classList.add("editing");
+  editBtn.style.display = "none";
+  saveBtn.style.display = "block";
 }
 
 /**
@@ -237,13 +280,17 @@ function editSubtask(li) {
  *
  * @param {HTMLElement} li - The 'li' element representing the subtask.
  */
-function saveSubtask(li) {
-  const textSpan = li.querySelector(".subtask-text");
-  const input = li.querySelector(".edit-input");
-  li.classList.remove("editing");
-  textSpan.textContent = input.value;
-  textSpan.style.display = "inline";
-  input.style.display = "none";
+function saveSubtask(element) {
+  const listItem = element.closest("li");
+  const subtaskText = listItem.querySelector(".subtask-text");
+  const editInput = listItem.querySelector(".edit-input");
+  const editBtn = listItem.querySelector(".edit-btn");
+  const saveBtn = listItem.querySelector(".save-btn");
+  subtaskText.textContent = editInput.value;
+  saveBtn.style.display = "none";
+  editBtn.style.display = "none";
+  editInput.style.display = "none";
+  subtaskText.style.display = "block";
 }
 
 /**
@@ -278,13 +325,14 @@ function clearFields() {
  * @returns {string} - HTML markup for the subtask.
  */
 function addTaskHTML(inputValue) {
-  return `<span class="subtask-text">
-  ${inputValue}
-  </span> 
-  <input type="text" class="edit-input d-none"> 
-  <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
-  <span class="save-btn" onclick="saveSubtask(this.parentNode)"><i class="fa-solid fa-check"></i></span>
-  `;
+  return `
+  <span class="subtask-text">${inputValue}</span>
+  <div class="buttons"> 
+    <input type="text" class="edit-input"> 
+    <span class="edit-btn"><i class="fa-solid fa-pencil"></i></span>
+    <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
+    <span class="save-btn"><i class="fa-solid fa-check"></i></span>
+  </div>`;
 }
 
 let prio; //Variable for the selected prio if an task
@@ -347,7 +395,7 @@ async function insertTask() {
     await loadUserstasksBoard();
     displayTasks();
     setTimeout(() => {
-      successMessage.classList.remove("d-flex")
+      successMessage.classList.remove("d-flex");
       closeAddTask();
     }, 1000);
   } else {
@@ -365,8 +413,8 @@ async function sendTaksToUsers(newTask) {
     const user = allUser[i];
     for (let j = 0; j < newTask["ass_to"].length; j++) {
       if (newTask["ass_to"][j] == user["email"]) {
-          const task = tasks[tasks.length - 1];
-          user["tasks"][0][insertIn].push(task);
+        const task = tasks[tasks.length - 1];
+        user["tasks"][0][insertIn].push(task);
       }
     }
   }

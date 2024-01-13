@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/style/add_task_style.css" />
     <link rel="stylesheet" href="./assets/style/board_style.css" />
-    <!-- <link rel="stylesheet" href="./assets/style/fonts.css" />
-    <link rel="stylesheet" href="./assets/style/font.css" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +24,7 @@
     <div id="template" w3-include-html="./template.html"></div>
     <div id="board_body" class="board_body">
       <div class="header" w3-include-html="./header.html"></div>
-      <div id="content">
+      <div id="content" class="board_content">
         <div class="head">
           <div class="headline">
             <span class="responsiveHeadline">
@@ -41,8 +39,10 @@
               </div>
 
               <div class="buttonAdd" onclick="openAddTask()">
-                Add task
-                <!-- <img src="./assets/img/board-img/addplus.png" /> -->
+                <span>Add task</span>
+                <span class="addT" onclick="menue_clicked('add_task')"
+                  ><i class="fa-solid fa-plus"></i
+                ></span>
               </div>
             </span>
           </div>
