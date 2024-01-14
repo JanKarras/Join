@@ -718,6 +718,11 @@ button i {
 }
 
 @media (max-width: 545px) {
+  .header_container {
+    background-color: #f6f7f8;
+    box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  }
+
   .contact_detail {
     padding: 2.2rem 1rem;
   }
@@ -726,19 +731,6 @@ button i {
     width: 90vw;
     right: -90vw;
   }
-
-  /* .add-contact,
-  .edit-contact {
-    width: 60vw;
-    height: 37.125rem;
-    position: fixed;
-    bottom: -200%;
-    right: 20%;
-    transform: translate(0, -50%);
-    border-radius: 2rem;
-    z-index: 1001;
-    transition: all 0.3s ease-in-out;
-  } */
 
   .add-contact.show,
   .edit-contact.show {
@@ -829,5 +821,12 @@ button i {
 
   .arrow-left {
     right: 0rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .contact_sidebar {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }

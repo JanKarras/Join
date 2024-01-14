@@ -330,8 +330,9 @@ function addTaskHTML(inputValue) {
   <div class="buttons"> 
     <input type="text" class="edit-input"> 
     <span class="edit-btn"><i class="fa-solid fa-pencil"></i></span>
-    <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
     <span class="save-btn"><i class="fa-solid fa-check"></i></span>
+    <span class="delete-btn" onclick="deleteSubtask(this.parentNode)"><i class="fa-regular fa-trash-can"></i></span>
+
   </div>`;
 }
 
@@ -348,13 +349,17 @@ function setPriority(priority) {
   const prioButtons = document.querySelectorAll(".prio_btns");
   prioButtons.forEach((button) => {
     button.style.backgroundColor = "initial";
+    button.classList.remove("active");
   });
   if (priority === "low") {
     low.style.backgroundColor = "green";
+    low.classList.toggle("active");
   } else if (priority === "medium") {
     medium.style.backgroundColor = "orange";
+    medium.classList.toggle("active");
   } else if (priority === "urgent") {
     urgent.style.backgroundColor = "red";
+    urgent.classList.toggle("active");
   }
   prio = priority;
 }
