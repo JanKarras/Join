@@ -106,7 +106,6 @@ function toggleCheckbox(index, nameInitials) {
 
     if (checkForEmail(users[index]["email"]) === 1) {
       assToEmails.push(users[index]["email"]);
-      console.log(assToEmails);
     }
   } else {
     const removedIndex = assToEmails.findIndex(
@@ -268,7 +267,6 @@ function editSubtask(parentNode) {
   const editBtn = parentNode.querySelector(".edit-btn");
   const saveBtn = parentNode.querySelector(".save-btn");
   const li = document.getElementsByTagName("li");
-  console.log("subtaskText:", subtaskText);
   editInput.value = subtaskText.innerText;
   parentNode.classList.add("editing");
   editBtn.style.display = "none";

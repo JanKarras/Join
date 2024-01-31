@@ -463,4 +463,3 @@ async function del(numberPart, textPart) {
   await setItem('users', allUser);
   closePopup();
 }
-
