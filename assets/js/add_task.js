@@ -307,6 +307,7 @@ function saveSubtask(element) {
   editBtn.style.display = "none";
   editInput.style.display = "none";
   subtaskText.style.display = "block";
+  listItem.classList.remove("editing");
 }
 
 /**
