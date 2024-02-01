@@ -66,6 +66,7 @@ async function setUsersTasks() {
  * Adds event listeners for background color change and checkbox toggle.
  */
 function contacts() {
+  let index
   const optionsContainer = document.getElementById("optionsContainer");
   optionsContainer.innerHTML = "";
   for (let i = 0; i < users.length; i++) {
@@ -81,7 +82,10 @@ function contacts() {
           </div>
           <input onclick="addBackgroundColour(${i}), toggleCheckbox(${i})" type="checkbox" class="checkbox" data-name-initials="${nameInitials}">
         </div>`;
-  }
+      if (users[i].email === Email)
+        index = i; 
+    }
+  addBackgroundColour(index);
 }
 
 /**
@@ -120,6 +124,20 @@ function toggleCheckbox(index, nameInitials) {
         selectedContInitials.removeChild(span);
       }
     });
+  }
+  render_ass_to();
+}
+
+function render_ass_to(){
+  const content = document.getElementById('show_ass_to');
+  const simulatedTask = {ass_to: assToEmails,};
+  let initials = getAssigneeInitials(simulatedTask);
+  console.log(initials);
+  content.innerHTML = "";
+  for (let i = 0; i < initials.length; i++) {
+    const inizial = initials[i]['initials'];
+    const color = initials[i]['color'];
+    content.innerHTML += `<div class="inits_addtask" style="background-color: ${color};">${inizial}</div>`
   }
 }
 

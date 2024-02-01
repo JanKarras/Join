@@ -886,3 +886,17 @@ li:hover .edit-btn {
     width: 90%;
   }
 }
+
+.inits_addtask {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
+  margin-left: 10px;
+  /* Abstand zwischen den Kreisen anpassen */
+}
+
+#show_ass_to{
+  display: flex;
+}
