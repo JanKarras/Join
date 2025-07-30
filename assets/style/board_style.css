@@ -1,0 +1,760 @@
+.header {
+  flex: 1;
+  width: 100%;
+}
+
+.content {
+  height: 100%;
+  max-height: calc(100vh - 94px);
+  padding: 2.5rem;
+  background-color: #f6f7f8 !important;
+}
+
+#content {
+  overflow: auto;
+  background-color: #f6f7f8 !important;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#menu_board {
+  background-color: #0a1931;
+}
+
+.d-none {
+  display: none;
+}
+
+.headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1477px;
+  padding-bottom: 99px;
+}
+
+.headline h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+footer {
+  margin-top: 5rem;
+}
+.inputAndButtonHeadline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputDiv {
+  height: 51px;
+  padding: 13px 21px 13px 21px;
+  border-radius: 10px;
+  border: solid 1px;
+  border-color: #a8a8a8;
+  width: 251px;
+  background-color: white;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.inputDiv input {
+  border: none;
+  width: 100px;
+  outline: none;
+}
+
+.inputDiv img {
+  border-left: solid 1px;
+  border-color: #d1d1d1;
+  padding-left: 15px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.taskContent {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  max-width: 1500px;
+  flex-wrap: wrap;
+  padding-bottom: 3rem;
+}
+
+.buttonAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 21px 13px 21px;
+  background-color: #2a3647;
+  color: white;
+  border-radius: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  margin-left: 35px;
+}
+
+.editTaskOkButton:hover,
+.plusForResponsive:hover,
+.buttonAdd:hover {
+  cursor: pointer;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
+}
+
+.taskContainer {
+  flex: 1;
+  min-width: 200px;
+  max-width: 350px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskCategoryName {
+  padding: 0.7rem 0;
+  font-weight: 700;
+  line-height: 120%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.taskCategoryName h3 {
+  font-size: 18px;
+  color: rgb(41, 54, 71, 0.8);
+  font-weight: 800;
+}
+
+.user_task {
+  padding: 0.8rem 1rem;
+  height: auto;
+  border-radius: 24px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.user_task:hover {
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3); /* Hier wird der stärkere Box-Shadow auf Hover festgelegt */
+  background-color: #f5f5f5; /* Hier wird die hellere Hintergrundfarbe auf Hover festgelegt */
+}
+
+.user_story {
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  width: max-content;
+  color: #fff;
+  background: rgb(47, 47, 223);
+}
+
+.user_topic h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.user_topic p {
+  color: #979797;
+  font-weight: 400;
+}
+
+.task_progress {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.techniker {
+  background-color: rgb(12, 150, 81);
+}
+
+.progress {
+  width: 50%;
+  background: #f6f7f8;
+}
+
+.progressbar {
+  width: 50%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #038af8;
+}
+
+.subtasks {
+  font-size: 14px;
+}
+
+.user_assignment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 42px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.showDetail-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.background-container {
+  background: rgba(0, 0, 0, 0.5);
+  /* Transparente Hintergrundfarbe */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  /* Änderung hier: Rechts ausrichten */
+  align-items: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  /* Hohe Z-Ebene für das Overlay */
+}
+
+.popup-container {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-right: -100%;
+  /* Änderung hier: Startet außerhalb des Bildschirms */
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 525px;
+  transition: margin-right 0.3s ease;
+  /* Animationsübergang hinzugefügt */
+  z-index: 1000;
+  /* Höhere Z-Ebene für das Popup selbst */
+  padding: 40px;
+  overflow-x: auto;
+  height: fit-content;
+}
+
+.edit_content,
+.parent_popup_content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close {
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.popup_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 71.2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.title::-webkit-scrollbar {
+  height: 2px;
+}
+
+.des {
+  font-weight: 400;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+.due {
+  display: flex;
+  font-weight: 400;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.prio_popup {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+#prio_img {
+  padding-left: 10px;
+}
+
+.ass_to {
+  display: flex;
+  font-weight: 400;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  flex-direction: column;
+}
+
+.list_element_ass_to {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.list_element_ass_to:hover {
+  background-color: initial;
+  /* Setze die Hintergrundfarbe zurück oder auf eine andere Farbe */
+  color: initial;
+  /* Setze die Textfarbe zurück oder auf eine andere Farbe */
+}
+
+.members {
+  display: flex;
+  position: relative;
+  height: 42px;
+}
+
+.inits_board {
+  position: absolute;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
+  margin-left: 10px;
+  /* Abstand zwischen den Kreisen anpassen */
+}
+
+/* Styles für das erste .inits_board-Element */
+.inits_board:first-child {
+  left: 0;
+  /* Das erste Element beginnt ganz links */
+}
+
+/* Styles für die weiteren .inits_board-Elemente */
+.inits_board:nth-child(2) {
+  left: calc(100% + 30px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits_board:nth-child(3) {
+  left: calc(100% + 60px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits_board:nth-child(4) {
+  left: calc(100% + 90px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits_board:nth-child(5) {
+  left: calc(100% + 120px);
+  /* 100% Breite des Containers minus Abstand */
+}
+
+.inits {
+  display: flex;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.sub {
+  display: flex;
+  font-weight: 400;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  flex-direction: column;
+}
+
+.list_element_sub_task {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.list_element_sub_task .check_img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.popup_footer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+}
+
+.del,
+.edit {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  /* Passe den Abstand nach Bedarf an */
+}
+
+.separator_popup {
+  width: 2px;
+  background-color: lightgrey;
+  height: 16px;
+  margin: 0 8px;
+  /* Passe den Abstand nach Bedarf an */
+}
+
+.del_edit_name {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.2px;
+  margin-left: 8px;
+}
+
+.edit_head {
+  padding-top: 30px;
+}
+
+.header_edit {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+}
+
+.contacts {
+  position: relative;
+}
+
+.options-container {
+  position: absolute;
+  top: 100%;
+  /* Setzt die Position unterhalb des contact-select Elements */
+  left: 0;
+  z-index: 1;
+  /* Stelle sicher, dass die Optionen über anderen Elementen liegen */
+}
+
+.date_picker {
+  margin-top: 10px;
+  /* Einen Abstand zwischen dem Kontaktelement und dem Subtask-Element hinzufügen */
+}
+
+.option_edit {
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  /* user-select: none; */
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.add_cancel {
+  visibility: hidden;
+}
+
+.contacts-open .add_cancel {
+  visibility: visible;
+}
+
+.inits_edit {
+  display: flex;
+  margin-top: 10px;
+}
+
+.footer_edit {
+  display: flex;
+  justify-content: end;
+  padding-top: 20px;
+}
+
+.added_subtasks_edit {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  border: none;
+  background-color: white;
+}
+
+.hoverPlusEffect {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.hoverPlusEffect img {
+  display: block;
+}
+
+.hoverPlusEffect:hover img {
+  content: url("../img/board-img/Property\ 1=Variant2.png");
+}
+
+.hover_pointer {
+  cursor: pointer;
+}
+
+.del {
+  cursor: pointer;
+}
+
+.del:hover {
+  content: url("../img/board-img/can_hover.png");
+}
+
+.edit {
+  cursor: pointer;
+}
+
+.edit:hover {
+  content: url("../img/board-img/edi_hover.png");
+}
+
+.notask {
+  width: 100%;
+  height: 48px;
+  text-align: center;
+  line-height: 48px;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  color: #a8a8a8;
+  border: 1px dashed #a8a8a8;
+}
+
+.searchbar {
+  position: relative;
+}
+
+.searchbar input {
+  height: 100%;
+  width: 100%;
+}
+
+.search {
+  display: block;
+  position: absolute;
+  right: 2rem;
+  top: 60%;
+  transform: translateY(-50%);
+  border-left: 1px solid #b8b6b6;
+  cursor: pointer;
+}
+
+.search img {
+  padding-left: 1rem;
+}
+
+#content {
+  width: 100%;
+  background-color: white;
+  height: 100%;
+}
+
+.hoverPlusEffect-mobile,
+.hoverPlusEffect-mobile img {
+  display: none;
+}
+
+#addTaskPopUpWindowContent {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 2;
+  /* padding: 4rem 2rem; */
+  border-radius: 30px;
+  transition: right 3s ease-in-out;
+  animation: sho 0.2s;
+  overflow: hidden;
+}
+
+@keyframes sho {
+  from {
+    right: -80%;
+    transform: translate(0, -50%);
+  }
+
+  to {
+    right: 20%;
+  }
+}
+
+.close_window {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.font {
+  position: relative;
+}
+
+.taskContent {
+  height: calc(100% - 172px);
+}
+
+.taskCategory {
+  height: 100%;
+}
+
+.searchbar2 {
+  display: none;
+}
+
+.addT {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  #addTaskPopUpWindowContent {
+    /* padding: 4rem 6rem; */
+    overflow: auto;
+  }
+}
+
+@media (max-width: 835px) {
+  .headline h1 {
+    font-size: 2.8rem;
+  }
+  .header_container {
+    background-color: white;
+    box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  }
+}
+@media (max-width: 777px) {
+  /* .buttonAdd {
+    padding: 0.3rem 0.5rem;
+  } */
+  .buttonAdd span {
+    display: none;
+  }
+  .buttonAdd .addT {
+    display: block;
+    font-size: 1.8rem;
+  }
+  .searchbar {
+    display: none;
+  }
+  .searchbar2 {
+    display: block;
+    margin-bottom: 2rem;
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+  }
+  .headline {
+    padding-bottom: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #addTaskPopUpWindowContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: 90%;
+  }
+  .hoverPlusEffect-mobile,
+  .hoverPlusEffect-mobile img {
+    display: block;
+  }
+  .popup-container {
+    max-height: 70vh;
+    width: 90vw;
+  }
+  .title {
+    font-size: 32px;
+  }
+  .names{
+    display: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.display-error {
+  top: 4rem;
+}
+
+.margin_top_20px{
+  margin-top: 20px;
+}
+
+#add-cancel-subtask_edit{
+  right: 0px;
+  font-size: 1.2rem;
+  margin-left: 0.8rem;
+}

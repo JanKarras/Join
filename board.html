@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style/add_task_style.css" />
+    <link rel="stylesheet" href="./assets/style/board_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <title>Board</title>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/template.js"></script>
+  </head>
+
+  <body class="font" id="bodys">
+    <div id="template" w3-include-html="./template.html"></div>
+    <div id="board_body" class="board_body">
+      <div class="header" w3-include-html="./header.html"></div>
+      <div id="content" class="board_content">
+        <div class="head">
+          <div class="headline">
+            <span class="responsiveHeadline">
+              <h1>Board</h1>
+            </span>
+            <span class="inputAndButtonHeadline">
+              <div class="searchbar">
+                <input oninput="search()" id="search_bar_input" type="text" />
+                <span onclick="search()" class="search"
+                  ><img src="./assets/img/board-img/lupe.png"
+                /></span>
+              </div>
+
+              <div class="buttonAdd" onclick="openAddTask()">
+                <span>Add task</span>
+                <span class="addT" onclick="menue_clicked('add_task')"
+                  ><i class="fa-solid fa-plus"></i
+                ></span>
+              </div>
+            </span>
+          </div>
+
+          <div class="searchbar searchbar2">
+            <input type="text" />
+            <span onclick="search()" class="search"
+              ><img src="./assets/img/board-img/lupe.png"
+            /></span>
+          </div>
+        </div>
+
+        <div class="taskContent">
+          <div class="taskContainer">
+            <div class="taskContainer">
+              <div class="taskCategoryName">
+                <h3>To do</h3>
+                <span onclick="openAddTask()" class="hoverPlusEffect"
+                  ><img src="./assets/img/board-img/plusButtonTasks.png"
+                /></span>
+              </div>
+              <div
+                id="todo"
+                class="taskCategory"
+                ondrop="drop(event)"
+                ondragover="allowDrop(event)"
+              >
+                <!-- insert status = "to_do" here -->
+              </div>
+            </div>
+          </div>
+
+          <div class="taskContainer">
+            <div class="taskCategoryName">
+              <h3>In progress</h3>
+              <span onclick="openAddTask('in_progress')" class="hoverPlusEffect"
+                ><img src="./assets/img/board-img/plusButtonTasks.png"
+              /></span>
+            </div>
+            <div
+              id="in_progress"
+              class="taskCategory"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            >
+              <!-- insert status = "in_progress" here -->
+            </div>
+          </div>
+
+          <div class="taskContainer">
+            <div class="taskCategoryName">
+              <h3>Await feedback</h3>
+              <span onclick="openAddTask('feedback')" class="hoverPlusEffect"
+                ><img src="./assets/img/board-img/plusButtonTasks.png"
+              /></span>
+            </div>
+            <div
+              id="feedback"
+              class="taskCategory"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            >
+              <!-- insert status = "feedback" here -->
+            </div>
+          </div>
+
+          <div class="taskContainer">
+            <div class="taskCategoryName">
+              <h3>Done</h3>
+            </div>
+            <div
+              id="done"
+              class="taskCategory"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            >
+              <!-- insert status = "done" here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="editTaskPopUpWindowContent"></div>
+
+    <div id="editSelectedTask"></div> -->
+
+    <div id="addTaskPopUpWindowContent" class="d-none">
+      <div id="content">
+        <div id="success-message" class="d-non success-message">
+          <img
+            id="slide-in-image"
+            src="./assets/img/addtask-img/task_added_to_board.png"
+            alt="Sliding Image"
+          />
+        </div>
+
+        <div id="error-message" class="d-none display-error">
+          <span>Please fill out all required fields!</span>
+        </div>
+        <span class="close_window" onclick="closeAddTask()"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
+        <div class="add_task_h1">Add Task</div>
+        <div class="add_task_content">
+          <div class="add_taks_sides left_side">
+            <div>
+              <div class="display_flex">
+                <label class="name_of_input">Title</label>
+                <div class="star">*</div>
+              </div>
+              <input
+                id="title_input"
+                type="text"
+                placeholder="Enter a title"
+                required
+              />
+            </div>
+            <div>
+              <div class="task-description">
+                <label class="description">Description</label>
+                <textarea
+                  id="description_input"
+                  class="description_input"
+                  placeholder="Enter a description"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div>
+              <label>Assigned to</label>
+              <div class="contacts">
+                <div class="contact-select date_picker" id="contactSelect">
+                  <input
+                    class="select-box"
+                    onclick="toggleOptions(event)"
+                    placeholder="Select contacts to assign"
+                  />
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
+                </div>
+                <div class="options-container" id="optionsContainer"></div>
+              </div>
+            </div>
+            <div id="show_ass_to"></div>
+          </div>
+
+          <!-- ############# -->
+          <div class="seperator_add_task"></div>
+
+          <div class="add_task_sides right_side">
+            <div>
+              <div class="display_flex">
+                <label class="name_of_input">Due date</label>
+                <div class="star">*</div>
+              </div>
+              <div class="date_picker">
+                <input required type="date" id="date_input" />
+              </div>
+            </div>
+            <label>Prio</label>
+            <div class="prio">
+              <div class="prio_btns urgent" onclick="setPriority('urgent')">
+                <label>Urgent</label>
+                <span><i class="fa-solid fa-angles-up"></i></span>
+              </div>
+              <div class="prio_btns medium" onclick="setPriority('medium')">
+                <label>Medium</label>
+                <span><i class="fa-solid fa-equals"></i></span>
+              </div>
+              <div class="prio_btns low" onclick="setPriority('low')">
+                <label>Low</label>
+                <span><i class="fa-solid fa-angles-down"></i></span>
+              </div>
+            </div>
+            <div>
+              <div class="display_flex">
+                <label class="name_of_input">Category</label>
+                <div class="star">*</div>
+              </div>
+              <div class="contact-select" id="customSelect">
+                <div class="select-head date_picker" onclick="toggleCategory()">
+                  <div id="selectedCat">Select task category</div>
+
+                  <span><i class="fa-solid fa-angle-down icon"></i></span>
+                </div>
+                <div class="category-container" id="categoryContainer">
+                  <div
+                    class="option category_option"
+                    onclick="selectCategory('Techniker task')"
+                  >
+                    Techniker Task
+                  </div>
+                  <div class="option" onclick="selectCategory('User Story')">
+                    User Story
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ### -->
+            <div>
+              <label>Subtasks</label>
+              <div class="date_picker" onclick="enterSubtasks()">
+                <input
+                  id="enter-subtask"
+                  type="text"
+                  placeholder="Add new subtask"
+                />
+                <span id="add-subtask" class="subtask">
+                  <i id="openAddTask" class="fa-solid fa-plus"></i>
+                </span>
+                <span id="add-cancel-subtask" class="add_cancel">
+                  <i
+                    onclick="clearInputField()"
+                    id="delete-subtask"
+                    class="fa-solid fa-xmark"
+                  ></i>
+                  <i
+                    id="confirm-subtask"
+                    class="fa-solid fa-check"
+                    onclick="addSubtaskKarras()"
+                  ></i>
+                </span>
+              </div>
+              <ul id="subtaskList" class="subtask-list"></ul>
+            </div>
+          </div>
+          <!--##################-->
+        </div>
+        <footer>
+          <div class="required">
+            <div class="star">*</div>
+            <div>This field is required</div>
+          </div>
+          <div class="footer_btns_container">
+            <div class="clear" onclick="clearFields()">
+              <div>Clear</div>
+              <span><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <div class="create" onclick="insertTask()">
+              <div>Create Task</div>
+              <span><i class="fa-solid fa-check"></i></span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- <div id="taskCreated">
+      <img src="./assets/img/board-img/addedToBoard.png" />
+    </div> -->
+    <div class="overlay d-none"></div>
+    <div id="showDetail-container" class="showDetail-container">
+      <div class="background-container" onclick="closePopup()">
+        <div
+          id="edit_container"
+          class="d-none popup-container"
+          onclick="stopPropagation(event)"
+        ></div>
+        <div
+          id="popup-container"
+          class="popup-container"
+          onclick="stopPropagation(event)"
+        >
+          <div class="popup_header">
+            <div id="cat" class="user_story">techniker Task</div>
+            <span class="close" onclick="closePopup()">&times;</span>
+          </div>
+          <div class="parent_popup_content">
+            <div class="popup-content">
+              <h1 id="title" class="title"></h1>
+              <div id="des" class="des"></div>
+            </div>
+            <div class="due">
+              Due Date:&emsp;
+              <div id="due"></div>
+            </div>
+            <div id="prio_popup" class="prio_popup">
+              Priority:&emsp;
+              <div id="prio"></div>
+              <img id="prio_img" src="" />
+            </div>
+            <div class="ass_to" id="ass_to_con">
+              Assigend To:
+              <div id="ass_to"></div>
+            </div>
+            <div id="sub" class="sub">
+              <div id="sub_head">Subtasks</div>
+              <div id="sub_list"></div>
+            </div>
+            <div class="popup_footer">
+              <img class="del" id="del" src="./assets/img//board-img/can.png" />
+              <div class="separator_popup"></div>
+              <img
+                class="edit"
+                id="edit"
+                src="./assets/img//board-img/edit.png"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/contacts.js"></script>
+    <script src="./assets/js/add_task.js"></script>
+    <script src="./assets/js/board.js"></script>
+  </body>
+</html>

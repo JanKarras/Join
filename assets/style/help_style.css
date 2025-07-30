@@ -1,0 +1,79 @@
+
+.content {
+    padding-left: calc(328px - 232px);
+    padding-top: calc(206px - 94px);
+    height: calc(100% - 206px);
+    overflow: auto;
+  }
+
+
+
+.help_body{
+    width: 90%;
+}
+
+.help_h1{
+    font-size: 61px;
+    margin: 0;
+}
+
+.help_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+p{
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+span{
+    color: #29ABE2;
+}
+
+.h2_help{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32.4px;
+}
+
+.zahlen-liste {
+    list-style-type: none; /* Entfernt die Standardnummerierung */
+    counter-reset: numerierung; /* Setzt den Zähler zurück */
+    padding-left: 50px; /* Fügt Platz für benutzerdefinierte Zahlen hinzu */
+}
+
+.zahlen-liste li {
+    position: relative; /* Stellt die Position für benutzerdefinierte Zahlen ein */
+    margin-bottom: 10px; /* Abstand zwischen den Listenelementen */
+}
+
+.zahlen-liste li:before {
+    content: counter(numerierung) ".";
+    counter-increment: numerierung;
+    position: absolute; /* Stellt die Position für die benutzerdefinierten Zahlen ein */
+    left: -50px; /* Verschiebt die Zahlen nach links */
+    font-size: 27px; /* Ändert die Schriftgröße der Zahlen */
+    font-weight: bold; /* Ändert das Schriftgewicht der Zahlen */
+}
+
+.span_list{
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.help_info{
+    overflow-y: auto;
+    margin-bottom: 10px;
+    height: calc(100% - 10px - 152px - 120px);
+}
+
+.display-none{
+    display: none;
+}
+
+.content{
+    height: calc(100% - 206px);
+}

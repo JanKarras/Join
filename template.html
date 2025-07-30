@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style/template.css" />
+    <link rel="stylesheet" href="./assets/style/fonts.css" />
+    <link rel="stylesheet" href="./assets/style/font.css" />
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/remote_storage.js"></script>
+    <script src="./assets/js/template.js"></script>
+    <script src="./assets/js/summary.js"></script>
+    <script src="./assets/js/add_task.js"></script>
+    <script src="./assets/js/board.js"></script>
+    <script src="./assets/js/board_show_detail.js"></script>
+    <script src="./assets/js/board_edit_detail.js"></script>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/contacts.js"></script>
+    <script src="./assets/js/help.js"></script>
+    <link rel="icon" href="./assets/img/logo-white.png" type="image/png" />
+    <title>Join</title>
+  </head>
+
+  <body class="font" id="body" onload="templateInit()">
+    <div class="height_100">
+      <div id="side_bar" class="side_bar">
+        <div class="width_100 center_felx">
+          <img
+            src="./assets/img/logo-white.png"
+            class="siede_bar_logo_header"
+            alt="join_logo"
+          />
+        </div>
+        <nav class="nav">
+          <div class="menu">
+            <div
+              onclick="menueClicked('summary')"
+              id="summary"
+              class="btn_clicked menu_buttons hover_pointer"
+            >
+              <img
+                src="./assets/img/summary_icon.png"
+                class="side_bar_logos_img"
+              />
+              <div class="menu_name">Summary</div>
+            </div>
+            <div
+              onclick="menueClicked('add_task')"
+              id="add_task"
+              class="menu_buttons hover_pointer"
+            >
+              <img
+                src="./assets/img/add_task_icon.png"
+                class="side_bar_logos_img"
+              />
+              <div class="menu_name">Add Task</div>
+            </div>
+            <div
+              onclick="menueClicked('board')"
+              id="board"
+              class="menu_buttons hover_pointer"
+            >
+              <img
+                src="./assets/img/board_icon.png"
+                class="side_bar_logos_img"
+              />
+              <div class="menu_name">Board</div>
+            </div>
+            <div
+              onclick="menueClicked('contacts')"
+              id="contacts"
+              class="menu_buttons hover_pointer"
+            >
+              <img
+                src="./assets/img/contacts_icon.png"
+                class="side_bar_logos_img"
+              />
+              <div class="menu_name">Contacts</div>
+            </div>
+          </div>
+          <div class="legal">
+            <div
+              id="privacy_policy"
+              onclick="menueClicked('privacy_policy')"
+              class="nav_legal"
+            >
+              <div class="nav_legal_p hover_pointer">Privacy Policy</div>
+            </div>
+            <div
+              id="legal_notice"
+              onclick="menueClicked('legal_notice')"
+              class="nav_legal"
+            >
+              <div class="nav_legal_p hover_pointer">Legal notice</div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div id="header_content_container" class="header_content_container">
+      <div class="header" w3-include-html="./header.html"></div>
+      <div class="content" id="content" w3-include-html=""></div>
+    </div>
+  </body>
+</html>

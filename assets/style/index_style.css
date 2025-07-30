@@ -1,0 +1,412 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: #f6f7f8;
+  position: relative;
+}
+
+.join-logo {
+  width: 140px;
+  height: 170.07px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.moveup-logo {
+  width: 100px;
+  height: 140px;
+  top: 80px;
+  left: 77px;
+  transform: translate(-5%, -5%);
+  z-index: 100;
+}
+
+img {
+  width: 100%;
+}
+
+.signin-container,
+.signin-container1 {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin-container {
+  visibility: hidden;
+}
+
+.signup {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+.visible {
+  visibility: visible;
+  background-color: #f6f7f8;
+}
+
+.signin-container1 {
+  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sign-in-form,
+.sign-up-form {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+  z-index: 1000;
+}
+.sign-in-form {
+  max-width: 40.75rem;
+  padding: 48px 115px 48px 115px;
+  animation: show 3s 0.5s;
+}
+.sign-up-form {
+  max-width: 37.375rem;
+  padding: 48px 88px 48px 88px;
+  position: relative;
+}
+
+.signup button,
+.signup2 button {
+  margin-left: 35px;
+}
+
+.log-heading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.log-heading h2 {
+  font-size: 3rem;
+  color: #222;
+}
+
+.underline {
+  border: 1px solid #3498db;
+  width: 100%;
+  width: 120px;
+}
+
+.input {
+  position: relative;
+}
+
+.signin button {
+  text-align: center;
+  padding: 0.9rem 0;
+  font-size: 1.2rem;
+}
+
+.log-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  color: #a0a0a0;
+}
+
+input::placeholder {
+  font-size: 1rem;
+}
+
+input,
+.name input {
+  display: block;
+  margin-bottom: 32px;
+}
+input {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  padding-right: 3rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.checkbox input {
+  display: inline-block;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  margin-left: 1.7rem;
+}
+.checkbox a {
+  color: #3498db;
+}
+.signin,
+.register-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+.signup2 {
+  display: none;
+}
+.signup2 button,
+.signup2 span {
+  font-size: 1.2rem;
+}
+.signin button,
+.signup button,
+.signup2 button,
+.register-button button {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.signin button:nth-child(1),
+.signup button,
+.signup2 button {
+  background-color: #2a3647;
+  color: #fff;
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+.signin:hover button:nth-child(1):hover,
+.signup button:hover,
+.signup2 button:hover {
+  color: #fff;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 9px -1px rgba(0, 0, 0, 0.4);
+}
+.signin button:nth-child(2) {
+  border: 1px solid #2a3647;
+  color: #000;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.signin button:nth-child(2):hover {
+  border: 1px solid #29abe2;
+  color: #29abe2;
+  background-color: #fff;
+}
+.register-button button {
+  background-color: #838588;
+}
+.sign-in {
+  cursor: pointer;
+}
+.legality {
+  width: 100%;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0;
+  animation: show 3s 0.5s;
+}
+.legality a {
+  color: #a0a0a0;
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.arrow-left {
+  position: absolute;
+  top: 65px;
+  left: 75px;
+  color: #3498db;
+  font-size: 25px;
+  cursor: pointer;
+}
+.d-block {
+  display: block;
+}
+.d-none {
+  display: none;
+}
+.opacity {
+  opacity: 1;
+}
+.sign-up-form {
+  margin-bottom: 2rem;
+}
+.msgBox {
+  width: 312px;
+  height: 74px;
+  background-color: #2a3647;
+  color: #fff;
+  position: absolute;
+  bottom: -20%;
+  right: 40%;
+  transform: translate(0%, -50%);
+  z-index: 10000;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+}
+/* Media Query */
+@media (max-width: 992px) {
+  .moveup-logo {
+    width: 75px;
+    height: 90px;
+    top: 37px;
+    left: 38px;
+  }
+  .sign-in-form,
+  .sign-up-form {
+    max-width: 30rem;
+    padding: 48px 88px 48px 88px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    background-color: #2a3647;
+  }
+  .moveup-logo {
+    width: 65px;
+    height: 70px;
+    top: 45px;
+    left: 45px;
+  }
+  .signin-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  form {
+    margin: 0 1rem;
+  }
+  .signup {
+    display: none;
+  }
+  .signup2 {
+    display: block;
+  }
+  input,
+  .name input {
+    margin-bottom: 28px;
+  }
+  .sign-in-form,
+  .sign-up-form {
+    padding: 28px 0px 28px 0px;
+    margin: 3rem 1rem;
+  }
+
+  .signin {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .signin button,
+  .register-button button {
+    width: 50%;
+  }
+  .signup2 button {
+    margin-left: 25px;
+  }
+
+  .log-heading h2 {
+    font-size: 2.2rem;
+  }
+  .underline {
+    border: 1.5px solid #3498db;
+    width: 75px;
+  }
+  .checkbox {
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+  .checkbox1 {
+    justify-content: flex-start;
+    margin-left: 1.7rem;
+    font-weight: 300;
+    margin-top: 2.1rem;
+    margin-bottom: 1.3rem;
+  }
+  .arrow-left {
+    top: 35px;
+    left: 50px;
+  }
+  input,
+  .name input {
+    margin-bottom: 25px;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+  }
+  .signin button,
+  .signup button,
+  .signup2 button {
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+  .signup2 span {
+    font-size: 1rem;
+  }
+
+  .input input {
+    padding: 0.9rem;
+  }
+}
+.legality {
+  bottom: 5%;
+}
+
+.passwordError{
+  color: red;
+  padding-bottom: 32px;
+}
+
+.passwordDontMatch{
+  color: red;
+  margin-bottom: 32px;
+}

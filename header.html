@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style/header.css" />
+    <link rel="stylesheet" href="./assets/style/font.css" />
+    <script src="./assets/js/header.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body class="font">
+    <div class="header_container">
+      <p id="headline_header">Kanban Project Management Tool</p>
+      <img src="./assets/img/logo.svg" alt="" class="mobile_logo" />
+      <div class="help_name_container">
+        <img
+          onclick="menueClicked('help')"
+          class="help_icon_header hover_pointer"
+          src="./assets/img/help.png"
+          alt="help_icon"
+          id="help"
+        />
+        <div onclick="toggleMenu()" class="name hover_pointer" id="name">
+          SM
+        </div>
+      </div>
+    </div>
+    <div id="popup_menu" class="popup_menu d-none">
+      <div
+        onclick="menueClicked('privacy_policy')"
+        class="nav_legal hover_pointer"
+      >
+        Privacy Policy
+      </div>
+      <div
+        onclick="menueClicked('legal_notice')"
+        class="nav_legal hover_pointer"
+      >
+        Legal notice
+      </div>
+      <div onclick="logOut()" class="nav_legal hover_pointer">Log out</div>
+    </div>
+  </body>
+</html>

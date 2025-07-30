@@ -1,0 +1,104 @@
+html,
+body {
+  margin: 0;
+  width: 100%;
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  height: 94px;
+}
+
+.help_name_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.help_icon_header {
+  padding-right: 20px;
+  background-color: white !important;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.name {
+  color: #29abe2;
+  width: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  border-radius: 50%;
+  border: solid #2a3647 3px;
+  font-size: 24px;
+  margin-right: 20px;
+}
+
+.popup_menu {
+  position: absolute;
+  top: 96px;
+  right: 20px;
+  background-color: #091931;
+  color: #7b818a;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  flex-direction: column;
+  z-index: 10000;
+  animation: show 0.3s;
+}
+
+@keyframes show {
+  from {
+    right: 0px;
+  }
+  to {
+    right: 20px;
+  }
+}
+
+#headline_header {
+  flex: 1;
+  margin-left: calc(328px - 232px);
+  font-size: 20px;
+}
+.mobile_logo {
+  display: none;
+}
+
+@media (max-width: 815px) {
+  #headline_header {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header_container p {
+    display: none;
+  }
+  .mobile_logo {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+  }
+  .header_container {
+    padding-left: 1rem;
+  }
+
+  /* .popup_menu {
+    display: block;
+  } */
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <link rel="stylesheet" href="./assets/style/index_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="./assets/js/index.js" defer></script>
+    <script src="./assets/js/remote_storage.js" defer></script>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div id="join-logo" class="join-logo">
+        <img id="logo" src="./assets/img/logo.svg" alt="Join Logo" />
+      </div>
+      <div id="signin-container" class="signin-container">
+        <div id="signInForm" class="sign-in-form">
+          <!-- Sign in form -->
+          <div class="log-heading">
+            <h2>Log in</h2>
+            <h1></h1>
+            <div class="underline"></div>
+          </div>
+
+          <div class="signup" id="signup" onclick="insertSignup()">
+            <span>Not a Join user?</span>
+            <button class="sign">Sign up</button>
+          </div>
+          <form onsubmit="loginUser(); return false">
+            <div class="input">
+              <input type="email" id="username" placeholder="Email" required />
+              <i class="fa-regular fa-envelope log-icon"></i>
+            </div>
+            <div class="input">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+              <i class="fa-solid fa-lock log-icon"></i>
+            </div>
+            <p id="passwordError" class="passwordError d-none">Username don't match with password</p>
+            <div class="checkbox checkbox1">
+              <span><input class="check" type="checkbox" /></span>
+              <span>Remember me</span>
+            </div>
+
+            <div class="signin">
+              <button>Log in</button>
+              <button onclick="guest_login()">Guest Log in</button>
+            </div>
+          </form>
+
+          <!-- End of sign in form -->
+        </div>
+        <div class="signup2" id="signup2" onclick="insertSignup()">
+          <span>Not a Join user?</span>
+          <button>Sign up</button>
+        </div>
+      </div>
+
+      <!-- Start of signup-form -->
+      <div id="signup-container" class="signin-container1">
+        <div id="signup-form" class="sign-up-form">
+          <div class="log-heading">
+            <span class="arrow-left" onclick="backToLogin()"
+              ><i class="fa-solid fa-arrow-left"></i
+            ></span>
+            <h2>Sign up</h2>
+            <div class="underline"></div>
+          </div>
+          <form name="register" onsubmit="registerUser(); return false">
+            <div class="input">
+              <input type="text" id="name" placeholder="Name" required />
+
+              <i class="fa-regular fa-user log-icon"></i>
+            </div>
+
+            <div class="input">
+              <input type="email" id="useremail" placeholder="Email" required />
+              <i class="fa-regular fa-envelope log-icon"></i>
+            </div>
+
+            <div class="input">
+              <input
+                type="password"
+                id="userpassword"
+                placeholder="Password"
+                required
+              />
+              <i class="fa-solid fa-lock log-icon"></i>
+            </div>
+
+            <div class="input">
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm Password"
+                required
+              />
+              <i class="fa-solid fa-lock log-icon"></i>
+            </div>
+            <div class="passwordDontMatch d-none" id="passwordDontMatch">Passwords don't match</div>
+            <div class="checkbox">
+              <span
+                ><input
+                  onclick="validateUser()"
+                  class="check"
+                  type="checkbox"
+                  id="checkbox"
+                  value="yes"
+                  required
+              /></span>
+              <span>I accept the <a href="template.html?userEmail=privacy_policy">Privacy policy</a></span>
+            </div>
+
+            <div class="register-button">
+              <button id="signin-button">Sign up</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="msgBox" id="msgBox">You have Signed Up successfully!</div>
+      </div>
+
+      <!-- End of sign up -->
+
+      <div class="legality">
+        <a href="template.html?userEmail=privacy_policy">Privacy Policy</a><a href="template.html?userEmail=legal_notice">Legal Notice</a>
+      </div>
+    </div>
+  </body>
+</html>

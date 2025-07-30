@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/style/add_task_style.css" />
+
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/template.js"></script>
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/contacts.js"></script>
+    <script src="./assets/js/add_task.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="addtask_body">
+      <div id="success-message" class="success-message">
+        <img
+          id="slide-in-image"
+          src="./assets/img/addtask-img/task_added_to_board.png"
+          alt="Sliding Image"
+        />
+      </div>
+
+      <div id="error-message" class="d-none display-error">
+        <span>Please fill out all required fields!</span>
+      </div>
+
+      <div id="add_task_body" class="add_task_body">
+        <div id="content">
+          <div class="add_task_h1">Add Task</div>
+          <div class="add_task_content">
+            <div class="add_task_sides left_side">
+              <div>
+                <div class="display_flex">
+                  <label class="name_of_input">Title</label>
+                  <div class="star">*</div>
+                </div>
+                <input
+                  id="title_input"
+                  type="text"
+                  placeholder="Enter a title"
+                  required
+                />
+              </div>
+              <div>
+                <div class="task-description">
+                  <label class="description">Description</label>
+                  <textarea
+                    class="description_input"
+                    placeholder="Enter a description"
+                    required
+                    id="description_input"
+                  ></textarea>
+                </div>
+              </div>
+              <div>
+                <label>Assigned to</label>
+                <div class="contacts">
+                  <div
+                    class="contact-select date_picker"
+                    id="contactSelect"
+                    onclick="toggleOptions(event)"
+                  >
+                    <input
+                      class="select-box"
+                      placeholder="Select contacts to assign"
+                    />
+                    <span><i class="fa-solid fa-angle-down icon"></i></span>
+                  </div>
+                  <div class="options-container" id="optionsContainer"></div>
+                  <div class="selected_cont_initials"></div>
+                </div>
+              </div>
+              <div id="show_ass_to"></div>
+            </div>
+
+            <!-- ############# -->
+            <div class="seperator_add_task"></div>
+
+            <div class="add_task_sides right_side">
+              <div>
+                <div class="display_flex">
+                  <label class="name_of_input">Due date</label>
+                  <div class="star">*</div>
+                </div>
+                <div class="date_picker">
+                  <input required type="date" id="date_input" />
+                </div>
+              </div>
+              <div>
+                <label>Prio</label>
+                <div class="prio">
+                  <div class="prio_btns urgent" onclick="setPriority('urgent')">
+                    <label>Urgent</label>
+                    <span><i class="fa-solid fa-angles-up"></i></span>
+                  </div>
+                  <div class="prio_btns medium" onclick="setPriority('medium')">
+                    <label>Medium</label>
+                    <span><i class="fa-solid fa-equals"></i></span>
+                  </div>
+                  <div class="prio_btns low" onclick="setPriority('low')">
+                    <label>Low</label>
+                    <span><i class="fa-solid fa-angles-down"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="display_flex">
+                  <label class="name_of_input">Category</label>
+                  <div class="star">*</div>
+                </div>
+                <div class="contact-select" id="customSelect">
+                  <div
+                    id="select-head"
+                    class="select-head date_picker"
+                    onclick="toggleCategory(event)"
+                  >
+                    <div id="selectedCat">Select task category</div>
+
+                    <span><i class="fa-solid fa-angle-down icon"></i></span>
+                  </div>
+                  <div class="category-container" id="categoryContainer">
+                    <div
+                      class="option"
+                      onclick="selectCategory('Techniker task')"
+                    >
+                      Techniker Task
+                    </div>
+                    <div class="option" onclick="selectCategory('User Story')">
+                      User Story
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ### -->
+              <div class="subtasks_list">
+                <label>Subtasks</label>
+                <div class="date_picker" onclick="enterSubtasks()">
+                  <input
+                    id="enter-subtask"
+                    type="text"
+                    placeholder="Add new subtask"
+                  />
+                  <span id="add-subtask" class="subtask">
+                    <i id="openAddTask" class="fa-solid fa-plus"></i>
+                  </span>
+                  <span id="add-cancel-subtask" class="add_cancel">
+                    <i
+                      onclick="clearInputField()"
+                      id="delete-subtask"
+                      class="fa-solid fa-xmark"
+                    ></i>
+                    <i
+                      id="confirm-subtask"
+                      class="fa-solid fa-check"
+                      onclick="addSubtaskKarras()"
+                    ></i>
+                  </span>
+                </div>
+                <ul id="subtaskList" class="subtask-list added_subtasks"></ul>
+              </div>
+            </div>
+            <!--##################-->
+          </div>
+          <footer>
+            <div class="required">
+              <div class="star">*</div>
+              <div>This field is required</div>
+            </div>
+            <div class="footer_btns_container">
+              <div class="clear" onclick="clearFields()">
+                <div>Clear</div>
+                <span><i class="fa-solid fa-xmark"></i></span>
+              </div>
+              <div class="create" onclick="insertTask()">
+                <div>Create Task</div>
+                <span><i class="fa-solid fa-check"></i></span>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

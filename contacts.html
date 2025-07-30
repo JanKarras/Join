@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts</title>
+    <link rel="stylesheet" href="assets/style/contacts_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/style/fonts.css" />
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/template.js"></script>
+    <script src="assets/js/contacts.js"></script>
+  </head>
+
+  <body>
+    <div class="overlay" id="overlay"></div>
+    <div class="container">
+      <section class="contacts">
+        <div class="contact_sidebar">
+          <div class="add_contact">
+            <div class="add_new_contact" onclick="openAddContactPopup()">
+              <span>Add new contact</span>
+              <span><i class="fa-solid fa-user-plus"></i></span>
+            </div>
+          </div>
+          <div class="contact_list">
+            <div class="contact_info" id="name_email"></div>
+          </div>
+        </div>
+        <div class="contact_detail">
+          <div class="contacts_heading">
+            <h2>Contacts</h2>
+            <div class="partition"></div>
+            <p>Better with a team</p>
+            <div class="partition partition2"></div>
+            <span class="arrow-left" onclick="displayContacts()"
+              ><i class="fa-solid fa-arrow-left"></i
+            ></span>
+          </div>
+          <div id="contact_details"></div>
+        </div>
+        <span class="add_contact_mobile" onclick="openAddContactPopup()"
+          ><i class="fa-solid fa-user-plus"></i
+        ></span>
+        <span class="edit_contact_mobile" onclick="openEditandDelete()"
+          ><i class="fa-solid fa-ellipsis-vertical"></i
+        ></span>
+      </section>
+      <div class="add-contact" id="addContactPopup">
+        <form onsubmit="addContactPopup(); return false">
+          <div class="add_contact_title">
+            <img src="assets/img/logo-white.png" alt="" class="join_logo" />
+
+            <div class="contact_title">
+              <h2>Add contact</h2>
+              <p>Tasks are better with a team!</p>
+              <div class="partition2"></div>
+            </div>
+          </div>
+          <div class="contact_img">
+            <img src="assets/img/Group13.png" alt="" />
+          </div>
+          <div class="add_contact_info">
+            <div class="c_name_email">
+              <div class="input">
+                <input type="text" id="addName" placeholder="Name" required />
+                <i class="fa-regular fa-user log-icon"></i>
+              </div>
+
+              <div class="input">
+                <input
+                  type="email"
+                  id="addEmail"
+                  placeholder="Email"
+                  required
+                />
+                <i class="fa-regular fa-envelope log-icon"></i>
+              </div>
+
+              <div class="input">
+                <input
+                  type="number"
+                  id="addPhone"
+                  placeholder="Phone"
+                  required
+                />
+                <i class="fa-solid fa-phone log-icon"></i>
+              </div>
+              <div class="delete_save">
+                <button onclick="closeAddContactPopup()">
+                  Cancel<i class="fa-solid fa-xmark"></i>
+                </button>
+                <button>
+                  Create contact <i class="fa-solid fa-check"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <span onclick="closeAddContactPopup()" class="close_form"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
+      </div>
+      <div class="edit-contact" id="editContactPopup">
+        <form form onsubmit="saveChanges(); return false;">
+          <div class="add_contact_title">
+            <img src="assets/img/logo-white.png" alt="" class="join_logo" />
+
+            <div class="contact_title">
+              <h2>Edit contact</h2>
+              <div class="underline"></div>
+            </div>
+          </div>
+          <div class="contacts_edit contact_img">
+            <p id="contactInitials"></p>
+          </div>
+          <div class="add_contact_info">
+            <div class="c_name_email">
+              <div class="input">
+                <input type="text" id="editName" placeholder="Name" required />
+                <i class="fa-regular fa-user log-icon"></i>
+              </div>
+
+              <div class="input">
+                <input
+                  type="email"
+                  id="editEmail"
+                  placeholder="Email"
+                  required
+                />
+                <i class="fa-regular fa-envelope log-icon"></i>
+              </div>
+
+              <div class="input">
+                <input
+                  type="number"
+                  id="editPhone"
+                  placeholder="Phone"
+                  required
+                />
+                <i class="fa-solid fa-phone log-icon"></i>
+              </div>
+              <div class="delete_save">
+                <button
+                  onclick="deleteUserByIndex(currentUserIndex); return false"
+                >
+                  Delete
+                </button>
+                <button type="button" onclick="saveChanges(); return false">
+                  Save<i class="fa-solid fa-check"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <span onclick="closeEditContactPopup()" class="close_form"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+#content{
+    height: calc(100% - 206px);
+}
+
+.content {
+    padding-left: calc(328px - 232px);
+    padding-top: calc(206px - 94px);
+    height: calc(100% - 206px);
+    overflow: auto;
+  }
+
+.privacy_policy_body{
+    width: 90%;
+}
+
+.privacy_policy_h1{
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.privacy_policy_h2{
+    font-size: 27px;
+    font-weight: 700;
+}
